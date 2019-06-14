@@ -1,0 +1,25 @@
+-- @atlcompiler atl2006
+
+-- @project example.class2table=lintra.transformation.class2table 
+-- @path CLASS=/example.class2table/metamodels/class1.ecore
+-- @path TABLE=/example.class2table/metamodels/table1.ecore
+
+module class2table1;
+create OUT : TABLE from IN : CLASS;
+
+rule class2table {
+	from c : CLASS!Class 
+	to	 t : TABLE!Table ( 
+  		name <- c.name,
+  		columns <- c.attrs, 
+		pkeys <- c.attrs->select(a | a.isKey)
+	)
+}
+
+rule Attribute2Column {
+   from a : CLASS!Attribute 
+     to c : TABLE!Column (
+		name <- a.name + (a.visibility = #public).debug('xx'),
+		type <- a.type.name
+	)
+}

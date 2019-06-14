@@ -1,0 +1,48 @@
+-- @atlcompiler lintra
+
+-- @path MM=/example.proc2docbook/metamodels/Proceedings.ecore
+-- @path MM1=/example.proc2docbook/metamodels/DocBook.ecore
+
+module Proc2DocBook;
+create OUT : MM1 from IN : MM;
+
+rule bibtex2docbook {
+	from
+		b : MM!BibTeXFile
+	to 
+		d : MM1!DocBook (
+			book <- b.entry->select(e | e.oclIsTypeOf(MM!Proc))
+		)
+}
+
+rule proc2book {
+	from
+		p : MM!Proc
+	to 
+		b : MM1!Book (
+			title <- p.title,
+			editor <- p.editor
+		)
+}
+
+rule inproc2article {
+	from
+		ip : MM!InProc,
+		p : MM!Proc ( p.title = ip.booktitle )
+	to 
+		a : MM1!Article (
+			title <- ip.title,
+			author <- ip.author,
+			book <- p
+		)
+}
+
+rule person2person {
+	from
+		p1 : MM!Person
+	to 
+		p2 : MM1!Person (
+			name <- p1.name
+		)
+}
+

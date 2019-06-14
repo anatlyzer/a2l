@@ -1,0 +1,61 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<genmodel:GenModel xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:ecore="http://www.eclipse.org/emf/2002/Ecore"
+    xmlns:genmodel="http://www.eclipse.org/emf/2002/GenModel" modelDirectory="/a2l.tests.vmtesting.emf/src-gen" modelPluginID="a2l.tests.vmtesting.emf"
+    modelName="KM2" rootExtendsClass="org.eclipse.emf.ecore.impl.MinimalEObjectImpl$Container"
+    importerID="org.eclipse.emf.importer.ecore" complianceLevel="8.0" copyrightFields="false"
+    operationReflection="true" importOrganizing="true">
+  <foreignModel>KM2.ecore</foreignModel>
+  <genPackages prefix="KM2" basePackage="a2l.tests.vmtesting.emf.dslmodel2km2" disposableProviderFactory="true"
+      ecorePackage="KM2.ecore#/">
+    <genClasses image="false" ecoreClass="KM2.ecore#//LocatedElement">
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute KM2.ecore#//LocatedElement/location"/>
+    </genClasses>
+    <genClasses image="false" ecoreClass="KM2.ecore#//NamedElement">
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute KM2.ecore#//NamedElement/name"/>
+    </genClasses>
+    <genClasses ecoreClass="KM2.ecore#//Model">
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute KM2.ecore#//Model/metamodel"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference KM2.ecore#//Model/contents"/>
+    </genClasses>
+    <genClasses ecoreClass="KM2.ecore#//ModelElement">
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute KM2.ecore#//ModelElement/id"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference KM2.ecore#//ModelElement/properties"/>
+    </genClasses>
+    <genClasses ecoreClass="KM2.ecore#//Property">
+      <genFeatures property="None" notify="false" createChild="false" ecoreFeature="ecore:EReference KM2.ecore#//Property/owner"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference KM2.ecore#//Property/value"/>
+    </genClasses>
+    <genClasses image="false" ecoreClass="KM2.ecore#//Value">
+      <genFeatures property="None" notify="false" createChild="false" ecoreFeature="ecore:EReference KM2.ecore#//Value/owner"/>
+      <genFeatures property="None" notify="false" createChild="false" ecoreFeature="ecore:EReference KM2.ecore#//Value/set"/>
+    </genClasses>
+    <genClasses ecoreClass="KM2.ecore#//ModelElementVal">
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference KM2.ecore#//ModelElementVal/element"/>
+    </genClasses>
+    <genClasses ecoreClass="KM2.ecore#//ModelElementRefVal">
+      <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference KM2.ecore#//ModelElementRefVal/element"/>
+    </genClasses>
+    <genClasses ecoreClass="KM2.ecore#//SetVal">
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference KM2.ecore#//SetVal/contents"/>
+    </genClasses>
+    <genClasses image="false" ecoreClass="KM2.ecore#//PrimitiveVal"/>
+    <genClasses ecoreClass="KM2.ecore#//BooleanVal">
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute KM2.ecore#//BooleanVal/value"/>
+    </genClasses>
+    <genClasses ecoreClass="KM2.ecore#//DoubleVal">
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute KM2.ecore#//DoubleVal/value"/>
+    </genClasses>
+    <genClasses ecoreClass="KM2.ecore#//IntegerVal">
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute KM2.ecore#//IntegerVal/value"/>
+    </genClasses>
+    <genClasses ecoreClass="KM2.ecore#//StringVal">
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute KM2.ecore#//StringVal/value"/>
+    </genClasses>
+    <nestedGenPackages prefix="PrimitiveTypes" disposableProviderFactory="true" ecorePackage="KM2.ecore#//PrimitiveTypes">
+      <genDataTypes ecoreDataType="KM2.ecore#//PrimitiveTypes/Boolean"/>
+      <genDataTypes ecoreDataType="KM2.ecore#//PrimitiveTypes/Double"/>
+      <genDataTypes ecoreDataType="KM2.ecore#//PrimitiveTypes/Integer"/>
+      <genDataTypes ecoreDataType="KM2.ecore#//PrimitiveTypes/String"/>
+    </nestedGenPackages>
+  </genPackages>
+</genmodel:GenModel>

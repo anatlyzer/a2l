@@ -1,0 +1,108 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<genmodel:GenModel xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:ecore="http://www.eclipse.org/emf/2002/Ecore"
+    xmlns:genmodel="http://www.eclipse.org/emf/2002/GenModel" modelDirectory="/a2l.tests.dblp/src-gen" modelPluginID="a2l.tests.dblp"
+    modelName="DBLP" rootExtendsClass="org.eclipse.emf.ecore.impl.MinimalEObjectImpl$Container"
+    importerID="org.eclipse.emf.importer.ecore" complianceLevel="8.0" copyrightFields="false"
+    operationReflection="true" importOrganizing="true">
+  <foreignModel>DBLP.ecore</foreignModel>
+  <genPackages prefix="DBLP" basePackage="dblp" disposableProviderFactory="true" ecorePackage="DBLP.ecore#/">
+    <genClasses image="false" ecoreClass="DBLP.ecore#//Record">
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute DBLP.ecore#//Record/ee"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute DBLP.ecore#//Record/url"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute DBLP.ecore#//Record/key"/>
+      <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference DBLP.ecore#//Record/authors"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute DBLP.ecore#//Record/mdate"/>
+    </genClasses>
+    <genClasses ecoreClass="DBLP.ecore#//Article">
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute DBLP.ecore#//Article/title"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute DBLP.ecore#//Article/fromPage"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute DBLP.ecore#//Article/toPage"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute DBLP.ecore#//Article/number"/>
+      <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference DBLP.ecore#//Article/journal"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute DBLP.ecore#//Article/volume"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute DBLP.ecore#//Article/month"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute DBLP.ecore#//Article/year"/>
+    </genClasses>
+    <genClasses ecoreClass="DBLP.ecore#//Author">
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute DBLP.ecore#//Author/name"/>
+      <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference DBLP.ecore#//Author/records"/>
+    </genClasses>
+    <genClasses ecoreClass="DBLP.ecore#//Journal">
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute DBLP.ecore#//Journal/name"/>
+      <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference DBLP.ecore#//Journal/articles"/>
+    </genClasses>
+    <genClasses ecoreClass="DBLP.ecore#//Book">
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute DBLP.ecore#//Book/title"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute DBLP.ecore#//Book/year"/>
+      <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference DBLP.ecore#//Book/publisher"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute DBLP.ecore#//Book/month"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute DBLP.ecore#//Book/volume"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute DBLP.ecore#//Book/series"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute DBLP.ecore#//Book/edition"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute DBLP.ecore#//Book/isbn"/>
+    </genClasses>
+    <genClasses ecoreClass="DBLP.ecore#//InCollection">
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute DBLP.ecore#//InCollection/title"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute DBLP.ecore#//InCollection/bookTitle"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute DBLP.ecore#//InCollection/year"/>
+      <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference DBLP.ecore#//InCollection/editors"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute DBLP.ecore#//InCollection/fromPage"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute DBLP.ecore#//InCollection/toPage"/>
+      <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference DBLP.ecore#//InCollection/sponsoredBy"/>
+      <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference DBLP.ecore#//InCollection/publisher"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute DBLP.ecore#//InCollection/month"/>
+    </genClasses>
+    <genClasses ecoreClass="DBLP.ecore#//InProceedings">
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute DBLP.ecore#//InProceedings/title"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute DBLP.ecore#//InProceedings/bootitle"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute DBLP.ecore#//InProceedings/year"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute DBLP.ecore#//InProceedings/fromPage"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute DBLP.ecore#//InProceedings/toPage"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute DBLP.ecore#//InProceedings/month"/>
+      <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference DBLP.ecore#//InProceedings/editors"/>
+      <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference DBLP.ecore#//InProceedings/organization"/>
+      <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference DBLP.ecore#//InProceedings/publisher"/>
+    </genClasses>
+    <genClasses ecoreClass="DBLP.ecore#//MastersThesis">
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute DBLP.ecore#//MastersThesis/title"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute DBLP.ecore#//MastersThesis/year"/>
+      <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference DBLP.ecore#//MastersThesis/school"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute DBLP.ecore#//MastersThesis/month"/>
+    </genClasses>
+    <genClasses ecoreClass="DBLP.ecore#//Proceedings">
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute DBLP.ecore#//Proceedings/title"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute DBLP.ecore#//Proceedings/year"/>
+      <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference DBLP.ecore#//Proceedings/editors"/>
+      <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference DBLP.ecore#//Proceedings/publisher"/>
+      <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference DBLP.ecore#//Proceedings/sponsoredBy"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute DBLP.ecore#//Proceedings/month"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute DBLP.ecore#//Proceedings/isbn"/>
+    </genClasses>
+    <genClasses ecoreClass="DBLP.ecore#//PhDThesis">
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute DBLP.ecore#//PhDThesis/title"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute DBLP.ecore#//PhDThesis/year"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute DBLP.ecore#//PhDThesis/month"/>
+      <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference DBLP.ecore#//PhDThesis/school"/>
+    </genClasses>
+    <genClasses ecoreClass="DBLP.ecore#//Www">
+      <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference DBLP.ecore#//Www/editors"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute DBLP.ecore#//Www/title"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute DBLP.ecore#//Www/year"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute DBLP.ecore#//Www/month"/>
+    </genClasses>
+    <genClasses ecoreClass="DBLP.ecore#//Editor">
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute DBLP.ecore#//Editor/name"/>
+    </genClasses>
+    <genClasses ecoreClass="DBLP.ecore#//Organization">
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute DBLP.ecore#//Organization/name"/>
+    </genClasses>
+    <genClasses ecoreClass="DBLP.ecore#//Publisher">
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute DBLP.ecore#//Publisher/name"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute DBLP.ecore#//Publisher/address"/>
+    </genClasses>
+    <genClasses ecoreClass="DBLP.ecore#//School">
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute DBLP.ecore#//School/name"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute DBLP.ecore#//School/address"/>
+    </genClasses>
+  </genPackages>
+</genmodel:GenModel>

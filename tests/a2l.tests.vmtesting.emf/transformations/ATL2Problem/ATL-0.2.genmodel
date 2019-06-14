@@ -1,0 +1,319 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<genmodel:GenModel xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:ecore="http://www.eclipse.org/emf/2002/Ecore"
+    xmlns:genmodel="http://www.eclipse.org/emf/2002/GenModel" modelDirectory="/a2l.tests.vmtesting.emf/src-gen" modelPluginID="a2l.tests.vmtesting.emf"
+    modelName="ATL-0" modelPluginClass="" rootExtendsClass="org.eclipse.emf.ecore.impl.MinimalEObjectImpl$Container"
+    importerID="org.eclipse.emf.importer.ecore" complianceLevel="8.0" copyrightFields="false"
+    operationReflection="true" importOrganizing="true">
+  <foreignModel>ATL-0.2.ecore</foreignModel>
+  <genPackages prefix="OCL" basePackage="a2l.tests.vmtesting.emf.atl2problem" disposableProviderFactory="true"
+      ecorePackage="ATL-0.2.ecore#/0">
+    <genClasses image="false" ecoreClass="ATL-0.2.ecore#/0/OclFeature">
+      <genFeatures property="None" notify="false" createChild="false" ecoreFeature="ecore:EReference ATL-0.2.ecore#/0/OclFeature/definition"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute ATL-0.2.ecore#/0/OclFeature/name"/>
+    </genClasses>
+    <genClasses ecoreClass="ATL-0.2.ecore#/0/Attribute">
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference ATL-0.2.ecore#/0/Attribute/initExpression"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference ATL-0.2.ecore#/0/Attribute/type"/>
+    </genClasses>
+    <genClasses ecoreClass="ATL-0.2.ecore#/0/Operation">
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference ATL-0.2.ecore#/0/Operation/parameters"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference ATL-0.2.ecore#/0/Operation/returnType"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference ATL-0.2.ecore#/0/Operation/body"/>
+    </genClasses>
+    <genClasses ecoreClass="ATL-0.2.ecore#/0/Parameter">
+      <genFeatures property="None" notify="false" createChild="false" ecoreFeature="ecore:EReference ATL-0.2.ecore#/0/Parameter/operation"/>
+    </genClasses>
+    <genClasses ecoreClass="ATL-0.2.ecore#/0/OclModel">
+      <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference ATL-0.2.ecore#/0/OclModel/metamodel"/>
+      <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference ATL-0.2.ecore#/0/OclModel/elements"/>
+      <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference ATL-0.2.ecore#/0/OclModel/model"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute ATL-0.2.ecore#/0/OclModel/name"/>
+    </genClasses>
+    <genClasses ecoreClass="ATL-0.2.ecore#/0/OclContextDefinition">
+      <genFeatures property="None" notify="false" createChild="false" ecoreFeature="ecore:EReference ATL-0.2.ecore#/0/OclContextDefinition/definition"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference ATL-0.2.ecore#/0/OclContextDefinition/context_"/>
+    </genClasses>
+    <genClasses ecoreClass="ATL-0.2.ecore#/0/OclFeatureDefinition">
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference ATL-0.2.ecore#/0/OclFeatureDefinition/feature"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference ATL-0.2.ecore#/0/OclFeatureDefinition/context_"/>
+    </genClasses>
+    <nestedGenPackages prefix="Expressions" disposableProviderFactory="true" ecorePackage="ATL-0.2.ecore#/0/Expressions">
+      <genClasses ecoreClass="ATL-0.2.ecore#/0/Expressions/CollectionOperationCallExp"/>
+      <genClasses ecoreClass="ATL-0.2.ecore#/0/Expressions/VariableExp">
+        <genFeatures notify="false" createChild="false" propertySortChoices="true"
+            ecoreFeature="ecore:EReference ATL-0.2.ecore#/0/Expressions/VariableExp/referredVariable"/>
+        <genFeatures createChild="false" ecoreFeature="ecore:EAttribute ATL-0.2.ecore#/0/Expressions/VariableExp/name"/>
+      </genClasses>
+      <genClasses ecoreClass="ATL-0.2.ecore#/0/Expressions/MapExp">
+        <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference ATL-0.2.ecore#/0/Expressions/MapExp/elements"/>
+      </genClasses>
+      <genClasses ecoreClass="ATL-0.2.ecore#/0/Expressions/MapElement">
+        <genFeatures property="None" notify="false" createChild="false" ecoreFeature="ecore:EReference ATL-0.2.ecore#/0/Expressions/MapElement/map"/>
+        <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference ATL-0.2.ecore#/0/Expressions/MapElement/key"/>
+        <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference ATL-0.2.ecore#/0/Expressions/MapElement/value"/>
+      </genClasses>
+      <genClasses ecoreClass="ATL-0.2.ecore#/0/Expressions/RealExp">
+        <genFeatures createChild="false" ecoreFeature="ecore:EAttribute ATL-0.2.ecore#/0/Expressions/RealExp/realSymbol"/>
+      </genClasses>
+      <genClasses image="false" ecoreClass="ATL-0.2.ecore#/0/Expressions/PrimitiveExp"/>
+      <genClasses ecoreClass="ATL-0.2.ecore#/0/Expressions/OclUndefinedExp"/>
+      <genClasses ecoreClass="ATL-0.2.ecore#/0/Expressions/IterateExp">
+        <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference ATL-0.2.ecore#/0/Expressions/IterateExp/result"/>
+      </genClasses>
+      <genClasses image="false" ecoreClass="ATL-0.2.ecore#/0/Expressions/PropertyCallExp">
+        <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference ATL-0.2.ecore#/0/Expressions/PropertyCallExp/source"/>
+      </genClasses>
+      <genClasses ecoreClass="ATL-0.2.ecore#/0/Expressions/TuplePart">
+        <genFeatures property="None" notify="false" createChild="false" ecoreFeature="ecore:EReference ATL-0.2.ecore#/0/Expressions/TuplePart/tuple"/>
+      </genClasses>
+      <genClasses image="false" ecoreClass="ATL-0.2.ecore#/0/Expressions/OclExpression">
+        <genFeatures property="None" notify="false" createChild="false" ecoreFeature="ecore:EReference ATL-0.2.ecore#/0/Expressions/OclExpression/ifExp3"/>
+        <genFeatures property="None" notify="false" createChild="false" ecoreFeature="ecore:EReference ATL-0.2.ecore#/0/Expressions/OclExpression/appliedProperty"/>
+        <genFeatures property="None" notify="false" createChild="false" ecoreFeature="ecore:EReference ATL-0.2.ecore#/0/Expressions/OclExpression/collection"/>
+        <genFeatures property="None" notify="false" createChild="false" ecoreFeature="ecore:EReference ATL-0.2.ecore#/0/Expressions/OclExpression/letExp"/>
+        <genFeatures property="None" notify="false" createChild="false" ecoreFeature="ecore:EReference ATL-0.2.ecore#/0/Expressions/OclExpression/loopExp"/>
+        <genFeatures property="None" notify="false" createChild="false" ecoreFeature="ecore:EReference ATL-0.2.ecore#/0/Expressions/OclExpression/parentOperation"/>
+        <genFeatures property="None" notify="false" createChild="false" ecoreFeature="ecore:EReference ATL-0.2.ecore#/0/Expressions/OclExpression/initializedVariable"/>
+        <genFeatures property="None" notify="false" createChild="false" ecoreFeature="ecore:EReference ATL-0.2.ecore#/0/Expressions/OclExpression/ifExp2"/>
+        <genFeatures property="None" notify="false" createChild="false" ecoreFeature="ecore:EReference ATL-0.2.ecore#/0/Expressions/OclExpression/operation"/>
+        <genFeatures property="None" notify="false" createChild="false" ecoreFeature="ecore:EReference ATL-0.2.ecore#/0/Expressions/OclExpression/ifExp1"/>
+        <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference ATL-0.2.ecore#/0/Expressions/OclExpression/type"/>
+        <genFeatures property="None" notify="false" createChild="false" ecoreFeature="ecore:EReference ATL-0.2.ecore#/0/Expressions/OclExpression/attribute"/>
+      </genClasses>
+      <genClasses ecoreClass="ATL-0.2.ecore#/0/Expressions/IntegerExp">
+        <genFeatures createChild="false" ecoreFeature="ecore:EAttribute ATL-0.2.ecore#/0/Expressions/IntegerExp/integerSymbol"/>
+      </genClasses>
+      <genClasses ecoreClass="ATL-0.2.ecore#/0/Expressions/EnumLiteralExp">
+        <genFeatures createChild="false" ecoreFeature="ecore:EAttribute ATL-0.2.ecore#/0/Expressions/EnumLiteralExp/name"/>
+      </genClasses>
+      <genClasses ecoreClass="ATL-0.2.ecore#/0/Expressions/OperatorCallExp"/>
+      <genClasses ecoreClass="ATL-0.2.ecore#/0/Expressions/IteratorExp">
+        <genFeatures createChild="false" ecoreFeature="ecore:EAttribute ATL-0.2.ecore#/0/Expressions/IteratorExp/name"/>
+      </genClasses>
+      <genClasses ecoreClass="ATL-0.2.ecore#/0/Expressions/StringExp">
+        <genFeatures createChild="false" ecoreFeature="ecore:EAttribute ATL-0.2.ecore#/0/Expressions/StringExp/stringSymbol"/>
+      </genClasses>
+      <genClasses ecoreClass="ATL-0.2.ecore#/0/Expressions/BooleanExp">
+        <genFeatures createChild="false" ecoreFeature="ecore:EAttribute ATL-0.2.ecore#/0/Expressions/BooleanExp/booleanSymbol"/>
+      </genClasses>
+      <genClasses ecoreClass="ATL-0.2.ecore#/0/Expressions/LetExp">
+        <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference ATL-0.2.ecore#/0/Expressions/LetExp/variable"/>
+        <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference ATL-0.2.ecore#/0/Expressions/LetExp/in_"/>
+      </genClasses>
+      <genClasses ecoreClass="ATL-0.2.ecore#/0/Expressions/Iterator">
+        <genFeatures property="None" notify="false" createChild="false" ecoreFeature="ecore:EReference ATL-0.2.ecore#/0/Expressions/Iterator/loopExpr"/>
+      </genClasses>
+      <genClasses ecoreClass="ATL-0.2.ecore#/0/Expressions/VariableDeclaration">
+        <genFeatures property="None" notify="false" createChild="false" ecoreFeature="ecore:EReference ATL-0.2.ecore#/0/Expressions/VariableDeclaration/letExp"/>
+        <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference ATL-0.2.ecore#/0/Expressions/VariableDeclaration/type"/>
+        <genFeatures property="None" notify="false" createChild="false" ecoreFeature="ecore:EReference ATL-0.2.ecore#/0/Expressions/VariableDeclaration/baseExp"/>
+        <genFeatures notify="false" createChild="false" propertySortChoices="true"
+            ecoreFeature="ecore:EReference ATL-0.2.ecore#/0/Expressions/VariableDeclaration/variableExp"/>
+        <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference ATL-0.2.ecore#/0/Expressions/VariableDeclaration/initExpression"/>
+        <genFeatures createChild="false" ecoreFeature="ecore:EAttribute ATL-0.2.ecore#/0/Expressions/VariableDeclaration/varName"/>
+        <genFeatures createChild="false" ecoreFeature="ecore:EAttribute ATL-0.2.ecore#/0/Expressions/VariableDeclaration/id"/>
+      </genClasses>
+      <genClasses ecoreClass="ATL-0.2.ecore#/0/Expressions/OperationCallExp">
+        <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference ATL-0.2.ecore#/0/Expressions/OperationCallExp/arguments"/>
+        <genFeatures createChild="false" ecoreFeature="ecore:EAttribute ATL-0.2.ecore#/0/Expressions/OperationCallExp/operationName"/>
+        <genFeatures createChild="false" ecoreFeature="ecore:EAttribute ATL-0.2.ecore#/0/Expressions/OperationCallExp/signature"/>
+      </genClasses>
+      <genClasses image="false" ecoreClass="ATL-0.2.ecore#/0/Expressions/NumericExp"/>
+      <genClasses ecoreClass="ATL-0.2.ecore#/0/Expressions/BagExp"/>
+      <genClasses image="false" ecoreClass="ATL-0.2.ecore#/0/Expressions/CollectionExp">
+        <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference ATL-0.2.ecore#/0/Expressions/CollectionExp/elements"/>
+      </genClasses>
+      <genClasses ecoreClass="ATL-0.2.ecore#/0/Expressions/IfExp">
+        <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference ATL-0.2.ecore#/0/Expressions/IfExp/thenExpression"/>
+        <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference ATL-0.2.ecore#/0/Expressions/IfExp/condition"/>
+        <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference ATL-0.2.ecore#/0/Expressions/IfExp/elseExpression"/>
+      </genClasses>
+      <genClasses ecoreClass="ATL-0.2.ecore#/0/Expressions/LoopExp">
+        <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference ATL-0.2.ecore#/0/Expressions/LoopExp/body"/>
+        <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference ATL-0.2.ecore#/0/Expressions/LoopExp/iterators"/>
+      </genClasses>
+      <genClasses ecoreClass="ATL-0.2.ecore#/0/Expressions/TupleExp">
+        <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference ATL-0.2.ecore#/0/Expressions/TupleExp/tuplePart"/>
+      </genClasses>
+      <genClasses ecoreClass="ATL-0.2.ecore#/0/Expressions/SequenceExp"/>
+      <genClasses ecoreClass="ATL-0.2.ecore#/0/Expressions/NavigationOrAttributeCallExp">
+        <genFeatures createChild="false" ecoreFeature="ecore:EAttribute ATL-0.2.ecore#/0/Expressions/NavigationOrAttributeCallExp/name"/>
+      </genClasses>
+      <genClasses ecoreClass="ATL-0.2.ecore#/0/Expressions/SetExp"/>
+      <genClasses ecoreClass="ATL-0.2.ecore#/0/Expressions/OrderedSetExp"/>
+    </nestedGenPackages>
+    <nestedGenPackages prefix="Types" disposableProviderFactory="true" ecorePackage="ATL-0.2.ecore#/0/Types">
+      <genClasses image="false" ecoreClass="ATL-0.2.ecore#/0/Types/CollectionType">
+        <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference ATL-0.2.ecore#/0/Types/CollectionType/elementType"/>
+      </genClasses>
+      <genClasses image="false" ecoreClass="ATL-0.2.ecore#/0/Types/OclType">
+        <genFeatures property="None" notify="false" createChild="false" ecoreFeature="ecore:EReference ATL-0.2.ecore#/0/Types/OclType/definitions"/>
+        <genFeatures property="None" notify="false" createChild="false" ecoreFeature="ecore:EReference ATL-0.2.ecore#/0/Types/OclType/oclExpression"/>
+        <genFeatures property="None" notify="false" createChild="false" ecoreFeature="ecore:EReference ATL-0.2.ecore#/0/Types/OclType/operation"/>
+        <genFeatures property="None" notify="false" createChild="false" ecoreFeature="ecore:EReference ATL-0.2.ecore#/0/Types/OclType/mapType2"/>
+        <genFeatures property="None" notify="false" createChild="false" ecoreFeature="ecore:EReference ATL-0.2.ecore#/0/Types/OclType/attribute"/>
+        <genFeatures property="None" notify="false" createChild="false" ecoreFeature="ecore:EReference ATL-0.2.ecore#/0/Types/OclType/mapType"/>
+        <genFeatures property="None" notify="false" createChild="false" ecoreFeature="ecore:EReference ATL-0.2.ecore#/0/Types/OclType/collectionTypes"/>
+        <genFeatures property="None" notify="false" createChild="false" ecoreFeature="ecore:EReference ATL-0.2.ecore#/0/Types/OclType/tupleTypeAttribute"/>
+        <genFeatures property="None" notify="false" createChild="false" ecoreFeature="ecore:EReference ATL-0.2.ecore#/0/Types/OclType/variableDeclaration"/>
+        <genFeatures createChild="false" ecoreFeature="ecore:EAttribute ATL-0.2.ecore#/0/Types/OclType/name"/>
+      </genClasses>
+      <genClasses ecoreClass="ATL-0.2.ecore#/0/Types/StringType"/>
+      <genClasses image="false" ecoreClass="ATL-0.2.ecore#/0/Types/Primitive"/>
+      <genClasses ecoreClass="ATL-0.2.ecore#/0/Types/RealType"/>
+      <genClasses ecoreClass="ATL-0.2.ecore#/0/Types/OclAnyType"/>
+      <genClasses ecoreClass="ATL-0.2.ecore#/0/Types/TupleType">
+        <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference ATL-0.2.ecore#/0/Types/TupleType/attributes"/>
+      </genClasses>
+      <genClasses ecoreClass="ATL-0.2.ecore#/0/Types/SequenceType"/>
+      <genClasses ecoreClass="ATL-0.2.ecore#/0/Types/BooleanType"/>
+      <genClasses ecoreClass="ATL-0.2.ecore#/0/Types/OclModelElement">
+        <genFeatures notify="false" createChild="false" propertySortChoices="true"
+            ecoreFeature="ecore:EReference ATL-0.2.ecore#/0/Types/OclModelElement/model"/>
+      </genClasses>
+      <genClasses ecoreClass="ATL-0.2.ecore#/0/Types/SetType"/>
+      <genClasses ecoreClass="ATL-0.2.ecore#/0/Types/BagType"/>
+      <genClasses ecoreClass="ATL-0.2.ecore#/0/Types/OrderedSetType"/>
+      <genClasses image="false" ecoreClass="ATL-0.2.ecore#/0/Types/NumericType"/>
+      <genClasses ecoreClass="ATL-0.2.ecore#/0/Types/TupleTypeAttribute">
+        <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference ATL-0.2.ecore#/0/Types/TupleTypeAttribute/type"/>
+        <genFeatures property="None" notify="false" createChild="false" ecoreFeature="ecore:EReference ATL-0.2.ecore#/0/Types/TupleTypeAttribute/tupleType"/>
+        <genFeatures createChild="false" ecoreFeature="ecore:EAttribute ATL-0.2.ecore#/0/Types/TupleTypeAttribute/name"/>
+      </genClasses>
+      <genClasses ecoreClass="ATL-0.2.ecore#/0/Types/IntegerType"/>
+      <genClasses ecoreClass="ATL-0.2.ecore#/0/Types/MapType">
+        <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference ATL-0.2.ecore#/0/Types/MapType/valueType"/>
+        <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference ATL-0.2.ecore#/0/Types/MapType/keyType"/>
+      </genClasses>
+    </nestedGenPackages>
+  </genPackages>
+  <genPackages prefix="ATL" basePackage="a2l.tests.vmtesting.emf.atl2problem" disposableProviderFactory="true"
+      ecorePackage="ATL-0.2.ecore#/1">
+    <genClasses ecoreClass="ATL-0.2.ecore#/1/DerivedInPatternElement">
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference ATL-0.2.ecore#/1/DerivedInPatternElement/value"/>
+    </genClasses>
+    <genClasses ecoreClass="ATL-0.2.ecore#/1/Query">
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference ATL-0.2.ecore#/1/Query/body"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference ATL-0.2.ecore#/1/Query/helpers"/>
+    </genClasses>
+    <genClasses ecoreClass="ATL-0.2.ecore#/1/Module">
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute ATL-0.2.ecore#/1/Module/isRefining"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference ATL-0.2.ecore#/1/Module/inModels"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference ATL-0.2.ecore#/1/Module/outModels"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference ATL-0.2.ecore#/1/Module/elements"/>
+    </genClasses>
+    <genClasses ecoreClass="ATL-0.2.ecore#/1/ActionBlock">
+      <genFeatures property="None" notify="false" createChild="false" ecoreFeature="ecore:EReference ATL-0.2.ecore#/1/ActionBlock/rule"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference ATL-0.2.ecore#/1/ActionBlock/statements"/>
+    </genClasses>
+    <genClasses image="false" ecoreClass="ATL-0.2.ecore#/1/Statement"/>
+    <genClasses ecoreClass="ATL-0.2.ecore#/1/ExpressionStat">
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference ATL-0.2.ecore#/1/ExpressionStat/expression"/>
+    </genClasses>
+    <genClasses ecoreClass="ATL-0.2.ecore#/1/BindingStat">
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference ATL-0.2.ecore#/1/BindingStat/source"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute ATL-0.2.ecore#/1/BindingStat/propertyName"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference ATL-0.2.ecore#/1/BindingStat/value"/>
+    </genClasses>
+    <genClasses ecoreClass="ATL-0.2.ecore#/1/IfStat">
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference ATL-0.2.ecore#/1/IfStat/condition"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference ATL-0.2.ecore#/1/IfStat/thenStatements"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference ATL-0.2.ecore#/1/IfStat/elseStatements"/>
+    </genClasses>
+    <genClasses ecoreClass="ATL-0.2.ecore#/1/ForStat">
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference ATL-0.2.ecore#/1/ForStat/iterator"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference ATL-0.2.ecore#/1/ForStat/collection"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference ATL-0.2.ecore#/1/ForStat/statements"/>
+    </genClasses>
+    <genClasses ecoreClass="ATL-0.2.ecore#/1/Unit">
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference ATL-0.2.ecore#/1/Unit/libraries"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute ATL-0.2.ecore#/1/Unit/name"/>
+    </genClasses>
+    <genClasses ecoreClass="ATL-0.2.ecore#/1/Library">
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference ATL-0.2.ecore#/1/Library/helpers"/>
+    </genClasses>
+    <genClasses image="false" ecoreClass="ATL-0.2.ecore#/1/Rule">
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference ATL-0.2.ecore#/1/Rule/outPattern"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference ATL-0.2.ecore#/1/Rule/actionBlock"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference ATL-0.2.ecore#/1/Rule/variables"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute ATL-0.2.ecore#/1/Rule/name"/>
+    </genClasses>
+    <genClasses image="false" ecoreClass="ATL-0.2.ecore#/1/OutPatternElement">
+      <genFeatures property="None" notify="false" createChild="false" ecoreFeature="ecore:EReference ATL-0.2.ecore#/1/OutPatternElement/outPattern"/>
+      <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference ATL-0.2.ecore#/1/OutPatternElement/sourceElement"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference ATL-0.2.ecore#/1/OutPatternElement/bindings"/>
+    </genClasses>
+    <genClasses ecoreClass="ATL-0.2.ecore#/1/InPattern">
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference ATL-0.2.ecore#/1/InPattern/elements"/>
+      <genFeatures property="None" notify="false" createChild="false" ecoreFeature="ecore:EReference ATL-0.2.ecore#/1/InPattern/rule"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference ATL-0.2.ecore#/1/InPattern/filter"/>
+    </genClasses>
+    <genClasses ecoreClass="ATL-0.2.ecore#/1/OutPattern">
+      <genFeatures property="None" notify="false" createChild="false" ecoreFeature="ecore:EReference ATL-0.2.ecore#/1/OutPattern/rule"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference ATL-0.2.ecore#/1/OutPattern/elements"/>
+    </genClasses>
+    <genClasses image="false" ecoreClass="ATL-0.2.ecore#/1/ModuleElement">
+      <genFeatures property="None" notify="false" createChild="false" ecoreFeature="ecore:EReference ATL-0.2.ecore#/1/ModuleElement/module"/>
+    </genClasses>
+    <genClasses ecoreClass="ATL-0.2.ecore#/1/Helper">
+      <genFeatures property="None" notify="false" createChild="false" ecoreFeature="ecore:EReference ATL-0.2.ecore#/1/Helper/query"/>
+      <genFeatures property="None" notify="false" createChild="false" ecoreFeature="ecore:EReference ATL-0.2.ecore#/1/Helper/library"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference ATL-0.2.ecore#/1/Helper/definition"/>
+    </genClasses>
+    <genClasses ecoreClass="ATL-0.2.ecore#/1/SimpleInPatternElement"/>
+    <genClasses ecoreClass="ATL-0.2.ecore#/1/IterateInPatternElement">
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference ATL-0.2.ecore#/1/IterateInPatternElement/collection"/>
+    </genClasses>
+    <genClasses image="false" ecoreClass="ATL-0.2.ecore#/1/InPatternElement">
+      <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference ATL-0.2.ecore#/1/InPatternElement/mapsTo"/>
+      <genFeatures property="None" notify="false" createChild="false" ecoreFeature="ecore:EReference ATL-0.2.ecore#/1/InPatternElement/inPattern"/>
+    </genClasses>
+    <genClasses image="false" ecoreClass="ATL-0.2.ecore#/1/PatternElement"/>
+    <genClasses ecoreClass="ATL-0.2.ecore#/1/CalledRule">
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference ATL-0.2.ecore#/1/CalledRule/parameters"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute ATL-0.2.ecore#/1/CalledRule/isEntrypoint"/>
+    </genClasses>
+    <genClasses ecoreClass="ATL-0.2.ecore#/1/Binding">
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference ATL-0.2.ecore#/1/Binding/value"/>
+      <genFeatures property="None" notify="false" createChild="false" ecoreFeature="ecore:EReference ATL-0.2.ecore#/1/Binding/outPatternElement"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute ATL-0.2.ecore#/1/Binding/propertyName"/>
+    </genClasses>
+    <genClasses ecoreClass="ATL-0.2.ecore#/1/ForEachOutPatternElement">
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference ATL-0.2.ecore#/1/ForEachOutPatternElement/collection"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference ATL-0.2.ecore#/1/ForEachOutPatternElement/iterator"/>
+    </genClasses>
+    <genClasses ecoreClass="ATL-0.2.ecore#/1/RuleVariableDeclaration">
+      <genFeatures property="None" notify="false" createChild="false" ecoreFeature="ecore:EReference ATL-0.2.ecore#/1/RuleVariableDeclaration/rule"/>
+    </genClasses>
+    <genClasses ecoreClass="ATL-0.2.ecore#/1/LibraryRef">
+      <genFeatures property="None" notify="false" createChild="false" ecoreFeature="ecore:EReference ATL-0.2.ecore#/1/LibraryRef/unit"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute ATL-0.2.ecore#/1/LibraryRef/name"/>
+    </genClasses>
+    <genClasses ecoreClass="ATL-0.2.ecore#/1/MatchedRule">
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference ATL-0.2.ecore#/1/MatchedRule/inPattern"/>
+      <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference ATL-0.2.ecore#/1/MatchedRule/children"/>
+      <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference ATL-0.2.ecore#/1/MatchedRule/superRule"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute ATL-0.2.ecore#/1/MatchedRule/isAbstract"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute ATL-0.2.ecore#/1/MatchedRule/isRefining"/>
+    </genClasses>
+    <genClasses ecoreClass="ATL-0.2.ecore#/1/LazyMatchedRule">
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute ATL-0.2.ecore#/1/LazyMatchedRule/isUnique"/>
+    </genClasses>
+    <genClasses ecoreClass="ATL-0.2.ecore#/1/SimpleOutPatternElement"/>
+  </genPackages>
+  <genPackages prefix="Core" basePackage="a2l.tests.vmtesting.emf.atl2problem" disposableProviderFactory="true"
+      ecorePackage="ATL-0.2.ecore#/2">
+    <genClasses ecoreClass="ATL-0.2.ecore#/2/Element">
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute ATL-0.2.ecore#/2/Element/location"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute ATL-0.2.ecore#/2/Element/commentsBefore"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute ATL-0.2.ecore#/2/Element/commentsAfter"/>
+    </genClasses>
+  </genPackages>
+  <genPackages prefix="PrimitiveTypes" basePackage="a2l.tests.vmtesting.emf.atl2problem"
+      disposableProviderFactory="true" ecorePackage="ATL-0.2.ecore#/3">
+    <genDataTypes ecoreDataType="ATL-0.2.ecore#/3/Double"/>
+    <genDataTypes ecoreDataType="ATL-0.2.ecore#/3/Integer"/>
+    <genDataTypes ecoreDataType="ATL-0.2.ecore#/3/String"/>
+    <genDataTypes ecoreDataType="ATL-0.2.ecore#/3/Boolean"/>
+  </genPackages>
+</genmodel:GenModel>

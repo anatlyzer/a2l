@@ -1,0 +1,235 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<genmodel:GenModel xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:ecore="http://www.eclipse.org/emf/2002/Ecore"
+    xmlns:genmodel="http://www.eclipse.org/emf/2002/GenModel" modelDirectory="/a2l.tests.vmtesting.emf/src-gen" modelPluginID="a2l.tests.vmtesting.emf"
+    modelName="MavenMaven" rootExtendsClass="org.eclipse.emf.ecore.impl.MinimalEObjectImpl$Container"
+    importerID="org.eclipse.emf.importer.ecore" complianceLevel="8.0" copyrightFields="false"
+    operationReflection="true" importOrganizing="true">
+  <foreignModel>MavenMaven.ecore</foreignModel>
+  <genPackages prefix="PrimitiveTypes" basePackage="a2l.tests.vmtesting.emf.ant2maven.mavenmaven"
+      disposableProviderFactory="true" ecorePackage="MavenMaven.ecore#/0">
+    <genDataTypes ecoreDataType="MavenMaven.ecore#/0/String"/>
+  </genPackages>
+  <genPackages prefix="MavenMaven" basePackage="a2l.tests.vmtesting.emf.ant2maven.mavenmaven"
+      disposableProviderFactory="true" ecorePackage="MavenMaven.ecore#/1">
+    <genClasses ecoreClass="MavenMaven.ecore#/1/Project">
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference MavenMaven.ecore#/1/Project/xmlns"/>
+      <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference MavenMaven.ecore#/1/Project/default"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference MavenMaven.ecore#/1/Project/path"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference MavenMaven.ecore#/1/Project/properties"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference MavenMaven.ecore#/1/Project/taskdefs"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference MavenMaven.ecore#/1/Project/prePostGoals"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference MavenMaven.ecore#/1/Project/goals"/>
+    </genClasses>
+    <genClasses ecoreClass="MavenMaven.ecore#/1/Xmlns">
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute MavenMaven.ecore#/1/Xmlns/name"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute MavenMaven.ecore#/1/Xmlns/value"/>
+    </genClasses>
+    <genClasses image="false" ecoreClass="MavenMaven.ecore#/1/AntProperty"/>
+    <genClasses image="false" ecoreClass="MavenMaven.ecore#/1/AntPropertyName">
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute MavenMaven.ecore#/1/AntPropertyName/name"/>
+    </genClasses>
+    <genClasses ecoreClass="MavenMaven.ecore#/1/AntPropertyValue">
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute MavenMaven.ecore#/1/AntPropertyValue/value"/>
+    </genClasses>
+    <genClasses ecoreClass="MavenMaven.ecore#/1/AntPropertyLocation">
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute MavenMaven.ecore#/1/AntPropertyLocation/location"/>
+    </genClasses>
+    <genClasses ecoreClass="MavenMaven.ecore#/1/AntPropertyFile">
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute MavenMaven.ecore#/1/AntPropertyFile/file"/>
+    </genClasses>
+    <genClasses ecoreClass="MavenMaven.ecore#/1/AntPropertyEnv">
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute MavenMaven.ecore#/1/AntPropertyEnv/environment"/>
+    </genClasses>
+    <genClasses image="false" ecoreClass="MavenMaven.ecore#/1/JellyCommand"/>
+    <genClasses ecoreClass="MavenMaven.ecore#/1/JellySet">
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute MavenMaven.ecore#/1/JellySet/var"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute MavenMaven.ecore#/1/JellySet/value"/>
+    </genClasses>
+    <genClasses image="false" ecoreClass="MavenMaven.ecore#/1/AbstractGoal">
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference MavenMaven.ecore#/1/AbstractGoal/contentsGoal"/>
+    </genClasses>
+    <genClasses image="false" ecoreClass="MavenMaven.ecore#/1/ContentsGoal"/>
+    <genClasses ecoreClass="MavenMaven.ecore#/1/AttainGoal">
+      <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference MavenMaven.ecore#/1/AttainGoal/attainGoal"/>
+    </genClasses>
+    <genClasses image="false" ecoreClass="MavenMaven.ecore#/1/PrePostGoal"/>
+    <genClasses ecoreClass="MavenMaven.ecore#/1/PreGoal">
+      <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference MavenMaven.ecore#/1/PreGoal/centralGoal"/>
+    </genClasses>
+    <genClasses ecoreClass="MavenMaven.ecore#/1/PostGoal">
+      <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference MavenMaven.ecore#/1/PostGoal/centralGoal"/>
+    </genClasses>
+    <genClasses ecoreClass="MavenMaven.ecore#/1/Goal">
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute MavenMaven.ecore#/1/Goal/name"/>
+      <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference MavenMaven.ecore#/1/Goal/preGoal"/>
+      <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference MavenMaven.ecore#/1/Goal/postGoal"/>
+    </genClasses>
+    <genClasses image="false" ecoreClass="MavenMaven.ecore#/1/Pattern"/>
+    <genClasses image="false" ecoreClass="MavenMaven.ecore#/1/Basic"/>
+    <genClasses ecoreClass="MavenMaven.ecore#/1/Mapper">
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute MavenMaven.ecore#/1/Mapper/type"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute MavenMaven.ecore#/1/Mapper/classname"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute MavenMaven.ecore#/1/Mapper/classpath"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute MavenMaven.ecore#/1/Mapper/classpathref"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute MavenMaven.ecore#/1/Mapper/from"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute MavenMaven.ecore#/1/Mapper/to"/>
+    </genClasses>
+    <genClasses image="false" ecoreClass="MavenMaven.ecore#/1/InExcludes">
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute MavenMaven.ecore#/1/InExcludes/name"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute MavenMaven.ecore#/1/InExcludes/ifCondition"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute MavenMaven.ecore#/1/InExcludes/unless"/>
+    </genClasses>
+    <genClasses ecoreClass="MavenMaven.ecore#/1/Includes"/>
+    <genClasses ecoreClass="MavenMaven.ecore#/1/Excludes"/>
+    <genClasses ecoreClass="MavenMaven.ecore#/1/IncludesFile"/>
+    <genClasses ecoreClass="MavenMaven.ecore#/1/ExcludesFile"/>
+    <genClasses ecoreClass="MavenMaven.ecore#/1/FileList">
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute MavenMaven.ecore#/1/FileList/dir"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute MavenMaven.ecore#/1/FileList/files"/>
+    </genClasses>
+    <genClasses ecoreClass="MavenMaven.ecore#/1/Filter">
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute MavenMaven.ecore#/1/Filter/token"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute MavenMaven.ecore#/1/Filter/value"/>
+    </genClasses>
+    <genClasses ecoreClass="MavenMaven.ecore#/1/FiltersFile">
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute MavenMaven.ecore#/1/FiltersFile/file"/>
+    </genClasses>
+    <genClasses ecoreClass="MavenMaven.ecore#/1/PathElement">
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute MavenMaven.ecore#/1/PathElement/path"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute MavenMaven.ecore#/1/PathElement/location"/>
+    </genClasses>
+    <genClasses image="false" ecoreClass="MavenMaven.ecore#/1/Set"/>
+    <genClasses ecoreClass="MavenMaven.ecore#/1/PatternSet">
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference MavenMaven.ecore#/1/PatternSet/inexcludes"/>
+    </genClasses>
+    <genClasses ecoreClass="MavenMaven.ecore#/1/FileSet">
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute MavenMaven.ecore#/1/FileSet/dir"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference MavenMaven.ecore#/1/FileSet/patternset"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference MavenMaven.ecore#/1/FileSet/include"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference MavenMaven.ecore#/1/FileSet/exclude"/>
+    </genClasses>
+    <genClasses ecoreClass="MavenMaven.ecore#/1/FilterSet">
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute MavenMaven.ecore#/1/FilterSet/starttoken"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute MavenMaven.ecore#/1/FilterSet/endtoken"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference MavenMaven.ecore#/1/FilterSet/filter"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference MavenMaven.ecore#/1/FilterSet/filtersfile"/>
+    </genClasses>
+    <genClasses ecoreClass="MavenMaven.ecore#/1/Path">
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute MavenMaven.ecore#/1/Path/id"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute MavenMaven.ecore#/1/Path/refid"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference MavenMaven.ecore#/1/Path/path"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference MavenMaven.ecore#/1/Path/pathElement"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference MavenMaven.ecore#/1/Path/fileset"/>
+    </genClasses>
+    <genClasses ecoreClass="MavenMaven.ecore#/1/ClassPath">
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute MavenMaven.ecore#/1/ClassPath/refid"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference MavenMaven.ecore#/1/ClassPath/pathElement"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference MavenMaven.ecore#/1/ClassPath/fileset"/>
+    </genClasses>
+    <genClasses image="false" ecoreClass="MavenMaven.ecore#/1/Task"/>
+    <genClasses ecoreClass="MavenMaven.ecore#/1/AntTaskDef">
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute MavenMaven.ecore#/1/AntTaskDef/name"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute MavenMaven.ecore#/1/AntTaskDef/classname"/>
+    </genClasses>
+    <genClasses ecoreClass="MavenMaven.ecore#/1/NewTask">
+      <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference MavenMaven.ecore#/1/NewTask/taskName"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference MavenMaven.ecore#/1/NewTask/attributes"/>
+    </genClasses>
+    <genClasses ecoreClass="MavenMaven.ecore#/1/Attribut">
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute MavenMaven.ecore#/1/Attribut/name"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute MavenMaven.ecore#/1/Attribut/value"/>
+    </genClasses>
+    <genClasses image="false" ecoreClass="MavenMaven.ecore#/1/PreDefinedTask">
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute MavenMaven.ecore#/1/PreDefinedTask/id"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute MavenMaven.ecore#/1/PreDefinedTask/taskname"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute MavenMaven.ecore#/1/PreDefinedTask/description"/>
+    </genClasses>
+    <genClasses image="false" ecoreClass="MavenMaven.ecore#/1/ExecutionTask"/>
+    <genClasses ecoreClass="MavenMaven.ecore#/1/Exec">
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute MavenMaven.ecore#/1/Exec/executable"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute MavenMaven.ecore#/1/Exec/dir"/>
+    </genClasses>
+    <genClasses ecoreClass="MavenMaven.ecore#/1/Java">
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute MavenMaven.ecore#/1/Java/classname"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute MavenMaven.ecore#/1/Java/jar"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute MavenMaven.ecore#/1/Java/fork"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference MavenMaven.ecore#/1/Java/classPath"/>
+    </genClasses>
+    <genClasses image="false" ecoreClass="MavenMaven.ecore#/1/MiscellaneousTask"/>
+    <genClasses ecoreClass="MavenMaven.ecore#/1/Echo">
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute MavenMaven.ecore#/1/Echo/message"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute MavenMaven.ecore#/1/Echo/file"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute MavenMaven.ecore#/1/Echo/append"/>
+    </genClasses>
+    <genClasses ecoreClass="MavenMaven.ecore#/1/Tstamp">
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference MavenMaven.ecore#/1/Tstamp/format"/>
+    </genClasses>
+    <genClasses ecoreClass="MavenMaven.ecore#/1/FormatTstamp">
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute MavenMaven.ecore#/1/FormatTstamp/property"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute MavenMaven.ecore#/1/FormatTstamp/pattern"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute MavenMaven.ecore#/1/FormatTstamp/offset"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute MavenMaven.ecore#/1/FormatTstamp/unit"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute MavenMaven.ecore#/1/FormatTstamp/locale"/>
+    </genClasses>
+    <genClasses image="false" ecoreClass="MavenMaven.ecore#/1/CompileTask"/>
+    <genClasses ecoreClass="MavenMaven.ecore#/1/Javac">
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute MavenMaven.ecore#/1/Javac/srcdir"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute MavenMaven.ecore#/1/Javac/destdir"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute MavenMaven.ecore#/1/Javac/debug"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute MavenMaven.ecore#/1/Javac/fork"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute MavenMaven.ecore#/1/Javac/optimize"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute MavenMaven.ecore#/1/Javac/deprecation"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference MavenMaven.ecore#/1/Javac/inExcludes"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference MavenMaven.ecore#/1/Javac/classPath"/>
+    </genClasses>
+    <genClasses image="false" ecoreClass="MavenMaven.ecore#/1/DocumentationTask"/>
+    <genClasses ecoreClass="MavenMaven.ecore#/1/Javadoc">
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute MavenMaven.ecore#/1/Javadoc/sourcepath"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute MavenMaven.ecore#/1/Javadoc/destdir"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute MavenMaven.ecore#/1/Javadoc/packagenames"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute MavenMaven.ecore#/1/Javadoc/defaultexcludes"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute MavenMaven.ecore#/1/Javadoc/author"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute MavenMaven.ecore#/1/Javadoc/version"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute MavenMaven.ecore#/1/Javadoc/use"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute MavenMaven.ecore#/1/Javadoc/windowtitle"/>
+    </genClasses>
+    <genClasses image="false" ecoreClass="MavenMaven.ecore#/1/ArchiveTask"/>
+    <genClasses ecoreClass="MavenMaven.ecore#/1/Jar">
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute MavenMaven.ecore#/1/Jar/jarfile"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute MavenMaven.ecore#/1/Jar/basedir"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute MavenMaven.ecore#/1/Jar/compress"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute MavenMaven.ecore#/1/Jar/encoding"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute MavenMaven.ecore#/1/Jar/manifest"/>
+    </genClasses>
+    <genClasses image="false" ecoreClass="MavenMaven.ecore#/1/FileTask"/>
+    <genClasses ecoreClass="MavenMaven.ecore#/1/Mkdir">
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute MavenMaven.ecore#/1/Mkdir/dir"/>
+    </genClasses>
+    <genClasses ecoreClass="MavenMaven.ecore#/1/Copy">
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute MavenMaven.ecore#/1/Copy/file"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute MavenMaven.ecore#/1/Copy/presservelastmodified"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute MavenMaven.ecore#/1/Copy/tofile"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute MavenMaven.ecore#/1/Copy/todir"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute MavenMaven.ecore#/1/Copy/overwrite"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute MavenMaven.ecore#/1/Copy/filtering"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute MavenMaven.ecore#/1/Copy/flatten"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute MavenMaven.ecore#/1/Copy/includeEmptyDirs"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference MavenMaven.ecore#/1/Copy/fileset"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference MavenMaven.ecore#/1/Copy/filterset"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference MavenMaven.ecore#/1/Copy/mapper"/>
+    </genClasses>
+    <genClasses ecoreClass="MavenMaven.ecore#/1/Delete">
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute MavenMaven.ecore#/1/Delete/file"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute MavenMaven.ecore#/1/Delete/dir"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute MavenMaven.ecore#/1/Delete/verbose"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute MavenMaven.ecore#/1/Delete/quiet"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute MavenMaven.ecore#/1/Delete/failonerror"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute MavenMaven.ecore#/1/Delete/includeEmptyDirs"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute MavenMaven.ecore#/1/Delete/includes"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute MavenMaven.ecore#/1/Delete/includesfile"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute MavenMaven.ecore#/1/Delete/excludes"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute MavenMaven.ecore#/1/Delete/excludesfile"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute MavenMaven.ecore#/1/Delete/defaultexcludes"/>
+    </genClasses>
+  </genPackages>
+</genmodel:GenModel>

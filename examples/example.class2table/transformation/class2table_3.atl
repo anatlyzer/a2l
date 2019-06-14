@@ -1,0 +1,35 @@
+-- @atlcompiler lintra
+
+-- @project example.class2table=lintra.transformation.class2table 
+-- @path CLASS=/example.class2table/metamodels/class2.ecore
+-- @path TABLE=/example.class2table/metamodels/table2.ecore
+
+module class2table3;
+create OUT : TABLE from IN : CLASS;
+
+helper context CLASS!Attribute def: checkKey : Boolean = self.isKey;
+
+rule model2schema {
+	from m : CLASS!Model 
+	to	 t : TABLE!Schema ( 
+  		name <- m.name,
+		tables <- m.classifiers
+	)
+}
+
+rule class2table { 
+	from c : CLASS!Class ( c.attrs->exists(a | a.isKey) )
+	to	 t : TABLE!Table ( 
+  		name <- c.name,
+  		columns <- c.attrs, 
+		pkeys <- c.attrs->select(a | a.checkKey)
+	)
+}
+
+rule Attribute2Column {
+   from a : CLASS!Attribute 
+     to c : TABLE!Column (
+		name <- a.name,
+		type <- a.type.name
+	)
+}

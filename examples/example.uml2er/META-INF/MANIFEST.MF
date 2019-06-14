@@ -1,0 +1,15 @@
+Manifest-Version: 1.0
+Bundle-ManifestVersion: 2
+Bundle-Name: Uml2er
+Bundle-SymbolicName: example.uml2er
+Bundle-Version: 1.0.0.qualifier
+Export-Package: er,
+ example.uml2er.uml2er_distinct2,
+ simpleuml
+Require-Bundle: lintra.lib;bundle-version="1.0.0",
+ lintra.lib;bundle-version="1.0.0",
+ org.eclipse.emf.ecore.xmi,
+ lintra.evaluation,
+ org.junit,
+ org.eclipse.emf.compare,
+ lintra.emf

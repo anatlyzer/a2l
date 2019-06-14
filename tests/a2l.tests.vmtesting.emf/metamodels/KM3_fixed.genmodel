@@ -1,0 +1,55 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<genmodel:GenModel xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:ecore="http://www.eclipse.org/emf/2002/Ecore"
+    xmlns:genmodel="http://www.eclipse.org/emf/2002/GenModel" modelDirectory="/a2l.tests.vmtesting.emf/src-gen" modelPluginID="a2l.tests.vmtesting.emf"
+    modelName="KM3_fixed" modelPluginClass="" rootExtendsClass="org.eclipse.emf.ecore.impl.MinimalEObjectImpl$Container"
+    importerID="org.eclipse.emf.importer.ecore" complianceLevel="8.0" copyrightFields="false"
+    operationReflection="true" importOrganizing="true">
+  <foreignModel>KM3_fixed.ecore</foreignModel>
+  <genPackages prefix="KM3" basePackage="a2l.tests.vmtesting.emf.metamodels" disposableProviderFactory="true"
+      ecorePackage="KM3_fixed.ecore#/">
+    <genClasses image="false" ecoreClass="KM3_fixed.ecore#//LocatedElement">
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute KM3_fixed.ecore#//LocatedElement/location"/>
+    </genClasses>
+    <genClasses image="false" ecoreClass="KM3_fixed.ecore#//ModelElement">
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute KM3_fixed.ecore#//ModelElement/name"/>
+      <genFeatures property="None" notify="false" createChild="false" ecoreFeature="ecore:EReference KM3_fixed.ecore#//ModelElement/package"/>
+    </genClasses>
+    <genClasses ecoreClass="KM3_fixed.ecore#//Classifier"/>
+    <genClasses ecoreClass="KM3_fixed.ecore#//DataType"/>
+    <genClasses ecoreClass="KM3_fixed.ecore#//Enumeration">
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference KM3_fixed.ecore#//Enumeration/literals"/>
+    </genClasses>
+    <genClasses ecoreClass="KM3_fixed.ecore#//EnumLiteral"/>
+    <genClasses ecoreClass="KM3_fixed.ecore#//Class">
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute KM3_fixed.ecore#//Class/isAbstract"/>
+      <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference KM3_fixed.ecore#//Class/supertypes"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference KM3_fixed.ecore#//Class/structuralFeatures"/>
+    </genClasses>
+    <genClasses ecoreClass="KM3_fixed.ecore#//StructuralFeature">
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute KM3_fixed.ecore#//StructuralFeature/lower"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute KM3_fixed.ecore#//StructuralFeature/upper"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute KM3_fixed.ecore#//StructuralFeature/isOrdered"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute KM3_fixed.ecore#//StructuralFeature/isUnique"/>
+      <genFeatures property="None" notify="false" createChild="false" ecoreFeature="ecore:EReference KM3_fixed.ecore#//StructuralFeature/owner"/>
+      <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference KM3_fixed.ecore#//StructuralFeature/type"/>
+    </genClasses>
+    <genClasses ecoreClass="KM3_fixed.ecore#//Attribute"/>
+    <genClasses ecoreClass="KM3_fixed.ecore#//Reference">
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute KM3_fixed.ecore#//Reference/isContainer"/>
+      <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference KM3_fixed.ecore#//Reference/opposite"/>
+    </genClasses>
+    <genClasses ecoreClass="KM3_fixed.ecore#//Package">
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference KM3_fixed.ecore#//Package/contents"/>
+      <genFeatures property="None" notify="false" createChild="false" ecoreFeature="ecore:EReference KM3_fixed.ecore#//Package/metamodel"/>
+    </genClasses>
+    <genClasses ecoreClass="KM3_fixed.ecore#//Metamodel">
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference KM3_fixed.ecore#//Metamodel/contents"/>
+    </genClasses>
+    <nestedGenPackages prefix="PrimitiveTypes" basePackage="a2l.tests.vmtesting.emf.metamodels.KM3"
+        disposableProviderFactory="true" ecorePackage="KM3_fixed.ecore#//PrimitiveTypes">
+      <genDataTypes ecoreDataType="KM3_fixed.ecore#//PrimitiveTypes/Boolean"/>
+      <genDataTypes ecoreDataType="KM3_fixed.ecore#//PrimitiveTypes/Integer"/>
+      <genDataTypes ecoreDataType="KM3_fixed.ecore#//PrimitiveTypes/String"/>
+    </nestedGenPackages>
+  </genPackages>
+</genmodel:GenModel>

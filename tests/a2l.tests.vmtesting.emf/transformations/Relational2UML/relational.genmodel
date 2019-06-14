@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<genmodel:GenModel xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:ecore="http://www.eclipse.org/emf/2002/Ecore"
+    xmlns:genmodel="http://www.eclipse.org/emf/2002/GenModel" modelDirectory="/a2l.tests.vmtesting.emf/src-gen" modelPluginID="a2l.tests.vmtesting.emf"
+    modelName="Relational" rootExtendsClass="org.eclipse.emf.ecore.impl.MinimalEObjectImpl$Container"
+    importerID="org.eclipse.emf.importer.ecore" complianceLevel="8.0" copyrightFields="false"
+    operationReflection="true" importOrganizing="true">
+  <foreignModel>relational.ecore</foreignModel>
+  <genPackages prefix="Relational_4relational2UML" basePackage="a2l.tests.vmtesting.emf.relational2uml"
+      disposableProviderFactory="true" ecorePackage="relational.ecore#/">
+    <genEnums typeSafeEnumCompatible="false" ecoreEnum="relational.ecore#//Type">
+      <genEnumLiterals ecoreEnumLiteral="relational.ecore#//Type/NUMERIC"/>
+      <genEnumLiterals ecoreEnumLiteral="relational.ecore#//Type/VARCHAR"/>
+      <genEnumLiterals ecoreEnumLiteral="relational.ecore#//Type/DATE"/>
+      <genEnumLiterals ecoreEnumLiteral="relational.ecore#//Type/TIME"/>
+      <genEnumLiterals ecoreEnumLiteral="relational.ecore#//Type/FLOAT"/>
+      <genEnumLiterals ecoreEnumLiteral="relational.ecore#//Type/CHAR"/>
+    </genEnums>
+    <genClasses ecoreClass="relational.ecore#//Database">
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute relational.ecore#//Database/name"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute relational.ecore#//Database/url"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference relational.ecore#//Database/ownedSchemas"/>
+    </genClasses>
+    <genClasses ecoreClass="relational.ecore#//Schema">
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute relational.ecore#//Schema/name"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference relational.ecore#//Schema/ownedTables"/>
+      <genFeatures property="None" notify="false" createChild="false" ecoreFeature="ecore:EReference relational.ecore#//Schema/owner"/>
+    </genClasses>
+    <genClasses ecoreClass="relational.ecore#//Table">
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute relational.ecore#//Table/name"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference relational.ecore#//Table/ownedColumns"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference relational.ecore#//Table/ownedForeignKeys"/>
+      <genFeatures property="None" notify="false" createChild="false" ecoreFeature="ecore:EReference relational.ecore#//Table/owner"/>
+    </genClasses>
+    <genClasses ecoreClass="relational.ecore#//ForeignKey">
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute relational.ecore#//ForeignKey/name"/>
+      <genFeatures property="None" notify="false" createChild="false" ecoreFeature="ecore:EReference relational.ecore#//ForeignKey/foreignTable"/>
+      <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference relational.ecore#//ForeignKey/sourceTable"/>
+    </genClasses>
+    <genClasses ecoreClass="relational.ecore#//Column">
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute relational.ecore#//Column/name"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute relational.ecore#//Column/type"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute relational.ecore#//Column/isPrimaryKey"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute relational.ecore#//Column/isUnique"/>
+      <genFeatures property="None" notify="false" createChild="false" ecoreFeature="ecore:EReference relational.ecore#//Column/owner"/>
+    </genClasses>
+    <genClasses image="false" ecoreClass="relational.ecore#//ModelElement">
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute relational.ecore#//ModelElement/comment"/>
+    </genClasses>
+  </genPackages>
+</genmodel:GenModel>

@@ -1,0 +1,181 @@
+@namespace(
+	uri="http://lintra/javagen",
+	prefix="lintra_javagen")
+package javagen;
+
+class JavaGenModel {
+	val JLibType[*] libTypes;
+	val JMetaType[*] metaTypes;
+
+//	val JPackage[*] packages;
+	val JClass[*] classes;
+} 
+
+/*
+class JPackage {
+	attr String[1] name;
+	val JClass[*] classes;
+}
+*/
+
+abstract class JType {
+	attr String[1] name;	
+}
+
+class JLibType extends JType {
+	attr String[1] pkg;
+}
+
+class JMetaType extends JType {
+	attr String[1] qualifiedJavaName;
+}
+
+class JTypeRef {
+	ref JType[1] type;		
+}
+
+class JParamTypeRef extends JTypeRef {
+	val JTypeRef[1] containedType;
+}
+
+class JParamNTypeRef extends JTypeRef {
+	val JTypeRef[+] params;
+}
+
+
+class JGenericTypeRef extends JTypeRef {
+	val JTypeRef[1..*] typeParams;
+}
+
+class JArrayTypeRef extends JTypeRef {
+	val JTypeRef[1] containedType;
+}
+
+class JClass extends JType {
+	attr String[0..1] extra;
+
+	attr String[1] pkg;
+	val JMethod[*] methods;
+	val JAttribute[*] attributes;
+	val JTypeRef[*] implements;
+	val JTypeRef[0..1] extends_;
+	
+	ref JType[*] imports;
+	
+	val JThis[1] this_;
+}
+
+class JThis extends JVariableDeclaration {
+	
+}
+
+class JAttribute extends JVariableDeclaration {
+	
+}
+
+class JComment extends JStatement {
+	attr String[1] value;
+}
+
+abstract class JBlock {
+	val JVariableDeclaration[*] localVars;
+	val JStatement[*] statements;	
+}
+
+class JMethod extends JBlock {
+	attr String[1] name;
+	val JParameter[*] parameters;
+	val JTypeRef[0..1] returnType;
+	val JTypeRef[*] throws_;
+}
+
+abstract class JStatement {
+	
+}
+
+class JReturn extends JStatement {
+	val JExpression[1] result;
+}
+
+class JLoop extends JStatement, JBlock {
+	val JVariableDeclaration[1] loopVar;	
+}
+
+class JForeach extends JLoop {
+	val JExpression[1] collection;
+}
+
+class IteratorLoop extends JLoop {
+	val JVariableDeclaration[1] iteratorVar;
+	val JExpression[1] iteratorInit;
+}
+
+class JConditional extends JStatement {
+	val JConditionalBlock[1..*] conditions;
+	val JConditionalBlock[0..1] else;	
+}
+
+class JConditionalBlock extends JBlock {
+	val JExpression[1] expr;
+}
+
+class JAssignment extends JText {
+	ref JVariableDeclaration[1] declaration;
+	val JExpression[1] rightPart;
+}
+
+class JText extends JStatement {
+	attr String[1] body;
+}
+
+abstract class JExpression { }
+
+class JVarExp extends JExpression {
+	ref JVariableDeclaration[1] reference;
+}
+
+class JTextExp extends JExpression {
+	attr String[1] body;
+}
+
+class JVariableDeclaration {
+	val JTypeRef[1] type;
+	attr String[1] name;	
+}
+
+class LMatchObject extends JStatement {
+	val LMatchCase[*] cases;	
+}
+
+class LMatchCase extends JBlock {
+	ref JMethod[1] predicate;
+	val JExpression[1] obj;
+}
+
+class JParameter extends JVariableDeclaration {
+	
+}
+
+class JClosure extends JExpression, JBlock {
+	val JParameter[*] parameters;	
+}
+
+class JInvoke extends JExpression {
+	attr String[1] name;
+	val JExpression[1] obj;
+	val JExpression[*] arguments;	
+}
+
+class JInvokeStatic extends JExpression {
+	attr String[1] name;
+	val JExpression[*] arguments;	
+}
+
+class JNewObject extends JExpression {
+	val JTypeRef[1] typeRef;
+	val JExpression[*] arguments;			
+}
+
+class JExprStatement extends JStatement {
+	val JExpression[1] expr;
+}

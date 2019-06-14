@@ -1,0 +1,13 @@
+Manifest-Version: 1.0
+Bundle-ManifestVersion: 2
+Bundle-Name: Java2graph
+Bundle-SymbolicName: example.java2graph
+Bundle-Version: 1.0.0.qualifier
+Export-Package: example.java2graph.java2graph,
+ graphmm,
+ javamm
+Require-Bundle: lintra.emf;bundle-version="1.0.0",
+ lintra.lib;bundle-version="1.0.0",
+ org.junit,
+ lintra.evaluation;bundle-version="1.0.0"
+Bundle-RequiredExecutionEnvironment: JavaSE-1.8

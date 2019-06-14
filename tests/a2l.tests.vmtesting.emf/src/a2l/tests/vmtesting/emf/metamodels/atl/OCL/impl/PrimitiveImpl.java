@@ -1,0 +1,37 @@
+/**
+ */
+package a2l.tests.vmtesting.emf.metamodels.atl.OCL.impl;
+
+import a2l.tests.vmtesting.emf.metamodels.atl.OCL.OCLPackage;
+import a2l.tests.vmtesting.emf.metamodels.atl.OCL.Primitive;
+
+import org.eclipse.emf.ecore.EClass;
+
+/**
+ * <!-- begin-user-doc -->
+ * An implementation of the model object '<em><b>Primitive</b></em>'.
+ * <!-- end-user-doc -->
+ *
+ * @generated
+ */
+public abstract class PrimitiveImpl extends OclTypeImpl implements Primitive {
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	protected PrimitiveImpl() {
+		super();
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
+	protected EClass eStaticClass() {
+		return OCLPackage.Literals.PRIMITIVE;
+	}
+
+} //PrimitiveImpl

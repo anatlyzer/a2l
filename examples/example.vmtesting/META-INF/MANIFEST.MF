@@ -1,0 +1,14 @@
+Manifest-Version: 1.0
+Bundle-ManifestVersion: 2
+Bundle-Name: VM Testing for Lintra
+Bundle-SymbolicName: example.vmtesting
+Bundle-Version: 1.0.0.qualifier
+Require-Bundle: lintra.emf;bundle-version="1.0.0",
+ org.eclipse.emf.ecore.xmi,
+ lintra.evaluation,
+ org.junit,
+ lintra2.lib;bundle-version="1.0.0",
+ org.eclipse.uml2;bundle-version="5.2.0",
+ org.eclipse.uml2.uml;bundle-version="5.2.0"
+Import-Package: com.google.common.base,
+ org.eclipse.emf.ecore

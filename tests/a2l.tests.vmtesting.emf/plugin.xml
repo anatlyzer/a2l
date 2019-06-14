@@ -1,0 +1,323 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<?eclipse version="3.0"?>
+
+<!--
+-->
+
+<plugin>
+
+   <extension point="org.eclipse.emf.ecore.generated_package">
+      <!-- @generated Ant -->
+      <package
+            uri="Ant"
+            class="a2l.tests.vmtesting.emf.ant2maven.ant.Ant.AntPackage"
+            genModel="transformations/Ant2Maven/Ant.genmodel"/>
+   </extension>
+
+   <extension point="org.eclipse.emf.ecore.generated_package">
+      <!-- @generated Ant -->
+      <package
+            uri="PrimitiveTypes"
+            class="a2l.tests.vmtesting.emf.ant2maven.ant.PrimitiveTypes.PrimitiveTypesPackage"
+            genModel="transformations/Ant2Maven/Ant.genmodel"/>
+   </extension>
+
+   <extension point="org.eclipse.emf.ecore.generated_package">
+      <!-- @generated XML -->
+      <package
+            uri="PrimitiveTypes"
+            class="a2l.tests.vmtesting.emf.metamodels.xml.PrimitiveTypes.PrimitiveTypes.PrimitiveTypesPackage"
+            genModel="metamodels/XML.genmodel"/>
+   </extension>
+
+   <extension point="org.eclipse.emf.ecore.generated_package">
+      <!-- @generated XML -->
+      <package
+            uri="http://zoo/XML"
+            class="a2l.tests.vmtesting.emf.metamodels.xml.XML.XML.XMLPackage"
+            genModel="metamodels/XML.genmodel"/>
+   </extension>
+   <extension point="org.eclipse.emf.ecore.generated_package">
+      <!-- @generated ATL-0.2 -->
+      <package
+            uri="OCL"
+            class="a2l.tests.vmtesting.emf.atl2problem.OCL.OCLPackage"
+            genModel="transformations/ATL2Problem/ATL-0.2.genmodel"/>
+   </extension>
+
+   <extension point="org.eclipse.emf.ecore.generated_package">
+      <!-- @generated ATL-0.2 -->
+      <package
+            uri="Expressions"
+            class="a2l.tests.vmtesting.emf.atl2problem.OCL.Expressions.ExpressionsPackage"
+            genModel="transformations/ATL2Problem/ATL-0.2.genmodel"/>
+   </extension>
+
+   <extension point="org.eclipse.emf.ecore.generated_package">
+      <!-- @generated ATL-0.2 -->
+      <package
+            uri="Types"
+            class="a2l.tests.vmtesting.emf.atl2problem.OCL.Types.TypesPackage"
+            genModel="transformations/ATL2Problem/ATL-0.2.genmodel"/>
+   </extension>
+
+   <extension point="org.eclipse.emf.ecore.generated_package">
+      <!-- @generated ATL-0.2 -->
+      <package
+            uri="ATL"
+            class="a2l.tests.vmtesting.emf.atl2problem.ATL.ATLPackage"
+            genModel="transformations/ATL2Problem/ATL-0.2.genmodel"/>
+   </extension>
+
+   <extension point="org.eclipse.emf.ecore.generated_package">
+      <!-- @generated ATL-0.2 -->
+      <package
+            uri="Core"
+            class="a2l.tests.vmtesting.emf.atl2problem.Core.CorePackage"
+            genModel="transformations/ATL2Problem/ATL-0.2.genmodel"/>
+   </extension>
+
+   <extension point="org.eclipse.emf.ecore.generated_package">
+      <!-- @generated ATL-0.2 -->
+      <package
+            uri="PrimitiveTypes"
+            class="a2l.tests.vmtesting.emf.atl2problem.PrimitiveTypes.PrimitiveTypesPackage"
+            genModel="transformations/ATL2Problem/ATL-0.2.genmodel"/>
+   </extension>
+   <extension point="org.eclipse.emf.ecore.generated_package">
+      <!-- @generated Problem -->
+      <package
+            uri="PrimitiveTypes"
+            class="a2l.tests.vmtesting.emf.atl2problem.problem.PrimitiveTypes.PrimitiveTypesPackage"
+            genModel="transformations/ATL2Problem/Problem.genmodel"/>
+   </extension>
+
+   <extension point="org.eclipse.emf.ecore.generated_package">
+      <!-- @generated Problem -->
+      <package
+            uri="Diagnostic"
+            class="a2l.tests.vmtesting.emf.atl2problem.problem.Diagnostic.DiagnosticPackage"
+            genModel="transformations/ATL2Problem/Problem.genmodel"/>
+   </extension>
+   <extension point="org.eclipse.emf.ecore.generated_package">
+      <!-- @generated BibTeX -->
+      <package
+            uri="PrimitiveTypes"
+            class="a2l.tests.vmtesting.emf.bibtex.PrimitiveTypes.PrimitiveTypesPackage"
+            genModel="transformations/BibTeX2DocBook/BibTeX.genmodel"/>
+   </extension>
+
+   <extension point="org.eclipse.emf.ecore.generated_package">
+      <!-- @generated BibTeX -->
+      <package
+            uri="BibTeX"
+            class="a2l.tests.vmtesting.emf.bibtex.BibTeX.BibTeXPackage"
+            genModel="transformations/BibTeX2DocBook/BibTeX.genmodel"/>
+   </extension>
+   <extension point="org.eclipse.emf.ecore.generated_package">
+      <!-- @generated DocBook -->
+      <package
+            uri="DocBook"
+            class="a2l.tests.vmtesting.emf.docbook.DocBook.DocBookPackage"
+            genModel="transformations/BibTeX2DocBook/DocBook.genmodel"/>
+   </extension>
+
+   <extension point="org.eclipse.emf.ecore.generated_package">
+      <!-- @generated Publication -->
+      <package
+            uri="Publication"
+            class="a2l.tests.vmtesting.emf.metamodels.Publication.PublicationPackage"
+            genModel="transformations/Book2Publication/Publication.genmodel"/>
+   </extension>
+
+   <extension point="org.eclipse.emf.ecore.generated_package">
+      <!-- @generated Book -->
+      <package
+            uri="PrimitiveTypes"
+            class="a2l.tests.vmtesting.emf.metamodels.PrimitiveTypes.PrimitiveTypesPackage"
+            genModel="transformations/Book2Publication/Book.genmodel"/>
+   </extension>
+
+   <extension point="org.eclipse.emf.ecore.generated_package">
+      <!-- @generated Book -->
+      <package
+            uri="Book"
+            class="a2l.tests.vmtesting.emf.metamodels.Book.BookPackage"
+            genModel="transformations/Book2Publication/Book.genmodel"/>
+   </extension>
+   <extension point="org.eclipse.emf.ecore.generated_package">
+      <!-- @generated Relational -->
+      <package
+            uri="Relational"
+            class="a2l.tests.vmtesting.emf.class2relational.relational.Relational.RelationalPackage"
+            genModel="transformations/Class2Relational/Relational.genmodel"/>
+   </extension>
+
+   <extension point="org.eclipse.emf.ecore.generated_package">
+      <!-- @generated Relational -->
+      <package
+            uri="RelationalPrimitiveTypes"
+            class="a2l.tests.vmtesting.emf.class2relational.relational.PrimitiveTypes.PrimitiveTypesPackage"
+            genModel="transformations/Class2Relational/Relational.genmodel"/>
+   </extension>
+   <extension point="org.eclipse.emf.ecore.generated_package">
+      <!-- @generated DSL -->
+      <package
+            uri="DSL"
+            class="a2l.tests.vmtesting.emf.metamodels.DSL.DSLPackage"
+            genModel="metamodels/DSL.genmodel"/>
+   </extension>
+
+   <extension point="org.eclipse.emf.ecore.generated_package">
+      <!-- @generated DSL -->
+      <package
+            uri="DSLPrimitiveTypes"
+            class="a2l.tests.vmtesting.emf.metamodels.DSL.PrimitiveTypes.PrimitiveTypesPackage"
+            genModel="metamodels/DSL.genmodel"/>
+   </extension>
+   <extension point="org.eclipse.emf.ecore.generated_package">
+      <!-- @generated KM3_fixed -->
+      <package
+            uri="KM3"
+            class="a2l.tests.vmtesting.emf.metamodels.KM3.KM3Package"
+            genModel="metamodels/KM3_fixed.genmodel"/>
+   </extension>
+
+   <extension point="org.eclipse.emf.ecore.generated_package">
+      <!-- @generated KM3_fixed -->
+      <package
+            uri="KM3PrimitiveTypes"
+            class="a2l.tests.vmtesting.emf.metamodels.KM3.PrimitiveTypes.PrimitiveTypesPackage"
+            genModel="metamodels/KM3_fixed.genmodel"/>
+   </extension>
+   <extension point="org.eclipse.emf.ecore.generated_package">
+      <!-- @generated DSLModel -->
+      <package
+            uri="DSLModel"
+            class="a2l.tests.vmtesting.emf.metamodels.DSLModel.DSLModelPackage"
+            genModel="metamodels/DSLModel.genmodel"/>
+   </extension>
+
+   <extension point="org.eclipse.emf.ecore.generated_package">
+      <!-- @generated DSLModel -->
+      <package
+            uri="DSLModelPrimitiveTypes"
+            class="a2l.tests.vmtesting.emf.metamodels.DSLModel.DSLModelPrimitiveTypes.DSLModelPrimitiveTypesPackage"
+            genModel="metamodels/DSLModel.genmodel"/>
+   </extension>
+   <extension point="org.eclipse.emf.ecore.generated_package">
+      <!-- @generated KM2 -->
+      <package
+            uri="KM2"
+            class="a2l.tests.vmtesting.emf.dslmodel2km2.KM2.KM2Package"
+            genModel="transformations/DSLModel2KM2/KM2.genmodel"/>
+   </extension>
+
+   <extension point="org.eclipse.emf.ecore.generated_package">
+      <!-- @generated KM2 -->
+      <package
+            uri="KM2PrimitiveTypes"
+            class="a2l.tests.vmtesting.emf.dslmodel2km2.KM2.PrimitiveTypes.PrimitiveTypesPackage"
+            genModel="transformations/DSLModel2KM2/KM2.genmodel"/>
+   </extension>
+   <extension point="org.eclipse.emf.ecore.generated_package">
+      <!-- @generated Class -->
+      <package
+            uri="ClassPrimitiveTypes"
+            class="a2l.tests.vmtesting.emf.ecore2class.PrimitiveTypes.PrimitiveTypesPackage"
+            genModel="transformations/Ecore2Class/Class.genmodel"/>
+   </extension>
+
+   <extension point="org.eclipse.emf.ecore.generated_package">
+      <!-- @generated Class -->
+      <package
+            uri="Ecore2Class_Class"
+            class="a2l.tests.vmtesting.emf.ecore2class.Class.ClassMMPackage"
+            genModel="transformations/Ecore2Class/Class.genmodel"/>
+   </extension>
+
+   <extension point="org.eclipse.emf.ecore.generated_package">
+      <!-- @generated Families -->
+      <package
+            uri="Families"
+            class="a2l.tests.vmtesting.emf.families2persons.Families.FamiliesPackage"
+            genModel="transformations/Families2Persons/Families.genmodel"/>
+   </extension>
+
+   <extension point="org.eclipse.emf.ecore.generated_package">
+      <!-- @generated Persons -->
+      <package
+            uri="Persons"
+            class="a2l.tests.vmtesting.emf.families2persons.Persons.PersonsPackage"
+            genModel="transformations/Families2Persons/Persons.genmodel"/>
+   </extension>
+
+   <extension point="org.eclipse.emf.ecore.generated_package">
+      <!-- @generated Families -->
+      <package
+            uri="FamiliesPrimitiveTypes"
+            class="a2l.tests.vmtesting.emf.families2persons.PrimitiveTypes.PrimitiveTypesPackage"
+            genModel="transformations/Families2Persons/Families.genmodel"/>
+   </extension>
+   <extension point="org.eclipse.emf.ecore.generated_package">
+      <!-- @generated ATL -->
+      <package
+            uri="http://www.eclipse.org/gmt/2005/ATL"
+            class="a2l.tests.vmtesting.emf.metamodels.atl.ATL.ATLPackage"
+            genModel="metamodels/ATL.genmodel"/>
+   </extension>
+
+   <extension point="org.eclipse.emf.ecore.generated_package">
+      <!-- @generated ATL -->
+      <package
+            uri="http://www.eclipse.org/gmt/2005/OCL"
+            class="a2l.tests.vmtesting.emf.metamodels.atl.OCL.OCLPackage"
+            genModel="metamodels/ATL.genmodel"/>
+   </extension>
+
+   <extension point="org.eclipse.emf.ecore.generated_package">
+      <!-- @generated ATL -->
+      <package
+            uri="http://www.eclipse.org/gmt/2005/ATL-PrimitiveTypes"
+            class="a2l.tests.vmtesting.emf.metamodels.atl.PrimitiveTypes.PrimitiveTypesPackage"
+            genModel="metamodels/ATL.genmodel"/>
+   </extension>
+   <extension point="org.eclipse.emf.ecore.generated_package">
+      <!-- @generated MavenMaven -->
+      <package
+            uri="Maven2XML_MavenMaven_PrimitiveTypes"
+            class="a2l.tests.vmtesting.emf.maven2xml.mavenmaven.PrimitiveTypes.PrimitiveTypesPackage"
+            genModel="transformations/Maven2XML/MavenMaven.genmodel"/>
+   </extension>
+
+   <extension point="org.eclipse.emf.ecore.generated_package">
+      <!-- @generated MavenMaven -->
+      <package
+            uri="Maven2XML_MavenMaven"
+            class="a2l.tests.vmtesting.emf.maven2xml.mavenmaven.MavenMaven.MavenMavenPackage"
+            genModel="transformations/Maven2XML/MavenMaven.genmodel"/>
+   </extension>
+   <extension point="org.eclipse.emf.ecore.generated_package">
+      <!-- @generated MavenProject -->
+      <package
+            uri="Maven2XML_MavenProject_PrimitiveTypes"
+            class="a2l.tests.vmtesting.emf.maven2xml.mavenprojet.PrimitiveTypes.PrimitiveTypesPackage"
+            genModel="transformations/Maven2XML/MavenProject.genmodel"/>
+   </extension>
+
+   <extension point="org.eclipse.emf.ecore.generated_package">
+      <!-- @generated MavenProject -->
+      <package
+            uri="Maven2XML_MavenProject_MavenProject"
+            class="a2l.tests.vmtesting.emf.maven2xml.mavenprojet.MavenProject.MavenProjectPackage"
+            genModel="transformations/Maven2XML/MavenProject.genmodel"/>
+   </extension>
+   <extension point="org.eclipse.emf.ecore.generated_package">
+      <!-- @generated relational -->
+      <package
+            uri="http://www.obeo.fr/dsl/relational"
+            class="a2l.tests.vmtesting.emf.relational2uml.relational_4relational2UML.Relational_4relational2UMLPackage"
+            genModel="transformations/Relational2UML/relational.genmodel"/>
+   </extension>
+
+</plugin>

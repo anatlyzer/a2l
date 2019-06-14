@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="ISO-8859-1"?>
+<Trace xmi:version="2.0"
+    xmlns:xmi="http://www.omg.org/XMI"
+    xmlns="Trace"
+    name="Order_PerformanceTrace">
+  <levels>
+    <calls methodName="Create New Order"
+        DBAccessesNumber="0"
+        DBRowsNumber="0"
+        CPUTime="8725">
+      <indexes
+          value="1"/>
+    </calls>
+    <calls methodName="Select Order"
+        DBAccessesNumber="2"
+        DBRowsNumber="2645"
+        CPUTime="10122">
+      <indexes
+          value="2"/>
+    </calls>
+    <calls methodName="Create New Order"
+        DBAccessesNumber="0"
+        DBRowsNumber="0"
+        CPUTime="7463">
+      <indexes
+          value="3"/>
+    </calls>
+  </levels>
+  <levels>
+    <calls methodName="Validate"
+        DBAccessesNumber="1"
+        DBRowsNumber="1115"
+        CPUTime="9964">
+      <indexes
+          value="2"/>
+      <indexes
+          value="1"/>
+      <indexes
+          value="1"/>
+    </calls>
+  </levels>
+</Trace>

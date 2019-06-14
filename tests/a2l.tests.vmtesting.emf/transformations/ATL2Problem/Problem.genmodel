@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<genmodel:GenModel xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:ecore="http://www.eclipse.org/emf/2002/Ecore"
+    xmlns:genmodel="http://www.eclipse.org/emf/2002/GenModel" modelDirectory="/a2l.tests.vmtesting.emf/src-gen" modelPluginID="a2l.tests.vmtesting.emf"
+    modelName="Problem" rootExtendsClass="org.eclipse.emf.ecore.impl.MinimalEObjectImpl$Container"
+    importerID="org.eclipse.emf.importer.ecore" complianceLevel="8.0" copyrightFields="false"
+    operationReflection="true" importOrganizing="true">
+  <foreignModel>Problem.ecore</foreignModel>
+  <genPackages prefix="PrimitiveTypes" basePackage="a2l.tests.vmtesting.emf.atl2problem.problem"
+      disposableProviderFactory="true" ecorePackage="Problem.ecore#/0">
+    <genDataTypes ecoreDataType="Problem.ecore#/0/String"/>
+  </genPackages>
+  <genPackages prefix="Diagnostic" basePackage="a2l.tests.vmtesting.emf.atl2problem.problem"
+      disposableProviderFactory="true" ecorePackage="Problem.ecore#/1">
+    <genEnums typeSafeEnumCompatible="false" ecoreEnum="Problem.ecore#/1/Severity">
+      <genEnumLiterals ecoreEnumLiteral="Problem.ecore#/1/Severity/error"/>
+      <genEnumLiterals ecoreEnumLiteral="Problem.ecore#/1/Severity/warning"/>
+      <genEnumLiterals ecoreEnumLiteral="Problem.ecore#/1/Severity/critic"/>
+    </genEnums>
+    <genClasses ecoreClass="Problem.ecore#/1/Problem">
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute Problem.ecore#/1/Problem/severity"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute Problem.ecore#/1/Problem/location"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute Problem.ecore#/1/Problem/description"/>
+    </genClasses>
+  </genPackages>
+</genmodel:GenModel>

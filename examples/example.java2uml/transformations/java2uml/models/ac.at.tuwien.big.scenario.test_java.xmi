@@ -1,0 +1,294 @@
+<?xml version="1.0" encoding="ASCII"?>
+<java:Model xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:java="http://www.eclipse.org/MoDisco/Java/0.2.incubation/java" name="ac.at.tuwien.big.scenario.test">
+  <ownedElements name="simple">
+    <ownedPackages name="test">
+      <ownedElements xsi:type="java:AnnotationTypeDeclaration" originalCompilationUnit="//@compilationUnits.0" name="CodeElement" usagesInTypeAccess="//@ownedElements.0/@ownedPackages.0/@ownedElements.2/@annotations.0/@type //@ownedElements.0/@ownedPackages.0/@ownedElements.2/@bodyDeclarations.0/@annotations.0/@type //@ownedElements.0/@ownedPackages.0/@ownedElements.2/@bodyDeclarations.1/@annotations.0/@type //@ownedElements.0/@ownedPackages.0/@ownedElements.2/@bodyDeclarations.2/@annotations.0/@type //@ownedElements.0/@ownedPackages.0/@ownedElements.2/@bodyDeclarations.2/@parameters.0/@annotations.0/@type //@ownedElements.0/@ownedPackages.0/@ownedElements.2/@bodyDeclarations.3/@annotations.0/@type //@ownedElements.0/@ownedPackages.0/@ownedElements.2/@bodyDeclarations.4/@annotations.0/@type //@ownedElements.0/@ownedPackages.0/@ownedElements.2/@bodyDeclarations.4/@parameters.0/@annotations.0/@type //@ownedElements.0/@ownedPackages.0/@ownedElements.2/@bodyDeclarations.5/@annotations.0/@type //@ownedElements.0/@ownedPackages.0/@ownedElements.2/@bodyDeclarations.5/@parameters.0/@annotations.0/@type //@ownedElements.0/@ownedPackages.0/@ownedElements.0/@annotations.2/@type">
+        <comments xsi:type="java:Javadoc" originalCompilationUnit="//@compilationUnits.0" content="/** &#xA; * Annotation that can be used to mark the positions in Java, where annotations can be used.&#xA; * A &lt;code>@CodeElement&lt;/code> annotation supports two elements. Element &lt;code>value&lt;/code>&#xA; * is used to tag the type of the code element which is annotated, while &lt;code>id&lt;/code> can&#xA; * be used to distinguish several occurrences of the annotation for the same type of code&#xA; * element.&#xA; * @author Michael Grossniklaus &amp;lt;grossniklaus@big.tuwien.ac.at&amp;gt;&#xA; */&#xA;" prefixOfParent="true">
+          <tags originalCompilationUnit="//@compilationUnits.0">
+            <fragments xsi:type="java:TextElement" originalCompilationUnit="//@compilationUnits.0" text="Annotation that can be used to mark the positions in Java, where annotations can be used."/>
+            <fragments xsi:type="java:TextElement" originalCompilationUnit="//@compilationUnits.0" text="A &lt;code>@CodeElement&lt;/code> annotation supports two elements. Element &lt;code>value&lt;/code>"/>
+            <fragments xsi:type="java:TextElement" originalCompilationUnit="//@compilationUnits.0" text="is used to tag the type of the code element which is annotated, while &lt;code>id&lt;/code> can"/>
+            <fragments xsi:type="java:TextElement" originalCompilationUnit="//@compilationUnits.0" text="be used to distinguish several occurrences of the annotation for the same type of code"/>
+            <fragments xsi:type="java:TextElement" originalCompilationUnit="//@compilationUnits.0" text="element."/>
+          </tags>
+          <tags originalCompilationUnit="//@compilationUnits.0" tagName="@author">
+            <fragments xsi:type="java:TextElement" originalCompilationUnit="//@compilationUnits.0" text=" Michael Grossniklaus &amp;lt;grossniklaus@big.tuwien.ac.at&amp;gt;"/>
+          </tags>
+        </comments>
+        <annotations originalCompilationUnit="//@compilationUnits.0">
+          <type type="//@ownedElements.1/@ownedPackages.0/@ownedPackages.0/@ownedElements.0"/>
+        </annotations>
+        <annotations originalCompilationUnit="//@compilationUnits.0">
+          <type type="//@ownedElements.1/@ownedPackages.0/@ownedPackages.0/@ownedElements.2"/>
+          <values originalCompilationUnit="//@compilationUnits.0" name="value" member="//@ownedElements.1/@ownedPackages.0/@ownedPackages.0/@ownedElements.2/@bodyDeclarations.0">
+            <value xsi:type="java:SingleVariableAccess" variable="//@ownedElements.1/@ownedPackages.0/@ownedPackages.0/@ownedElements.3/@enumConstants.0">
+              <qualifier xsi:type="java:TypeAccess" type="//@ownedElements.1/@ownedPackages.0/@ownedPackages.0/@ownedElements.3"/>
+            </value>
+          </values>
+        </annotations>
+        <annotations originalCompilationUnit="//@compilationUnits.0">
+          <type type="//@ownedElements.0/@ownedPackages.0/@ownedElements.0"/>
+          <values originalCompilationUnit="//@compilationUnits.0" name="value" member="//@ownedElements.0/@ownedPackages.0/@ownedElements.0/@bodyDeclarations.0">
+            <value xsi:type="java:SingleVariableAccess" variable="//@ownedElements.1/@ownedPackages.0/@ownedPackages.0/@ownedElements.1/@enumConstants.0">
+              <qualifier xsi:type="java:TypeAccess" type="//@ownedElements.1/@ownedPackages.0/@ownedPackages.0/@ownedElements.1"/>
+            </value>
+          </values>
+        </annotations>
+        <modifier visibility="public"/>
+        <bodyDeclarations xsi:type="java:AnnotationTypeMemberDeclaration" originalCompilationUnit="//@compilationUnits.0" name="value" usages="//@ownedElements.0/@ownedPackages.0/@ownedElements.2/@annotations.0/@values.0 //@ownedElements.0/@ownedPackages.0/@ownedElements.2/@bodyDeclarations.0/@annotations.0/@values.0 //@ownedElements.0/@ownedPackages.0/@ownedElements.2/@bodyDeclarations.1/@annotations.0/@values.0 //@ownedElements.0/@ownedPackages.0/@ownedElements.2/@bodyDeclarations.2/@annotations.0/@values.0 //@ownedElements.0/@ownedPackages.0/@ownedElements.2/@bodyDeclarations.2/@parameters.0/@annotations.0/@values.0 //@ownedElements.0/@ownedPackages.0/@ownedElements.2/@bodyDeclarations.3/@annotations.0/@values.0 //@ownedElements.0/@ownedPackages.0/@ownedElements.2/@bodyDeclarations.4/@annotations.0/@values.0 //@ownedElements.0/@ownedPackages.0/@ownedElements.2/@bodyDeclarations.4/@parameters.0/@annotations.0/@values.0 //@ownedElements.0/@ownedPackages.0/@ownedElements.2/@bodyDeclarations.5/@annotations.0/@values.0 //@ownedElements.0/@ownedPackages.0/@ownedElements.2/@bodyDeclarations.5/@parameters.0/@annotations.0/@values.1 //@ownedElements.0/@ownedPackages.0/@ownedElements.0/@annotations.2/@values.0">
+          <comments xsi:type="java:LineComment" originalCompilationUnit="//@compilationUnits.0" content="// @Target({ElementType.ANNOTATION_TYPE, ElementType.CONSTRUCTOR, ElementType.FIELD," prefixOfParent="true"/>
+          <comments xsi:type="java:LineComment" originalCompilationUnit="//@compilationUnits.0" content="//&#x9;     ElementType.LOCAL_VARIABLE, ElementType.METHOD, ElementType.PARAMETER, ElementType.TYPE})" prefixOfParent="true"/>
+          <modifier/>
+          <type type="//@ownedElements.1/@ownedPackages.0/@ownedPackages.0/@ownedElements.1"/>
+        </bodyDeclarations>
+        <bodyDeclarations xsi:type="java:AnnotationTypeMemberDeclaration" originalCompilationUnit="//@compilationUnits.0" name="id" usages="//@ownedElements.0/@ownedPackages.0/@ownedElements.2/@bodyDeclarations.2/@parameters.0/@annotations.0/@values.1 //@ownedElements.0/@ownedPackages.0/@ownedElements.2/@bodyDeclarations.3/@annotations.0/@values.1 //@ownedElements.0/@ownedPackages.0/@ownedElements.2/@bodyDeclarations.4/@annotations.0/@values.1 //@ownedElements.0/@ownedPackages.0/@ownedElements.2/@bodyDeclarations.4/@parameters.0/@annotations.0/@values.1 //@ownedElements.0/@ownedPackages.0/@ownedElements.2/@bodyDeclarations.5/@annotations.0/@values.1 //@ownedElements.0/@ownedPackages.0/@ownedElements.2/@bodyDeclarations.5/@parameters.0/@annotations.0/@values.0">
+          <modifier/>
+          <default xsi:type="java:NumberLiteral" originalCompilationUnit="//@compilationUnits.0" tokenValue="1"/>
+          <type type="//@orphanTypes.0"/>
+        </bodyDeclarations>
+      </ownedElements>
+      <ownedElements xsi:type="java:ClassDeclaration" originalCompilationUnit="//@compilationUnits.1" name="MySubClass">
+        <comments xsi:type="java:Javadoc" originalCompilationUnit="//@compilationUnits.1" content="/** &#xA; * Class &lt;code>MySubClass&lt;/code> is designed to experiment with the &lt;code>@Inherited&lt;/code>&#xA; * annotation.&#xA; * @author Michael Grossniklaus &amp;;grossniklaus@big.tuwien.ac.at&amp;gt;&#xA; */&#xA;" prefixOfParent="true">
+          <tags originalCompilationUnit="//@compilationUnits.1">
+            <fragments xsi:type="java:TextElement" originalCompilationUnit="//@compilationUnits.1" text="Class &lt;code>MySubClass&lt;/code> is designed to experiment with the &lt;code>@Inherited&lt;/code>"/>
+            <fragments xsi:type="java:TextElement" originalCompilationUnit="//@compilationUnits.1" text="annotation."/>
+          </tags>
+          <tags originalCompilationUnit="//@compilationUnits.1" tagName="@author">
+            <fragments xsi:type="java:TextElement" originalCompilationUnit="//@compilationUnits.1" text=" Michael Grossniklaus &amp;;grossniklaus@big.tuwien.ac.at&amp;gt;"/>
+          </tags>
+        </comments>
+        <modifier visibility="public"/>
+        <bodyDeclarations xsi:type="java:ConstructorDeclaration" originalCompilationUnit="//@compilationUnits.1" name="MySubClass">
+          <modifier visibility="public"/>
+        </bodyDeclarations>
+        <bodyDeclarations xsi:type="java:MethodDeclaration" originalCompilationUnit="//@compilationUnits.1" name="checkValue" redefinedMethodDeclaration="//@ownedElements.0/@ownedPackages.0/@ownedElements.2/@bodyDeclarations.5">
+          <annotations originalCompilationUnit="//@compilationUnits.1">
+            <type type="//@ownedElements.1/@ownedPackages.0/@ownedElements.0"/>
+          </annotations>
+          <modifier visibility="public"/>
+          <parameters originalCompilationUnit="//@compilationUnits.1" name="value">
+            <modifier inheritance="final"/>
+            <type type="//@ownedElements.1/@ownedPackages.0/@ownedElements.1"/>
+          </parameters>
+          <returnType type="//@ownedElements.1/@ownedPackages.0/@ownedElements.1"/>
+        </bodyDeclarations>
+        <superClass type="//@ownedElements.0/@ownedPackages.0/@ownedElements.2"/>
+      </ownedElements>
+      <ownedElements xsi:type="java:ClassDeclaration" originalCompilationUnit="//@compilationUnits.2" name="MyClass" usagesInTypeAccess="//@ownedElements.0/@ownedPackages.0/@ownedElements.1/@superClass //@ownedElements.0/@ownedPackages.0/@ownedElements.2/@bodyDeclarations.1/@type">
+        <comments xsi:type="java:Javadoc" originalCompilationUnit="//@compilationUnits.2" content="/** &#xA; * Class &lt;code>MyClass&lt;/code> demonstrates all the possible places in the code, where&#xA; * annotations can be used in Java, except for package-level annotations.&#xA; * @author Michael Grossniklaus &amp;lt;grossniklaus@big.tuwien.ac.at&amp;gt;&#xA; */&#xA;" prefixOfParent="true">
+          <tags originalCompilationUnit="//@compilationUnits.2">
+            <fragments xsi:type="java:TextElement" originalCompilationUnit="//@compilationUnits.2" text="Class &lt;code>MyClass&lt;/code> demonstrates all the possible places in the code, where"/>
+            <fragments xsi:type="java:TextElement" originalCompilationUnit="//@compilationUnits.2" text="annotations can be used in Java, except for package-level annotations."/>
+          </tags>
+          <tags originalCompilationUnit="//@compilationUnits.2" tagName="@author">
+            <fragments xsi:type="java:TextElement" originalCompilationUnit="//@compilationUnits.2" text=" Michael Grossniklaus &amp;lt;grossniklaus@big.tuwien.ac.at&amp;gt;"/>
+          </tags>
+        </comments>
+        <annotations originalCompilationUnit="//@compilationUnits.2">
+          <comments xsi:type="java:BlockComment" originalCompilationUnit="//@compilationUnits.2" content="/* [ClassDeclaration] */" prefixOfParent="true"/>
+          <type type="//@ownedElements.0/@ownedPackages.0/@ownedElements.0"/>
+          <values originalCompilationUnit="//@compilationUnits.2" name="value" member="//@ownedElements.0/@ownedPackages.0/@ownedElements.0/@bodyDeclarations.0">
+            <value xsi:type="java:SingleVariableAccess" variable="//@ownedElements.1/@ownedPackages.0/@ownedPackages.0/@ownedElements.1/@enumConstants.1">
+              <qualifier xsi:type="java:TypeAccess" type="//@ownedElements.1/@ownedPackages.0/@ownedPackages.0/@ownedElements.1"/>
+            </value>
+          </values>
+        </annotations>
+        <modifier visibility="public"/>
+        <bodyDeclarations xsi:type="java:FieldDeclaration" originalCompilationUnit="//@compilationUnits.2">
+          <comments xsi:type="java:BlockComment" originalCompilationUnit="//@compilationUnits.2" content="/* [FieldDeclaration] */" prefixOfParent="true"/>
+          <annotations originalCompilationUnit="//@compilationUnits.2">
+            <type type="//@ownedElements.0/@ownedPackages.0/@ownedElements.0"/>
+            <values originalCompilationUnit="//@compilationUnits.2" name="value" member="//@ownedElements.0/@ownedPackages.0/@ownedElements.0/@bodyDeclarations.0">
+              <value xsi:type="java:SingleVariableAccess" variable="//@ownedElements.1/@ownedPackages.0/@ownedPackages.0/@ownedElements.1/@enumConstants.2">
+                <qualifier xsi:type="java:TypeAccess" type="//@ownedElements.1/@ownedPackages.0/@ownedPackages.0/@ownedElements.1"/>
+              </value>
+            </values>
+          </annotations>
+          <modifier visibility="private"/>
+          <type type="//@ownedElements.1/@ownedPackages.0/@ownedElements.1"/>
+          <fragments originalCompilationUnit="//@compilationUnits.2" name="myField"/>
+        </bodyDeclarations>
+        <bodyDeclarations xsi:type="java:FieldDeclaration" originalCompilationUnit="//@compilationUnits.2">
+          <comments xsi:type="java:BlockComment" originalCompilationUnit="//@compilationUnits.2" content="/* [FieldDeclaration] */" prefixOfParent="true"/>
+          <annotations originalCompilationUnit="//@compilationUnits.2">
+            <type type="//@ownedElements.0/@ownedPackages.0/@ownedElements.0"/>
+            <values originalCompilationUnit="//@compilationUnits.2" name="value" member="//@ownedElements.0/@ownedPackages.0/@ownedElements.0/@bodyDeclarations.0">
+              <value xsi:type="java:SingleVariableAccess" variable="//@ownedElements.1/@ownedPackages.0/@ownedPackages.0/@ownedElements.1/@enumConstants.2">
+                <qualifier xsi:type="java:TypeAccess" type="//@ownedElements.1/@ownedPackages.0/@ownedPackages.0/@ownedElements.1"/>
+              </value>
+            </values>
+          </annotations>
+          <modifier visibility="private"/>
+          <type type="//@ownedElements.0/@ownedPackages.0/@ownedElements.2"/>
+          <fragments originalCompilationUnit="//@compilationUnits.2" name="myClass"/>
+        </bodyDeclarations>
+        <bodyDeclarations xsi:type="java:ConstructorDeclaration" originalCompilationUnit="//@compilationUnits.2" name="MyClass">
+          <comments xsi:type="java:BlockComment" originalCompilationUnit="//@compilationUnits.2" content="/* [ConstructorDeclaration] */" prefixOfParent="true"/>
+          <annotations originalCompilationUnit="//@compilationUnits.2">
+            <type type="//@ownedElements.0/@ownedPackages.0/@ownedElements.0"/>
+            <values originalCompilationUnit="//@compilationUnits.2" name="value" member="//@ownedElements.0/@ownedPackages.0/@ownedElements.0/@bodyDeclarations.0">
+              <value xsi:type="java:SingleVariableAccess" variable="//@ownedElements.1/@ownedPackages.0/@ownedPackages.0/@ownedElements.1/@enumConstants.3">
+                <qualifier xsi:type="java:TypeAccess" type="//@ownedElements.1/@ownedPackages.0/@ownedPackages.0/@ownedElements.1"/>
+              </value>
+            </values>
+          </annotations>
+          <modifier visibility="public"/>
+          <parameters originalCompilationUnit="//@compilationUnits.2" name="myField">
+            <comments xsi:type="java:BlockComment" originalCompilationUnit="//@compilationUnits.2" content="/* [SingleVariableDeclaration] */" prefixOfParent="true"/>
+            <modifier inheritance="final"/>
+            <type type="//@ownedElements.1/@ownedPackages.0/@ownedElements.1"/>
+            <annotations originalCompilationUnit="//@compilationUnits.2">
+              <type type="//@ownedElements.0/@ownedPackages.0/@ownedElements.0"/>
+              <values originalCompilationUnit="//@compilationUnits.2" name="value" member="//@ownedElements.0/@ownedPackages.0/@ownedElements.0/@bodyDeclarations.0">
+                <value xsi:type="java:SingleVariableAccess" variable="//@ownedElements.1/@ownedPackages.0/@ownedPackages.0/@ownedElements.1/@enumConstants.4">
+                  <qualifier xsi:type="java:TypeAccess" type="//@ownedElements.1/@ownedPackages.0/@ownedPackages.0/@ownedElements.1"/>
+                </value>
+              </values>
+              <values originalCompilationUnit="//@compilationUnits.2" name="id" member="//@ownedElements.0/@ownedPackages.0/@ownedElements.0/@bodyDeclarations.1">
+                <value xsi:type="java:NumberLiteral" originalCompilationUnit="//@compilationUnits.2" tokenValue="1"/>
+              </values>
+            </annotations>
+          </parameters>
+        </bodyDeclarations>
+        <bodyDeclarations xsi:type="java:MethodDeclaration" originalCompilationUnit="//@compilationUnits.2" name="getMyField">
+          <comments xsi:type="java:BlockComment" originalCompilationUnit="//@compilationUnits.2" content="/* [MethodDeclaration] */" prefixOfParent="true"/>
+          <annotations originalCompilationUnit="//@compilationUnits.2">
+            <type type="//@ownedElements.0/@ownedPackages.0/@ownedElements.0"/>
+            <values originalCompilationUnit="//@compilationUnits.2" name="value" member="//@ownedElements.0/@ownedPackages.0/@ownedElements.0/@bodyDeclarations.0">
+              <value xsi:type="java:SingleVariableAccess" variable="//@ownedElements.1/@ownedPackages.0/@ownedPackages.0/@ownedElements.1/@enumConstants.5">
+                <qualifier xsi:type="java:TypeAccess" type="//@ownedElements.1/@ownedPackages.0/@ownedPackages.0/@ownedElements.1"/>
+              </value>
+            </values>
+            <values originalCompilationUnit="//@compilationUnits.2" name="id" member="//@ownedElements.0/@ownedPackages.0/@ownedElements.0/@bodyDeclarations.1">
+              <value xsi:type="java:NumberLiteral" originalCompilationUnit="//@compilationUnits.2" tokenValue="1"/>
+            </values>
+          </annotations>
+          <modifier visibility="public"/>
+          <returnType type="//@ownedElements.1/@ownedPackages.0/@ownedElements.1"/>
+        </bodyDeclarations>
+        <bodyDeclarations xsi:type="java:MethodDeclaration" originalCompilationUnit="//@compilationUnits.2" name="setMyField">
+          <comments xsi:type="java:BlockComment" originalCompilationUnit="//@compilationUnits.2" content="/* [MethodDeclaration] */" prefixOfParent="true"/>
+          <annotations originalCompilationUnit="//@compilationUnits.2">
+            <type type="//@ownedElements.0/@ownedPackages.0/@ownedElements.0"/>
+            <values originalCompilationUnit="//@compilationUnits.2" name="value" member="//@ownedElements.0/@ownedPackages.0/@ownedElements.0/@bodyDeclarations.0">
+              <value xsi:type="java:SingleVariableAccess" variable="//@ownedElements.1/@ownedPackages.0/@ownedPackages.0/@ownedElements.1/@enumConstants.5">
+                <qualifier xsi:type="java:TypeAccess" type="//@ownedElements.1/@ownedPackages.0/@ownedPackages.0/@ownedElements.1"/>
+              </value>
+            </values>
+            <values originalCompilationUnit="//@compilationUnits.2" name="id" member="//@ownedElements.0/@ownedPackages.0/@ownedElements.0/@bodyDeclarations.1">
+              <value xsi:type="java:NumberLiteral" originalCompilationUnit="//@compilationUnits.2" tokenValue="2"/>
+            </values>
+          </annotations>
+          <modifier visibility="public"/>
+          <parameters originalCompilationUnit="//@compilationUnits.2" name="myField">
+            <comments xsi:type="java:BlockComment" originalCompilationUnit="//@compilationUnits.2" content="/* [SingleVariableDeclaration] */" prefixOfParent="true"/>
+            <modifier inheritance="final"/>
+            <type type="//@ownedElements.1/@ownedPackages.0/@ownedElements.1"/>
+            <annotations originalCompilationUnit="//@compilationUnits.2">
+              <type type="//@ownedElements.0/@ownedPackages.0/@ownedElements.0"/>
+              <values originalCompilationUnit="//@compilationUnits.2" name="value" member="//@ownedElements.0/@ownedPackages.0/@ownedElements.0/@bodyDeclarations.0">
+                <value xsi:type="java:SingleVariableAccess" variable="//@ownedElements.1/@ownedPackages.0/@ownedPackages.0/@ownedElements.1/@enumConstants.4">
+                  <qualifier xsi:type="java:TypeAccess" type="//@ownedElements.1/@ownedPackages.0/@ownedPackages.0/@ownedElements.1"/>
+                </value>
+              </values>
+              <values originalCompilationUnit="//@compilationUnits.2" name="id" member="//@ownedElements.0/@ownedPackages.0/@ownedElements.0/@bodyDeclarations.1">
+                <value xsi:type="java:NumberLiteral" originalCompilationUnit="//@compilationUnits.2" tokenValue="2"/>
+              </values>
+            </annotations>
+          </parameters>
+          <returnType type="//@orphanTypes.5"/>
+        </bodyDeclarations>
+        <bodyDeclarations xsi:type="java:MethodDeclaration" originalCompilationUnit="//@compilationUnits.2" name="checkValue" redefinitions="//@ownedElements.0/@ownedPackages.0/@ownedElements.1/@bodyDeclarations.1">
+          <comments xsi:type="java:BlockComment" originalCompilationUnit="//@compilationUnits.2" content="/* [MethodDeclaration] */" prefixOfParent="true"/>
+          <comments xsi:type="java:BlockComment" originalCompilationUnit="//@compilationUnits.2" content="/* [VariableDeclarationStatement] */" enclosedByParent="true"/>
+          <annotations originalCompilationUnit="//@compilationUnits.2">
+            <type type="//@ownedElements.0/@ownedPackages.0/@ownedElements.0"/>
+            <values originalCompilationUnit="//@compilationUnits.2" name="value" member="//@ownedElements.0/@ownedPackages.0/@ownedElements.0/@bodyDeclarations.0">
+              <value xsi:type="java:SingleVariableAccess" variable="//@ownedElements.1/@ownedPackages.0/@ownedPackages.0/@ownedElements.1/@enumConstants.5">
+                <qualifier xsi:type="java:TypeAccess" type="//@ownedElements.1/@ownedPackages.0/@ownedPackages.0/@ownedElements.1"/>
+              </value>
+            </values>
+            <values originalCompilationUnit="//@compilationUnits.2" name="id" member="//@ownedElements.0/@ownedPackages.0/@ownedElements.0/@bodyDeclarations.1">
+              <value xsi:type="java:NumberLiteral" originalCompilationUnit="//@compilationUnits.2" tokenValue="3"/>
+            </values>
+          </annotations>
+          <modifier visibility="public"/>
+          <parameters originalCompilationUnit="//@compilationUnits.2" name="value">
+            <comments xsi:type="java:BlockComment" originalCompilationUnit="//@compilationUnits.2" content="/* [SingleVariableDeclaration] */" prefixOfParent="true"/>
+            <modifier inheritance="final"/>
+            <type type="//@ownedElements.1/@ownedPackages.0/@ownedElements.1"/>
+            <annotations originalCompilationUnit="//@compilationUnits.2">
+              <type type="//@ownedElements.0/@ownedPackages.0/@ownedElements.0"/>
+              <values originalCompilationUnit="//@compilationUnits.2" name="id" member="//@ownedElements.0/@ownedPackages.0/@ownedElements.0/@bodyDeclarations.1">
+                <value xsi:type="java:NumberLiteral" originalCompilationUnit="//@compilationUnits.2" tokenValue="3"/>
+              </values>
+              <values originalCompilationUnit="//@compilationUnits.2" name="value" member="//@ownedElements.0/@ownedPackages.0/@ownedElements.0/@bodyDeclarations.0">
+                <value xsi:type="java:SingleVariableAccess" variable="//@ownedElements.1/@ownedPackages.0/@ownedPackages.0/@ownedElements.1/@enumConstants.4">
+                  <qualifier xsi:type="java:TypeAccess" type="//@ownedElements.1/@ownedPackages.0/@ownedPackages.0/@ownedElements.1"/>
+                </value>
+              </values>
+            </annotations>
+          </parameters>
+          <returnType type="//@ownedElements.1/@ownedPackages.0/@ownedElements.1"/>
+        </bodyDeclarations>
+      </ownedElements>
+    </ownedPackages>
+  </ownedElements>
+  <ownedElements name="java" proxy="true">
+    <ownedPackages name="lang" proxy="true">
+      <ownedElements xsi:type="java:AnnotationTypeDeclaration" name="Override" proxy="true" usagesInTypeAccess="//@ownedElements.0/@ownedPackages.0/@ownedElements.1/@bodyDeclarations.1/@annotations.0/@type"/>
+      <ownedElements xsi:type="java:ClassDeclaration" name="String" proxy="true" usagesInTypeAccess="//@ownedElements.0/@ownedPackages.0/@ownedElements.1/@bodyDeclarations.1/@returnType //@ownedElements.0/@ownedPackages.0/@ownedElements.1/@bodyDeclarations.1/@parameters.0/@type //@ownedElements.0/@ownedPackages.0/@ownedElements.2/@bodyDeclarations.0/@type //@ownedElements.0/@ownedPackages.0/@ownedElements.2/@bodyDeclarations.2/@parameters.0/@type //@ownedElements.0/@ownedPackages.0/@ownedElements.2/@bodyDeclarations.3/@returnType //@ownedElements.0/@ownedPackages.0/@ownedElements.2/@bodyDeclarations.4/@parameters.0/@type //@ownedElements.0/@ownedPackages.0/@ownedElements.2/@bodyDeclarations.5/@returnType //@ownedElements.0/@ownedPackages.0/@ownedElements.2/@bodyDeclarations.5/@parameters.0/@type">
+        <superInterfaces type="//@ownedElements.1/@ownedPackages.1/@ownedElements.0"/>
+        <superInterfaces type="//@ownedElements.1/@ownedPackages.0/@ownedElements.2"/>
+        <superInterfaces type="//@ownedElements.1/@ownedPackages.0/@ownedElements.3"/>
+      </ownedElements>
+      <ownedElements xsi:type="java:InterfaceDeclaration" name="Comparable" proxy="true" usagesInTypeAccess="//@ownedElements.1/@ownedPackages.0/@ownedElements.1/@superInterfaces.1">
+        <typeParameters name="T" proxy="true"/>
+      </ownedElements>
+      <ownedElements xsi:type="java:InterfaceDeclaration" name="CharSequence" proxy="true" usagesInTypeAccess="//@ownedElements.1/@ownedPackages.0/@ownedElements.1/@superInterfaces.2"/>
+      <ownedPackages name="annotation" proxy="true">
+        <ownedElements xsi:type="java:AnnotationTypeDeclaration" name="Documented" proxy="true" usagesInImports="//@compilationUnits.0/@imports.0" usagesInTypeAccess="//@ownedElements.0/@ownedPackages.0/@ownedElements.0/@annotations.0/@type"/>
+        <ownedElements xsi:type="java:EnumDeclaration" name="ElementType" proxy="true" usagesInImports="//@compilationUnits.0/@imports.1 //@compilationUnits.2/@imports.0" usagesInTypeAccess="//@ownedElements.0/@ownedPackages.0/@ownedElements.0/@annotations.2/@values.0/@value/@qualifier //@ownedElements.0/@ownedPackages.0/@ownedElements.0/@bodyDeclarations.0/@type //@ownedElements.0/@ownedPackages.0/@ownedElements.2/@annotations.0/@values.0/@value/@qualifier //@ownedElements.0/@ownedPackages.0/@ownedElements.2/@bodyDeclarations.0/@annotations.0/@values.0/@value/@qualifier //@ownedElements.0/@ownedPackages.0/@ownedElements.2/@bodyDeclarations.1/@annotations.0/@values.0/@value/@qualifier //@ownedElements.0/@ownedPackages.0/@ownedElements.2/@bodyDeclarations.2/@annotations.0/@values.0/@value/@qualifier //@ownedElements.0/@ownedPackages.0/@ownedElements.2/@bodyDeclarations.2/@parameters.0/@annotations.0/@values.0/@value/@qualifier //@ownedElements.0/@ownedPackages.0/@ownedElements.2/@bodyDeclarations.3/@annotations.0/@values.0/@value/@qualifier //@ownedElements.0/@ownedPackages.0/@ownedElements.2/@bodyDeclarations.4/@annotations.0/@values.0/@value/@qualifier //@ownedElements.0/@ownedPackages.0/@ownedElements.2/@bodyDeclarations.4/@parameters.0/@annotations.0/@values.0/@value/@qualifier //@ownedElements.0/@ownedPackages.0/@ownedElements.2/@bodyDeclarations.5/@annotations.0/@values.0/@value/@qualifier //@ownedElements.0/@ownedPackages.0/@ownedElements.2/@bodyDeclarations.5/@parameters.0/@annotations.0/@values.1/@value/@qualifier">
+          <enumConstants name="ANNOTATION_TYPE" proxy="true" usageInVariableAccess="//@ownedElements.0/@ownedPackages.0/@ownedElements.0/@annotations.2/@values.0/@value"/>
+          <enumConstants name="TYPE" proxy="true" usageInVariableAccess="//@ownedElements.0/@ownedPackages.0/@ownedElements.2/@annotations.0/@values.0/@value"/>
+          <enumConstants name="FIELD" proxy="true" usageInVariableAccess="//@ownedElements.0/@ownedPackages.0/@ownedElements.2/@bodyDeclarations.0/@annotations.0/@values.0/@value //@ownedElements.0/@ownedPackages.0/@ownedElements.2/@bodyDeclarations.1/@annotations.0/@values.0/@value"/>
+          <enumConstants name="CONSTRUCTOR" proxy="true" usageInVariableAccess="//@ownedElements.0/@ownedPackages.0/@ownedElements.2/@bodyDeclarations.2/@annotations.0/@values.0/@value"/>
+          <enumConstants name="PARAMETER" proxy="true" usageInVariableAccess="//@ownedElements.0/@ownedPackages.0/@ownedElements.2/@bodyDeclarations.2/@parameters.0/@annotations.0/@values.0/@value //@ownedElements.0/@ownedPackages.0/@ownedElements.2/@bodyDeclarations.4/@parameters.0/@annotations.0/@values.0/@value //@ownedElements.0/@ownedPackages.0/@ownedElements.2/@bodyDeclarations.5/@parameters.0/@annotations.0/@values.1/@value"/>
+          <enumConstants name="METHOD" proxy="true" usageInVariableAccess="//@ownedElements.0/@ownedPackages.0/@ownedElements.2/@bodyDeclarations.3/@annotations.0/@values.0/@value //@ownedElements.0/@ownedPackages.0/@ownedElements.2/@bodyDeclarations.4/@annotations.0/@values.0/@value //@ownedElements.0/@ownedPackages.0/@ownedElements.2/@bodyDeclarations.5/@annotations.0/@values.0/@value"/>
+        </ownedElements>
+        <ownedElements xsi:type="java:AnnotationTypeDeclaration" name="Retention" proxy="true" usagesInImports="//@compilationUnits.0/@imports.2" usagesInTypeAccess="//@ownedElements.0/@ownedPackages.0/@ownedElements.0/@annotations.1/@type">
+          <bodyDeclarations xsi:type="java:AnnotationTypeMemberDeclaration" name="value" proxy="true" usages="//@ownedElements.0/@ownedPackages.0/@ownedElements.0/@annotations.1/@values.0"/>
+        </ownedElements>
+        <ownedElements xsi:type="java:EnumDeclaration" name="RetentionPolicy" proxy="true" usagesInImports="//@compilationUnits.0/@imports.3" usagesInTypeAccess="//@ownedElements.0/@ownedPackages.0/@ownedElements.0/@annotations.1/@values.0/@value/@qualifier">
+          <enumConstants name="RUNTIME" proxy="true" usageInVariableAccess="//@ownedElements.0/@ownedPackages.0/@ownedElements.0/@annotations.1/@values.0/@value"/>
+        </ownedElements>
+      </ownedPackages>
+    </ownedPackages>
+    <ownedPackages name="io" proxy="true">
+      <ownedElements xsi:type="java:InterfaceDeclaration" name="Serializable" proxy="true" usagesInTypeAccess="//@ownedElements.1/@ownedPackages.0/@ownedElements.1/@superInterfaces.0"/>
+    </ownedPackages>
+  </ownedElements>
+  <orphanTypes xsi:type="java:PrimitiveTypeInt" name="int" usagesInTypeAccess="//@ownedElements.0/@ownedPackages.0/@ownedElements.0/@bodyDeclarations.1/@type"/>
+  <orphanTypes xsi:type="java:PrimitiveTypeLong" name="long"/>
+  <orphanTypes xsi:type="java:PrimitiveTypeFloat" name="float"/>
+  <orphanTypes xsi:type="java:PrimitiveTypeDouble" name="double"/>
+  <orphanTypes xsi:type="java:PrimitiveTypeBoolean" name="boolean"/>
+  <orphanTypes xsi:type="java:PrimitiveTypeVoid" name="void" usagesInTypeAccess="//@ownedElements.0/@ownedPackages.0/@ownedElements.2/@bodyDeclarations.4/@returnType"/>
+  <orphanTypes xsi:type="java:PrimitiveTypeChar" name="char"/>
+  <orphanTypes xsi:type="java:PrimitiveTypeShort" name="short"/>
+  <orphanTypes xsi:type="java:PrimitiveTypeByte" name="byte"/>
+  <compilationUnits name="CodeElement.java" originalFilePath="E:\03_DEVELOPMENT\Java2UML2JavaEvaluation\ac.at.tuwien.big.scenario.test\src\simple\test\CodeElement.java" commentList="//@compilationUnits.0/@comments.0 //@ownedElements.0/@ownedPackages.0/@ownedElements.0/@comments.0 //@ownedElements.0/@ownedPackages.0/@ownedElements.0/@bodyDeclarations.0/@comments.0 //@ownedElements.0/@ownedPackages.0/@ownedElements.0/@bodyDeclarations.0/@comments.1" package="//@ownedElements.0/@ownedPackages.0" types="//@ownedElements.0/@ownedPackages.0/@ownedElements.0">
+    <comments xsi:type="java:BlockComment" originalCompilationUnit="//@compilationUnits.0" content="/*&#xA; * @(#)CodeElement.java   1.0   Feb 6, 2013&#xA; *&#xA; * Copyright 2012-2013 TU Wien. All Rights Reserved.&#xA; *&#xA; * This software is the proprietary information of TU Wien.&#xA; * Use is subject to license terms.&#xA; *&#xA; * @(#) $Id: 20f5130128c72ff8d66c56a4773f4cc6d957dc8a $&#xA; */" prefixOfParent="true"/>
+    <imports originalCompilationUnit="//@compilationUnits.0" importedElement="//@ownedElements.1/@ownedPackages.0/@ownedPackages.0/@ownedElements.0"/>
+    <imports originalCompilationUnit="//@compilationUnits.0" importedElement="//@ownedElements.1/@ownedPackages.0/@ownedPackages.0/@ownedElements.1"/>
+    <imports originalCompilationUnit="//@compilationUnits.0" importedElement="//@ownedElements.1/@ownedPackages.0/@ownedPackages.0/@ownedElements.2"/>
+    <imports originalCompilationUnit="//@compilationUnits.0" importedElement="//@ownedElements.1/@ownedPackages.0/@ownedPackages.0/@ownedElements.3"/>
+  </compilationUnits>
+  <compilationUnits name="MySubClass.java" originalFilePath="E:\03_DEVELOPMENT\Java2UML2JavaEvaluation\ac.at.tuwien.big.scenario.test\src\simple\test\MySubClass.java" commentList="//@compilationUnits.1/@comments.0 //@ownedElements.0/@ownedPackages.0/@ownedElements.1/@comments.0" package="//@ownedElements.0/@ownedPackages.0" types="//@ownedElements.0/@ownedPackages.0/@ownedElements.1">
+    <comments xsi:type="java:BlockComment" originalCompilationUnit="//@compilationUnits.1" content="/*&#xA; * @(#)MySubClass.java   1.0   Feb 6, 2013&#xA; *&#xA; * Copyright 2012-2013 TU Wien. All Rights Reserved.&#xA; *&#xA; * This software is the proprietary information of TU Wien.&#xA; * Use is subject to license terms.&#xA; *&#xA; * @(#) $Id: 889dd677eaa89800e547a6300affc070ceabc9a3 $&#xA; */" prefixOfParent="true"/>
+  </compilationUnits>
+  <compilationUnits name="MyClass.java" originalFilePath="E:\03_DEVELOPMENT\Java2UML2JavaEvaluation\ac.at.tuwien.big.scenario.test\src\simple\test\MyClass.java" commentList="//@compilationUnits.2/@comments.0 //@ownedElements.0/@ownedPackages.0/@ownedElements.2/@comments.0 //@ownedElements.0/@ownedPackages.0/@ownedElements.2/@annotations.0/@comments.0 //@ownedElements.0/@ownedPackages.0/@ownedElements.2/@bodyDeclarations.0/@comments.0 //@ownedElements.0/@ownedPackages.0/@ownedElements.2/@bodyDeclarations.1/@comments.0 //@ownedElements.0/@ownedPackages.0/@ownedElements.2/@bodyDeclarations.2/@comments.0 //@ownedElements.0/@ownedPackages.0/@ownedElements.2/@bodyDeclarations.2/@parameters.0/@comments.0 //@ownedElements.0/@ownedPackages.0/@ownedElements.2/@bodyDeclarations.3/@comments.0 //@ownedElements.0/@ownedPackages.0/@ownedElements.2/@bodyDeclarations.4/@comments.0 //@ownedElements.0/@ownedPackages.0/@ownedElements.2/@bodyDeclarations.4/@parameters.0/@comments.0 //@ownedElements.0/@ownedPackages.0/@ownedElements.2/@bodyDeclarations.5/@comments.0 //@ownedElements.0/@ownedPackages.0/@ownedElements.2/@bodyDeclarations.5/@parameters.0/@comments.0 //@ownedElements.0/@ownedPackages.0/@ownedElements.2/@bodyDeclarations.5/@comments.1" package="//@ownedElements.0/@ownedPackages.0" types="//@ownedElements.0/@ownedPackages.0/@ownedElements.2">
+    <comments xsi:type="java:BlockComment" originalCompilationUnit="//@compilationUnits.2" content="/*&#xA; * @(#)MyClass.java   1.0   Feb 6, 2013&#xA; *&#xA; * Copyright 2012-2013 TU Wien. All Rights Reserved.&#xA; *&#xA; * This software is the proprietary information of TU Wien.&#xA; * Use is subject to license terms.&#xA; *&#xA; * @(#) $Id: 2a66e3334f56c731e9d50524c1bfe4f00373591a $&#xA; */" prefixOfParent="true"/>
+    <imports originalCompilationUnit="//@compilationUnits.2" importedElement="//@ownedElements.1/@ownedPackages.0/@ownedPackages.0/@ownedElements.1"/>
+  </compilationUnits>
+</java:Model>

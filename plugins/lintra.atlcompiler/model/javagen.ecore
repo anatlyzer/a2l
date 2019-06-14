@@ -1,0 +1,165 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ecore:EPackage xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xmlns:ecore="http://www.eclipse.org/emf/2002/Ecore" name="javagen" nsURI="http://lintra/javagen" nsPrefix="lintra_javagen">
+  <eClassifiers xsi:type="ecore:EClass" name="JavaGenModel">
+    <eStructuralFeatures xsi:type="ecore:EReference" name="libTypes" upperBound="-1"
+        eType="#//JLibType" containment="true"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="metaTypes" upperBound="-1"
+        eType="#//JMetaType" containment="true"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="classes" upperBound="-1"
+        eType="#//JClass" containment="true"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="JType" abstract="true">
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="name" lowerBound="1" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="JLibType" eSuperTypes="#//JType">
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="pkg" lowerBound="1" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="JMetaType" eSuperTypes="#//JType">
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="qualifiedJavaName" lowerBound="1"
+        eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="JTypeRef">
+    <eStructuralFeatures xsi:type="ecore:EReference" name="type" lowerBound="1" eType="#//JType"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="JParamTypeRef" eSuperTypes="#//JTypeRef">
+    <eStructuralFeatures xsi:type="ecore:EReference" name="containedType" lowerBound="1"
+        eType="#//JTypeRef" containment="true"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="JParamNTypeRef" eSuperTypes="#//JTypeRef">
+    <eStructuralFeatures xsi:type="ecore:EReference" name="params" lowerBound="1"
+        upperBound="-1" eType="#//JTypeRef" containment="true"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="JGenericTypeRef" eSuperTypes="#//JTypeRef">
+    <eStructuralFeatures xsi:type="ecore:EReference" name="typeParams" lowerBound="1"
+        upperBound="-1" eType="#//JTypeRef" containment="true"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="JArrayTypeRef" eSuperTypes="#//JTypeRef">
+    <eStructuralFeatures xsi:type="ecore:EReference" name="containedType" lowerBound="1"
+        eType="#//JTypeRef" containment="true"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="JClass" eSuperTypes="#//JType">
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="extra" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="pkg" lowerBound="1" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="methods" upperBound="-1"
+        eType="#//JMethod" containment="true"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="attributes" upperBound="-1"
+        eType="#//JAttribute" containment="true"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="implements" upperBound="-1"
+        eType="#//JTypeRef" containment="true"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="extends_" eType="#//JTypeRef"
+        containment="true"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="imports" upperBound="-1"
+        eType="#//JType"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="this_" lowerBound="1" eType="#//JThis"
+        containment="true"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="JThis" eSuperTypes="#//JVariableDeclaration"/>
+  <eClassifiers xsi:type="ecore:EClass" name="JAttribute" eSuperTypes="#//JVariableDeclaration"/>
+  <eClassifiers xsi:type="ecore:EClass" name="JComment" eSuperTypes="#//JStatement">
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="value" lowerBound="1" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="JBlock" abstract="true">
+    <eStructuralFeatures xsi:type="ecore:EReference" name="localVars" upperBound="-1"
+        eType="#//JVariableDeclaration" containment="true"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="statements" upperBound="-1"
+        eType="#//JStatement" containment="true"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="JMethod" eSuperTypes="#//JBlock">
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="name" lowerBound="1" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="parameters" upperBound="-1"
+        eType="#//JParameter" containment="true"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="returnType" eType="#//JTypeRef"
+        containment="true"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="throws_" upperBound="-1"
+        eType="#//JTypeRef" containment="true"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="JStatement" abstract="true"/>
+  <eClassifiers xsi:type="ecore:EClass" name="JReturn" eSuperTypes="#//JStatement">
+    <eStructuralFeatures xsi:type="ecore:EReference" name="result" lowerBound="1"
+        eType="#//JExpression" containment="true"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="JLoop" eSuperTypes="#//JStatement #//JBlock">
+    <eStructuralFeatures xsi:type="ecore:EReference" name="loopVar" lowerBound="1"
+        eType="#//JVariableDeclaration" containment="true"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="JForeach" eSuperTypes="#//JLoop">
+    <eStructuralFeatures xsi:type="ecore:EReference" name="collection" lowerBound="1"
+        eType="#//JExpression" containment="true"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="IteratorLoop" eSuperTypes="#//JLoop">
+    <eStructuralFeatures xsi:type="ecore:EReference" name="iteratorVar" lowerBound="1"
+        eType="#//JVariableDeclaration" containment="true"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="iteratorInit" lowerBound="1"
+        eType="#//JExpression" containment="true"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="JConditional" eSuperTypes="#//JStatement">
+    <eStructuralFeatures xsi:type="ecore:EReference" name="conditions" lowerBound="1"
+        upperBound="-1" eType="#//JConditionalBlock" containment="true"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="else" eType="#//JConditionalBlock"
+        containment="true"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="JConditionalBlock" eSuperTypes="#//JBlock">
+    <eStructuralFeatures xsi:type="ecore:EReference" name="expr" lowerBound="1" eType="#//JExpression"
+        containment="true"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="JAssignment" eSuperTypes="#//JText">
+    <eStructuralFeatures xsi:type="ecore:EReference" name="declaration" lowerBound="1"
+        eType="#//JVariableDeclaration"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="rightPart" lowerBound="1"
+        eType="#//JExpression" containment="true"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="JText" eSuperTypes="#//JStatement">
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="body" lowerBound="1" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="JExpression" abstract="true"/>
+  <eClassifiers xsi:type="ecore:EClass" name="JVarExp" eSuperTypes="#//JExpression">
+    <eStructuralFeatures xsi:type="ecore:EReference" name="reference" lowerBound="1"
+        eType="#//JVariableDeclaration"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="JTextExp" eSuperTypes="#//JExpression">
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="body" lowerBound="1" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="JVariableDeclaration">
+    <eStructuralFeatures xsi:type="ecore:EReference" name="type" lowerBound="1" eType="#//JTypeRef"
+        containment="true"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="name" lowerBound="1" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="LMatchObject" eSuperTypes="#//JStatement">
+    <eStructuralFeatures xsi:type="ecore:EReference" name="cases" upperBound="-1"
+        eType="#//LMatchCase" containment="true"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="LMatchCase" eSuperTypes="#//JBlock">
+    <eStructuralFeatures xsi:type="ecore:EReference" name="predicate" lowerBound="1"
+        eType="#//JMethod"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="obj" lowerBound="1" eType="#//JExpression"
+        containment="true"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="JParameter" eSuperTypes="#//JVariableDeclaration"/>
+  <eClassifiers xsi:type="ecore:EClass" name="JClosure" eSuperTypes="#//JExpression #//JBlock">
+    <eStructuralFeatures xsi:type="ecore:EReference" name="parameters" upperBound="-1"
+        eType="#//JParameter" containment="true"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="JInvoke" eSuperTypes="#//JExpression">
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="name" lowerBound="1" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="obj" lowerBound="1" eType="#//JExpression"
+        containment="true"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="arguments" upperBound="-1"
+        eType="#//JExpression" containment="true"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="JInvokeStatic" eSuperTypes="#//JExpression">
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="name" lowerBound="1" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="arguments" upperBound="-1"
+        eType="#//JExpression" containment="true"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="JNewObject" eSuperTypes="#//JExpression">
+    <eStructuralFeatures xsi:type="ecore:EReference" name="typeRef" lowerBound="1"
+        eType="#//JTypeRef" containment="true"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="arguments" upperBound="-1"
+        eType="#//JExpression" containment="true"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="JExprStatement" eSuperTypes="#//JStatement">
+    <eStructuralFeatures xsi:type="ecore:EReference" name="expr" lowerBound="1" eType="#//JExpression"
+        containment="true"/>
+  </eClassifiers>
+</ecore:EPackage>

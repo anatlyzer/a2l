@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ecore:EPackage xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xmlns:ecore="http://www.eclipse.org/emf/2002/Ecore" name="anatlyzerext" nsURI="http://a2l/anatlyzer_ext" nsPrefix="anatlyzer_ext">
+  <eClassifiers xsi:type="ecore:EClass" name="NavRefAsSet" eSuperTypes="../../anatlyzer.atl.typing/model/generated/merged.ecore#//OCL/NavigationOrAttributeCallExp"/>
+  <eClassifiers xsi:type="ecore:EClass" name="MutableIteratorExp" eSuperTypes="../../anatlyzer.atl.typing/model/generated/merged.ecore#//OCL/IteratorExp"/>
+  <eClassifiers xsi:type="ecore:EClass" name="MutableCollectionOperationCallExp" eSuperTypes="../../anatlyzer.atl.typing/model/generated/merged.ecore#//OCL/CollectionOperationCallExp"/>
+  <eClassifiers xsi:type="ecore:EClass" name="IteratorChainExp" eSuperTypes="../../anatlyzer.atl.typing/model/generated/merged.ecore#//OCL/PropertyCallExp">
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="name" lowerBound="1" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="iterator" lowerBound="1"
+        eType="ecore:EClass ../../anatlyzer.atl.typing/model/generated/merged.ecore#//OCL/Iterator"
+        containment="true"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="preChain" upperBound="-1"
+        eType="#//IteratorChainElement" containment="true"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="chain" upperBound="-1"
+        eType="#//IteratorChainElement" containment="true"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="IteratorChainElement">
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="name" lowerBound="1" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="iterator" eType="ecore:EClass ../../anatlyzer.atl.typing/model/generated/merged.ecore#//OCL/Iterator"
+        containment="true"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="body" lowerBound="1" eType="ecore:EClass ../../anatlyzer.atl.typing/model/generated/merged.ecore#//OCL/OclExpression"
+        containment="true"/>
+  </eClassifiers>
+</ecore:EPackage>

@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<genmodel:GenModel xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:ecore="http://www.eclipse.org/emf/2002/Ecore"
+    xmlns:genmodel="http://www.eclipse.org/emf/2002/GenModel" modelDirectory="/a2l.tests.vmtesting.emf/src-gen" modelPluginID="a2l.tests.vmtesting.emf"
+    modelName="Families" rootExtendsClass="org.eclipse.emf.ecore.impl.MinimalEObjectImpl$Container"
+    importerID="org.eclipse.emf.importer.ecore" complianceLevel="8.0" copyrightFields="false"
+    operationReflection="true" importOrganizing="true">
+  <foreignModel>Families.ecore</foreignModel>
+  <genPackages prefix="Families" basePackage="a2l.tests.vmtesting.emf.families2persons"
+      disposableProviderFactory="true" ecorePackage="Families.ecore#/0">
+    <genClasses ecoreClass="Families.ecore#/0/Family">
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute Families.ecore#/0/Family/lastName"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference Families.ecore#/0/Family/father"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference Families.ecore#/0/Family/mother"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference Families.ecore#/0/Family/sons"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference Families.ecore#/0/Family/daughters"/>
+    </genClasses>
+    <genClasses ecoreClass="Families.ecore#/0/Member">
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute Families.ecore#/0/Member/firstName"/>
+      <genFeatures property="None" notify="false" createChild="false" ecoreFeature="ecore:EReference Families.ecore#/0/Member/familyFather"/>
+      <genFeatures property="None" notify="false" createChild="false" ecoreFeature="ecore:EReference Families.ecore#/0/Member/familyMother"/>
+      <genFeatures property="None" notify="false" createChild="false" ecoreFeature="ecore:EReference Families.ecore#/0/Member/familySon"/>
+      <genFeatures property="None" notify="false" createChild="false" ecoreFeature="ecore:EReference Families.ecore#/0/Member/familyDaughter"/>
+    </genClasses>
+  </genPackages>
+  <genPackages prefix="PrimitiveTypes" basePackage="a2l.tests.vmtesting.emf.families2persons"
+      disposableProviderFactory="true" ecorePackage="Families.ecore#/1">
+    <genDataTypes ecoreDataType="Families.ecore#/1/String"/>
+  </genPackages>
+</genmodel:GenModel>

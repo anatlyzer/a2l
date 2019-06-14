@@ -1,0 +1,127 @@
+<?xml version="1.0" encoding="ASCII"?>
+<xmi:XMI xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:zooxml="http://zoo/XML">
+  <zooxml:Root name="project">
+    <children xsi:type="zooxml:Attribute" name="xmlns:ant" value="jelly:ant"/>
+    <children xsi:type="zooxml:Attribute" name="default" value="build"/>
+    <children xsi:type="zooxml:Attribute" name="file" value="build.properties"/>
+    <children xsi:type="zooxml:Attribute" name="file" value="${user.home}/build.properties"/>
+  </zooxml:Root>
+  <zooxml:Element name="ant:path">
+    <children xsi:type="zooxml:Attribute" name="id" value="classpath"/>
+  </zooxml:Element>
+  <zooxml:Element name="ant:fileset">
+    <children xsi:type="zooxml:Attribute" name="dir" value="${jwsdp.home}/common/lib"/>
+    <children xsi:type="zooxml:Attribute" name="name" value="*.jar"/>
+  </zooxml:Element>
+  <zooxml:Element name="ant:include"/>
+  <zooxml:Element name="ant:property">
+    <children xsi:type="zooxml:Attribute" name="name" value="example"/>
+    <children xsi:type="zooxml:Attribute" name="value" value="GSApp"/>
+  </zooxml:Element>
+  <zooxml:Element name="ant:property">
+    <children xsi:type="zooxml:Attribute" name="name" value="path"/>
+    <children xsi:type="zooxml:Attribute" name="value" value="/${example}"/>
+  </zooxml:Element>
+  <zooxml:Element name="ant:property">
+    <children xsi:type="zooxml:Attribute" name="name" value="build"/>
+    <children xsi:type="zooxml:Attribute" name="value" value="${jwsdp.home}/docs/tutorial/examples/${example}/build"/>
+  </zooxml:Element>
+  <zooxml:Element name="ant:property">
+    <children xsi:type="zooxml:Attribute" name="name" value="url"/>
+    <children xsi:type="zooxml:Attribute" name="value" value="http://localhost:8080/manager"/>
+  </zooxml:Element>
+  <zooxml:Element name="ant:property"/>
+  <zooxml:Element name="ant:property"/>
+  <zooxml:Element name="ant:taskdef">
+    <children xsi:type="zooxml:Attribute" name="name" value="install"/>
+    <children xsi:type="zooxml:Attribute" name="classname" value="org.apache.catalina.ant.InstallTask"/>
+  </zooxml:Element>
+  <zooxml:Element name="ant:taskdef">
+    <children xsi:type="zooxml:Attribute" name="name" value="reload"/>
+    <children xsi:type="zooxml:Attribute" name="classname" value="org.apache.catalina.ant.ReloadTask"/>
+  </zooxml:Element>
+  <zooxml:Element name="ant:taskdef">
+    <children xsi:type="zooxml:Attribute" name="name" value="remove"/>
+    <children xsi:type="zooxml:Attribute" name="classname" value="org.apache.catalina.ant.RemoveTask"/>
+  </zooxml:Element>
+  <zooxml:Element name="goal">
+    <children xsi:type="zooxml:Attribute" name="name" value="init"/>
+    <children xsi:type="zooxml:Element" name="ant:tstamp"/>
+  </zooxml:Element>
+  <zooxml:Element name="goal">
+    <children xsi:type="zooxml:Attribute" name="name" value="prepare"/>
+    <children xsi:type="zooxml:Attribute" name="name" value="init"/>
+    <children xsi:type="zooxml:Attribute" name="ant:dir" value="${build}"/>
+    <children xsi:type="zooxml:Attribute" name="ant:dir" value="${build}/WEB-INF"/>
+    <children xsi:type="zooxml:Attribute" name="ant:dir" value="${build}/WEB-INF/classes"/>
+  </zooxml:Element>
+  <zooxml:Element name="attainGoal"/>
+  <zooxml:Element name="ant:mkdir"/>
+  <zooxml:Element name="ant:mkdir"/>
+  <zooxml:Element name="ant:mkdir"/>
+  <zooxml:Element name="goal">
+    <children xsi:type="zooxml:Attribute" name="name" value="install"/>
+    <children xsi:type="zooxml:Attribute" name="name" value="build"/>
+    <children xsi:type="zooxml:Element" name="install">
+      <children xsi:type="zooxml:Attribute" name="url" value="${url}"/>
+      <children xsi:type="zooxml:Attribute" name="username" value="${username}"/>
+      <children xsi:type="zooxml:Attribute" name="password" value="${password}"/>
+      <children xsi:type="zooxml:Attribute" name="path" value="${path}"/>
+      <children xsi:type="zooxml:Attribute" name="war" value="file:${build}"/>
+    </children>
+  </zooxml:Element>
+  <zooxml:Element name="attainGoal"/>
+  <zooxml:Element name="goal">
+    <children xsi:type="zooxml:Attribute" name="name" value="reload"/>
+    <children xsi:type="zooxml:Attribute" name="name" value="build"/>
+    <children xsi:type="zooxml:Element" name="reload">
+      <children xsi:type="zooxml:Attribute" name="url" value="${url}"/>
+      <children xsi:type="zooxml:Attribute" name="username" value="${username}"/>
+      <children xsi:type="zooxml:Attribute" name="password" value="${password}"/>
+      <children xsi:type="zooxml:Attribute" name="path" value="${path}"/>
+    </children>
+  </zooxml:Element>
+  <zooxml:Element name="attainGoal"/>
+  <zooxml:Element name="goal">
+    <children xsi:type="zooxml:Attribute" name="name" value="remove"/>
+    <children xsi:type="zooxml:Element" name="remove">
+      <children xsi:type="zooxml:Attribute" name="url" value="${url}"/>
+      <children xsi:type="zooxml:Attribute" name="username" value="${username}"/>
+      <children xsi:type="zooxml:Attribute" name="password" value="${password}"/>
+      <children xsi:type="zooxml:Attribute" name="path" value="${path}"/>
+    </children>
+  </zooxml:Element>
+  <zooxml:Element name="goal">
+    <children xsi:type="zooxml:Attribute" name="name" value="build"/>
+    <children xsi:type="zooxml:Attribute" name="name" value="prepare"/>
+  </zooxml:Element>
+  <zooxml:Element name="attainGoal"/>
+  <zooxml:Element name="ant:javac">
+    <children xsi:type="zooxml:Attribute" name="srcdir" value="src"/>
+    <children xsi:type="zooxml:Attribute" name="destdir" value="${build}/WEB-INF/classes"/>
+    <children xsi:type="zooxml:Attribute" name="name" value="**/*.java"/>
+    <children xsi:type="zooxml:Attribute" name="refid" value="classpath"/>
+  </zooxml:Element>
+  <zooxml:Element name="ant:include"/>
+  <zooxml:Element name="ant:classpath"/>
+  <zooxml:Element name="ant:copy">
+    <children xsi:type="zooxml:Attribute" name="todir" value="${build}/WEB-INF"/>
+  </zooxml:Element>
+  <zooxml:Element name="ant:fileset">
+    <children xsi:type="zooxml:Attribute" name="dir" value="web/WEB-INF"/>
+    <children xsi:type="zooxml:Attribute" name="name" value="web.xml"/>
+  </zooxml:Element>
+  <zooxml:Element name="ant:include"/>
+  <zooxml:Element name="ant:copy">
+    <children xsi:type="zooxml:Attribute" name="todir" value="${build}"/>
+  </zooxml:Element>
+  <zooxml:Element name="ant:fileset">
+    <children xsi:type="zooxml:Attribute" name="dir" value="web"/>
+    <children xsi:type="zooxml:Attribute" name="name" value="*.html"/>
+    <children xsi:type="zooxml:Attribute" name="name" value="*.jsp"/>
+    <children xsi:type="zooxml:Attribute" name="name" value="*.gif"/>
+  </zooxml:Element>
+  <zooxml:Element name="ant:include"/>
+  <zooxml:Element name="ant:include"/>
+  <zooxml:Element name="ant:include"/>
+</xmi:XMI>

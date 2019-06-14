@@ -1,0 +1,85 @@
+<?xml version="1.0" encoding="ASCII"?>
+<xmi:XMI xmi:version="2.0"
+    xmlns:xmi="http://www.omg.org/XMI"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xmlns:proceedings="proceedings"
+    xsi:schemaLocation="proceedings /example.proc2docbook/metamodels/Proceedings.ecore#/0">
+  <proceedings:BibTeXFile
+      name="bibtex1">
+    <entry xsi:type="proceedings:Proc"
+        title="proc1"
+        yearE="2015"
+        yearP="2016"
+        editor="/3 /4"/>
+    <entry xsi:type="proceedings:InProc"
+        title="inproc 1.1"
+        booktitle="proc1"
+        author="/6"/>
+    <entry xsi:type="proceedings:InProc"
+        title="inproc 1.2"
+        booktitle="proc1"
+        author="/7"/>
+    <entry xsi:type="proceedings:Proc"
+        title="proc2"
+        yearE="2009"
+        yearP="2009"
+        editor="/5"/>
+    <entry xsi:type="proceedings:InProc"
+        title="inproc 2.1"
+        booktitle="proc2"
+        author="/3"/>
+    <entry xsi:type="proceedings:InProc"
+        title="inproc 2.2"
+        booktitle="proc2"
+        author="/5 /6"/>
+    <entry xsi:type="proceedings:InProc"
+        title="inproc 2.3"
+        booktitle="proc2"
+        author="/7"/>
+  </proceedings:BibTeXFile>
+  <proceedings:BibTeXFile
+      name="bibtex2">
+    <entry xsi:type="proceedings:Proc"
+        title="proc3"
+        yearE="2014"
+        yearP="2015"
+        editor="/7 /6"/>
+    <entry xsi:type="proceedings:InProc"
+        title="inproc X"
+        booktitle="X"
+        author="/5"/>
+  </proceedings:BibTeXFile>
+  <proceedings:BibTeXFile
+      name="bibtex3">
+    <entry xsi:type="proceedings:Proc"
+        title="proc4"
+        yearE="2005"
+        yearP="2005"
+        editor="/4 /7"/>
+    <entry xsi:type="proceedings:InProc"
+        title="inproc 3.1"
+        booktitle="proc4"
+        author="/3"/>
+  </proceedings:BibTeXFile>
+  <proceedings:Person
+      name="Michele"
+      proc="/0/@entry.0"
+      inProc="/0/@entry.4 /2/@entry.1"/>
+  <proceedings:Person
+      name="Don"
+      proc="/0/@entry.0 /2/@entry.0"/>
+  <proceedings:Person
+      name="Jeff"
+      proc="/0/@entry.3"
+      inProc="/0/@entry.5 /1/@entry.1"/>
+  <proceedings:Person
+      name="Anthony"
+      proc="/1/@entry.0"
+      inProc="/0/@entry.1 /0/@entry.5"/>
+  <proceedings:Person
+      name="Claire"
+      proc="/1/@entry.0 /2/@entry.0"
+      inProc="/0/@entry.2 /0/@entry.6"/>
+  <proceedings:Person
+      name="Hannah"/>
+</xmi:XMI>

@@ -1,0 +1,23 @@
+@namespace(
+	uri="http://class1",
+	prefix="classm1")
+package classm1;
+
+abstract class CNamedElement {
+	attr String[0..1] name;
+}
+
+class Class extends CNamedElement {
+	val Attribute[*] attrs;
+}
+
+class Attribute extends CNamedElement  {
+	attr boolean[1] isKey;
+	ref Class[1] type;
+	attr Visibility[1] visibility;
+}
+
+enum Visibility {
+	public;
+	private;	
+}

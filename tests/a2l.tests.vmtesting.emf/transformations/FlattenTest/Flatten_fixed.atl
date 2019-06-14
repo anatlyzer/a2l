@@ -1,0 +1,50 @@
+-- @nsURI UML=http://www.eclipse.org/uml2/3.0.0/UML
+-- @nsURI UML2=http://www.eclipse.org/uml2/3.0.0/UML
+
+-- @project a2l.tests.vmtesting.emf=a2l.tests.vmtesting.emf.flattentest  
+
+-- @driver UML=emf-uml
+-- @driver UML2=emf-uml
+
+module FlattenTest;
+create OUT : UML2 from IN : UML;
+
+helper def : testSequence : Sequence(OclAny) = 
+	Sequence{1,Sequence{1,Sequence{2,Sequence{2,Sequence{3,Sequence{3}}}}}};
+
+--helper def : testBag : OclAny = 
+--	Bag{1,Bag{2,Bag{3,Bag{4,Bag{5,Bag{6,Bag{7,Bag{8,Bag{9}}}}}}}}};
+	
+helper def : testSet : Set(OclAny) = 
+	Set{1,Set{1,Set{2,Set{2,Set{3,Set{3}}}}}};
+	
+helper def : testOrderedSet : OrderedSet(OclAny) = 
+	OrderedSet{1,OrderedSet{1,OrderedSet{2,OrderedSet{2,OrderedSet{3,OrderedSet{3}}}}}};
+	
+rule Class {
+	from 
+		trigger : UML!Model
+		
+	to 
+		container : UML2!Model (
+			name <- 'tests results',
+			packagedElement <- Sequence{
+				testSequenceClass,
+				testBagClass,
+				testSetClass,
+				testOrderedSetClass
+			}
+		),
+		testSequenceClass : UML2!Class (
+			name <- thisModule.testSequence -> flatten() -> toString()
+		),
+		testBagClass : UML2!Class (
+			--name <- thisModule.testBag -> flatten() -> toString()
+		),
+		testSetClass : UML2!Class (
+			name <- thisModule.testSet -> flatten() -> toString()
+		),
+		testOrderedSetClass : UML2!Class (
+			name <- thisModule.testOrderedSet -> flatten() -> toString()
+		)
+}

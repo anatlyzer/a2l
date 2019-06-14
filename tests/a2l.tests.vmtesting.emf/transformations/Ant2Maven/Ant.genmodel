@@ -1,0 +1,218 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<genmodel:GenModel xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:ecore="http://www.eclipse.org/emf/2002/Ecore"
+    xmlns:genmodel="http://www.eclipse.org/emf/2002/GenModel" modelDirectory="/a2l.tests.vmtesting.emf/src-gen" modelPluginID="a2l.tests.vmtesting.emf"
+    modelName="Ant" rootExtendsClass="org.eclipse.emf.ecore.impl.MinimalEObjectImpl$Container"
+    importerID="org.eclipse.emf.importer.ecore" complianceLevel="8.0" copyrightFields="false"
+    operationReflection="true" importOrganizing="true">
+  <foreignModel>Ant.ecore</foreignModel>
+  <genPackages prefix="Ant" basePackage="a2l.tests.vmtesting.emf.ant2maven.ant" disposableProviderFactory="true"
+      ecorePackage="Ant.ecore#/0">
+    <genClasses ecoreClass="Ant.ecore#/0/Project">
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute Ant.ecore#/0/Project/name"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute Ant.ecore#/0/Project/basedir"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute Ant.ecore#/0/Project/description"/>
+      <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference Ant.ecore#/0/Project/default"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference Ant.ecore#/0/Project/path"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference Ant.ecore#/0/Project/properties"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference Ant.ecore#/0/Project/taskdef"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference Ant.ecore#/0/Project/targets"/>
+    </genClasses>
+    <genClasses image="false" ecoreClass="Ant.ecore#/0/Property"/>
+    <genClasses ecoreClass="Ant.ecore#/0/PropertyName">
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute Ant.ecore#/0/PropertyName/name"/>
+    </genClasses>
+    <genClasses ecoreClass="Ant.ecore#/0/PropertyValue">
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute Ant.ecore#/0/PropertyValue/value"/>
+    </genClasses>
+    <genClasses ecoreClass="Ant.ecore#/0/PropertyLocation">
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute Ant.ecore#/0/PropertyLocation/location"/>
+    </genClasses>
+    <genClasses ecoreClass="Ant.ecore#/0/PropertyFile">
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute Ant.ecore#/0/PropertyFile/file"/>
+    </genClasses>
+    <genClasses ecoreClass="Ant.ecore#/0/PropertyEnv">
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute Ant.ecore#/0/PropertyEnv/environment"/>
+    </genClasses>
+    <genClasses ecoreClass="Ant.ecore#/0/Target">
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute Ant.ecore#/0/Target/name"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute Ant.ecore#/0/Target/description"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute Ant.ecore#/0/Target/unless"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute Ant.ecore#/0/Target/ifCondition"/>
+      <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference Ant.ecore#/0/Target/depends"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference Ant.ecore#/0/Target/tasks"/>
+    </genClasses>
+    <genClasses image="false" ecoreClass="Ant.ecore#/0/Pattern"/>
+    <genClasses image="false" ecoreClass="Ant.ecore#/0/Basic"/>
+    <genClasses ecoreClass="Ant.ecore#/0/Mapper">
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute Ant.ecore#/0/Mapper/type"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute Ant.ecore#/0/Mapper/classname"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute Ant.ecore#/0/Mapper/classpath"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute Ant.ecore#/0/Mapper/classpathref"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute Ant.ecore#/0/Mapper/from"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute Ant.ecore#/0/Mapper/to"/>
+    </genClasses>
+    <genClasses image="false" ecoreClass="Ant.ecore#/0/InExcludes">
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute Ant.ecore#/0/InExcludes/name"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute Ant.ecore#/0/InExcludes/ifCondition"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute Ant.ecore#/0/InExcludes/unless"/>
+    </genClasses>
+    <genClasses ecoreClass="Ant.ecore#/0/Includes"/>
+    <genClasses ecoreClass="Ant.ecore#/0/Excludes"/>
+    <genClasses ecoreClass="Ant.ecore#/0/IncludesFile"/>
+    <genClasses ecoreClass="Ant.ecore#/0/ExcludesFile"/>
+    <genClasses ecoreClass="Ant.ecore#/0/FileList">
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute Ant.ecore#/0/FileList/dir"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute Ant.ecore#/0/FileList/files"/>
+    </genClasses>
+    <genClasses ecoreClass="Ant.ecore#/0/Filter">
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute Ant.ecore#/0/Filter/token"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute Ant.ecore#/0/Filter/value"/>
+    </genClasses>
+    <genClasses ecoreClass="Ant.ecore#/0/FiltersFile">
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute Ant.ecore#/0/FiltersFile/file"/>
+    </genClasses>
+    <genClasses ecoreClass="Ant.ecore#/0/PathElement">
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute Ant.ecore#/0/PathElement/path"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute Ant.ecore#/0/PathElement/location"/>
+    </genClasses>
+    <genClasses image="false" ecoreClass="Ant.ecore#/0/Set"/>
+    <genClasses ecoreClass="Ant.ecore#/0/PatternSet">
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference Ant.ecore#/0/PatternSet/inexcludes"/>
+    </genClasses>
+    <genClasses ecoreClass="Ant.ecore#/0/FileSet">
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute Ant.ecore#/0/FileSet/dir"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference Ant.ecore#/0/FileSet/patternset"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference Ant.ecore#/0/FileSet/include"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference Ant.ecore#/0/FileSet/exclude"/>
+    </genClasses>
+    <genClasses ecoreClass="Ant.ecore#/0/FilterSet">
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute Ant.ecore#/0/FilterSet/starttoken"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute Ant.ecore#/0/FilterSet/endtoken"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference Ant.ecore#/0/FilterSet/filter"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference Ant.ecore#/0/FilterSet/filtersfile"/>
+    </genClasses>
+    <genClasses ecoreClass="Ant.ecore#/0/Path">
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute Ant.ecore#/0/Path/id"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute Ant.ecore#/0/Path/refid"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference Ant.ecore#/0/Path/path"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference Ant.ecore#/0/Path/pathElement"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference Ant.ecore#/0/Path/fileset"/>
+    </genClasses>
+    <genClasses ecoreClass="Ant.ecore#/0/ClassPath">
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute Ant.ecore#/0/ClassPath/refid"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference Ant.ecore#/0/ClassPath/pathElement"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference Ant.ecore#/0/ClassPath/fileset"/>
+    </genClasses>
+    <genClasses image="false" ecoreClass="Ant.ecore#/0/Task">
+      <genFeatures property="None" notify="false" createChild="false" ecoreFeature="ecore:EReference Ant.ecore#/0/Task/target"/>
+    </genClasses>
+    <genClasses ecoreClass="Ant.ecore#/0/TaskDef">
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute Ant.ecore#/0/TaskDef/name"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute Ant.ecore#/0/TaskDef/classname"/>
+    </genClasses>
+    <genClasses ecoreClass="Ant.ecore#/0/NewTask">
+      <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference Ant.ecore#/0/NewTask/taskName"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference Ant.ecore#/0/NewTask/attributes"/>
+    </genClasses>
+    <genClasses ecoreClass="Ant.ecore#/0/Attribut">
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute Ant.ecore#/0/Attribut/name"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute Ant.ecore#/0/Attribut/value"/>
+    </genClasses>
+    <genClasses image="false" ecoreClass="Ant.ecore#/0/PreDefinedTask">
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute Ant.ecore#/0/PreDefinedTask/id"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute Ant.ecore#/0/PreDefinedTask/taskname"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute Ant.ecore#/0/PreDefinedTask/description"/>
+    </genClasses>
+    <genClasses image="false" ecoreClass="Ant.ecore#/0/ExecutionTask"/>
+    <genClasses ecoreClass="Ant.ecore#/0/Exec">
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute Ant.ecore#/0/Exec/executable"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute Ant.ecore#/0/Exec/dir"/>
+    </genClasses>
+    <genClasses ecoreClass="Ant.ecore#/0/Java">
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute Ant.ecore#/0/Java/classname"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute Ant.ecore#/0/Java/jar"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute Ant.ecore#/0/Java/fork"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference Ant.ecore#/0/Java/classPath"/>
+    </genClasses>
+    <genClasses image="false" ecoreClass="Ant.ecore#/0/MiscellaneousTask"/>
+    <genClasses ecoreClass="Ant.ecore#/0/Echo">
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute Ant.ecore#/0/Echo/message"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute Ant.ecore#/0/Echo/file"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute Ant.ecore#/0/Echo/append"/>
+    </genClasses>
+    <genClasses ecoreClass="Ant.ecore#/0/Tstamp">
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference Ant.ecore#/0/Tstamp/format"/>
+    </genClasses>
+    <genClasses ecoreClass="Ant.ecore#/0/FormatTstamp">
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute Ant.ecore#/0/FormatTstamp/property"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute Ant.ecore#/0/FormatTstamp/pattern"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute Ant.ecore#/0/FormatTstamp/offset"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute Ant.ecore#/0/FormatTstamp/unit"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute Ant.ecore#/0/FormatTstamp/locale"/>
+    </genClasses>
+    <genClasses image="false" ecoreClass="Ant.ecore#/0/CompileTask"/>
+    <genClasses ecoreClass="Ant.ecore#/0/Javac">
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute Ant.ecore#/0/Javac/srcdir"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute Ant.ecore#/0/Javac/destdir"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute Ant.ecore#/0/Javac/debug"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute Ant.ecore#/0/Javac/fork"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute Ant.ecore#/0/Javac/optimize"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute Ant.ecore#/0/Javac/deprecation"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference Ant.ecore#/0/Javac/inExcludes"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference Ant.ecore#/0/Javac/classPath"/>
+    </genClasses>
+    <genClasses image="false" ecoreClass="Ant.ecore#/0/DocumentationTask"/>
+    <genClasses ecoreClass="Ant.ecore#/0/Javadoc">
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute Ant.ecore#/0/Javadoc/sourcepath"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute Ant.ecore#/0/Javadoc/destdir"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute Ant.ecore#/0/Javadoc/packagenames"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute Ant.ecore#/0/Javadoc/defaultexcludes"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute Ant.ecore#/0/Javadoc/author"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute Ant.ecore#/0/Javadoc/version"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute Ant.ecore#/0/Javadoc/use"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute Ant.ecore#/0/Javadoc/windowtitle"/>
+    </genClasses>
+    <genClasses image="false" ecoreClass="Ant.ecore#/0/ArchiveTask"/>
+    <genClasses ecoreClass="Ant.ecore#/0/Jar">
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute Ant.ecore#/0/Jar/jarfile"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute Ant.ecore#/0/Jar/basedir"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute Ant.ecore#/0/Jar/compress"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute Ant.ecore#/0/Jar/encoding"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute Ant.ecore#/0/Jar/manifest"/>
+    </genClasses>
+    <genClasses image="false" ecoreClass="Ant.ecore#/0/FileTask"/>
+    <genClasses ecoreClass="Ant.ecore#/0/Mkdir">
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute Ant.ecore#/0/Mkdir/dir"/>
+    </genClasses>
+    <genClasses ecoreClass="Ant.ecore#/0/Copy">
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute Ant.ecore#/0/Copy/file"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute Ant.ecore#/0/Copy/presservelastmodified"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute Ant.ecore#/0/Copy/tofile"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute Ant.ecore#/0/Copy/todir"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute Ant.ecore#/0/Copy/overwrite"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute Ant.ecore#/0/Copy/filtering"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute Ant.ecore#/0/Copy/flatten"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute Ant.ecore#/0/Copy/includeEmptyDirs"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference Ant.ecore#/0/Copy/fileset"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference Ant.ecore#/0/Copy/filterset"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference Ant.ecore#/0/Copy/mapper"/>
+    </genClasses>
+    <genClasses ecoreClass="Ant.ecore#/0/Delete">
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute Ant.ecore#/0/Delete/file"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute Ant.ecore#/0/Delete/dir"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute Ant.ecore#/0/Delete/verbose"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute Ant.ecore#/0/Delete/quiet"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute Ant.ecore#/0/Delete/failonerror"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute Ant.ecore#/0/Delete/includeEmptyDirs"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute Ant.ecore#/0/Delete/includes"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute Ant.ecore#/0/Delete/includesfile"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute Ant.ecore#/0/Delete/excludes"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute Ant.ecore#/0/Delete/excludesfile"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute Ant.ecore#/0/Delete/defaultexcludes"/>
+    </genClasses>
+  </genPackages>
+  <genPackages prefix="PrimitiveTypes" basePackage="a2l.tests.vmtesting.emf.ant2maven.ant"
+      disposableProviderFactory="true" ecorePackage="Ant.ecore#/1">
+    <genDataTypes ecoreDataType="Ant.ecore#/1/String"/>
+  </genPackages>
+</genmodel:GenModel>

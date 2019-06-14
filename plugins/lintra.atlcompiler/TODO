@@ -1,0 +1,6 @@
+
+- Change IArea interface to consider readAll(String[]) to avoid conversions
+
+* Limitations
+  - For meta-models with eOperations implemented in Java it can be difficult
+    to enable integration with Lintra. 

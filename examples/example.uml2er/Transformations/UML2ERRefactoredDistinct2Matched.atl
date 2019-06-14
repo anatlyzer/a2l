@@ -1,0 +1,85 @@
+-- @path SimpleUML=/example.uml2er/Metamodels/SimpleUml.ecore
+-- @path ER=/example.uml2er/Metamodels/ER.ecore
+-- @project example.uml2er=example.uml2er.uml2er_matched 
+module UML2ERMatchedRules;
+create OUT : ER from IN : SimpleUML;
+
+rule Package {
+	from
+		s: SimpleUML!Package
+	to
+		t: ER!ERModel (
+			entities <- s.ownedElements	
+		)
+}
+
+helper context SimpleUML!Class def: allClasses : Sequence(SimpleUML!Class) =
+ self.superClasses->iterate(e; acc : Sequence(SimpleUML!Class) = Sequence {} |
+  acc->union(Set{e})->union(e.allClasses)
+ );
+
+helper context SimpleUML!Class def : getAllProperties : Sequence (SimpleUML!Property) =
+	self.allClasses.including(self).flatten()->collect(e | e.ownedProperty).flatten()
+	;
+
+helper context SimpleUML!Class def : getAllAttributes : Sequence (SimpleUML!Property) =
+	self.getAllProperties -> select (e | not e.primitiveType.oclIsUndefined())
+;
+
+helper context SimpleUML!Class def : getAllNonContainmentReferences : Sequence (SimpleUML!Property) =
+	self.getAllProperties -> select (e | not e.complexType.oclIsUndefined() and not e.isContainment)
+;
+
+helper context SimpleUML!Class def : getAllContainmentReferences : Sequence (SimpleUML!Property) =
+	self.getAllProperties -> select (e | not e.complexType.oclIsUndefined() and e.isContainment)
+;
+
+rule Class {
+	from
+		s: SimpleUML!Class
+	to
+		t: ER!EntityType (
+			name <- s.name,
+			features <- s.getAllProperties -> collect(e | Tuple {s = e, c = s})
+		)			
+}
+
+rule Attributes {
+	from
+		s: SimpleUML!Property,
+		c : SimpleUML!Class (
+			c.getAllAttributes->includes(s)
+		)
+		
+	to
+		t: ER!Attribute (
+			name <- s.name,
+			type <- s.primitiveType	
+		)
+}
+
+rule WeakReferences {
+	from
+		s: SimpleUML!Property,
+		c : SimpleUML!Class (
+			c.getAllNonContainmentReferences->includes(s)
+		)
+	to
+		t: ER!WeakReference (
+			name <- s.name,
+			type <- s.complexType
+		)
+}
+
+rule StrongReferences {
+	from
+		s: SimpleUML!Property,
+		c : SimpleUML!Class (
+			c.getAllContainmentReferences->includes(s)
+		)
+	to
+		t: ER!StrongReference (
+			name <- s.name,
+			type <- s.complexType	
+		)
+}

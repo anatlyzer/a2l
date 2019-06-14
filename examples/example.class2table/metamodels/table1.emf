@@ -1,0 +1,18 @@
+@namespace(
+	uri="http://table1",
+	prefix="table1")
+package table;
+
+class NamedElement {
+	attr String[1] name;
+}
+
+class Table extends NamedElement {
+	val Column[*] columns;
+	ref Column[*] pkeys;
+}
+
+class Column extends NamedElement  {
+	attr String[1] type;
+}
+

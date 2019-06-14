@@ -1,0 +1,92 @@
+-- @nsURI UMLMM=http://www.eclipse.org/uml2/3.0.0/UML
+-- @nsURI JMM=http://www.eclipse.org/MoDisco/Java/0.2.incubation/java
+
+-- @project a2l.tests.java2uml=a2l.tests.java2uml.umldeps
+-- @driver UMLMM=emf-uml
+-- @driver JMM=emf
+
+-- @optimizations all
+
+module java2uml_deps;
+create UCD : UMLMM from CM : JMM;
+
+helper def : allClasses : Sequence(JMM!ClassDeclaration) = JMM!ClassDeclaration.allInstances();
+
+helper context JMM!Package def : allNonProxyClassesInPackage : Sequence(JMM!ClassDeclaration) = 
+	self.ownedElements -> select(e | e.proxy = false) -> select(e | e.oclIsTypeOf(JMM!ClassDeclaration));
+
+helper context JMM!ClassDeclaration def : getSuperClass : JMM!Type =
+	 if self.superClass.oclIsUndefined() 
+	 then OclUndefined 
+	 else 
+		if (self.superClass.type.proxy = false and self.superClass.type.oclIsTypeOf(JMM!ClassDeclaration)) 
+		then self.superClass.type 
+		else OclUndefined
+		endif
+	 endif;
+
+helper context JMM!ClassDeclaration def : getRefClassFields : Sequence(JMM!FieldDeclaration) = 
+				self.bodyDeclarations -> select(e | e.oclIsTypeOf(JMM!FieldDeclaration))
+				-> select(e|e.type.type.proxy = false and not e.type.isPrimitiveType() and e.type.type.oclIsTypeOf(JMM!ClassDeclaration)); 
+
+helper context JMM!TypeAccess def : isPrimitiveType() : Boolean =
+	if (self.type.oclIsKindOf(JMM!PrimitiveType)) then true
+	else -- wrapped primitive types
+		(self.type.name = 'String') or (self.type.name = 'Integer') 
+		or (self.type.name = 'Long') or (self.type.name = 'Short')
+		or (self.type.name = 'Float') or (self.type.name = 'Double')
+		or (self.type.name = 'Boolean') or (self.type.name = 'Number')
+	endif;
+
+rule Model2Model {
+	from s1 : JMM!Model
+	to t1 : UMLMM!Model (
+			name <- s1.name,
+			packagedElement <- s1.ownedElements -> select(e | e.proxy = false)
+		)
+}
+
+rule Package2Package {
+	from s1 : JMM!Package(s1.proxy = false)
+	to t1 : UMLMM!Package(
+			name <- s1.name,
+			packagedElement <- s1.ownedPackages -> select(e | e.proxy = false) -> select(e | e.oclIsTypeOf(JMM!Package)),
+			packagedElement <- s1.allNonProxyClassesInPackage,
+			packagedElement <- s1.allNonProxyClassesInPackage
+							   -> collect(s2 |if s2.getSuperClass.oclIsUndefined() 
+							   				  then OclUndefined 
+											  else  thisModule.createGeneralizationDependency(s2)
+											  endif),
+			packagedElement <- 	s1.allNonProxyClassesInPackage
+								-> collect (s2 | s2.getRefClassFields) -> flatten() -> collect(e|thisModule.createUsageDependency(e))
+		)
+}
+
+rule Class2Class {
+	from s1 : JMM!ClassDeclaration(s1.proxy = false)
+	to t1 : UMLMM!Class (
+			name <- s1.name,
+			isAbstract <- if s1.modifier.oclIsUndefined() then OclUndefined else s1.modifier.inheritance = 'abstract' endif	
+		)
+}
+
+lazy rule createGeneralizationDependency {
+   from class : JMM!ClassDeclaration
+   to gTgt : UMLMM!Dependency (
+     	name <- 'generalization pointing from ' + class.name + ' to ' + class.superClass.type.name,
+		supplier <- class.superClass.type,
+		client <- class
+	)
+}
+
+lazy rule createUsageDependency {
+   from field : JMM!FieldDeclaration
+   to gTgt : UMLMM!Dependency (
+     	-- name <- 'field pointing from ' + field.refImmediateComposite().name + ' to ' + field.type.type.name,
+		name <- 'field pointing from ' + 'xx' + ' to ' + field.type.type.name,
+		supplier <-  field.type.type
+		--,
+		--client <- thisModule.allClasses->any(cd | cd.bodyDeclarations->includes(field))
+		, client <- thisModule.allClasses->any(cd | cd.bodyDeclarations->includes(field))
+	)
+}

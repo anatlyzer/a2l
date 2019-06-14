@@ -1,0 +1,58 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<genmodel:GenModel xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:ecore="http://www.eclipse.org/emf/2002/Ecore"
+    xmlns:genmodel="http://www.eclipse.org/emf/2002/GenModel" modelDirectory="/a2l.tests.atlmr/src-gen" modelPluginID="a2l.tests.atlmr"
+    modelName="Anomalies" rootExtendsClass="org.eclipse.emf.ecore.impl.MinimalEObjectImpl$Container"
+    importerID="org.eclipse.emf.importer.ecore" complianceLevel="8.0" copyrightFields="false"
+    operationReflection="true" importOrganizing="true">
+  <foreignModel>anomalies.ecore</foreignModel>
+  <genPackages prefix="Anomalies" basePackage="a2l.tests.atlmr" disposableProviderFactory="true"
+      ecorePackage="anomalies.ecore#/">
+    <genClasses image="false" ecoreClass="anomalies.ecore#//Anomaly">
+      <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference anomalies.ecore#//Anomaly/trace"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute anomalies.ecore#//Anomaly/description"/>
+    </genClasses>
+    <genClasses ecoreClass="anomalies.ecore#//AvoidStartImport"/>
+    <genClasses ecoreClass="anomalies.ecore#//ConstantName"/>
+    <genClasses ecoreClass="anomalies.ecore#//AbbreviationAsWordInName"/>
+    <genClasses ecoreClass="anomalies.ecore#//AbstractClassName"/>
+    <genClasses ecoreClass="anomalies.ecore#//AvoidEscapedUnicodeCharacters"/>
+    <genClasses ecoreClass="anomalies.ecore#//LocalFinalVariableName"/>
+    <genClasses ecoreClass="anomalies.ecore#//LocalVariableName"/>
+    <genClasses ecoreClass="anomalies.ecore#//MemberName"/>
+    <genClasses ecoreClass="anomalies.ecore#//MethodName"/>
+    <genClasses ecoreClass="anomalies.ecore#//PackageName"/>
+    <genClasses ecoreClass="anomalies.ecore#//ParameterName"/>
+    <genClasses ecoreClass="anomalies.ecore#//StaticVariableName"/>
+    <genClasses ecoreClass="anomalies.ecore#//TypeName"/>
+    <genClasses ecoreClass="anomalies.ecore#//UnusedImports"/>
+    <genClasses ecoreClass="anomalies.ecore#//RedundantImport"/>
+    <genClasses ecoreClass="anomalies.ecore#//ParameterNumber"/>
+    <genClasses ecoreClass="anomalies.ecore#//RedundantModifier"/>
+    <genClasses ecoreClass="anomalies.ecore#//AvoidInlineConditionals"/>
+    <genClasses ecoreClass="anomalies.ecore#//EqualsHashCode"/>
+    <genClasses ecoreClass="anomalies.ecore#//HiddenField"/>
+    <genClasses ecoreClass="anomalies.ecore#//MissingSwitchDefault"/>
+    <genClasses ecoreClass="anomalies.ecore#//RedundantThrows"/>
+    <genClasses ecoreClass="anomalies.ecore#//SimplifyBooleanExpression"/>
+    <genClasses ecoreClass="anomalies.ecore#//SimplifyBooleanReturn"/>
+    <genClasses ecoreClass="anomalies.ecore#//FinalClass"/>
+    <genClasses ecoreClass="anomalies.ecore#//InterfaceIsType"/>
+    <genClasses ecoreClass="anomalies.ecore#//VisibilityModifier"/>
+    <genClasses ecoreClass="anomalies.ecore#//LooseCoupling"/>
+    <genClasses ecoreClass="anomalies.ecore#//SignatureDeclareThrowsException"/>
+    <genClasses ecoreClass="anomalies.ecore#//DefaultLabelNotLastInSwitchStmt"/>
+    <genClasses ecoreClass="anomalies.ecore#//EqualsNull"/>
+    <genClasses ecoreClass="anomalies.ecore#//CompareObjectsWithEquals"/>
+    <genClasses ecoreClass="anomalies.ecore#//PositionLiteralsFirstInComparisons"/>
+    <genClasses ecoreClass="anomalies.ecore#//UseEqualsToCompareStrings"/>
+    <genClasses ecoreClass="anomalies.ecore#//IntegerInstantiation"/>
+    <genClasses ecoreClass="anomalies.ecore#//ByteInstantiation"/>
+    <genClasses ecoreClass="anomalies.ecore#//LongInstantiation"/>
+    <genClasses ecoreClass="anomalies.ecore#//BooleanInstantiation"/>
+    <genClasses ecoreClass="anomalies.ecore#//ShortInstantiation"/>
+    <genClasses ecoreClass="anomalies.ecore#//SimplifyStartsWith"/>
+    <genClasses ecoreClass="anomalies.ecore#//UnnecessaryReturn"/>
+    <genClasses ecoreClass="anomalies.ecore#//UnconditionalIfStatement"/>
+    <genClasses ecoreClass="anomalies.ecore#//UnnecessaryFinalModifier"/>
+  </genPackages>
+</genmodel:GenModel>

@@ -1,0 +1,157 @@
+-- @XnsURI UMLMM=http://www.eclipse.org/uml2/3.0.0/UML
+-- @XnsURI JMM=http://www.eclipse.org/MoDisco/Java/0.2.incubation/java
+-- @path JMM=/example.java2uml/transformations/java2uml/JMM.ecore
+-- @path UMLMM=/example.java2uml/transformations/java2uml/UMLMM.ecore
+
+-- @project example.java2uml=example.java2uml.runningexample
+
+module java2uml_running;
+
+create UCD : UMLMM from CM : JMM;
+
+rule Model2Model 
+{
+	from
+		s1 : JMM!Model
+	to 
+		t1 : UMLMM!Model (
+			name <- s1.name,
+			packagedElement <- s1.ownedElements -> select(e | e.proxy = false)
+		)
+}
+
+rule Package2Package
+{
+	from
+		s1:JMM!Package(s1.proxy = false)
+	to
+		t1:UMLMM!Package(
+			name <- s1.name,
+			packagedElement <- s1.ownedPackages,
+			packagedElement <- s1.ownedElements -> select(e | e.proxy = false) -> select(e | not e.oclIsTypeOf(JMM!AnnotationTypeDeclaration))
+		)
+}
+
+rule Class2Class
+{
+	from
+		s1 : JMM!ClassDeclaration(s1.proxy = false)
+	to 
+		t1 : UMLMM!Class (
+			name <- s1.name,
+			isAbstract <- if s1.modifier.oclIsUndefined() then OclUndefined else s1.modifier.inheritance = 'abstract' endif,
+			--nestedClassifier,
+			generalization <- 
+				if s1.superClass.oclIsUndefined() then 
+					OclUndefined 
+				else 
+					thisModule.createGeneralization(s1.superClass)
+				endif,
+			interfaceRealization <- s1.superInterfaces,
+			ownedAttribute <- s1.bodyDeclarations -> select(e | e.oclIsTypeOf(JMM!FieldDeclaration)),
+			ownedOperation <- s1.bodyDeclarations -> select(e | e.oclIsTypeOf(JMM!MethodDeclaration)
+				                                                or e.oclIsTypeOf(JMM!ConstructorDeclaration))
+		)
+}
+
+lazy rule createGeneralization {
+   from superClass : JMM!TypeAccess
+     to gTgt : UMLMM!Generalization (
+		general <- superClass.type
+	)
+}
+
+rule Interface2Interface
+{
+	from
+		s1 : JMM!InterfaceDeclaration(s1.proxy = false)
+	to
+		t1: UMLMM!Interface (
+			name <- s1.name	
+		)
+}
+
+--rule FieldDeclaration2Property {
+--	from 
+--		s1 : JMM!FieldDeclaration(s1.proxy = false)
+--	to
+--		t1 : UMLMM!Property (
+--			name <- s1.fragments.first().name,
+--			type <- if s1.type.type.proxy = false or s1.type.isPrimitiveType() then s1.type.getType() else OclUndefined endif,
+--			isStatic <- s1.modifier.static
+--		)
+--	
+--	do {
+--		-- produce UMLMM Association Element if required
+--		if (not (s1.type.isPrimitiveType())) {
+--			thisModule.FieldDeclaration2Association(s1); 
+--		} 
+--	}
+--}
+--
+---- if we have UMLMM properties with a complex type then we should create an UMLMM association
+--lazy rule FieldDeclaration2Association {
+--	from
+--		s1 : JMM!FieldDeclaration
+--	to 
+--		t1 : UMLMM!Association (
+--			name <- s1.refImmediateComposite().name.concat('_').concat(s1.type.getType().name).concat('_Association'),
+--			memberEnd <- s1,
+--			memberEnd <- t2--,
+--		),
+--		t2 : UMLMM!Property (
+--			name <- s1.fragments.first().name.concat('_Member_End2'),
+--			type <- s1.refImmediateComposite()
+--		)
+--	
+--	do {
+--		-- adapt name of member end 1
+--		thisModule.resolveTemp(s1, 't1').name <- s1.fragments.first().name.concat('_Member_End1');
+--		thisModule.resolveTemp(s1.refImmediateComposite(), 't1').refImmediateComposite().packagedElement <- t1;
+--		thisModule.resolveTemp(s1.type.type, 't1').ownedAttribute <- t2;
+--	}
+--}
+--
+--rule MethodDeclaration2Operation {
+--	from
+--		s1 : JMM!MethodDeclaration(s1.proxy = false)
+--	to
+--		t1 : UMLMM!Operation (
+--			name <- s1.name,
+--			ownedParameter <- s1.parameters
+--		)
+--}
+--
+--rule ConstructurDeclaration2Operation
+--{
+--	from 
+--		s1 : JMM!ConstructorDeclaration(s1.proxy = false)
+--	to
+--		t1 : UMLMM!Operation (
+--			name <- s1.name,
+--			ownedParameter <- s1.parameters
+--		)
+--}
+--
+--rule SingleVariableDeclaration2Parameter {
+--	from
+--		s1 : JMM!SingleVariableDeclaration(
+--				(s1.proxy = false) and 
+--				( (s1.refImmediateComposite().oclIsTypeOf(JMM!MethodDeclaration)) or 
+--			  	  (s1.refImmediateComposite().oclIsTypeOf(JMM!ConstructorDeclaration)) )  )
+--	to
+--		t1 : UMLMM!Parameter (
+--			name <- s1.name,
+--			direction <- #"in",
+--			type <- if s1.type.type.proxy = false or s1.type.isPrimitiveType() then s1.type.getType() else OclUndefined endif	
+--		)
+--}
+--
+--helper context JMM!Expression def : getValueFromExpression() : String =
+--	-- if proxy true then we need to check existing libraries
+--	if(self.oclIsTypeOf(JMM!SingleVariableAccess)) then self.qualifier.type.name.toString().concat('.').concat(self.variable.name.toString()) 
+--	else
+--		if self.oclIsTypeOf(JMM!NumberLiteral) then self.tokenValue.toString()
+--		else 'dummy string'
+--		endif 
+--	endif;

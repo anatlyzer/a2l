@@ -1,0 +1,23 @@
+Manifest-Version: 1.0
+Bundle-ManifestVersion: 2
+Bundle-Name: Lintra Evaluation
+Bundle-SymbolicName: lintra.evaluation;singleton:=true
+Bundle-Version: 1.0.0.qualifier
+Bundle-Activator: lintra.evaluation.Activator
+Require-Bundle: org.eclipse.ui,
+ org.eclipse.core.runtime,
+ org.eclipse.m2m.atl.core,
+ org.eclipse.m2m.atl.core.emf,
+ org.eclipse.m2m.atl.emftvm;bundle-version="3.7.0",
+ org.eclipse.m2m.atl.emftvm.launcher;bundle-version="3.7.0",
+ org.eclipse.m2m.atl.emftvm.compiler;bundle-version="3.7.0",
+ org.eclipse.m2m.atl.engine,
+ org.eclipse.m2m.atl.engine.emfvm,
+ org.eclipse.emf.compare;visibility:=reexport,
+ org.junit,
+ anatlyzer.atl.editor;bundle-version="0.7.0",
+ lintra.atlcompiler,
+ lintra2.lib
+Bundle-RequiredExecutionEnvironment: JavaSE-1.8
+Bundle-ActivationPolicy: lazy
+Export-Package: lintra.evaluation

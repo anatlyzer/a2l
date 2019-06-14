@@ -1,0 +1,70 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<project default="create_run_jar" name="Create Runnable Jar for Project a2l.tests.dblp">
+    <!--this file was created by Eclipse Runnable JAR Export Wizard-->
+    <!--ANT 1.7 is required                                        -->
+    <!--define folder properties-->
+    <property name="dir.buildfile" value="."/>
+    <property name="dir.workspace" value="/home/loli/runtime-EclipseApplication"/>
+    <property name="dir.jarfile" value="${dir.buildfile}"/>
+    <target name="create_run_jar">
+        <jar destfile="${dir.jarfile}/DBLP_v2.jar" filesetmanifest="mergewithoutmain">
+            <manifest>
+                <attribute name="Main-Class" value="a2l.tests.dblp_v2.DBLPv2_TestCase"/>
+                <attribute name="Class-Path" value="."/>
+            </manifest>
+            <fileset dir="/home/loli/a2l/atl-lintra/tests/a2l.tests.dblp/bin"/>
+            <zipfileset excludes="META-INF/*.SF" src="/home/loli/Descargas/eclipseNeon/plugins/org.eclipse.core.runtime_3.12.0.v20160606-1342.jar"/>
+            <zipfileset excludes="META-INF/*.SF" src="/home/loli/Descargas/eclipseNeon/plugins/javax.inject_1.0.0.v20091030.jar"/>
+            <zipfileset excludes="META-INF/*.SF" src="/home/loli/Descargas/eclipseNeon/plugins/org.eclipse.osgi_3.11.3.v20170209-1843.jar"/>
+            <zipfileset excludes="META-INF/*.SF" src="/home/loli/Descargas/eclipseNeon/plugins/org.eclipse.osgi.compatibility.state_1.0.200.v20160504-1419.jar"/>
+            <zipfileset excludes="META-INF/*.SF" src="/home/loli/Descargas/eclipseNeon/plugins/org.eclipse.equinox.common_3.8.0.v20160509-1230.jar"/>
+            <zipfileset excludes="META-INF/*.SF" src="/home/loli/Descargas/eclipseNeon/plugins/org.eclipse.core.jobs_3.8.0.v20160509-0411.jar"/>
+            <zipfileset excludes="META-INF/*.SF" src="/home/loli/Descargas/eclipseNeon/plugins/org.eclipse.equinox.registry_3.6.100.v20160223-2218.jar"/>
+            <zipfileset excludes="META-INF/*.SF" src="/home/loli/Descargas/eclipseNeon/plugins/org.eclipse.equinox.preferences_3.6.1.v20160815-1406.jar"/>
+            <zipfileset excludes="META-INF/*.SF" src="/home/loli/Descargas/eclipseNeon/plugins/org.eclipse.core.contenttype_3.5.100.v20160418-1621.jar"/>
+            <zipfileset excludes="META-INF/*.SF" src="/home/loli/Descargas/eclipseNeon/plugins/org.eclipse.equinox.app_1.3.400.v20150715-1528.jar"/>
+            <zipfileset excludes="META-INF/*.SF" src="/home/loli/Descargas/eclipseNeon/plugins/org.eclipse.emf.ecore_2.12.0.v20160420-0247.jar"/>
+            <zipfileset excludes="META-INF/*.SF" src="/home/loli/Descargas/eclipseNeon/plugins/org.eclipse.emf.common_2.12.0.v20160420-0247.jar"/>
+            <zipfileset excludes="META-INF/*.SF" src="/home/loli/a2l/atl-lintra/plugins/lintra2.lib/lib/guava/guava-26.0-jre.jar"/>
+            <zipfileset excludes="META-INF/*.SF" src="/home/loli/a2l/atl-lintra/plugins/lintra2.lib/lib/ehcache/ehcache-2.10.3.jar"/>
+            <zipfileset excludes="META-INF/*.SF" src="/home/loli/a2l/atl-lintra/plugins/lintra2.lib/lib/ehcache/slf4j-api-1.7.7.jar"/>
+            <zipfileset excludes="META-INF/*.SF" src="/home/loli/a2l/atl-lintra/plugins/lintra2.lib/lib/ehcache/slf4j-jdk14-1.7.7.jar"/>
+            <zipfileset excludes="META-INF/*.SF" src="/home/loli/a2l/atl-lintra/plugins/lintra2.lib/lib/hazelcast/hazelcast-all-3.7.5.jar"/>
+            <zipfileset excludes="META-INF/*.SF" src="/home/loli/a2l/atl-lintra/plugins/lintra2.lib/lib/javaslang/javaslang-2.1.0-alpha.jar"/>
+            <zipfileset excludes="META-INF/*.SF" src="/home/loli/Descargas/eclipseNeon/plugins/org.eclipse.emf.ecore.xmi_2.12.0.v20160420-0247.jar"/>
+            <fileset dir="/home/loli/a2l/atl-lintra/plugins/lintra2.lib/bin"/>
+            <zipfileset excludes="META-INF/*.SF" src="/home/loli/Descargas/eclipseNeon/plugins/org.eclipse.ui_3.108.1.v20160929-1045.jar"/>
+            <zipfileset excludes="META-INF/*.SF" src="/home/loli/Descargas/eclipseNeon/plugins/org.eclipse.swt_3.105.3.v20170228-0512.jar"/>
+            <zipfileset excludes="META-INF/*.SF" src="/home/loli/Descargas/eclipseNeon/plugins/org.eclipse.swt.gtk.linux.x86_64_3.105.3.v20170228-0512.jar"/>
+            <zipfileset excludes="META-INF/*.SF" src="/home/loli/Descargas/eclipseNeon/plugins/org.eclipse.jface_3.12.2.v20170113-2113.jar"/>
+            <zipfileset excludes="META-INF/*.SF" src="/home/loli/Descargas/eclipseNeon/plugins/org.eclipse.core.commands_3.8.1.v20161221-1651.jar"/>
+            <zipfileset excludes="META-INF/*.SF" src="/home/loli/Descargas/eclipseNeon/plugins/org.eclipse.ui.workbench_3.108.3.v20170216-1539.jar"/>
+            <zipfileset excludes="META-INF/*.SF" src="/home/loli/Descargas/eclipseNeon/plugins/org.eclipse.e4.ui.workbench3_0.13.100.v20160506-0759.jar"/>
+            <zipfileset excludes="META-INF/*.SF" src="/home/loli/Descargas/eclipseNeon/plugins/org.eclipse.m2m.atl.core_3.7.0.v201603222002.jar"/>
+            <zipfileset excludes="META-INF/*.SF" src="/home/loli/Descargas/eclipseNeon/plugins/org.eclipse.m2m.atl.core.emf_3.7.0.v201603222002.jar"/>
+            <zipfileset excludes="META-INF/*.SF" src="/home/loli/Descargas/eclipseNeon/plugins/org.eclipse.m2m.atl.emftvm_3.8.0.v201705182014.jar"/>
+            <zipfileset excludes="META-INF/*.SF" src="/home/loli/Descargas/eclipseNeon/plugins/org.eclipse.m2m.atl.emftvm.trace_3.8.0.v201705182014.jar"/>
+            <zipfileset excludes="META-INF/*.SF" src="/home/loli/Descargas/eclipseNeon/plugins/org.eclipse.m2m.atl.emftvm.launcher_3.8.0.v201705182014.jar"/>
+            <zipfileset excludes="META-INF/*.SF" src="/home/loli/Descargas/eclipseNeon/plugins/org.eclipse.m2m.atl.emftvm.compiler_3.8.0.v201705182014.jar"/>
+            <zipfileset excludes="META-INF/*.SF" src="/home/loli/Descargas/eclipseNeon/plugins/org.eclipse.m2m.atl.engine_3.7.0.v201603222002.jar"/>
+            <zipfileset excludes="META-INF/*.SF" src="/home/loli/Descargas/eclipseNeon/plugins/org.eclipse.m2m.atl.engine.emfvm_3.7.0.v201603222002.jar"/>
+            <zipfileset excludes="META-INF/*.SF" src="/home/loli/Descargas/eclipseNeon/plugins/org.eclipse.m2m.atl.common_3.7.0.v201603222002.jar"/>
+            <zipfileset excludes="META-INF/*.SF" src="/home/loli/Descargas/eclipseNeon/plugins/org.eclipse.emf.compare_3.3.1.201608311750.jar"/>
+            <zipfileset excludes="META-INF/*.SF" src="/home/loli/Descargas/eclipseNeon/plugins/org.junit_4.12.0.v201504281640/junit.jar"/>
+            <zipfileset excludes="META-INF/*.SF" src="/home/loli/Descargas/eclipseNeon/plugins/org.hamcrest.core_1.3.0.v201303031735.jar"/>
+            <fileset dir="/home/loli/a2l/anatlyzer/plugins/anatlyzer.atl.editor/bin"/>
+            <zipfileset excludes="META-INF/*.SF" src="/home/loli/Descargas/eclipseNeon/plugins/org.eclipse.core.resources_3.11.1.v20161107-2032.jar"/>
+            <zipfileset excludes="META-INF/*.SF" src="/home/loli/Descargas/eclipseNeon/plugins/org.eclipse.m2m.atl.adt.editor_3.7.0.v201603222002.jar"/>
+            <fileset dir="/home/loli/a2l/anatlyzer/plugins/anatlyzer.atl.typing/bin"/>
+            <zipfileset excludes="META-INF/*.SF" src="/home/loli/a2l/anatlyzer/plugins/anatlyzer.atl.typing/lib/guava-r05.jar"/>
+            <fileset dir="/home/loli/a2l/atl-lintra/plugins/lintra.atlcompiler/bin"/>
+            <zipfileset excludes="META-INF/*.SF" src="/home/loli/a2l/atl-lintra/plugins/lintra.atlcompiler/lib/commons-io-2.5.jar"/>
+            <zipfileset excludes="META-INF/*.SF" src="/home/loli/a2l/anatlyzer/plugins/anatlyzer.use.witness/lib/plantuml.jar"/>
+            <zipfileset excludes="META-INF/*.SF" src="/home/loli/a2l/anatlyzer/plugins/anatlyzer.use.witness/lib/dist/transml_use_complete.jar"/>
+            <fileset dir="/home/loli/a2l/anatlyzer/plugins/anatlyzer.use.witness/bin"/>
+            <zipfileset excludes="META-INF/*.SF" src="/home/loli/Descargas/eclipseNeon/plugins/com.google.guava_15.0.0.v201403281430.jar"/>
+            <fileset dir="/home/loli/a2l/atl-lintra/plugins/lintra.evaluation/bin"/>
+            <fileset dir="/home/loli/a2l/atl-lintra/plugins/lintra.emf/bin"/>
+        </jar>
+    </target>
+</project>

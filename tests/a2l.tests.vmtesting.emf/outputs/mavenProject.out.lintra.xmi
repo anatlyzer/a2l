@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="ASCII"?>
+<xmi:XMI xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:zooxml="http://zoo/XML">
+  <zooxml:Root name="project">
+    <children xsi:type="zooxml:Attribute" name="id" value="gs-example"/>
+    <children xsi:type="zooxml:Attribute" name="name" value="gs-example"/>
+    <children xsi:type="zooxml:Text" name="." value="."/>
+  </zooxml:Root>
+  <zooxml:Element name="build">
+    <children xsi:type="zooxml:Element" name="defaultGoal">
+      <children xsi:type="zooxml:Text" name="build" value="build"/>
+    </children>
+    <children xsi:type="zooxml:Element" name="sourceDirectory"/>
+  </zooxml:Element>
+</xmi:XMI>

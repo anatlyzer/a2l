@@ -1,0 +1,17 @@
+/**
+ */
+package a2l.tests.atlmr.anomalies;
+
+
+/**
+ * <!-- begin-user-doc -->
+ * A representation of the model object '<em><b>Simplify Starts With</b></em>'.
+ * <!-- end-user-doc -->
+ *
+ *
+ * @see a2l.tests.atlmr.anomalies.AnomaliesPackage#getSimplifyStartsWith()
+ * @model
+ * @generated
+ */
+public interface SimplifyStartsWith extends Anomaly {
+} // SimplifyStartsWith

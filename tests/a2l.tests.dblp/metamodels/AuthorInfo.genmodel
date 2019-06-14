@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<genmodel:GenModel xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:ecore="http://www.eclipse.org/emf/2002/Ecore"
+    xmlns:genmodel="http://www.eclipse.org/emf/2002/GenModel" modelDirectory="/a2l.tests.dblp/src-gen" modelPluginID="a2l.tests.dblp"
+    modelName="AuthorInfo" rootExtendsClass="org.eclipse.emf.ecore.impl.MinimalEObjectImpl$Container"
+    importerID="org.eclipse.emf.importer.ecore" complianceLevel="8.0" copyrightFields="false"
+    operationReflection="true" importOrganizing="true">
+  <foreignModel>AuthorInfo.ecore</foreignModel>
+  <genPackages prefix="AuthorInfo" basePackage="dblp" disposableProviderFactory="true"
+      ecorePackage="AuthorInfo.ecore#/">
+    <genClasses ecoreClass="AuthorInfo.ecore#//Author">
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute AuthorInfo.ecore#//Author/name"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute AuthorInfo.ecore#//Author/numOfPapers"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute AuthorInfo.ecore#//Author/active"/>
+      <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference AuthorInfo.ecore#//Author/publishesInC"/>
+      <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference AuthorInfo.ecore#//Author/coauthor"/>
+      <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference AuthorInfo.ecore#//Author/publishesInJ"/>
+    </genClasses>
+    <genClasses ecoreClass="AuthorInfo.ecore#//Conference">
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute AuthorInfo.ecore#//Conference/name"/>
+    </genClasses>
+    <genClasses ecoreClass="AuthorInfo.ecore#//Journal">
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute AuthorInfo.ecore#//Journal/name"/>
+    </genClasses>
+  </genPackages>
+</genmodel:GenModel>

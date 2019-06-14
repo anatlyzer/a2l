@@ -1,0 +1,20 @@
+-- @atlcompiler lintra
+
+-- @path MM=/example.proc2docbook/metamodels/Proceedings.ecore
+-- @path MM1=/example.proc2docbook/metamodels/DocBook.ecore
+
+module Proc2DocBook;
+create OUT : MM1 from IN : MM;
+
+rule proc2book {
+	from
+		proc : MM!Proc,
+		person : MM!Person (proc.editor->includes(person))
+	to 
+		b : MM1!Book (
+			title <- proc.title + ' ' + person.name
+		),
+		p : MM1!Person (
+			name <- person.name	
+		)
+}

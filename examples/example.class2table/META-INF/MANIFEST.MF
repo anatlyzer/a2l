@@ -1,0 +1,7 @@
+Manifest-Version: 1.0
+Bundle-ManifestVersion: 2
+Bundle-Name: Class2table
+Bundle-SymbolicName: example.class2table
+Bundle-Version: 1.0.0.qualifier
+Require-Bundle: lintra.emf;bundle-version="1.0.0",
+ lintra.lib;bundle-version="1.0.0"

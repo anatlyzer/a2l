@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<genmodel:GenModel xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:ecore="http://www.eclipse.org/emf/2002/Ecore"
+    xmlns:genmodel="http://www.eclipse.org/emf/2002/GenModel" modelDirectory="/a2l.tests.vmtesting.emf/src-gen" modelPluginID="a2l.tests.vmtesting.emf"
+    modelName="MavenProject" modelPluginClass="" rootExtendsClass="org.eclipse.emf.ecore.impl.MinimalEObjectImpl$Container"
+    importerID="org.eclipse.emf.importer.ecore" complianceLevel="8.0" copyrightFields="false"
+    operationReflection="true" importOrganizing="true">
+  <foreignModel>MavenProject.ecore</foreignModel>
+  <genPackages prefix="PrimitiveTypes" basePackage="a2l.tests.vmtesting.emf.ant2maven.mavenproject"
+      disposableProviderFactory="true" ecorePackage="MavenProject.ecore#/0">
+    <genDataTypes ecoreDataType="MavenProject.ecore#/0/String"/>
+  </genPackages>
+  <genPackages prefix="MavenProject" basePackage="a2l.tests.vmtesting.emf.ant2maven.mavenproject"
+      disposableProviderFactory="true" ecorePackage="MavenProject.ecore#/1">
+    <genClasses ecoreClass="MavenProject.ecore#/1/Project">
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute MavenProject.ecore#/1/Project/id"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute MavenProject.ecore#/1/Project/groupId"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute MavenProject.ecore#/1/Project/artifactId"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute MavenProject.ecore#/1/Project/name"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute MavenProject.ecore#/1/Project/description"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference MavenProject.ecore#/1/Project/build"/>
+      <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference MavenProject.ecore#/1/Project/dependencies"/>
+    </genClasses>
+    <genClasses ecoreClass="MavenProject.ecore#/1/Build">
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute MavenProject.ecore#/1/Build/defaultGoal"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute MavenProject.ecore#/1/Build/sourceDirectory"/>
+    </genClasses>
+    <genClasses ecoreClass="MavenProject.ecore#/1/Description">
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute MavenProject.ecore#/1/Description/description"/>
+    </genClasses>
+  </genPackages>
+</genmodel:GenModel>

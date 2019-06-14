@@ -1,0 +1,55 @@
+
+-- @path MM=/a2l.tests.dblp/metamodels/DBLP.ecore
+-- @path MM1=/a2l.tests.dblp/metamodels/AuthorInfo.ecore
+
+-- @genpath MM=/a2l.tests.dblp/metamodels/DBLP.genmodel
+-- @genpath MM1=/a2l.tests.dblp/metamodels/AuthorInfo.genmodel
+
+-- @project a2l.tests.dblp=a2l.tests.dblp_v3
+-- @driver MM=emf
+-- @driver MM1=emf
+
+-- @optimizations all
+
+module DBLPv3;
+create OUT : MM1 from IN : MM;
+
+helper context MM!InProceedings def : booktitle() : String = self.bootitle;
+
+helper context MM!InProceedings def : year() : String = self.year;
+
+helper def : conferences : Map(String, MM1!Conference) = Map{};
+
+helper context MM!Author def : active() : Boolean =
+	self.records->select(r | r.oclIsTypeOf(MM!InProceedings))->select(ip | ip.booktitle().indexOf('ICMT')>=0 and ip.year()>2008)->size()>0;
+
+helper context MM!Author def : nowPublishingIn() : Sequence(String) =
+	self.records->select(r | r.oclIsTypeOf(MM!InProceedings))->select(ip | ip.booktitle().indexOf('ICMT')<0 and ip.year()>2008)->collect(r | r.booktitle());
+
+rule icmt {
+	from
+		a : MM!Author (a.records->select(r | r.oclIsTypeOf(MM!InProceedings))->exists(ip | ip.booktitle().indexOf('ICMT')>=0) and not a.active())
+	to
+		out : MM1!Author (
+			name <- a.name,
+			active <- a.active()
+		)
+	do {
+		for (cName in a.nowPublishingIn()) {
+			if (thisModule.conferences.get(cName).oclIsUndefined()){
+				thisModule.conf(cName);
+			}
+			out.publishesInC <- out.publishesInC->append(thisModule.conferences.get(cName));
+		}
+	}
+}
+
+rule conf(cName : String) {
+	to 
+		c : MM1!Conference (
+			name <- cName
+		)
+	do {
+		thisModule.conferences.put(cName, c);	
+	}
+}

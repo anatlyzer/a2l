@@ -1,0 +1,51 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<project default="create_run_jar" name="Create Runnable Jar for Project a2l.tests.imdb">
+    <!--this file was created by Eclipse Runnable JAR Export Wizard-->
+    <!--ANT 1.7 is required                                        -->
+    <!--define folder properties-->
+    <property name="dir.buildfile" value="."/>
+    <property name="dir.jarfile" value="${dir.buildfile}"/>
+   	<property name="eclipse.plugins" value="${eclipse.home}/plugins"/>
+	<property name="lintra.dir" location="../../.."/>
+	<property name="anatlyzer.dir" location="../../../../anatlyzer"/>
+
+   	<target name="create_run_jar">
+        <jar destfile="${dir.jarfile}/a2l.jar" filesetmanifest="mergewithoutmain">
+        	<!--
+            <manifest>
+                <attribute name="Main-Class" value="a2l.tests.imdb.identity.IdentityIMDb_TestCase"/>
+                <attribute name="Class-Path" value="."/>
+            </manifest>
+        	-->
+
+        	<!--
+        	<zipfileset excludes="META-INF/*.SF" dir="${eclipse.plugins}" includes="*.jar"/>
+        	-->
+        	
+            <zipfileset excludes="META-INF/*.SF" src="${lintra.dir}/plugins/lintra2.lib/lib/guava/guava-26.0-jre.jar"/>
+            <zipfileset excludes="META-INF/*.SF" src="${lintra.dir}/plugins/lintra2.lib/lib/ehcache/ehcache-2.10.3.jar"/>
+            <zipfileset excludes="META-INF/*.SF" src="${lintra.dir}/plugins/lintra2.lib/lib/ehcache/slf4j-api-1.7.7.jar"/>
+            <zipfileset excludes="META-INF/*.SF" src="${lintra.dir}/plugins/lintra2.lib/lib/ehcache/slf4j-jdk14-1.7.7.jar"/>
+            <zipfileset excludes="META-INF/*.SF" src="${lintra.dir}/plugins/lintra2.lib/lib/hazelcast/hazelcast-all-3.7.5.jar"/>
+            <zipfileset excludes="META-INF/*.SF" src="${lintra.dir}/plugins/lintra2.lib/lib/javaslang/javaslang-2.1.0-alpha.jar"/>
+            <fileset dir="${lintra.dir}/plugins/lintra2.lib/bin"/>
+            <fileset dir="${lintra.dir}/plugins/lintra.emf/bin"/>
+            <fileset dir="${anatlyzer.dir}/plugins/anatlyzer.atl.editor/bin"/>
+            <fileset dir="${anatlyzer.dir}/plugins/anatlyzer.atl.typing/bin"/>
+            <zipfileset excludes="META-INF/*.SF" src="${anatlyzer.dir}/plugins/anatlyzer.atl.typing/lib/guava-r05.jar"/>
+            <fileset dir="${lintra.dir}/plugins/lintra.atlcompiler/bin"/>
+            <zipfileset excludes="META-INF/*.SF" src="${lintra.dir}/plugins/lintra.atlcompiler/lib/commons-io-2.5.jar"/>
+            <zipfileset excludes="META-INF/*.SF" src="${anatlyzer.dir}/plugins/anatlyzer.use.witness/lib/plantuml.jar"/>
+            <zipfileset excludes="META-INF/*.SF" src="${anatlyzer.dir}/plugins/anatlyzer.use.witness/lib/dist/transml_use_complete.jar"/>
+            <fileset dir="${anatlyzer.dir}/plugins/anatlyzer.use.witness/bin"/>
+            <fileset dir="${lintra.dir}/plugins/lintra.evaluation/bin"/>
+
+			<!-- Test cases -->        
+            <fileset dir="${lintra.dir}/tests/a2l.tests.imdb/bin"/>
+        	<fileset dir="${lintra.dir}/tests/a2l.tests.dblp/bin"/>
+        	<fileset dir="${lintra.dir}/tests/a2l.tests.java2graph/bin"/>
+        	<fileset dir="${lintra.dir}/tests/a2l.tests.java2uml/bin"/>
+
+        </jar>
+    </target>
+</project>

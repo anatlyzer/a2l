@@ -1,0 +1,110 @@
+<?xml version="1.0" encoding="ASCII"?>
+<xmi:XMI xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:javaMM="http://www.eclipse.org/MoDisco/Java/0.2.incubation/java">
+  <javaMM:PrimitiveTypeByte name="byte"/>
+  <javaMM:TypeAccess type="/26/@ownedElements.1/@ownedPackages.0/@ownedElements.0"/>
+  <javaMM:TypeAccess type="/26/@ownedElements.1/@ownedPackages.0/@ownedElements.5"/>
+  <javaMM:ExpressionStatement originalCompilationUnit="/19">
+    <expression xsi:type="javaMM:MethodInvocation" originalCompilationUnit="/19" method="/26/@ownedElements.1/@ownedPackages.1/@ownedElements.1/@bodyDeclarations.0">
+      <expression xsi:type="javaMM:SingleVariableAccess" variable="/26/@ownedElements.1/@ownedPackages.0/@ownedElements.3/@bodyDeclarations.0/@fragments.0">
+        <qualifier xsi:type="javaMM:TypeAccess" href="#/15"/>
+      </expression>
+    </expression>
+  </javaMM:ExpressionStatement>
+  <javaMM:PrimitiveTypeLong name="long"/>
+  <javaMM:PrimitiveTypeDouble name="double"/>
+  <javaMM:PrimitiveTypeVoid name="void" usagesInTypeAccess="/12"/>
+  <javaMM:TypeAccess type="/26/@ownedElements.1/@ownedPackages.0/@ownedElements.1"/>
+  <javaMM:TypeAccess type="/26/@ownedElements.1/@ownedPackages.1/@ownedElements.4"/>
+  <javaMM:PrimitiveTypeInt name="int"/>
+  <javaMM:TypeParameter name="T" proxy="true"/>
+  <javaMM:TypeAccess type="/26/@ownedElements.1/@ownedPackages.1/@ownedElements.0"/>
+  <javaMM:TypeAccess type="/6"/>
+  <javaMM:TypeAccess type="/26/@ownedElements.1/@ownedPackages.1/@ownedElements.2"/>
+  <javaMM:TypeAccess type="/26/@ownedElements.1/@ownedPackages.1/@ownedElements.3"/>
+  <javaMM:TypeAccess type="/26/@ownedElements.1/@ownedPackages.0/@ownedElements.3"/>
+  <javaMM:TypeAccess type="/26/@ownedElements.1/@ownedPackages.1/@ownedElements.4"/>
+  <javaMM:PrimitiveTypeShort name="short"/>
+  <javaMM:ArrayType name="java.lang.String[]" usagesInTypeAccess="/26/@ownedElements.0/@ownedElements.0/@bodyDeclarations.0/@parameters.0/@type" dimensions="1">
+    <elementType href="#/1"/>
+  </javaMM:ArrayType>
+  <javaMM:CompilationUnit name="HelloWorld.java" originalFilePath="C:\Users\Atenea\Desktop\Gits\LinTraCompilerGit\helloworld\src\helloworld\HelloWorld.java" package="/26/@ownedElements.0" types="/26/@ownedElements.0/@ownedElements.0"/>
+  <javaMM:Block originalCompilationUnit="/19">
+    <statements xsi:type="javaMM:ExpressionStatement" href="#/3"/>
+  </javaMM:Block>
+  <javaMM:PrimitiveTypeFloat name="float"/>
+  <javaMM:PrimitiveTypeBoolean name="boolean"/>
+  <javaMM:PrimitiveTypeChar name="char"/>
+  <javaMM:TypeAccess type="/26/@ownedElements.1/@ownedPackages.0/@ownedElements.2"/>
+  <javaMM:StringLiteral originalCompilationUnit="/19" escapedValue="&quot;Hello World&quot;"/>
+  <javaMM:Model name="helloworld">
+    <ownedElements name="helloworld">
+      <ownedElements xsi:type="javaMM:ClassDeclaration" originalCompilationUnit="/19" name="HelloWorld">
+        <modifier visibility="public"/>
+        <bodyDeclarations xsi:type="javaMM:MethodDeclaration" originalCompilationUnit="/19" name="main">
+          <modifier visibility="public"/>
+          <body href="#/20"/>
+          <parameters originalCompilationUnit="/19" name="args">
+            <modifier/>
+            <type type="/18"/>
+          </parameters>
+          <returnType href="#/12"/>
+        </bodyDeclarations>
+      </ownedElements>
+    </ownedElements>
+    <ownedElements name="java" proxy="true">
+      <ownedPackages name="lang" proxy="true">
+        <ownedElements xsi:type="javaMM:ClassDeclaration" name="String" proxy="true" usagesInTypeAccess="/1 /26/@ownedElements.1/@ownedPackages.1/@ownedElements.1/@bodyDeclarations.0/@parameters.0/@type">
+          <superInterfaces href="#/11"/>
+          <superInterfaces href="#/7"/>
+          <superInterfaces href="#/24"/>
+        </ownedElements>
+        <ownedElements xsi:type="javaMM:InterfaceDeclaration" name="Comparable" proxy="true" usagesInTypeAccess="/7">
+          <typeParameters href="#/10"/>
+        </ownedElements>
+        <ownedElements xsi:type="javaMM:InterfaceDeclaration" name="CharSequence" proxy="true" usagesInTypeAccess="/24"/>
+        <ownedElements xsi:type="javaMM:ClassDeclaration" name="System" proxy="true" usagesInTypeAccess="/15">
+          <bodyDeclarations xsi:type="javaMM:FieldDeclaration" proxy="true">
+            <fragments name="out" proxy="true" usageInVariableAccess="/3/@expression/@expression"/>
+          </bodyDeclarations>
+        </ownedElements>
+        <ownedElements xsi:type="javaMM:InterfaceDeclaration" name="AutoCloseable" proxy="true" usagesInTypeAccess="/26/@ownedElements.1/@ownedPackages.1/@ownedElements.4/@superInterfaces.0"/>
+        <ownedElements xsi:type="javaMM:InterfaceDeclaration" name="Appendable" proxy="true" usagesInTypeAccess="/2"/>
+      </ownedPackages>
+      <ownedPackages name="io" proxy="true">
+        <ownedElements xsi:type="javaMM:InterfaceDeclaration" name="Serializable" proxy="true" usagesInTypeAccess="/11"/>
+        <ownedElements xsi:type="javaMM:ClassDeclaration" name="PrintStream" proxy="true">
+          <bodyDeclarations xsi:type="javaMM:MethodDeclaration" name="println" proxy="true" usages="/3/@expression">
+            <parameters name="arg0" proxy="true">
+              <type type="/26/@ownedElements.1/@ownedPackages.0/@ownedElements.0"/>
+            </parameters>
+          </bodyDeclarations>
+          <superInterfaces href="#/2"/>
+          <superInterfaces href="#/8"/>
+          <superClass href="#/13"/>
+        </ownedElements>
+        <ownedElements xsi:type="javaMM:ClassDeclaration" name="FilterOutputStream" proxy="true" usagesInTypeAccess="/13">
+          <superClass href="#/14"/>
+        </ownedElements>
+        <ownedElements xsi:type="javaMM:ClassDeclaration" name="OutputStream" proxy="true" usagesInTypeAccess="/14">
+          <superInterfaces href="#/16"/>
+          <superInterfaces type="/26/@ownedElements.1/@ownedPackages.1/@ownedElements.5"/>
+        </ownedElements>
+        <ownedElements xsi:type="javaMM:InterfaceDeclaration" name="Closeable" proxy="true" usagesInTypeAccess="/8 /16">
+          <superInterfaces type="/26/@ownedElements.1/@ownedPackages.0/@ownedElements.4"/>
+        </ownedElements>
+        <ownedElements xsi:type="javaMM:InterfaceDeclaration" name="Flushable" proxy="true" usagesInTypeAccess="/26/@ownedElements.1/@ownedPackages.1/@ownedElements.3/@superInterfaces.1"/>
+      </ownedPackages>
+    </ownedElements>
+    <orphanTypes xsi:type="javaMM:PrimitiveTypeInt" href="#/9"/>
+    <orphanTypes xsi:type="javaMM:PrimitiveTypeLong" href="#/4"/>
+    <orphanTypes xsi:type="javaMM:PrimitiveTypeFloat" href="#/21"/>
+    <orphanTypes xsi:type="javaMM:PrimitiveTypeDouble" href="#/5"/>
+    <orphanTypes xsi:type="javaMM:PrimitiveTypeBoolean" href="#/22"/>
+    <orphanTypes xsi:type="javaMM:PrimitiveTypeVoid" href="#/6"/>
+    <orphanTypes xsi:type="javaMM:PrimitiveTypeChar" href="#/23"/>
+    <orphanTypes xsi:type="javaMM:PrimitiveTypeShort" href="#/17"/>
+    <orphanTypes xsi:type="javaMM:PrimitiveTypeByte" href="#/0"/>
+    <orphanTypes xsi:type="javaMM:ArrayType" href="#/18"/>
+    <compilationUnits href="#/19"/>
+  </javaMM:Model>
+</xmi:XMI>

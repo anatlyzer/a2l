@@ -1,0 +1,33 @@
+@namespace(uri="http://a2l/anatlyzer_ext", prefix="anatlyzer_ext")
+package anatlyzerext;
+
+import "platform:/resource/anatlyzer.atl.typing/model/generated/merged.ecore";
+
+class NavRefAsSet extends atlext.OCL.NavigationOrAttributeCallExp {
+}
+
+/**
+ * Represents an iterator expression which can use a mutable collection
+ * because the static analysis has deemed it safe.
+ */
+class MutableIteratorExp extends atlext.OCL.IteratorExp {
+	
+}
+
+class MutableCollectionOperationCallExp extends atlext.OCL.CollectionOperationCallExp {
+	
+}
+
+class IteratorChainExp extends atlext.OCL.PropertyCallExp {
+	attr String[1] name;
+	
+	val atlext.OCL.Iterator[1] iterator;
+	val IteratorChainElement[*] preChain;
+	val IteratorChainElement[*] chain;
+}
+
+class IteratorChainElement {
+	attr String[1] name;
+	val atlext.OCL.Iterator[0..1] iterator; /* optional because the iterator variable may be defined by the IteratorChainExp */
+	val atlext.OCL.OclExpression[1] body;
+}

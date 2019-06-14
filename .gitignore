@@ -1,0 +1,158 @@
+
+# Created by https://www.gitignore.io/api/eclipse,java
+
+### Eclipse ###
+
+.metadata
+bin/
+tmp/
+*.tmp
+*.bak
+*.swp
+*~.nib
+local.properties
+.settings/
+.loadpath
+.recommenders
+.asm
+
+# Eclipse Core
+# .project
+
+# External tool builders
+.externalToolBuilders/
+
+# Locally stored "Eclipse launch configurations"
+*.launch
+
+# PyDev specific (Python IDE for Eclipse)
+*.pydevproject
+
+# CDT-specific (C/C++ Development Tooling)
+.cproject
+
+# JDT-specific (Eclipse Java Development Tools)
+#.classpath
+
+# Java annotation processor (APT)
+.factorypath
+
+# PDT-specific (PHP Development Tools)
+.buildpath
+
+# sbteclipse plugin
+.target
+
+# Tern plugin
+.tern-project
+
+# TeXlipse plugin
+.texlipse
+
+# STS (Spring Tool Suite)
+.springBeans
+
+# Code Recommenders
+.recommenders/
+
+
+### Java ###
+*.class
+
+# BlueJ files
+*.ctxt
+
+# Mobile Tools for Java (J2ME)
+.mtj.tmp/
+
+# Package Files #
+#*.jar
+#*.war
+#*.ear
+
+# virtual machine crash logs, see http://www.java.com/en/download/help/error_hotspot.xml
+hs_err_pid*
+
+examples/example.vmtesting/outputs/
+tests/a2l.tests.imdb/outputs/
+
+# Generated files
+tests/a2l.tests.dblp/src/a2l/tests/dblp_v1/DBLPv1.java
+tests/a2l.tests.dblp/src/a2l/tests/dblp_v1/DBLPv1Footprint.java
+tests/a2l.tests.dblp/src/a2l/tests/dblp_v1/DBLPv1Runner.java
+tests/a2l.tests.dblp/src/a2l/tests/dblp_v1/DBLPv1GlobalContext.java
+
+tests/a2l.tests.imdb/src/a2l/tests/findcouples/FindCouplesIMDb.java
+tests/a2l.tests.imdb/src/a2l/tests/findcouples/FindCouplesIMDbFootprint.java
+tests/a2l.tests.imdb/src/a2l/tests/findcouples/FindCouplesIMDbRunner.java
+
+tests/a2l.tests.java2graph/src/a2l/tests/java2graph/Java2Graph.java
+tests/a2l.tests.java2graph/src/a2l/tests/java2graph/Java2GraphFootprint.java
+tests/a2l.tests.java2graph/src/a2l/tests/java2graph/Java2GraphRunner.java
+tests/a2l.tests.java2graph/src/a2l/tests/java2graph/Java2GraphGlobalContext.java
+
+tests/a2l.tests.dblp/src/a2l/tests/dblp_v1_noOptimizations/DBLPv1_noOptimizations.java
+tests/a2l.tests.dblp/src/a2l/tests/dblp_v1_noOptimizations/DBLPv1_noOptimizationsFootprint.java
+tests/a2l.tests.dblp/src/a2l/tests/dblp_v1_noOptimizations/DBLPv1_noOptimizationsRunner.java
+
+tests/a2l.tests.dblp/src/a2l/tests/dblp_v2/DBLPv2.java
+tests/a2l.tests.dblp/src/a2l/tests/dblp_v2/DBLPv2Footprint.java
+tests/a2l.tests.dblp/src/a2l/tests/dblp_v2/DBLPv2Runner.java
+tests/a2l.tests.dblp/src/a2l/tests/dblp_v2/DBLPv2GlobalContext.java
+
+tests/a2l.tests.dblp/src/a2l/tests/dblp_v2_noOptimizations/DBLPv2_noOptimizations.java
+tests/a2l.tests.dblp/src/a2l/tests/dblp_v2_noOptimizations/DBLPv2_noOptimizationsFootprint.java
+tests/a2l.tests.dblp/src/a2l/tests/dblp_v2_noOptimizations/DBLPv2_noOptimizationsRunner.java
+
+tests/a2l.tests.imdb/src/a2l/tests/findcouples_noOptimizations/FindCouplesIMDb_noOptimizations.java
+tests/a2l.tests.imdb/src/a2l/tests/findcouples_noOptimizations/FindCouplesIMDb_noOptimizationsFootprint.java
+tests/a2l.tests.imdb/src/a2l/tests/findcouples_noOptimizations/FindCouplesIMDb_noOptimizationsRunner.java
+
+
+tests/a2l.tests.imdb/src/a2l/tests/imdb/identity_noOptimizations/IdentityIMDbnoOptimizations.java
+tests/a2l.tests.imdb/src/a2l/tests/imdb/identity_noOptimizations/IdentityIMDbnoOptimizationsFootprint.java
+tests/a2l.tests.imdb/src/a2l/tests/imdb/identity_noOptimizations/IdentityIMDbnoOptimizationsRunner.java
+
+tests/a2l.tests.java2graph/src/a2l/tests/java2graph_noOptimizations/Java2Graph_noOptimizations.java
+tests/a2l.tests.java2graph/src/a2l/tests/java2graph_noOptimizations/Java2Graph_noOptimizationsFootprint.java
+tests/a2l.tests.java2graph/src/a2l/tests/java2graph_noOptimizations/Java2Graph_noOptimizationsRunner.java
+
+
+tests/a2l.tests.java2uml/src/at2l/tests/java2uml/umldeps_noOptimizations/java2uml_deps_noOptimizations.java
+tests/a2l.tests.java2uml/src/at2l/tests/java2uml/umldeps_noOptimizations/java2uml_deps_noOptimizationsFootprint.java
+tests/a2l.tests.java2uml/src/at2l/tests/java2uml/umldeps_noOptimizations/java2uml_deps_noOptimizationsRunner.java
+
+# Test models -- too big
+tests/a2l.tests.imdb/inputs/imdb-0.1.xmi
+tests/a2l.tests.imdb/inputs/imdb-0.5.xmi
+tests/a2l.tests.imdb/inputs/imdb-1.0.xmi
+tests/a2l.tests.imdb/inputs/imdb-2.0.xmi
+tests/a2l.tests.imdb/inputs/imdb-2.5.xmi
+tests/a2l.tests.imdb/inputs/imdb-all.xmi
+
+tests/a2l.tests.java2uml/inputs/eclipseModel-0.1.xmi
+tests/a2l.tests.java2uml/inputs/eclipseModel-0.5.xmi
+tests/a2l.tests.java2uml/inputs/eclipseModel-2.0.xmi
+tests/a2l.tests.java2uml/inputs/eclipseModel-3.0.xmi
+tests/a2l.tests.java2uml/inputs/eclipseModel-all.xmi
+
+tests/a2l.tests.java2uml/src/at2l/tests/java2uml/umldeps/java2uml_deps.java
+tests/a2l.tests.java2uml/src/at2l/tests/java2uml/umldeps/java2uml_depsFootprint.java
+tests/a2l.tests.java2uml/src/at2l/tests/java2uml/umldeps/java2uml_depsRunner.java
+
+tests/a2l.tests.imdb/src/a2l/tests/imdb/identity/IdentityIMDbGlobalContext.java
+tests/a2l.tests.java2uml/src/at2l/tests/java2uml/umldeps/java2uml_depsGlobalContext.java
+
+transml.properties
+*~
+
+# Deploy files
+tests/a2l.tests.imdb/deploy/imdb.jar
+
+examples/example.vmtesting/src-gen/
+tests/a2l.tests.vmtesting.emf/src-gen/
+
+# Inputs
+tests/a2l.tests.java2uml/inputs/*.xmi
+tests/a2l.tests.dblp/inputs/*.xmi
+tests/a2l.tests.imdb/inputs/*.xmi

@@ -1,0 +1,82 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<?eclipse version="3.4"?>
+<plugin>
+   <extension
+         point="org.eclipse.ui.commands">
+      <category
+            id="lintra.evaluation.commands.category"
+            name="A2L Automatic compile">
+      </category>
+      <command
+            categoryId="lintra.evaluation.commands.category"
+            id="lintra.evaluation.commands.compileTestCases"
+            name="Compile test cases">
+      </command>
+
+      <command
+            categoryId="lintra.evaluation.commands.category"
+            id="lintra.evaluation.commands.compileEvaluation"
+            name="Compile evaluation">
+      </command>
+
+   </extension>
+
+   <extension
+         point="org.eclipse.ui.handlers">
+      <handler
+            class="lintra.evaluation.handlers.CompileTestCasesHandler"
+            commandId="lintra.evaluation.commands.compileTestCases">
+      </handler>
+
+      <handler
+            class="lintra.evaluation.handlers.CompileEvaluationHandler"
+            commandId="lintra.evaluation.commands.compileEvaluation">
+      </handler>
+   </extension>
+
+   <extension
+         point="org.eclipse.ui.menus">
+      <menuContribution
+            locationURI="menu:org.eclipse.ui.main.menu?after=additions">
+         <menu
+               id="lintra.evaluation.menus.sampleMenu"
+               label="Sample Menu"
+               mnemonic="M">
+            <command
+                  commandId="lintra.evaluation.commands.compileTestCases"
+                  id="lintra.evaluation.menus.sampleCommand"
+                  mnemonic="S">
+            </command>
+         </menu>
+      </menuContribution>
+
+      <menuContribution
+            locationURI="toolbar:org.eclipse.ui.main.toolbar?after=additions">
+         <toolbar
+               id="lintra.evaluation.toolbars.sampleToolbar">
+            <command
+                  commandId="lintra.evaluation.commands.compileTestCases"
+                  icon="icons/sample.gif"
+                  id="lintra.evaluation.toolbars.sampleCommand"
+                  tooltip="Compile all tests">
+            </command>
+         </toolbar>
+      </menuContribution>
+
+      <menuContribution
+            locationURI="toolbar:org.eclipse.ui.main.toolbar?after=additions">
+         <toolbar
+               id="lintra.evaluation.toolbars.sampleToolbar">
+            <command
+                  commandId="lintra.evaluation.commands.compileEvaluation"
+                  icon="icons/sample.gif"
+                  id="lintra.evaluation.toolbars.compileEvaluation"
+                  tooltip="Compile evaluation">
+            </command>
+         </toolbar>
+      </menuContribution>
+
+      
+   </extension>
+
+</plugin>

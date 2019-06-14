@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="ASCII"?>
+<classm1:Class
+    xmi:version="2.0"
+    xmlns:xmi="http://www.omg.org/XMI"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xmlns:classm1="http://class1"
+    xsi:schemaLocation="http://class1 ../metamodels/class1.ecore"
+    name="car">
+  <attrs name="color"
+      type="/"/>
+  <attrs name="plate"
+      isKey="true"
+      type="/"/>
+</classm1:Class>

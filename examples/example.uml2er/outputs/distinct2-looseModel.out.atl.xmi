@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="ASCII"?>
+<ER:ERModel xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:ER="http://er">
+  <entities name="class_1_1">
+    <features xsi:type="ER:Attribute" name="prop_c1_1_j" type="String"/>
+    <features xsi:type="ER:StrongReference" name="prop_c1_1_j" type="//@entities.0"/>
+  </entities>
+  <entities name="class_1_4">
+    <features xsi:type="ER:Attribute" name="prop_c1_4_j" type="String"/>
+    <features xsi:type="ER:Attribute" name="prop_c1_4_j" type=""/>
+    <features xsi:type="ER:WeakReference" name="prop_c1_4_j" type="//@entities.0"/>
+  </entities>
+</ER:ERModel>

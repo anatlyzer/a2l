@@ -1,0 +1,44 @@
+-- @project example.uml2er=example.uml2er.uml2er_original
+-- @path SimpleUML=/example.uml2er/Metamodels/SimpleUml.ecore
+-- @path ER=/example.uml2er/Metamodels/ER.ecore
+
+module UML2ER;
+create OUT : ER from IN : SimpleUML;
+
+rule Package {
+	from
+		s: SimpleUML!Package
+	to
+		t: ER!ERModel (
+			entities <- s.ownedElements	
+		)
+}
+
+helper context SimpleUML!Class def: allClasses : Sequence(SimpleUML!Class) =
+ self.superClasses ->
+ 	iterate(e; acc : Sequence(SimpleUML!Class) = Sequence {} | acc->
+ 		union(Set{e})->
+ 			union(e.allClasses) );
+
+rule Class {
+	from s: SimpleUML!Class
+	to  t: ER!EntityType (
+			name <- s.name,
+			features <- attributes, 
+			features <- weakReferences, 
+			features <- strongReferences ),	
+		attributes : distinct ER!Attribute foreach(a in s.allClasses.including(s).flatten()
+												   -> collect(e | e.ownedProperty).flatten()
+												   -> select (e | not e.primitiveType.oclIsUndefined())) (
+				name <- a.name,
+				type <- a.primitiveType ),
+		weakReferences : distinct ER!WeakReference foreach(a in s.allClasses.including(s).flatten()
+														   -> collect(e | e.ownedProperty).flatten() 
+														   -> select (e | not e.complexType.oclIsUndefined() and not e.isContainment)) (
+				name <- a.name,
+				type <- a.complexType ),
+		strongReferences : distinct ER!StrongReference foreach(a in s.allClasses.including(s).flatten()
+															   -> collect(e | e.ownedProperty).flatten() 
+															   -> select (e | not e.complexType.oclIsUndefined() and e.isContainment)) (
+				name <- a.name,
+				type <- a.complexType )	}

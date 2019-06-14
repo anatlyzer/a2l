@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<genmodel:GenModel xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:ecore="http://www.eclipse.org/emf/2002/Ecore"
+    xmlns:genmodel="http://www.eclipse.org/emf/2002/GenModel" modelDirectory="/a2l.tests.vmtesting.emf/src-gen" modelPluginID="a2l.tests.vmtesting.emf"
+    modelName="XML" rootExtendsClass="org.eclipse.emf.ecore.impl.MinimalEObjectImpl$Container"
+    importerID="org.eclipse.emf.importer.ecore" complianceLevel="8.0" copyrightFields="false"
+    operationReflection="true" importOrganizing="true">
+  <foreignModel>XML.ecore</foreignModel>
+  <genPackages prefix="PrimitiveTypes" basePackage="a2l.tests.vmtesting.emf.metamodels.xml.PrimitiveTypes"
+      disposableProviderFactory="true" ecorePackage="XML.ecore#/0">
+    <genDataTypes ecoreDataType="XML.ecore#/0/Boolean"/>
+    <genDataTypes ecoreDataType="XML.ecore#/0/Integer"/>
+    <genDataTypes ecoreDataType="XML.ecore#/0/String"/>
+  </genPackages>
+  <genPackages prefix="XML" basePackage="a2l.tests.vmtesting.emf.metamodels.xml.XML"
+      disposableProviderFactory="true" ecorePackage="XML.ecore#/1">
+    <genClasses image="false" ecoreClass="XML.ecore#/1/Node">
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute XML.ecore#/1/Node/startLine"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute XML.ecore#/1/Node/startColumn"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute XML.ecore#/1/Node/endLine"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute XML.ecore#/1/Node/endColumn"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute XML.ecore#/1/Node/name"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute XML.ecore#/1/Node/value"/>
+      <genFeatures property="None" notify="false" createChild="false" ecoreFeature="ecore:EReference XML.ecore#/1/Node/parent"/>
+    </genClasses>
+    <genClasses ecoreClass="XML.ecore#/1/Attribute"/>
+    <genClasses ecoreClass="XML.ecore#/1/Text"/>
+    <genClasses ecoreClass="XML.ecore#/1/Element">
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference XML.ecore#/1/Element/children"/>
+    </genClasses>
+    <genClasses ecoreClass="XML.ecore#/1/Root"/>
+  </genPackages>
+</genmodel:GenModel>

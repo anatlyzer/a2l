@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xmi:XMI xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xmlns:ecore="http://www.eclipse.org/emf/2002/Ecore">
+  <ecore:EPackage name="proceedings" nsURI="proceedings" nsPrefix="proceedings">
+    <eClassifiers xsi:type="ecore:EClass" name="BibTeXFile">
+      <eStructuralFeatures xsi:type="ecore:EAttribute" name="name" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+      <eStructuralFeatures xsi:type="ecore:EReference" name="entry" upperBound="-1"
+          eType="#/0/BibTeXEntry" containment="true" eOpposite="#/0/BibTeXEntry/file"/>
+    </eClassifiers>
+    <eClassifiers xsi:type="ecore:EClass" name="BibTeXEntry">
+      <eStructuralFeatures xsi:type="ecore:EAttribute" name="title" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+      <eStructuralFeatures xsi:type="ecore:EReference" name="file" lowerBound="1"
+          eType="#/0/BibTeXFile" eOpposite="#/0/BibTeXFile/entry"/>
+    </eClassifiers>
+    <eClassifiers xsi:type="ecore:EClass" name="Proc" eSuperTypes="#/0/BibTeXEntry">
+      <eStructuralFeatures xsi:type="ecore:EAttribute" name="yearE" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EInt"/>
+      <eStructuralFeatures xsi:type="ecore:EAttribute" name="yearP" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EInt"/>
+      <eStructuralFeatures xsi:type="ecore:EReference" name="editor" lowerBound="1"
+          upperBound="-1" eType="#/0/Person" eOpposite="#/0/Person/proc"/>
+    </eClassifiers>
+    <eClassifiers xsi:type="ecore:EClass" name="InProc" eSuperTypes="#/0/BibTeXEntry">
+      <eStructuralFeatures xsi:type="ecore:EAttribute" name="booktitle" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+      <eStructuralFeatures xsi:type="ecore:EReference" name="author" lowerBound="1"
+          upperBound="-1" eType="#/0/Person" eOpposite="#/0/Person/inProc"/>
+    </eClassifiers>
+    <eClassifiers xsi:type="ecore:EClass" name="Person">
+      <eStructuralFeatures xsi:type="ecore:EAttribute" name="name" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+      <eStructuralFeatures xsi:type="ecore:EReference" name="proc" upperBound="-1"
+          eType="#/0/Proc" eOpposite="#/0/Proc/editor"/>
+      <eStructuralFeatures xsi:type="ecore:EReference" name="inProc" upperBound="-1"
+          eType="#/0/InProc" eOpposite="#/0/InProc/author"/>
+    </eClassifiers>
+  </ecore:EPackage>
+</xmi:XMI>

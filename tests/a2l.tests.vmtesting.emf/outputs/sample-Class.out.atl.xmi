@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="ASCII"?>
+<xmi:XMI xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:Ecore2Class_Class="Ecore2Class_Class">
+  <Ecore2Class_Class:Class name="Family">
+    <attr name="name" type="/2"/>
+    <attr name="members" multiValued="true" type="/1"/>
+  </Ecore2Class_Class:Class>
+  <Ecore2Class_Class:Class name="Person">
+    <attr name="firstName" type="/2"/>
+    <attr name="closestFriend" type="/1"/>
+    <attr name="emailAddresses" multiValued="true" type="/2"/>
+  </Ecore2Class_Class:Class>
+  <Ecore2Class_Class:DataType name="String"/>
+  <Ecore2Class_Class:DataType name="Integer"/>
+</xmi:XMI>

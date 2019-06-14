@@ -1,0 +1,68 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<genmodel:GenModel xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:ecore="http://www.eclipse.org/emf/2002/Ecore"
+    xmlns:genmodel="http://www.eclipse.org/emf/2002/GenModel" modelDirectory="/a2l.tests.vmtesting.emf/src-gen" modelPluginID="a2l.tests.vmtesting.emf"
+    modelName="DSLModel" rootExtendsClass="org.eclipse.emf.ecore.impl.MinimalEObjectImpl$Container"
+    importerID="org.eclipse.emf.importer.ecore" complianceLevel="8.0" copyrightFields="false"
+    operationReflection="true" importOrganizing="true">
+  <foreignModel>DSLModel.ecore</foreignModel>
+  <genPackages prefix="DSLModel" basePackage="a2l.tests.vmtesting.emf.metamodels"
+      disposableProviderFactory="true" ecorePackage="DSLModel.ecore#/">
+    <genClasses ecoreClass="DSLModel.ecore#//Model">
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute DSLModel.ecore#//Model/domainModel"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference DSLModel.ecore#//Model/contents"/>
+    </genClasses>
+    <genClasses image="false" ecoreClass="DSLModel.ecore#//Element">
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute DSLModel.ecore#//Element/type"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute DSLModel.ecore#//Element/id"/>
+    </genClasses>
+    <genClasses ecoreClass="DSLModel.ecore#//ModelElement">
+      <genFeatures property="None" notify="false" createChild="false" ecoreFeature="ecore:EReference DSLModel.ecore#//ModelElement/parentLink"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference DSLModel.ecore#//ModelElement/properties"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference DSLModel.ecore#//ModelElement/embeddinglinks"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference DSLModel.ecore#//ModelElement/referencelinks"/>
+    </genClasses>
+    <genClasses ecoreClass="DSLModel.ecore#//ModelElementLink">
+      <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference DSLModel.ecore#//ModelElementLink/links"/>
+    </genClasses>
+    <genClasses ecoreClass="DSLModel.ecore#//EmbeddingLink">
+      <genFeatures property="None" notify="false" createChild="false" ecoreFeature="ecore:EReference DSLModel.ecore#//EmbeddingLink/owner"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference DSLModel.ecore#//EmbeddingLink/elements"/>
+    </genClasses>
+    <genClasses ecoreClass="DSLModel.ecore#//ReferenceLink">
+      <genFeatures property="None" notify="false" createChild="false" ecoreFeature="ecore:EReference DSLModel.ecore#//ReferenceLink/owner"/>
+      <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference DSLModel.ecore#//ReferenceLink/modelElement"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference DSLModel.ecore#//ReferenceLink/roles"/>
+    </genClasses>
+    <genClasses image="false" ecoreClass="DSLModel.ecore#//NamedElement">
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute DSLModel.ecore#//NamedElement/name"/>
+    </genClasses>
+    <genClasses ecoreClass="DSLModel.ecore#//Property">
+      <genFeatures property="None" notify="false" createChild="false" ecoreFeature="ecore:EReference DSLModel.ecore#//Property/owner"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference DSLModel.ecore#//Property/value"/>
+    </genClasses>
+    <genClasses ecoreClass="DSLModel.ecore#//Role">
+      <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference DSLModel.ecore#//Role/element"/>
+      <genFeatures property="None" notify="false" createChild="false" ecoreFeature="ecore:EReference DSLModel.ecore#//Role/owner"/>
+    </genClasses>
+    <genClasses image="false" ecoreClass="DSLModel.ecore#//Value"/>
+    <genClasses ecoreClass="DSLModel.ecore#//IntegerValue">
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute DSLModel.ecore#//IntegerValue/value"/>
+    </genClasses>
+    <genClasses ecoreClass="DSLModel.ecore#//DoubleValue">
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute DSLModel.ecore#//DoubleValue/value"/>
+    </genClasses>
+    <genClasses ecoreClass="DSLModel.ecore#//BooleanValue">
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute DSLModel.ecore#//BooleanValue/value"/>
+    </genClasses>
+    <genClasses ecoreClass="DSLModel.ecore#//StringValue">
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute DSLModel.ecore#//StringValue/value"/>
+    </genClasses>
+    <nestedGenPackages prefix="DSLModelPrimitiveTypes" disposableProviderFactory="true"
+        ecorePackage="DSLModel.ecore#//DSLModelPrimitiveTypes">
+      <genDataTypes ecoreDataType="DSLModel.ecore#//DSLModelPrimitiveTypes/Boolean"/>
+      <genDataTypes ecoreDataType="DSLModel.ecore#//DSLModelPrimitiveTypes/Integer"/>
+      <genDataTypes ecoreDataType="DSLModel.ecore#//DSLModelPrimitiveTypes/String"/>
+      <genDataTypes ecoreDataType="DSLModel.ecore#//DSLModelPrimitiveTypes/Double"/>
+    </nestedGenPackages>
+  </genPackages>
+</genmodel:GenModel>

@@ -1,0 +1,13 @@
+Manifest-Version: 1.0
+Bundle-ManifestVersion: 2
+Bundle-Name: Lintra support for EMF
+Bundle-SymbolicName: lintra.emf
+Bundle-Version: 1.0.0.qualifier
+Bundle-RequiredExecutionEnvironment: JavaSE-1.8
+Require-Bundle: org.eclipse.core.runtime,
+ org.eclipse.emf.ecore;visibility:=reexport,
+ org.eclipse.emf.ecore.xmi;bundle-version="2.12.0",
+ lintra2.lib
+Export-Package: a2l.runtime.emf,
+ lintra.emf,
+ lintra.lingen

@@ -1,0 +1,17 @@
+	public Resource postprocessing() throws BlackboardException {
+		for (IPendingTask tasks : pendingTasks) {
+			tasks.execute();
+		}
+		
+		ResourceSet rs = new ResourceSetImpl();
+		Resource res = rs.createResource(URI.createFileURI("test.xmi"));
+		Collection objects = _area_UCD.read(_area_UCD.size());
+		for (Object object : objects) {
+			EObject obj = (EObject) object;
+			if ( obj.eContainer() == null ) {
+				res.getContents().add(obj);
+			}
+		}
+		
+		return res;
+	}	

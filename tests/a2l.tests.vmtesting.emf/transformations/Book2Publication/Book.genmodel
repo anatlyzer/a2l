@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<genmodel:GenModel xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:ecore="http://www.eclipse.org/emf/2002/Ecore"
+    xmlns:genmodel="http://www.eclipse.org/emf/2002/GenModel" modelDirectory="/a2l.tests.vmtesting.emf/src-gen" modelPluginID="a2l.tests.vmtesting.emf"
+    modelName="Book" rootExtendsClass="org.eclipse.emf.ecore.impl.MinimalEObjectImpl$Container"
+    importerID="org.eclipse.emf.importer.ecore" complianceLevel="8.0" copyrightFields="false"
+    operationReflection="true" importOrganizing="true">
+  <foreignModel>Book.ecore</foreignModel>
+  <genPackages prefix="PrimitiveTypes" basePackage="a2l.tests.vmtesting.emf.metamodels"
+      disposableProviderFactory="true" ecorePackage="Book.ecore#/0">
+    <genDataTypes ecoreDataType="Book.ecore#/0/Integer"/>
+    <genDataTypes ecoreDataType="Book.ecore#/0/String"/>
+    <genDataTypes ecoreDataType="Book.ecore#/0/Boolean"/>
+  </genPackages>
+  <genPackages prefix="Book" basePackage="a2l.tests.vmtesting.emf.metamodels" disposableProviderFactory="true"
+      ecorePackage="Book.ecore#/1">
+    <genClasses ecoreClass="Book.ecore#/1/Book">
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute Book.ecore#/1/Book/title"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference Book.ecore#/1/Book/chapters"/>
+    </genClasses>
+    <genClasses ecoreClass="Book.ecore#/1/Chapter">
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute Book.ecore#/1/Chapter/title"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute Book.ecore#/1/Chapter/nbPages"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute Book.ecore#/1/Chapter/author"/>
+      <genFeatures property="None" notify="false" createChild="false" ecoreFeature="ecore:EReference Book.ecore#/1/Chapter/book"/>
+    </genClasses>
+  </genPackages>
+</genmodel:GenModel>

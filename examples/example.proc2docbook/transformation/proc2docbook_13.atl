@@ -1,0 +1,24 @@
+-- @atlcompiler lintra
+
+-- @path MM=/example.proc2docbook/metamodels/Proceedings.ecore
+-- @path MM1=/example.proc2docbook/metamodels/DocBook.ecore
+
+module Proc2DocBook;
+create OUT : MM1 from IN : MM;
+
+helper context MM!Proc def : editors() : String =
+	self.editor->iterate(ed; s : String = '' | s.concat(ed.name+', '));
+
+
+rule proc2book {
+	from
+		p : MM!Proc
+	to 
+		b : MM1!Book (
+			title <- p.title,
+			articles <- inp
+		),
+		inp : MM1!Article (
+			title <- 'Prelude. Editored by: '.concat(p.editors())
+		)
+}

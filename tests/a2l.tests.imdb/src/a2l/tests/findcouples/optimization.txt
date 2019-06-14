@@ -1,0 +1,47 @@
+	Cache<Person, javaslang.collection.Set<Movie>> personMovies = CacheBuilder.newBuilder()
+				.concurrencyLevel(12).<Person, javaslang.collection.Set<Movie>>build();
+				// weakKeys, weakValues
+	
+	public boolean helper_global_areCouple(Person p1, Person p2) throws BlackboardException {
+		javaslang.collection.List<Movie> get7;
+		javaslang.collection.Set<Movie> op8;
+		javaslang.collection.List<Movie> get9;
+		javaslang.collection.Set<Movie> op10;
+		javaslang.collection.Set<Movie> op11;
+		int op12;
+		int tmp13;
+		boolean tmp14;/*
+						 * 22:64-22:126:
+						 * p1.movies->asSet()->intersection(p2.movies->asSet())-
+						 * >size()
+						 */
+		/* 22:65-22:117: p1.movies->asSet()->intersection(p2.movies->asSet()) */
+		/* 22:65-22:83: p1.movies->asSet() */
+		/* 22:65-22:74: p1.movies */
+		//get7 = javaslang.collection.List.ofAll(p1.getMovies());
+		//op8 = javaslang.collection.HashSet.ofAll(get7);
+
+		
+		try {
+			op8 = personMovies.get(p1, () -> {
+				return javaslang.collection.HashSet.ofAll(p1.getMovies());
+			});
+		} catch (ExecutionException e) {
+			throw new RuntimeException(e);
+		}
+		
+
+
+		/* 22:98-22:116: p2.movies->asSet() */
+		/* 22:98-22:107: p2.movies */
+//		get9 = javaslang.collection.List.ofAll(p2.getMovies());
+//
+//		op10 = javaslang.collection.HashSet.ofAll(get9);
+
+		try {
+			op10 = personMovies.get(p2, () -> {
+				return javaslang.collection.HashSet.ofAll(p2.getMovies());
+			});
+		} catch (ExecutionException e) {
+			throw new RuntimeException(e);
+		}

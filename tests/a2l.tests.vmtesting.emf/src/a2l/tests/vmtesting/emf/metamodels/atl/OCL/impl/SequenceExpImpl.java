@@ -1,0 +1,37 @@
+/**
+ */
+package a2l.tests.vmtesting.emf.metamodels.atl.OCL.impl;
+
+import a2l.tests.vmtesting.emf.metamodels.atl.OCL.OCLPackage;
+import a2l.tests.vmtesting.emf.metamodels.atl.OCL.SequenceExp;
+
+import org.eclipse.emf.ecore.EClass;
+
+/**
+ * <!-- begin-user-doc -->
+ * An implementation of the model object '<em><b>Sequence Exp</b></em>'.
+ * <!-- end-user-doc -->
+ *
+ * @generated
+ */
+public class SequenceExpImpl extends CollectionExpImpl implements SequenceExp {
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	protected SequenceExpImpl() {
+		super();
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
+	protected EClass eStaticClass() {
+		return OCLPackage.Literals.SEQUENCE_EXP;
+	}
+
+} //SequenceExpImpl

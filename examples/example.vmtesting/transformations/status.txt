@@ -1,0 +1,30 @@
+	SpreadsheetMLSimplified2Trace 	 	
+	Ecore2Class 	 	
+[X]	Families2Persons 			
+	KM32DSL 						
+	XML2DSLModel 					
+	Trace2PerformanceMetrics  	
+	XML2DSL 	
+	DSLModel2KM2  	
+	UniqueLazyRule 	
+	XML2Book 	
+	DSL2XML 	
+	Maven2XML 	 	
+	Ant2Maven 	
+	KM32ATL_KM22MM
+	UML2Relational
+	Book2Publication
+	DSL2KM3 	
+	Relational2UML 
+	BibTeX2DocBook  
+	FlattenTest 	 	Collections implementation completed on 12/12/2007.
+	AssertionModification 	
+	XML2Ant 	 	
+	Class2Relational 	
+	ATL2Problem 	
+	
+
+* XML2DSLModel:
+  Can we implement searches like this: DSL!DomainModel.allInstances()->select( e | e.oclIsTypeOf(DSL!DomainModel))->first().name;
+  efficiently by being smart (e.g., replace select->first with any and let any has a special
+  or a native Lintra implementation?). 
