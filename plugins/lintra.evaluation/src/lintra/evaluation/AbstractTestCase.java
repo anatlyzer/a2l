@@ -186,13 +186,8 @@ public abstract class AbstractTestCase {
 		
 		// IEObjectMatcher fallBackMatcher = DefaultMatchEngine.createDefaultEObjectMatcher(UseIdentifiers.NEVER);		
 		IEObjectMatcher fallBackMatcher = DefaultMatchEngine.createDefaultEObjectMatcher(idUSE);
-		IEObjectMatcher customIDMatcher = new IdentifierEObjectMatcher(fallBackMatcher, new com.google.common.base.Function<EObject, String>() {
-
-			@Override
-			public String apply(EObject arg0) {
-				return idFunction.apply(arg0);
-			}
-			
+		IEObjectMatcher customIDMatcher = new IdentifierEObjectMatcher(fallBackMatcher, (arg0) -> {
+				return idFunction.apply(arg0);			
 		});
 
 		IComparisonFactory comparisonFactory = new DefaultComparisonFactory(new DefaultEqualityHelperFactory());
