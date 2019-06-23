@@ -156,3 +156,5 @@ tests/a2l.tests.vmtesting.emf/src-gen/
 tests/a2l.tests.java2uml/inputs/*.xmi
 tests/a2l.tests.dblp/inputs/*.xmi
 tests/a2l.tests.imdb/inputs/*.xmi
+
+tests/a2l.tests.vmtesting.emf/outputs/
