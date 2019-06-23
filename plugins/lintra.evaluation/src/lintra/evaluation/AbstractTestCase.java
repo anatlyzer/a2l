@@ -107,7 +107,7 @@ public abstract class AbstractTestCase {
 		return input;
 	}
 
-	public static Resource load(String inXmiPath) {
+	protected Resource load(String inXmiPath) {
 		double time0 = System.currentTimeMillis();
 
 		ResourceSet rs = new ResourceSetImpl();

@@ -1,8 +1,12 @@
--- @path Relational=/example.vmtesting/transformations/UML2Relational/relational.ecore
 -- @nsURI UML=http://www.eclipse.org/uml2/2.1.0/UML
+-- @path Relational=/a2l.tests.vmtesting.emf/transformations/Relational2UML/relational.ecore
 
--- @project example.vmtesting=example.vmtesting.uml2relational
+-- @project a2l.tests.vmtesting.emf=a2l.tests.vmtesting.emf.uml2relational
+
+-- @genpath Relational=/a2l.tests.vmtesting.emf/transformations/Relational2UML/relational.genmodel
+
 -- @driver UML=emf-uml
+-- @driver Relational=emf
 
 module Class2Relational;
 create OUT : Relational from IN : UML;
