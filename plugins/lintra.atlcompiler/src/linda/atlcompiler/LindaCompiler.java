@@ -211,8 +211,9 @@ public abstract class LindaCompiler extends BaseCompiler {
 //		// Generate fields, and the constructor. 
 //		// This is not the cleanest way, only takes into account 1 source, 1 target
 		String fieldsText = "a2l.runtime.InputExtent inputExtent;" +
-				globalContextClassQName + " globalContext;" +
-				"java.util.Map<Object, Object> trace = new java.util.HashMap<Object, Object>();";
+				globalContextClassQName + " globalContext;\n" +
+				"a2l.runtime.GlobalTrace.PartialTrace trace = null;";
+				//"java.util.Map<Object, Object> trace = new java.util.HashMap<Object, Object>();";
 
 		
 //		String fieldsConstructor = "IArea trgArea, cachingArea;";
@@ -1240,16 +1241,20 @@ public abstract class LindaCompiler extends BaseCompiler {
 		
 		resolveObjectWithRules(stms, self.getResolveTempResolvedBy(), inElement, (r) -> {
 			OutPatternElement ope = getResolveTempOutpatternElement(r, opeName);
-			JTypeRef opeType = typ.createMetaTypeImplRef((Metaclass) ope.getInferredType());
-			int i = ope.getOutPattern().getElements().indexOf(ope);
 			
 			env.bind(ope, newVar);
+			
+			// Why is this???
 			env.bind(r.getInPattern().getElements().get(0), inElement);
 			
 			IMetaDriver driver = env.getDriver(ope);
 
-			List<JStatement> stmsResolveTemp = driver.compileObjectCreation((Metaclass) ope.getInferredType(), newVar, ctx());
-			stmsResolveTemp.addAll(driver.compileTraceGeneration(r, r.getInPattern().getElements().get(0), ope, ctx()) );
+			
+			// Pass the expression to be resolved (inElement)
+			// The input element of the resolving rule
+			// The output element of the resolving rule
+			List<JStatement> stmsResolveTemp = driver.compileResolveTemp(self, inElement, r, ope, newVar, ctx());
+			
 			
 			return stmsResolveTemp;
 			

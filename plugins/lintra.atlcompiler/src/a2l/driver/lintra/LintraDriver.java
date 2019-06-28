@@ -29,6 +29,7 @@ import anatlyzer.atlext.ATL.InPatternElement;
 import anatlyzer.atlext.ATL.MatchedRule;
 import anatlyzer.atlext.ATL.OutPatternElement;
 import anatlyzer.atlext.ATL.Rule;
+import anatlyzer.atlext.ATL.RuleWithPattern;
 import anatlyzer.atlext.OCL.NavigationOrAttributeCallExp;
 import anatlyzer.atlext.OCL.OclExpression;
 import anatlyzer.atlext.OCL.OperationCallExp;
@@ -458,6 +459,17 @@ public class LintraDriver implements IMetaDriver {
 			return "a2l.runtime.lintra.LintraOutputModel";
 		}
 		
+	}
+
+	@Override
+	public List<JStatement> compileResolveTemp(OperationCallExp resolveTemp, JVariableDeclaration inElement, RuleWithPattern r,
+			OutPatternElement ope, JVariableDeclaration newVar, ICompilationContext ctx) {
+
+		
+		List<JStatement> stmsResolveTemp = compileObjectCreation((Metaclass) ope.getInferredType(), newVar, ctx);
+		stmsResolveTemp.addAll(compileTraceGeneration(r, r.getInPattern().getElements().get(0), ope, ctx) );
+		
+		return null;
 	}
 
 	

@@ -16,6 +16,7 @@ import anatlyzer.atlext.ATL.InPatternElement;
 import anatlyzer.atlext.ATL.MatchedRule;
 import anatlyzer.atlext.ATL.OutPatternElement;
 import anatlyzer.atlext.ATL.Rule;
+import anatlyzer.atlext.ATL.RuleWithPattern;
 import anatlyzer.atlext.OCL.NavigationOrAttributeCallExp;
 import anatlyzer.atlext.OCL.OclExpression;
 import anatlyzer.atlext.OCL.OperationCallExp;
@@ -113,6 +114,9 @@ public interface IMetaDriver {
 	// tgtElemsCol can be null if there is no need for it
 	public JStatement compileMultiValuedBindingResolution(Binding binding, JVariableDeclaration outVar, JVariableDeclaration inputIds, JVariableDeclaration tgtElemsCol, ICompilationContext ctx);
 
+	public List<JStatement> compileResolveTemp(OperationCallExp resolveTemp, JVariableDeclaration inElement, RuleWithPattern r,
+			OutPatternElement ope, JVariableDeclaration newVar, ICompilationContext ctx);
+
 	public boolean checkIsJavaOperation(OperationCallExp self);
 
 	/**
@@ -152,6 +156,7 @@ public interface IMetaDriver {
 	}
 
 	public String toBinding(JVariableDeclaration loopVar, MatchedRule r);
+
 
 	
 }

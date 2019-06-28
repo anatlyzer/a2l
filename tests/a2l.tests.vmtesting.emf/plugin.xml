@@ -320,4 +320,20 @@
             genModel="transformations/Relational2UML/relational.genmodel"/>
    </extension>
 
+   <extension point="org.eclipse.emf.ecore.generated_package">
+      <!-- @generated ABCD -->
+      <package
+            uri="http://anatlyzer/test/abcd"
+            class="a2l.tests.simple.emf.abcd.AbcdPackage"
+            genModel="metamodels/simple/ABCD.genmodel"/>
+   </extension>
+
+   <extension point="org.eclipse.emf.ecore.generated_package">
+      <!-- @generated WXYZ -->
+      <package
+            uri="http://anatlyzer/test/wxyz"
+            class="a2l.tests.simple.emf.wxyz.WxyzPackage"
+            genModel="metamodels/simple/WXYZ.genmodel"/>
+   </extension>
+
 </plugin>

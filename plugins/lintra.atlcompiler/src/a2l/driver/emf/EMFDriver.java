@@ -29,6 +29,7 @@ import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.EPackage;
 import org.eclipse.emf.ecore.EReference;
 import org.eclipse.emf.ecore.EStructuralFeature;
+import org.eclipse.emf.ecore.util.EcoreUtil;
 
 import a2l.driver.DriverConfiguration;
 import a2l.driver.ICollectionsDriver;
@@ -50,8 +51,10 @@ import anatlyzer.atlext.ATL.Binding;
 import anatlyzer.atlext.ATL.Helper;
 import anatlyzer.atlext.ATL.InPatternElement;
 import anatlyzer.atlext.ATL.MatchedRule;
+import anatlyzer.atlext.ATL.OutPattern;
 import anatlyzer.atlext.ATL.OutPatternElement;
 import anatlyzer.atlext.ATL.Rule;
+import anatlyzer.atlext.ATL.RuleWithPattern;
 import anatlyzer.atlext.OCL.NavigationOrAttributeCallExp;
 import anatlyzer.atlext.OCL.OclExpression;
 import anatlyzer.atlext.OCL.OperationCallExp;
@@ -202,7 +205,16 @@ public class EMFDriver implements IMetaDriver {
 	public String getClassQName(EClass klass) {
 		return ifGenClass(klass, GenClass::getQualifiedInterfaceName, () -> klass.getInstanceClass().getCanonicalName());
 	}
-	 
+
+	public String getClassQNameImpl(EClass klass) {
+		// return ifGenClass(klass, GenClass::getGeneratedInstanceClassFlag, () -> klass.getInstanceClass().getCanonicalName());		
+		String qname = getClassQName(klass);
+		int idx = qname.lastIndexOf(".");
+		// TODO: There must be a place in the genmodel to get this value, but I can't find it
+		return qname.substring(0, idx) + ".impl." + qname.substring(idx + 1, qname.length()) + "Impl";
+	}
+
+	
 	@Override
 	public String getEnumName(EEnum e) {
 		return e.getName();
@@ -334,12 +346,65 @@ public class EMFDriver implements IMetaDriver {
 			tclass.setExtra(tclass.getExtra() + "\n" + utilities + "\n" + post);
 
 			generateTaskClasses(ctx, tclass);
+			generateResolveTempClasses(ctx, tclass);
 		}
 
 		private static String getWriteMethodName(ModelInfo m) {
 			return "write" + m.getModelName();
 		}
 
+		protected void generateResolveTempClasses(ICompilationContext ctx, JClass tclass) {
+			StringBuilder resolveTempClasses = new StringBuilder();
+			
+			Set<EClass> alreadyAdded = new HashSet<EClass>();
+			
+			ATLModel model = ctx.getEnv().getAnalysis().getATLModel();
+			for (OperationCallExp op : model.allObjectsOf(OperationCallExp.class)) {
+				if (op.getOperationName().equals("resolveTemp")) {
+					Type t = op.getInferredType();
+					if (t instanceof Metaclass) {
+						Metaclass m = (Metaclass) t;
+						
+						if (alreadyAdded.contains(((Metaclass) t).getKlass()))
+							continue;
+											
+						IMetaDriver driver = ctx.getEnv().getDriver(op);
+						if ( ! (driver instanceof EMFDriver))
+							// This is another driver job
+							continue;
+						
+						EMFDriver emf = (EMFDriver) driver;
+						String qname = emf.getClassQNameImpl(m.getKlass());
+						
+						String className = getResolveTempClass(m.getKlass());
+						resolveTempClasses.append("private static class " + className + " extends " + qname + " implements a2l.runtime.ResolveTempObject {");
+						
+
+						resolveTempClasses.append("private final Object source;");
+						resolveTempClasses.append("private final String opeName;");
+
+						resolveTempClasses.append("public " + className + "(Object source, String opeName) {");
+						resolveTempClasses.append("this.source = source;");
+						resolveTempClasses.append("this.opeName = opeName;");
+						resolveTempClasses.append("}");
+
+						resolveTempClasses.append("@Override public Object getSource() { return source; }");
+						resolveTempClasses.append("@Override public String getOpeName() { return opeName; }");
+						
+						resolveTempClasses.append("}\n");
+						
+						alreadyAdded.add(m.getKlass());
+					}
+				}
+			}
+			
+			tclass.setExtra(tclass.getExtra() + "\n" + resolveTempClasses.toString());
+		}
+		
+		public static String getResolveTempClass(EClass klass) {
+			return klass.getName() + "_ResolveTemp";			
+		}
+		
 		protected void generateTaskClasses(ICompilationContext ctx, JClass tclass) {
 			// This check is to avoid problems in the interplay of UMLDriver and EMFDriver
 			if ( ! tclass.getExtra().contains("interface IPendingTask") ) {			
@@ -369,7 +434,7 @@ public class EMFDriver implements IMetaDriver {
 				
 				String objType = r.isMany() ? "Collection<Object>" : "Object";
 				
-				String klass = "class " + className + " implements IPendingTask { " + "\n";
+				String klass = "final class " + className + " implements IPendingTask { " + "\n";
 				klass += "private final " + tgtTypeName + " tgt;" + "\n";
 				klass += "private final " + objType + " objId;" + "\n";
 				klass += "private final a2l.runtime.IModel area;" + "\n";
@@ -393,26 +458,53 @@ public class EMFDriver implements IMetaDriver {
 					//textNoTgt = "if (tgtElems == null) {" + textNoTgt + "}";
 					String textNoTgt = "ArrayList<Object> result = new ArrayList<>(objId.size());" + 
 							"for (Object object : objId) {"
-							+ "Object tgt = globalTrace.get(object);" 
+							+ "Object tgt = getTrace(object, globalTrace);" 
 							+ "  if (tgt instanceof " + expectedType + ") { result.add(tgt); }"
 							+ "}\n" + generateGetter("tgt", r) + ".addAll(" + cast + "result);";
 					textNoTgt = "if (tgtElems == null) {" + textNoTgt + "}";
 					
 					String withTgtAlgorithm = "ArrayList<Object> result = new ArrayList<>(objId.size());"
 					+ "for (Object object : objId) {"
-					+ "  if (tgtElems.contains(object)) { result.add(object); }"
-					+ "  else { Object tgt = globalTrace.get(object); if (tgt instanceof " + expectedType + ") { result.add(tgt); } }"
+					
+							
+					+ "  if (tgtElems.contains(object)) { result.add(getTargetResolveTempOrSame(object, globalTrace)); }"
+					+ "  else { "
+					+ "         Object tgt = getTrace(object, globalTrace); "
+					+ "         if (tgt instanceof " + expectedType + ") { result.add(tgt); } "
+					+ "  }"
 					+ "}"
 					+ generateGetter("tgt", r) + ".addAll(" + cast + "result);";
+
 					String textTgt = "else {" + withTgtAlgorithm + "} ";
 					
 					klass += textNoTgt + textTgt;
 				} else {
 					// String cast = "(" + getInterfaceQNameAux((EClass) r.getEType()) + ")";
 					String cast = "(" + expectedType + ")";
-					klass += getSetterExpression("tgt", r) + "(" + cast + "globalTrace.get(objId)" + ");";
+					klass += "if (tgtElems != null && tgtElems.contains(object)) { ";
+					klass +=    getSetterExpression("tgt", r) + "(" + cast + "getTargetResolveTempOrSame(object, globalTrace)" + ");";
+					klass += " } else {";
+					klass += getSetterExpression("tgt", r) + "(" + cast + "getTrace(objId, globalTrace))" + ");";
+					klass += "}";
 				}
 				klass += "}" + "\n";
+				
+				klass += "private final Object getTrace(Object object, a2l.runtime.GlobalTrace globalTrace) {"				
+						+ " return globalTrace.get(object);"
+				+ "}"
+				+ "\n";
+				
+				klass += "private final Object getTargetResolveTempOrSame(Object object, a2l.runtime.GlobalTrace globalTrace) {"				
+						// TODO: Add the ResolveTemp check only when really needed
+						+ "         if (object instanceof a2l.runtime.ResolveTempObject) {"
+						+ "             a2l.runtime.ResolveTempObject rtmp = (a2l.runtime.ResolveTempObject) object;" 
+						+ "             return globalTrace.getSecondary(rtmp.getSource(), rtmp.getOpeName());"
+						+ "         }"
+						+ " return object;"
+				+ "}"
+				+ "\n";
+				
+				
 				klass += "}" + "\n";
 
 				// Add the class
@@ -557,7 +649,17 @@ public class EMFDriver implements IMetaDriver {
 			JVariableDeclaration inVar  = ctx.getEnv().getVar(inPatternElement);
 			JVariableDeclaration outVar = ctx.getEnv().getVar(ope);
 		
-			stms.add( createText("this.trace.put(" + inVar.getName() + "," + outVar.getName() + ")"));
+			OutPattern pattern = ope.getOutPattern();
+			int idx = pattern.getElements().indexOf(ope);
+			
+			if (idx == 0) {
+				// Default trace
+				stms.add( createText("this.trace.put(" + inVar.getName() + "," + outVar.getName() + ")"));
+			} else {
+				// We generate secondary output traces only when they are required 
+				// TODO: Do this
+				stms.add( createText("this.trace.put(" + inVar.getName() + "," + outVar.getName() + "," + quote(ope.getVarName()) + ")"));
+			}
 		} else {
 			// This is for called rules and so on
 		}
@@ -652,6 +754,19 @@ public class EMFDriver implements IMetaDriver {
 		String pendingCollection = getPendingCollection(binding);		
 		return createText(pendingCollection + ".add( new " + pendingClassName + "(" + outVar.getName() + "," + inVar.getName() + "," + areaName + ", null) )");
 	}
+
+
+
+	@Override
+	public List<JStatement> compileResolveTemp(OperationCallExp resolveTemp, JVariableDeclaration inElement, RuleWithPattern r, OutPatternElement ope, JVariableDeclaration newVar, ICompilationContext ctx) {
+		List<JStatement> statements = new ArrayList<JStatement>();		
+		Metaclass m = (Metaclass) resolveTemp.getInferredType();
+		String className = EMFTransformationConfigurator.getResolveTempClass(m.getKlass());		
+		statements.add( CreationHelpers.createAssignment(newVar, "new " + className + "(" + inElement.getName() + "," + quote(ope.getVarName()) + ")"));
+		return statements;
+	}
+
+
 	
 	private String getPendingCollection(Binding binding) {
 		if ( mayConflictingBindings.contains(binding) ) {
@@ -793,7 +908,5 @@ public class EMFDriver implements IMetaDriver {
 		}
 		
 	}
-
-	
 	
 }

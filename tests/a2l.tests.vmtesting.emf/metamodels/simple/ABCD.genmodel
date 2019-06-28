@@ -1,0 +1,59 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<genmodel:GenModel xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:ecore="http://www.eclipse.org/emf/2002/Ecore"
+    xmlns:genmodel="http://www.eclipse.org/emf/2002/GenModel" modelDirectory="/a2l.tests.vmtesting.emf/src-gen" modelPluginID="a2l.tests.vmtesting.emf"
+    modelName="ABCD" rootExtendsClass="org.eclipse.emf.ecore.impl.MinimalEObjectImpl$Container"
+    importerID="org.eclipse.emf.importer.ecore" complianceLevel="8.0" copyrightFields="false"
+    operationReflection="true" importOrganizing="true">
+  <foreignModel>ABCD.ecore</foreignModel>
+  <genPackages prefix="Abcd" basePackage="a2l.tests.simple.emf" disposableProviderFactory="true"
+      ecorePackage="ABCD.ecore#/">
+    <genEnums typeSafeEnumCompatible="false" ecoreEnum="ABCD.ecore#//StyleKind">
+      <genEnumLiterals ecoreEnumLiteral="ABCD.ecore#//StyleKind/Style1"/>
+      <genEnumLiterals ecoreEnumLiteral="ABCD.ecore#//StyleKind/Style2"/>
+    </genEnums>
+    <genClasses image="false" ecoreClass="ABCD.ecore#//NamedElt">
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute ABCD.ecore#//NamedElt/name"/>
+    </genClasses>
+    <genClasses ecoreClass="ABCD.ecore#//Model">
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference ABCD.ecore#//Model/elements"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference ABCD.ecore#//Model/others"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute ABCD.ecore#//Model/style"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference ABCD.ecore#//Model/optionalA"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference ABCD.ecore#//Model/optionalB"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference ABCD.ecore#//Model/optionalC"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference ABCD.ecore#//Model/optionalD"/>
+    </genClasses>
+    <genClasses image="false" ecoreClass="ABCD.ecore#//A">
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference ABCD.ecore#//A/children"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute ABCD.ecore#//A/anIntegerAttr"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute ABCD.ecore#//A/aBooleanAttr"/>
+    </genClasses>
+    <genClasses ecoreClass="ABCD.ecore#//B">
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute ABCD.ecore#//B/propOfB"/>
+    </genClasses>
+    <genClasses ecoreClass="ABCD.ecore#//C">
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute ABCD.ecore#//C/propOfC"/>
+    </genClasses>
+    <genClasses ecoreClass="ABCD.ecore#//C1">
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute ABCD.ecore#//C1/propOfC1"/>
+    </genClasses>
+    <genClasses ecoreClass="ABCD.ecore#//C2">
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute ABCD.ecore#//C2/propOfC2"/>
+    </genClasses>
+    <genClasses image="false" ecoreClass="ABCD.ecore#//D">
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute ABCD.ecore#//D/propOfD"/>
+    </genClasses>
+    <genClasses ecoreClass="ABCD.ecore#//D1">
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute ABCD.ecore#//D1/commonOfD"/>
+    </genClasses>
+    <genClasses ecoreClass="ABCD.ecore#//D2">
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute ABCD.ecore#//D2/commonOfD"/>
+    </genClasses>
+    <genClasses ecoreClass="ABCD.ecore#//D3">
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute ABCD.ecore#//D3/commonOfD"/>
+    </genClasses>
+    <genClasses ecoreClass="ABCD.ecore#//D3_B"/>
+    <genClasses ecoreClass="ABCD.ecore#//D3_B_C"/>
+    <genClasses ecoreClass="ABCD.ecore#//Other"/>
+  </genPackages>
+</genmodel:GenModel>
