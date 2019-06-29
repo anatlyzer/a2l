@@ -1,7 +1,9 @@
 package linda.atlcompiler;
 
+import java.util.List;
 import java.util.function.Function;
 import java.util.function.Supplier;
+import java.util.stream.Collectors;
 
 import org.eclipse.emf.ecore.EClass;
 import org.eclipse.emf.ecore.EEnum;
@@ -10,7 +12,6 @@ import a2l.driver.DriverConfiguration;
 import a2l.driver.IMetaDriver;
 import a2l.utils.Assertions;
 import anatlyzer.atl.analyser.namespaces.EnumNamespace;
-import anatlyzer.atl.model.TypeUtils;
 import anatlyzer.atl.model.TypingModel;
 import anatlyzer.atl.types.BooleanType;
 import anatlyzer.atl.types.CollectionType;
@@ -23,6 +24,8 @@ import anatlyzer.atl.types.Metaclass;
 import anatlyzer.atl.types.PrimitiveType;
 import anatlyzer.atl.types.ReflectiveClass;
 import anatlyzer.atl.types.StringType;
+import anatlyzer.atl.types.TupleAttribute;
+import anatlyzer.atl.types.TupleType;
 import anatlyzer.atl.types.Type;
 import anatlyzer.atl.types.UnionType;
 import anatlyzer.atl.types.Unknown;
@@ -36,8 +39,6 @@ import lintra.atlcompiler.javagen.JType;
 import lintra.atlcompiler.javagen.JTypeRef;
 import lintra.atlcompiler.javagen.JavaGenModel;
 import lintra.atlcompiler.javagen.JavagenFactory;
-import lintra.lingen.LinGen;
-import lintra.lingen.LinGen2;
 
 public abstract class BaseTyping implements ITyping {
 
@@ -244,6 +245,9 @@ public abstract class BaseTyping implements ITyping {
 			return createTypeRef("Object");
 		} else if ( type instanceof ReflectiveClass ) {
 			return createTypeRef("lintra.utils.ReflectiveObject");
+		} else if ( type instanceof TupleType ) {
+			// TODO: In A2LCompiler and LindaCompiler initTyping change the generic createLibType for a specific addTupleType
+			return createTypeRef("", new TupleTypeInformation((TupleType) type).getGeneratedClassName());
 		} else {
 			throw new UnsupportedOperationException("Not type for " + type);
 		}
@@ -331,5 +335,58 @@ public abstract class BaseTyping implements ITyping {
 	public String getModelName(Metaclass t) {
 		// TODO: Probably this requires aditional information to get the actual model
 		return t.getModel().getName();
+	}
+	
+	public static class TupleTypeInformation {
+
+		private TupleType tupleType;
+		private String key;
+
+		public TupleTypeInformation(TupleType tupleType) {
+			this.tupleType = tupleType;
+			this.key = toKey(tupleType);
+		}
+
+		private static String toKey(TupleType tupleType) {			
+			String key = "";
+			List<TupleAttribute> sorted = tupleType.getAttributes().stream().sorted((a1, a2) -> a1.getName().compareTo(a2.getName())).collect(Collectors.toList());
+			for (TupleAttribute attr : sorted) {
+				key += attr.getName();
+			}
+			return key;
+		}
+		
+		public String getGeneratedClassName() {
+			return key;
+		}
+
+		public TupleType getTupleType() {
+			return tupleType;
+		}
+		
+		@Override
+		public int hashCode() {
+			final int prime = 31;
+			int result = 1;
+			result = prime * result + ((key == null) ? 0 : key.hashCode());
+			return result;
+		}
+
+		@Override
+		public boolean equals(Object obj) {
+			if (this == obj)
+				return true;
+			if (obj == null)
+				return false;
+			if (getClass() != obj.getClass())
+				return false;
+			TupleTypeInformation other = (TupleTypeInformation) obj;
+			if (key == null) {
+				if (other.key != null)
+					return false;
+			} else if (!key.equals(other.key))
+				return false;
+			return true;
+		}
 	}
 }

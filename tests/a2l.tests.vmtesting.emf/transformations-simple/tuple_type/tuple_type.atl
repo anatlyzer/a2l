@@ -1,0 +1,52 @@
+-- @atlcompiler atl2006
+-- @path ABCD=/a2l.tests.vmtesting.emf/metamodels/simple/ABCD.ecore
+-- @path WXYZ=/a2l.tests.vmtesting.emf/metamodels/simple/WXYZ.ecore
+
+-- @project a2l.tests.vmtesting.emf=a2l.tests.simple.emf.tupletype 
+
+-- @genpath ABCD=/a2l.tests.vmtesting.emf/metamodels/simple/ABCD.genmodel
+-- @genpath WXYZ=/a2l.tests.vmtesting.emf/metamodels/simple/WXYZ.genmodel
+
+-- @driver ABCD=emf
+-- @driver WXYZ=emf
+
+
+module TupleTypes;
+create OUT : WXYZ from IN : ABCD;
+
+rule A2B {
+	from
+		a : ABCD!Model
+	to
+		b : WXYZ!Model (
+			name <- a.asTuples()->collect(t | t.str)->toString(),
+			elements <- a.asTuples()->collect(t | t.obj)
+		)
+}
+
+helper context ABCD!Model def: asTuples() : Sequence(TupleType(str : String, obj : ABCD!A)) =
+	self.elements->collect(e | e.asTuple());
+
+helper context ABCD!A def: asTuple() : TupleType(str : String, obj : ABCD!A) = 
+	Tuple { str = self.name + '_ABase', obj = self };
+
+-- @force-declared-return-type
+helper context ABCD!B def: asTuple() : TupleType(str : String, obj : ABCD!A) = 
+	Tuple { str = self.name + '_B', obj = self };
+	
+rule B2W {
+   from a : ABCD!B
+     to out : WXYZ!W (
+		name <- a.name
+   )
+}
+
+
+rule C2W {
+   from a : ABCD!C
+     to out : WXYZ!W (
+		name <- a.name
+	)
+}
+
+

@@ -12,6 +12,7 @@ import static linda.atlcompiler.CreationHelpers.createAssignment;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.HashMap;
+import java.util.HashSet;
 import java.util.LinkedList;
 import java.util.List;
 import java.util.Set;
@@ -32,6 +33,8 @@ import anatlyzer.atl.model.TypeUtils;
 import anatlyzer.atl.model.TypingModel;
 import anatlyzer.atl.types.CollectionType;
 import anatlyzer.atl.types.Metaclass;
+import anatlyzer.atl.types.TupleAttribute;
+import anatlyzer.atl.types.TupleType;
 import anatlyzer.atl.types.Type;
 import anatlyzer.atl.types.Unknown;
 import anatlyzer.atl.util.ATLUtils;
@@ -100,6 +103,7 @@ public abstract class BaseCompiler extends AbstractAnatlyzerExtVisitor {
 	
 	protected String basePkg;
 	protected DriverConfiguration driverConfiguration;
+	protected Set<BaseTyping.TupleTypeInformation> usedTupleTypes;
 	
 	
 	public BaseCompiler(IAnalyserResult result, DriverConfiguration driverConfiguration) {
@@ -135,11 +139,21 @@ public abstract class BaseCompiler extends AbstractAnatlyzerExtVisitor {
 		this.basePkg = basePkg;
 		this.jmodel = JavagenFactory.eINSTANCE.createJavaGenModel();
 	
+		analyseTupleTypes(model);
 		analyseTargetModelElementUsage(model);
 		
 		startVisiting(model.getModule());
 		
 		return jmodel;
+	}
+	
+	private void analyseTupleTypes(ATLModel model) {
+		List<TupleType> types = model.allObjectsOf(TupleType.class);
+		usedTupleTypes = new HashSet<>();
+		for (TupleType tupleType : types) {
+			usedTupleTypes.add(new BaseTyping.TupleTypeInformation(tupleType));
+		}
+		
 	}
 	
 	private void analyseTargetModelElementUsage(ATLModel model) {

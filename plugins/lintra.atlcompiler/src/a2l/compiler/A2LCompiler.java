@@ -16,6 +16,7 @@ import anatlyzer.atl.analyser.IAnalyserResult;
 import anatlyzer.atl.util.ATLUtils;
 import anatlyzer.atl.util.ATLUtils.ModelInfo;
 import anatlyzer.atlext.ATL.Module;
+import linda.atlcompiler.BaseTyping;
 import linda.atlcompiler.CreationHelpers;
 import linda.atlcompiler.ITyping;
 import linda.atlcompiler.LindaCompiler;
@@ -50,6 +51,7 @@ public class A2LCompiler extends LindaCompiler {
 		return "Object";
 	}
 	
+	// TODO: For some reason this doesn't call super...
 	@Override
 	protected void initTyping(ITyping typ, JClass tclass) {
 		typ.createLibType("lintra2.blackboard", "IdentifiableElement");
@@ -77,7 +79,9 @@ public class A2LCompiler extends LindaCompiler {
 		addImport(tclass, "a2l.runtime.IModel", "IOutputModel");
 		addImport(tclass, "a2l.runtime", "PartialOutputModel");
 
-		
+		for (BaseTyping.TupleTypeInformation tti : usedTupleTypes) {
+			typ.createLibType("", tti.getGeneratedClassName());
+		}
 	}
 
 	// Overriden for the moment to avoid errors. Should be made more general in the parent

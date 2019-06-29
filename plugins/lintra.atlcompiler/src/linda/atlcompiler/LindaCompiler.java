@@ -1324,6 +1324,11 @@ public abstract class LindaCompiler extends BaseCompiler {
 		addImport(tclass, "transfo", "ITransformation");
 		addImport(tclass, "transfo", "IMaster");
 		addImport(tclass, "transfo", "TraceFunction");
+		
+		for (BaseTyping.TupleTypeInformation tti : usedTupleTypes) {
+			typ.createLibType("", tti.getGeneratedClassName());
+		}
+		
 	}
 
 }
