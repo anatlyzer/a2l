@@ -254,7 +254,7 @@ public abstract class AbstractTestCase {
 	public static Arguments parseArguments(String[] args) {
 		if ( args.length == 0 ) {
 			System.out.println("Run with:");
-			System.out.println("   minThreads maxThreads numRuns model framework optimised");
+			System.out.println("   minThreads maxThreads numRuns model framework [footprint optimised]");
 			System.exit(-1);
 		} else {
 			Arguments arguments = new Arguments();

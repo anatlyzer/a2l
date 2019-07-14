@@ -481,10 +481,10 @@ public class EMFDriver implements IMetaDriver {
 				} else {
 					// String cast = "(" + getInterfaceQNameAux((EClass) r.getEType()) + ")";
 					String cast = "(" + expectedType + ")";
-					klass += "if (tgtElems != null && tgtElems.contains(object)) { ";
-					klass +=    getSetterExpression("tgt", r) + "(" + cast + "getTargetResolveTempOrSame(object, globalTrace)" + ");";
+					klass += "if (tgtElems != null && tgtElems.contains(objId)) { ";
+					klass +=    getSetterExpression("tgt", r) + "(" + cast + "getTargetResolveTempOrSame(objId, globalTrace)" + ");";
 					klass += " } else {";
-					klass += getSetterExpression("tgt", r) + "(" + cast + "getTrace(objId, globalTrace))" + ");";
+					klass += getSetterExpression("tgt", r) + "(" + cast + "getTrace(objId, globalTrace))" + ";";
 					klass += "}";
 				}
 				klass += "}" + "\n";
