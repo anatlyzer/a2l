@@ -10,6 +10,7 @@ import lintra.atlcompiler.javagen.JTypeRef;
 public interface ITyping {
 
 	void createLibType(String pkg, String type);
+	void addInternalType(String className);
 	
 	JTypeRef createTypeRef(String string);
 	JTypeRef createTypeRef(JType t);
@@ -37,5 +38,6 @@ public interface ITyping {
 		MUTABLE,
 		NON_MUTABLE
 	}
+
 	
 }

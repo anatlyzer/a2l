@@ -8,7 +8,6 @@ import java.util.stream.Collectors;
 
 import org.eclipse.emf.common.util.EList;
 import org.eclipse.emf.ecore.EObject;
-import org.eclipse.emf.ecore.util.EcoreUtil;
 
 import javagen.visitor.AbstractJavaGenVisitor;
 import lintra.atlcompiler.javagen.IteratorLoop;
@@ -46,6 +45,8 @@ import lintra.atlcompiler.javagen.LMatchObject;
 
 public class JavaGenerator extends AbstractJavaGenVisitor {
 
+	private JavaGenModel javaGenModel;
+
 	public GenData generate(JavaGenModel model) {
 		startVisiting(model);
 		
@@ -57,6 +58,7 @@ public class JavaGenerator extends AbstractJavaGenVisitor {
 
 	@Override
 	public void beforeJavaGenModel(JavaGenModel self) {
+		this.javaGenModel = self;
 		self.getLibTypes().forEach(jlibType -> {
 			str.put(jlibType, jlibType.getName());
 		});
@@ -65,6 +67,11 @@ public class JavaGenerator extends AbstractJavaGenVisitor {
 			str.put(jm, jm.getName());
 		});
 		
+	}
+	
+	@Override
+	public void afterJavaGenModel(JavaGenModel self) {
+		this.javaGenModel = null;
 	}
 	
 	public static String textOf(EObject obj) {
@@ -77,10 +84,14 @@ public class JavaGenerator extends AbstractJavaGenVisitor {
 			container = container.eContainer();
 		}
 		
+		return textOf((JavaGenModel) container, obj);
+	}
+	
+	public static String textOf(JavaGenModel model, EObject obj) {
 		JavaGenerator gen = new JavaGenerator();
-		gen.beforeJavaGenModel((JavaGenModel) container);
+		gen.beforeJavaGenModel(model);
 		gen.startVisiting(obj);
-		return gen.g(obj);
+		return gen.g(obj);	
 	}
 	
 	@Override
@@ -164,11 +175,12 @@ public class JavaGenerator extends AbstractJavaGenVisitor {
 	}
 	
 	public String getTypeName(JType type, JClass containingClass) {
-		JavaGenModel model = (JavaGenModel) containingClass.eContainer();
+		JavaGenModel model = javaGenModel;
 		
 		String pkgPrefix = "";
-		if ( type instanceof JLibType && ! isPrimitive((JLibType) type) && ! containingClass.getImports().contains(type)) {
-			pkgPrefix = ((JLibType) type).getPkg() + ".";
+		if ( type instanceof JLibType && ! isPrimitive((JLibType) type) && (containingClass == null || ! containingClass.getImports().contains(type))) {
+			if ( ((JLibType) type).getPkg() != null )
+				pkgPrefix = ((JLibType) type).getPkg() + ".";
 		} else if ( type instanceof JMetaType && hasDuplicateImports(model.getMetaTypes(), type) ) {
 			return pkgPrefix = ((JMetaType) type).getQualifiedJavaName();
 		} else if ( type instanceof JClass ) {
@@ -184,7 +196,7 @@ public class JavaGenerator extends AbstractJavaGenVisitor {
 	}
 	
 	private boolean isPrimitive(JLibType type) {
-		return type.getPkg().equals("default_");
+		return type.getPkg() != null && type.getPkg().equals("default_");
 	}
 
 	@Override

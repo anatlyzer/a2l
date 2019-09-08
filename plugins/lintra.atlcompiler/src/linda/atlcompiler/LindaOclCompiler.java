@@ -56,9 +56,11 @@ import anatlyzer.atl.types.PrimitiveType;
 import anatlyzer.atl.types.ReflectiveClass;
 import anatlyzer.atl.types.SetType;
 import anatlyzer.atl.types.StringType;
+import anatlyzer.atl.types.TupleType;
 import anatlyzer.atl.types.Type;
 import anatlyzer.atl.types.UnionType;
 import anatlyzer.atl.util.ATLUtils;
+import anatlyzer.atl.util.TypeError;
 import anatlyzer.atl.util.UnsupportedTranslation;
 import anatlyzer.atlext.ATL.BindingStat;
 import anatlyzer.atlext.ATL.ContextHelper;
@@ -87,8 +89,11 @@ import anatlyzer.atlext.OCL.PropertyCallExp;
 import anatlyzer.atlext.OCL.SequenceExp;
 import anatlyzer.atlext.OCL.SetExp;
 import anatlyzer.atlext.OCL.StringExp;
+import anatlyzer.atlext.OCL.TupleExp;
+import anatlyzer.atlext.OCL.TuplePart;
 import anatlyzer.atlext.OCL.VariableDeclaration;
 import anatlyzer.atlext.OCL.VariableExp;
+import linda.atlcompiler.BaseTyping.TupleTypeInformation;
 import linda.atlcompiler.ICompilationContext.Context;
 import linda.atlcompiler.ICompilationContext.IInitializer;
 import linda.atlcompiler.ITyping.MutabilityAttribute;
@@ -165,8 +170,8 @@ public class LindaOclCompiler implements IOclCompiler, IInitializer {
 		
 		JVariableDeclaration sourceVar = env.getVar(self.getSource());
 		List<JStatement> stms = createCommentedList(self);
-		stms.addAll(env.getStatements(self.getSource()));
-				
+		stms.addAll(env.getStatements(self.getSource()));		
+		
 		if ( self.getDynamicResolvers().isEmpty() ) {
 			throw new UnsupportedTranslation("Call without resolvers is not supported. There are probably typing errors: " + self.getLocation() + " - " + self);
 		}
@@ -244,6 +249,17 @@ public class LindaOclCompiler implements IOclCompiler, IInitializer {
 		generateCall(self);
 		// TODO: What about parameter passing??
 	}
+	
+	@Override
+	public void inTupleAccess(NavigationOrAttributeCallExp self) {
+		// List<JStatement> stms = createCommentedList(self);
+		JVariableDeclaration newVar = gen.addLocalVar(env.currentBlock(), "nav", typ.createTypeRef(self.getInferredType()));
+		JVariableDeclaration receptor = env.getVar(self.getSource());
+		JStatement nav = createAssignment(newVar, receptor.getName() + "." + self.getName());
+		
+		env.bind(self, newVar, Collections.singletonList(nav));
+	}
+	
 	
 	@Override
 	public void inBuiltInAttributeCallExp(NavigationOrAttributeCallExp self) {
@@ -1145,6 +1161,36 @@ public class LindaOclCompiler implements IOclCompiler, IInitializer {
 	public void inIntegerExp(IntegerExp self) {
 		JVariableDeclaration newVar = gen.addLocalVar(env.currentBlock(), "tmp", typ.createTypeRef("int"));
 		env.bind(self, newVar, Collections.singletonList( createAssignment(newVar, self.getIntegerSymbol() + "")));		
+	}
+	
+	@Override
+	public void inTupleExp(TupleExp self) {
+		TupleTypeInformation type = getType(self);
+		JVariableDeclaration newVar = gen.addLocalVar(env.currentBlock(), "tmp", typ.createTypeRef(self.getInferredType()));
+		
+		List<JStatement> statements = new ArrayList<JStatement>(1 + self.getTuplePart().size() * 2);		
+		
+		JAssignment assignment = createAssignment(newVar, "new " + type.getGeneratedClassName() + "()");
+		statements.add(assignment);
+		for (TuplePart part : self.getTuplePart()) {
+			JVariableDeclaration decl = assignment.getDeclaration();
+			JVariableDeclaration value = env.getVar(part.getInitExpression());
+			JText init = createText(decl.getName() + "." + part.getVarName() + " = " + value.getName());
+		
+			statements.addAll(env.getStatements(part.getInitExpression()));
+			statements.add(init);
+		}
+		env.bind(self, newVar, statements);
+	}
+	
+	public TupleTypeInformation getType(TupleExp self) {
+		Set<? extends TupleTypeInformation> tupleTypes = env.getUsedTupleTypes();
+		for (TupleTypeInformation tupleTypeInformation : tupleTypes) {
+			if (tupleTypeInformation.isTypeOf(self)) {
+				return tupleTypeInformation;
+			}
+		}		
+		throw new TypeError("No type for " + self);
 	}
 	
 	@Override

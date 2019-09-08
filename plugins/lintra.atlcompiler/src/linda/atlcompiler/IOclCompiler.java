@@ -28,12 +28,14 @@ import anatlyzer.atlext.OCL.OrderedSetExp;
 import anatlyzer.atlext.OCL.SequenceExp;
 import anatlyzer.atlext.OCL.SetExp;
 import anatlyzer.atlext.OCL.StringExp;
+import anatlyzer.atlext.OCL.TupleExp;
 import anatlyzer.atlext.OCL.VariableDeclaration;
 
 public interface IOclCompiler {
 
 	void inNavigationExp(NavigationOrAttributeCallExp self, boolean onSubtypes);
 	void inAttributeCall(NavigationOrAttributeCallExp self);
+	void inTupleAccess(NavigationOrAttributeCallExp self);	
 	void beforeIteratorExp(IteratorExp self);
 	void inIteratorExp(IteratorExp self);
 
@@ -62,6 +64,7 @@ public interface IOclCompiler {
 	void inSetExp(SetExp self);
 	void inOrderedSetExp(OrderedSetExp self);
 	void inMapExp(MapExp self);
+	void inTupleExp(TupleExp self);
 	
 	void inOclModelElement(OclModelElement self);
 
@@ -82,6 +85,7 @@ public interface IOclCompiler {
 	void inMutableCollectionOperationCallExp(MutableCollectionOperationCallExp self);
 	void inIteratorChainExp(IteratorChainExp self);
 	void beforeIteratorChainExp(IteratorChainExp self);
+	
 	
 //	String getSetter(EStructuralFeature writtenFeature);
 //	String getGetter(EStructuralFeature writtenFeature);

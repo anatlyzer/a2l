@@ -29,6 +29,7 @@ import anatlyzer.atl.types.TupleType;
 import anatlyzer.atl.types.Type;
 import anatlyzer.atl.types.UnionType;
 import anatlyzer.atl.types.Unknown;
+import anatlyzer.atlext.OCL.TupleExp;
 import lintra.atlcompiler.javagen.JArrayTypeRef;
 import lintra.atlcompiler.javagen.JGenericTypeRef;
 import lintra.atlcompiler.javagen.JLibType;
@@ -83,10 +84,11 @@ public abstract class BaseTyping implements ITyping {
 		String type2 = qualifiedTypeName.substring(idx + 1);
 		return type2;
 	}
-	
+
+	// pkg == null means an inner class
 	private JType getType(String pkg, String type) {
 		return jmodel.getLibTypes().stream().
-				filter(t -> t.getName().equals(type) && pkg.equals(t.getPkg()) ).findAny().
+				filter(t -> t.getName().equals(type) && (pkg == null || pkg.equals(t.getPkg())) ).findAny().
 				orElseThrow(() -> new IllegalStateException("Type " + type + " not found."));
 	}
 
@@ -95,6 +97,16 @@ public abstract class BaseTyping implements ITyping {
 		JLibType libType = JavagenFactory.eINSTANCE.createJLibType();
 		libType.setName(cname);
 		libType.setPkg(qname);
+		jmodel.getLibTypes().add(libType);
+	}
+	
+	@Override
+	public void addInternalType(String className) {
+		JLibType libType = JavagenFactory.eINSTANCE.createJLibType();
+		libType.setName(className);
+		// This would be saner, or even a different type for this
+		// libType.setIsInternal(true);
+		libType.setPkg(null);
 		jmodel.getLibTypes().add(libType);
 	}
 
@@ -247,7 +259,7 @@ public abstract class BaseTyping implements ITyping {
 			return createTypeRef("lintra.utils.ReflectiveObject");
 		} else if ( type instanceof TupleType ) {
 			// TODO: In A2LCompiler and LindaCompiler initTyping change the generic createLibType for a specific addTupleType
-			return createTypeRef("", new TupleTypeInformation((TupleType) type).getGeneratedClassName());
+			return createTypeRef(null, new TupleTypeInformation((TupleType) type).getGeneratedClassName());
 		} else {
 			throw new UnsupportedOperationException("Not type for " + type);
 		}
@@ -355,6 +367,10 @@ public abstract class BaseTyping implements ITyping {
 			}
 			return key;
 		}
+
+		public boolean isTypeOf(TupleExp self) {
+			return toKey((TupleType) self.getInferredType()).equals(key);			
+		}
 		
 		public String getGeneratedClassName() {
 			return key;
@@ -388,5 +404,6 @@ public abstract class BaseTyping implements ITyping {
 				return false;
 			return true;
 		}
+
 	}
 }

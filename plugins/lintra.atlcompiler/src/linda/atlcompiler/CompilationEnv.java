@@ -3,7 +3,9 @@ package linda.atlcompiler;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.HashMap;
+import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
 
 import org.eclipse.emf.ecore.EObject;
 
@@ -21,6 +23,7 @@ import anatlyzer.atlext.ATL.OutPatternElement;
 import anatlyzer.atlext.OCL.OclExpression;
 import anatlyzer.atlext.OCL.OclModelElement;
 import anatlyzer.atlext.OCL.VariableDeclaration;
+import linda.atlcompiler.BaseTyping.TupleTypeInformation;
 import linda.atlcompiler.ITyping.MutabilityAttribute;
 import lintra.atlcompiler.javagen.JBlock;
 import lintra.atlcompiler.javagen.JStatement;
@@ -32,14 +35,23 @@ public class CompilationEnv {
 	protected HashMap<EObject, List<JStatement>> mapStatements = new HashMap<>();
 	protected HashMap<EObject, List<Object>> mapAttributes = new HashMap<>();
 	protected ArrayList<JBlock> blocks = new ArrayList<>();
-	
+		
 	protected List<CompilationEnv> stack = new ArrayList<CompilationEnv>();
 	private IAnalyserResult result;
 	private DriverConfiguration drivers;
+	private Set<TupleTypeInformation> usedTupleTypes;
 	
 	public CompilationEnv(IAnalyserResult result, DriverConfiguration drivers) {
 		this.result = result;
 		this.drivers = drivers;
+	}
+
+	public void setUsedTupleTypes(Set<? extends TupleTypeInformation> usedTupleTypes) {
+		this.usedTupleTypes = new HashSet<TupleTypeInformation>(usedTupleTypes);
+	}
+	
+	public Set<? extends TupleTypeInformation> getUsedTupleTypes() {
+		return usedTupleTypes;
 	}
 
 	public IAnalyserResult getAnalysis() {

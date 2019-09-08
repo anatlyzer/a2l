@@ -48,6 +48,8 @@ import anatlyzer.atl.types.IntegerType;
 import anatlyzer.atl.types.Metaclass;
 import anatlyzer.atl.types.PrimitiveType;
 import anatlyzer.atl.types.ReflectiveClass;
+import anatlyzer.atl.types.TupleAttribute;
+import anatlyzer.atl.types.TupleType;
 import anatlyzer.atl.types.Type;
 import anatlyzer.atl.types.UnionType;
 import anatlyzer.atl.util.ATLUtils;
@@ -96,8 +98,10 @@ import anatlyzer.atlext.OCL.PropertyCallExp;
 import anatlyzer.atlext.OCL.SequenceExp;
 import anatlyzer.atlext.OCL.SetExp;
 import anatlyzer.atlext.OCL.StringExp;
+import anatlyzer.atlext.OCL.TupleExp;
 import anatlyzer.atlext.OCL.VariableDeclaration;
 import anatlyzer.atlext.OCL.VariableExp;
+import linda.atlcompiler.BaseTyping.TupleTypeInformation;
 import lintra.atlcompiler.javagen.JAttribute;
 import lintra.atlcompiler.javagen.JBlock;
 import lintra.atlcompiler.javagen.JClass;
@@ -279,7 +283,17 @@ public abstract class LindaCompiler extends BaseCompiler {
 				
 		trafoResultClass +=	"}";
 		
-		tclass.setExtra(fieldsText + constructorText + utilities + trafoResultClass);
+		StringBuilder tupleClasses = new StringBuilder(); 
+		for (TupleTypeInformation tti : env.getUsedTupleTypes()) {
+			tupleClasses.append("private static class " + tti.getGeneratedClassName() + "{ ");
+			for (TupleAttribute ta : tti.getTupleType().getAttributes()) {
+				String type = JavaGenerator.textOf(jmodel, typ.createTypeRef(ta.getType()));
+				tupleClasses.append(type + " " + ta.getName()).append(";").append("\n");
+			}
+			tupleClasses.append("}");
+		}
+		
+		tclass.setExtra(fieldsText + constructorText + utilities + trafoResultClass + tupleClasses.toString());
 		
 		driverConfiguration.configureTransformationClass(ctx(), tclass);
 		
@@ -881,6 +895,8 @@ public abstract class LindaCompiler extends BaseCompiler {
 			}
 		} else if ( isBuiltinAttribute(self) ) {
 			ocl.inBuiltInAttributeCallExp(self);
+		} else if ( self.getReceptorType() instanceof TupleType ) {
+			ocl.inTupleAccess(self);
 		} else {
 			ocl.inAttributeCall(self);
 		}
@@ -1032,6 +1048,12 @@ public abstract class LindaCompiler extends BaseCompiler {
 	public void inEnumLiteralExp(EnumLiteralExp self) {
 		ocl.inEnumLiteralExp(self);
 	}
+	
+	@Override
+	public void inTupleExp(TupleExp self) {
+		ocl.inTupleExp(self);
+	}
+	
 	
 	@Override
 	public VisitingActions preIteratorExp(IteratorExp self) {
@@ -1325,8 +1347,8 @@ public abstract class LindaCompiler extends BaseCompiler {
 		addImport(tclass, "transfo", "IMaster");
 		addImport(tclass, "transfo", "TraceFunction");
 		
-		for (BaseTyping.TupleTypeInformation tti : usedTupleTypes) {
-			typ.createLibType("", tti.getGeneratedClassName());
+		for (BaseTyping.TupleTypeInformation tti : env.getUsedTupleTypes()) {
+			typ.addInternalType(tti.getGeneratedClassName());
 		}
 		
 	}

@@ -65,6 +65,7 @@ import anatlyzer.atlext.OCL.Operation;
 import anatlyzer.atlext.OCL.VariableDeclaration;
 import anatlyzer.atlext.processing.AbstractVisitor;
 import anatlyzer.atlext.processing.AbstractVisitor.VisitingActions;
+import linda.atlcompiler.BaseTyping.TupleTypeInformation;
 import linda.atlcompiler.ICompilationContext.Context;
 import linda.atlcompiler.ICompilationContext.IInitializer;
 import lintra.atlcompiler.javagen.JAssignment;
@@ -102,9 +103,7 @@ public abstract class BaseCompiler extends AbstractAnatlyzerExtVisitor {
 
 	
 	protected String basePkg;
-	protected DriverConfiguration driverConfiguration;
-	protected Set<BaseTyping.TupleTypeInformation> usedTupleTypes;
-	
+	protected DriverConfiguration driverConfiguration;	
 	
 	public BaseCompiler(IAnalyserResult result, DriverConfiguration driverConfiguration) {
 		this.result = result;
@@ -149,10 +148,12 @@ public abstract class BaseCompiler extends AbstractAnatlyzerExtVisitor {
 	
 	private void analyseTupleTypes(ATLModel model) {
 		List<TupleType> types = model.allObjectsOf(TupleType.class);
-		usedTupleTypes = new HashSet<>();
+		Set<TupleTypeInformation> usedTupleTypes = new HashSet<>();
 		for (TupleType tupleType : types) {
 			usedTupleTypes.add(new BaseTyping.TupleTypeInformation(tupleType));
 		}
+		
+		env.setUsedTupleTypes(usedTupleTypes);
 		
 	}
 	
@@ -211,7 +212,7 @@ public abstract class BaseCompiler extends AbstractAnatlyzerExtVisitor {
 	public void configureContextHelper(ContextHelper self) {
 		if ( ATLUtils.getHelperBody(self) instanceof JavaBody ) 
 			return;
-		
+				
 		JMethod method = JavagenFactory.eINSTANCE.createJMethod();
 		JTypeRef ctxTypeRef = typ.createTypeRef(self.getContextType());
 		method.setName("helper_" + CreationHelpers.toStr(ctxTypeRef).replace(".", "_") + "_" + ATLUtils.getHelperName(self));

@@ -19,7 +19,7 @@ rule A2B {
 		a : ABCD!Model
 	to
 		b : WXYZ!Model (
-			name <- a.asTuples()->collect(t | t.str)->toString(),
+			name <- a.asTuples()->collect(t | t.str)->iterate(s; v: String  = '' | v + ' ' + s),
 			elements <- a.asTuples()->collect(t | t.obj)
 		)
 }

@@ -79,8 +79,9 @@ public class A2LCompiler extends LindaCompiler {
 		addImport(tclass, "a2l.runtime.IModel", "IOutputModel");
 		addImport(tclass, "a2l.runtime", "PartialOutputModel");
 
-		for (BaseTyping.TupleTypeInformation tti : usedTupleTypes) {
-			typ.createLibType("", tti.getGeneratedClassName());
+		// Looks duplicated from LindaCompiler... 
+		for (BaseTyping.TupleTypeInformation tti : env.getUsedTupleTypes()) {
+			typ.addInternalType(tti.getGeneratedClassName());
 		}
 	}
 
