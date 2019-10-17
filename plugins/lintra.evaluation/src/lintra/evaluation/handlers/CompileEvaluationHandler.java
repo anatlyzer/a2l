@@ -25,10 +25,11 @@ public class CompileEvaluationHandler extends AbstractHandler {
 		projects.put("/a2l.tests.imdb/transformations/FindCouples.atl", "a2l.tests.findcouples");		
 		projects.put("/a2l.tests.java2uml/transformations/java2uml_deps.atl", "a2l.tests.java2uml.umldeps");
 		projects.put("/a2l.tests.java2graph/transformations/Java2Graph.atl", "a2l.tests.java2graph");
+		projects.put("/a2l.tests.airquality/transformations/AirQualityReport.atl", "a2l.tests.airquality");
 		
 		List<TransformationToCompile> trafos = new ArrayList<CompileTestCasesHandler.TransformationToCompile>();
 		List<TransformationToCompile> trafosNoOps = new ArrayList<CompileTestCasesHandler.TransformationToCompile>();
-				
+
 		for (Entry<String, String> path : projects.entrySet()) {
 			TransformationToCompile t = new TransformationToCompile(path.getKey());
 			HashSet<Optimisation> optimisations = new HashSet<Optimisation>();

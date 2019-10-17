@@ -25,6 +25,7 @@ import anatlyzer.atlext.OCL.OclUndefinedExp;
 import anatlyzer.atlext.OCL.OperationCallExp;
 import anatlyzer.atlext.OCL.OperatorCallExp;
 import anatlyzer.atlext.OCL.OrderedSetExp;
+import anatlyzer.atlext.OCL.RealExp;
 import anatlyzer.atlext.OCL.SequenceExp;
 import anatlyzer.atlext.OCL.SetExp;
 import anatlyzer.atlext.OCL.StringExp;
@@ -54,6 +55,7 @@ public interface IOclCompiler {
 	void inBooleanExp(BooleanExp self);
 	void inStringExp(StringExp self);
 	void inIntegerExp(IntegerExp self);
+	void inRealExp(RealExp self);
 	void inEnumLiteralExp(EnumLiteralExp self);
 	void inOclUndefined(OclUndefinedExp self);
 

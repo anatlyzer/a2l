@@ -49,6 +49,7 @@ public class IdentityIMDb_TestCase extends AbstractTestCase {
 				null; 
 		
 		if ( optimised ) {
+			System.out.println("Optimised");
 			outLintra = new a2l.tests.imdb.identity.optimised.IdentityIMDbRunner().
 				setStatsRecorder(recorder).
 				setFootprint(footprintObject).
@@ -58,6 +59,7 @@ public class IdentityIMDb_TestCase extends AbstractTestCase {
 				run().
 				getOUTResource();
 		} else {
+			System.out.println("Normal");
 			outLintra = new a2l.tests.imdb.identity.normal.IdentityIMDbRunner().
 					setStatsRecorder(recorder).
 					setFootprint(footprintObject).

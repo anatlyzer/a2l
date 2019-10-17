@@ -208,8 +208,8 @@ public abstract class BaseTyping implements ITyping {
 	}
 	
 	@Override
-	public JTypeRef createTypeRef(Type type, Supplier<JTypeRef> baseType) {
-		return createTypeRef(type, false, false, baseType);
+	public JTypeRef createTypeRef(Type type, Supplier<JTypeRef> baseType, boolean isMutable) {
+		return createTypeRef(type, false, isMutable, baseType);
 	}
 
 	protected JTypeRef createTypeRef(Type type, boolean isContainedType, boolean isMutable) {

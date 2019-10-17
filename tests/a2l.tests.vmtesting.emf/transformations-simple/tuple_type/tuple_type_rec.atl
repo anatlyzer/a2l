@@ -1,0 +1,43 @@
+-- @atlcompiler atl2006
+-- @path ABCD=/a2l.tests.vmtesting.emf/metamodels/simple/ABCD.ecore
+-- @path WXYZ=/a2l.tests.vmtesting.emf/metamodels/simple/WXYZ.ecore
+
+-- @project a2l.tests.vmtesting.emf=a2l.tests.simple.emf.tupletyperec 
+
+-- @genpath ABCD=/a2l.tests.vmtesting.emf/metamodels/simple/ABCD.genmodel
+-- @genpath WXYZ=/a2l.tests.vmtesting.emf/metamodels/simple/WXYZ.genmodel
+
+-- @driver ABCD=emf
+-- @driver WXYZ=emf
+
+-- @Tuple RecTuple=TupleType(str : String, rec : RecTuple)
+
+module TupleTypesRec;
+create OUT : WXYZ from IN : ABCD;
+
+rule A2B {
+	from
+		a : ABCD!Model
+	to
+		b : WXYZ!Model (
+			name <- a.asTuples()->iterate(t; v: String  = '' | 
+				if t.rec <> OclUndefined then
+					t.rec.str
+				else
+					t.str
+				endif + ' ' + v
+			)
+		)
+}
+
+helper context ABCD!Model def: asTuples() : Sequence(TupleType(str : String, rec : OclAny)) =
+	self.elements->collect(e | e.asTuple());
+
+-- @force-declared-return-type
+helper context ABCD!A def: asTuple() : TupleType(str : String, rec : OclAny) = 
+	Tuple { str = self.name + '_ABase', rec = Tuple { str = 'Sub', rec = OclUndefined } };
+
+-- @force-declared-return-type
+helper context ABCD!B def: asTuple() : TupleType(str : String, rec : OclAny) = 
+	Tuple { str = self.name + '_B', rec = OclUndefined };
+	

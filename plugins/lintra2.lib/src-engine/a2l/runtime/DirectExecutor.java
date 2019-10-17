@@ -58,7 +58,7 @@ public class DirectExecutor {
 		Scheduler scheduler = new Scheduler(numWorkers, numChunks);
 		
 		Worker firstWorker = null;
-		
+		increase = 1;
 		for (long i = 0; i < numWorkers; i++) {
 			Worker worker = new Worker("Worker " + i, i, increase, scheduler);
 			if ( firstWorker == null ) {
@@ -99,7 +99,7 @@ public class DirectExecutor {
 	}
 	
 	public void postprocessing(IGlobalContext context) {
-		context.getGlobalTrace().pack();
+		// context.getGlobalTrace().pack();
 	
 		for (ITransformation2 t : partialTrafos) {
 			t.doSequentialPostprocessing();

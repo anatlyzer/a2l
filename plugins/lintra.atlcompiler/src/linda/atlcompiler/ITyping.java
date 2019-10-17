@@ -26,7 +26,7 @@ public interface ITyping {
 	JTypeRef createTypeRef(Type type);
 	JTypeRef createTypeRef(Type type, boolean isMutable);
 	
-	JTypeRef createTypeRef(Type type, Supplier<JTypeRef> baseType);
+	JTypeRef createTypeRef(Type type, Supplier<JTypeRef> baseType, boolean isMutable);
 
 	JType getType(String type);
 	

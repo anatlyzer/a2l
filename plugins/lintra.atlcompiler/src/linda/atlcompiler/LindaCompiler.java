@@ -95,6 +95,7 @@ import anatlyzer.atlext.OCL.OperationCallExp;
 import anatlyzer.atlext.OCL.OperatorCallExp;
 import anatlyzer.atlext.OCL.OrderedSetExp;
 import anatlyzer.atlext.OCL.PropertyCallExp;
+import anatlyzer.atlext.OCL.RealExp;
 import anatlyzer.atlext.OCL.SequenceExp;
 import anatlyzer.atlext.OCL.SetExp;
 import anatlyzer.atlext.OCL.StringExp;
@@ -1022,6 +1023,11 @@ public abstract class LindaCompiler extends BaseCompiler {
 	@Override
 	public void inIntegerExp(IntegerExp self) {
 		ocl.inIntegerExp(self);
+	}
+	
+	@Override
+	public void inRealExp(RealExp self) {
+		ocl.inRealExp(self);
 	}
 	
 	@Override

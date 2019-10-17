@@ -40,6 +40,7 @@ import a2l.optimiser.anatlyzerext.IteratorChainExp;
 import a2l.optimiser.anatlyzerext.MutableCollectionOperationCallExp;
 import a2l.optimiser.anatlyzerext.MutableIteratorExp;
 import a2l.optimiser.anatlyzerext.NavRefAsSet;
+import a2l.utils.TypeError;
 import anatlyzer.atl.analyser.namespaces.MetamodelNamespace;
 import anatlyzer.atl.model.TypeUtils;
 import anatlyzer.atl.model.TypingModel;
@@ -60,7 +61,6 @@ import anatlyzer.atl.types.TupleType;
 import anatlyzer.atl.types.Type;
 import anatlyzer.atl.types.UnionType;
 import anatlyzer.atl.util.ATLUtils;
-import anatlyzer.atl.util.TypeError;
 import anatlyzer.atl.util.UnsupportedTranslation;
 import anatlyzer.atlext.ATL.BindingStat;
 import anatlyzer.atlext.ATL.ContextHelper;
@@ -86,6 +86,7 @@ import anatlyzer.atlext.OCL.OperationCallExp;
 import anatlyzer.atlext.OCL.OperatorCallExp;
 import anatlyzer.atlext.OCL.OrderedSetExp;
 import anatlyzer.atlext.OCL.PropertyCallExp;
+import anatlyzer.atlext.OCL.RealExp;
 import anatlyzer.atlext.OCL.SequenceExp;
 import anatlyzer.atlext.OCL.SetExp;
 import anatlyzer.atlext.OCL.StringExp;
@@ -109,6 +110,7 @@ import lintra.atlcompiler.javagen.JConditionalBlock;
 import lintra.atlcompiler.javagen.JExpression;
 import lintra.atlcompiler.javagen.JForeach;
 import lintra.atlcompiler.javagen.JInvoke;
+import lintra.atlcompiler.javagen.JInvokeStatic;
 import lintra.atlcompiler.javagen.JMetaType;
 import lintra.atlcompiler.javagen.JMethod;
 import lintra.atlcompiler.javagen.JParameter;
@@ -544,7 +546,10 @@ public class LindaOclCompiler implements IOclCompiler, IInitializer {
 			}
 		};
 		
-		JVariableDeclaration newVar = gen.addLocalVar(env.currentBlock(), "op", typ.createTypeRef(self.getInferredType(), createBaseType));
+		System.out.println(self.getLocation() + " - " + self.getOperationName());
+		boolean isMutable = AstAnnotations.isMutable(self);
+		
+		JVariableDeclaration newVar = gen.addLocalVar(env.currentBlock(), "op", typ.createTypeRef(self.getInferredType(), createBaseType, isMutable));
 		List<JStatement> stms = createCommentedList(self);
 		stms.addAll(env.getStatements(self.getSource()));
 		
@@ -629,11 +634,21 @@ public class LindaOclCompiler implements IOclCompiler, IInitializer {
 //		case "flatten":  
 //			stms.add( createAssignment(newVar, srcVarName + ".flatMap(x_ -> x_)") );
 //			break;									
-		case "first":  
-			stms.add( createAssignment(newVar, srcVarName + ".isEmpty() ? null : " + srcVarName + ".get(0)") );
+		case "first":
+			// We check the type, and it it is a primitive type we do a hacky conversion...
+			if (self.getInferredType() instanceof IntegerType) {
+				// Use MAX_INTEGER as the representation of OclUndefined... Not perfect but should do
+				stms.add( createAssignment(newVar, srcVarName + ".isEmpty() ? Integer.MAX_VALUE : " + srcVarName + ".get(0)") );				
+			} else {
+				stms.add( createAssignment(newVar, srcVarName + ".isEmpty() ? null : " + srcVarName + ".get(0)") );
+			}
 			break;						
-		case "last":  
-			stms.add( createAssignment(newVar, srcVarName + ".isEmpty() ? null : " + srcVarName + ".last()") );
+		case "last":
+			if (self.getInferredType() instanceof IntegerType) {
+				stms.add( createAssignment(newVar, srcVarName + ".isEmpty() ? Integer.MAX_VALUE : " + srcVarName + ".get(0)") );				
+			} else {
+				stms.add( createAssignment(newVar, srcVarName + ".isEmpty() ? null : " + srcVarName + ".last()") );
+			}
 			break;						
 		case "asSet":  
 			stms.add( createAssignment(newVar, "javaslang.collection.HashSet.ofAll(" + srcVarName +")" ));
@@ -892,8 +907,6 @@ public class LindaOclCompiler implements IOclCompiler, IInitializer {
 
 		JVariableDeclaration colVar = env.getVar(self.getSource()); // This returns a collection
 			
-		// create a new var for the result and initialize
-		JVariableDeclaration resultVar = createResultVar(self, stms, isMutable);
 
 		String name = self.getName();
 		if ( name.equals("sortedBy") ) {
@@ -909,11 +922,22 @@ public class LindaOclCompiler implements IOclCompiler, IInitializer {
 			Set<JVariableDeclaration> varSet = closureStatements.stream().filter(s -> s instanceof JAssignment).map(s -> ((JAssignment) s).getDeclaration()).collect(Collectors.toSet());
 			closure.getLocalVars().addAll(varSet);			
 			
-			JInvoke invoke = createInvoke("sortBy", CreationHelpers.refVar(colVar), closure);
-			
-			JAssignment sort = createAssignment(resultVar, invoke);
-			stms.add(sort);
-			
+			JVariableDeclaration resultVar;
+			if (isMutable) {
+				// TODO: CHECK THAT IF THIS IS MUTABLE THEN WE JUST SORT THE COLLECTION DIRECTLY, BUT NOT SURE HOW...
+				JInvokeStatic invoke = CreationHelpers.createInvokeStatic("a2l.runtime.stdlib.Collections.sort", CreationHelpers.refVar(colVar), closure);
+				
+				stms.add(CreationHelpers.createExpresionStatement(invoke));
+				// Use the collection variable as result because we are modifying the collection in place
+				resultVar = colVar;
+			} else {
+				resultVar = createResultVar(self, stms, isMutable);
+
+				JInvoke invoke = createInvoke("sortBy", CreationHelpers.refVar(colVar), closure);
+				
+				JAssignment sort = createAssignment(resultVar, invoke);
+				stms.add(sort);
+			}
 //			// Add the body to the foreach
 //			addStm(foreach, env.getStatements(self.getBody()));
 //			JAssignment append = createAssignment(resultVar, resultVar.getName() + ".prepend(" + env.getVar(self.getBody()).getName() + ")");
@@ -922,7 +946,10 @@ public class LindaOclCompiler implements IOclCompiler, IInitializer {
 			env.bind(self, resultVar, stms);
 			return;
 		}
-		
+
+		// create a new var for the result and initialize
+		JVariableDeclaration resultVar = createResultVar(self, stms, isMutable);
+
 		// - put the statements within the body
 		JForeach foreach = createForeach(colVar, env.getVar(it));
 		stms.add(foreach);
@@ -1162,6 +1189,13 @@ public class LindaOclCompiler implements IOclCompiler, IInitializer {
 		JVariableDeclaration newVar = gen.addLocalVar(env.currentBlock(), "tmp", typ.createTypeRef("int"));
 		env.bind(self, newVar, Collections.singletonList( createAssignment(newVar, self.getIntegerSymbol() + "")));		
 	}
+	
+	@Override
+	public void inRealExp(RealExp self) {
+		JVariableDeclaration newVar = gen.addLocalVar(env.currentBlock(), "tmp", typ.createTypeRef("double"));
+		env.bind(self, newVar, Collections.singletonList( createAssignment(newVar, self.getRealSymbol() + "")));		
+	}
+
 	
 	@Override
 	public void inTupleExp(TupleExp self) {
