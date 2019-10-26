@@ -1,6 +1,6 @@
 -- @project example.vmtesting=example.vmtesting.xml2ant 
--- @path Ant=/example.vmtesting/transformations/XML2Ant/Ant.ecore
--- @path XML=/example.vmtesting/transformations/XML2Ant/XML.ecore
+-- @path Ant=/a2l.tests.vmtesting.emf/transformations/XML2Ant/Ant.ecore
+-- @path XML=/a2l.tests.vmtesting.emf/transformations/XML2Ant/XML.ecore
 module XML2Ant;
 create OUT : Ant from IN : XML;
 
