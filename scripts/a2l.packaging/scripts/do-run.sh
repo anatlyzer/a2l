@@ -1,25 +1,52 @@
+RUN_COMMAND="Exec with ./$0 std|jesus|loli model [ a2l|atl|both minThreads maxThreads numRuns fooprint|nofootprint optimised|nooptimised]"
 
 case $1 in
   std)
     ECLIPSE_PLUGINS=`echo $(pwd)/../../../eclipse-jars`
     ;;	
   jesus) 
-    ECLIPSE_PLUGINS="/home/jesus/usr/a2l/plugins"
+    ECLIPSE_PLUGINS="/home/jesus/usr/a2l-2019/plugins"
     ;;
   loli)
     ECLIPSE_PLUGINS="C:/Users/Loli/Desktop/eclipseNeon/plugins"
     ;;
   *)
-    echo "Exec with ./$0 jesus|loli model [ a2l|atl|both minThreads maxThreads numRuns fooprint|nofootprint optimised|nooptimised]"
+    echo $RUN_COMMAND
     exit
     ;;
 esac
 
 
+#CLASSPATH=$(pwd)/../../../scripts/a2l.packaging/build/a2l.jar:$ECLIPSE_PLUGINS/*
+
+EMF=`ls $ECLIPSE_PLUGINS/*emf* | paste -s -d ":" -`
+ATL=`ls $ECLIPSE_PLUGINS/*atl* | paste -s -d ":" -`
+MODISCO=`ls $ECLIPSE_PLUGINS/*modisco* | paste -s -d ":" -`
+UML=`ls $ECLIPSE_PLUGINS/*uml* | paste -s -d ":" -`
+ANTLR=`ls $ECLIPSE_PLUGINS/*antlr*3* | paste -s -d ":" -`
+ECLIPSE=`ls $ECLIPSE_PLUGINS/*org.eclipse.core.* | paste -s -d ":" -`
+
+CLASSPATH=$(pwd)/../../../scripts/a2l.packaging/build/a2l.jar:$EMF:$ATL:$MODISCO:$UML:$ANTLR:$ECLIPSE
+
+
+case $2 in
+  copydeps)
+    rm -rf /tmp/deps
+	mkdir /tmp/deps
+	cp `echo $EMF | tr ":" " "` /tmp/eclipse-jars
+	cp `echo $ATL | tr ":" " "` /tmp/eclipse-jars
+	cp `echo $MODISCO | tr ":" " "` /tmp/eclipse-jars
+	cp `echo $UML | tr ":" " "` /tmp/eclipse-jars
+	cp `echo $ANTLR | tr ":" " "` /tmp/eclipse-jars
+	cp `echo $ECLIPSE | tr ":" " "` /tmp/eclipse-jars
+	exit
+  ;;
+esac
+
 MODEL=$2
 if [ -z "$MODEL" ]
   then
-    echo "Exec with ./$0 jesus|loli model [ a2l|atl|both minThreads maxThreads numRuns ]"
+    echo $RUN_COMMAND
     exit
 fi
 
@@ -73,18 +100,6 @@ if [ -z "$BENCHMARK_FOLDER" ]
     BENCHMARK_FOLDER="/tmp/benchmark"
     echo "Using /tmp/benchmark as default option"
 fi
-
-
-#CLASSPATH=$(pwd)/../../../scripts/a2l.packaging/build/a2l.jar:$ECLIPSE_PLUGINS/*
-
-EMF=`ls $ECLIPSE_PLUGINS/*emf* | paste -s -d ":" -`
-ATL=`ls $ECLIPSE_PLUGINS/*atl* | paste -s -d ":" -`
-MODISCO=`ls $ECLIPSE_PLUGINS/*modisco* | paste -s -d ":" -`
-UML=`ls $ECLIPSE_PLUGINS/*uml* | paste -s -d ":" -`
-ANTLR=`ls $ECLIPSE_PLUGINS/*antlr*3* | paste -s -d ":" -`
-ECLIPSE=`ls $ECLIPSE_PLUGINS/*org.eclipse.core.* | paste -s -d ":" -`
-
-CLASSPATH=$(pwd)/../../../scripts/a2l.packaging/build/a2l.jar:$EMF:$ATL:$MODISCO:$UML:$ANTLR:$ECLIPSE
 
 #Some tests!
 #java -d64 -server -XX:+AggressiveOpts -XX:+UseLargePages -Xmn10g 
