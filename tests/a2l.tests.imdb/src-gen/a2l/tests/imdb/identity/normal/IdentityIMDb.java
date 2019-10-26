@@ -107,13 +107,15 @@ public class IdentityIMDb implements ITransformation, lintra2.transfo.ITransform
 		for (IPendingTask tasks : parallelPendingTasks) {
 			tasks.execute(this.globalContext.getGlobalTrace());
 		}
+	}
+
+	@Override
+	public void doSequentialCleanup() {
 		final Collection<? extends org.eclipse.emf.ecore.EObject> objects_OUT = (Collection<? extends org.eclipse.emf.ecore.EObject>) OUTModel_PartialOutput_
 				.allInstances();
 		for (org.eclipse.emf.ecore.EObject obj : objects_OUT) {
 			if (obj.eContainer() == null) {
-				synchronized (OUTModel_) {
-					OUTModel_.add(obj);
-				}
+				OUTModel_.add(obj);
 			}
 		}
 	}
@@ -495,7 +497,7 @@ public class IdentityIMDb implements ITransformation, lintra2.transfo.ITransform
 		double get2;
 		MovieType get3;
 		int get4;
-		List<Person> get5;
+		javaslang.collection.List<Person> get5;
 		List<java.lang.Object> itTmp6;
 		m20 = imdb.movies.MoviesFactory.eINSTANCE.createMovie();
 
@@ -516,7 +518,7 @@ public class IdentityIMDb implements ITransformation, lintra2.transfo.ITransform
 		get4 = m1.getYear();
 
 		/* 25:15-25:25: m1.persons */
-		get5 = m1.getPersons();
+		get5 = javaslang.collection.List.ofAll(m1.getPersons());
 
 		m20.setTitle(get1);
 		;
@@ -546,7 +548,7 @@ public class IdentityIMDb implements ITransformation, lintra2.transfo.ITransform
 	public void create_actor(Actor p1) throws BlackboardException {
 		Actor p27;
 		java.lang.String get8;
-		List<Movie> get9;
+		javaslang.collection.List<Movie> get9;
 		List<java.lang.Object> itTmp10;
 		p27 = imdb.movies.MoviesFactory.eINSTANCE.createActor();
 
@@ -558,7 +560,7 @@ public class IdentityIMDb implements ITransformation, lintra2.transfo.ITransform
 		get8 = p1.getName();
 
 		/* 35:14-35:23: p1.movies */
-		get9 = p1.getMovies();
+		get9 = javaslang.collection.List.ofAll(p1.getMovies());
 
 		p27.setName(get8);
 		;
@@ -577,7 +579,7 @@ public class IdentityIMDb implements ITransformation, lintra2.transfo.ITransform
 	public void create_actress(Actress p1) throws BlackboardException {
 		Actress p211;
 		java.lang.String get12;
-		List<Movie> get13;
+		javaslang.collection.List<Movie> get13;
 		List<java.lang.Object> itTmp14;
 		p211 = imdb.movies.MoviesFactory.eINSTANCE.createActress();
 
@@ -589,7 +591,7 @@ public class IdentityIMDb implements ITransformation, lintra2.transfo.ITransform
 		get12 = p1.getName();
 
 		/* 45:14-45:23: p1.movies */
-		get13 = p1.getMovies();
+		get13 = javaslang.collection.List.ofAll(p1.getMovies());
 
 		p211.setName(get12);
 		;
@@ -608,8 +610,8 @@ public class IdentityIMDb implements ITransformation, lintra2.transfo.ITransform
 	public void create_clique(Clique c1) throws BlackboardException {
 		Clique c215;
 		double get16;
-		java.util.List<Movie> get17;
-		java.util.List<Person> get18;
+		javaslang.collection.List<Movie> get17;
+		javaslang.collection.List<Person> get18;
 		List<java.lang.Object> itTmp19;
 		List<java.lang.Object> itTmp20;
 		c215 = imdb.movies.MoviesFactory.eINSTANCE.createClique();
@@ -622,10 +624,10 @@ public class IdentityIMDb implements ITransformation, lintra2.transfo.ITransform
 		get16 = c1.getAvgRating();
 
 		/* 55:20-55:35: c1.commonMovies */
-		get17 = c1.getCommonMovies();
+		get17 = javaslang.collection.List.ofAll(c1.getCommonMovies());
 
 		/* 56:15-56:25: c1.persons */
-		get18 = c1.getPersons();
+		get18 = javaslang.collection.List.ofAll(c1.getPersons());
 
 		c215.setAvgRating(get16);
 		;
@@ -656,7 +658,7 @@ public class IdentityIMDb implements ITransformation, lintra2.transfo.ITransform
 	public void create_couple(Couple c1) throws BlackboardException {
 		Couple c221;
 		double get22;
-		java.util.List<Movie> get23;
+		javaslang.collection.List<Movie> get23;
 		Person get24;
 		Person get25;
 		List<java.lang.Object> itTmp26;
@@ -670,7 +672,7 @@ public class IdentityIMDb implements ITransformation, lintra2.transfo.ITransform
 		get22 = c1.getAvgRating();
 
 		/* 66:20-66:35: c1.commonMovies */
-		get23 = c1.getCommonMovies();
+		get23 = javaslang.collection.List.ofAll(c1.getCommonMovies());
 
 		/* 67:10-67:15: c1.p1 */
 		get24 = c1.getP1();

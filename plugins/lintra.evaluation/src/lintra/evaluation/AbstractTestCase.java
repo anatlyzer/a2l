@@ -304,7 +304,7 @@ public abstract class AbstractTestCase {
 	
 
 	protected void doBenchmark(Arguments args, String trafo) throws FileNotFoundException, IOException, Exception {
-		doTestAux(args, trafo, (m) -> "inputs/" + m);
+		doTestAux(args, trafo, (m) -> m.startsWith("/") ? m : "inputs/" + m);
 	}
 	
 	protected void doTest(Arguments args, String trafo) throws FileNotFoundException, IOException, Exception {

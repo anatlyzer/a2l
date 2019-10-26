@@ -296,14 +296,14 @@ public class EMFDriver implements IMetaDriver {
 						post += "			tasks.execute(this.globalContext.getGlobalTrace());";
 						post += "  }";
 						
-						post += "final Collection<? extends org.eclipse.emf.ecore.EObject> objects_" + m.getModelName() + " = (Collection<? extends org.eclipse.emf.ecore.EObject>)" + partialOutputName + ".allInstances();";
-						post += "for(org.eclipse.emf.ecore.EObject obj : " + "objects_" + m.getModelName()+ ") {";
-						post += "		if (obj.eContainer() == null) {";
-						post += "         synchronized(" + outputName + ") {";
-						post += "			" + outputName + ".add(obj);";
-						post += "		  }";
-						post += "		}";									
-						post += "}";
+//						post += "final Collection<? extends org.eclipse.emf.ecore.EObject> objects_" + m.getModelName() + " = (Collection<? extends org.eclipse.emf.ecore.EObject>)" + partialOutputName + ".allInstances();";
+//						post += "for(org.eclipse.emf.ecore.EObject obj : " + "objects_" + m.getModelName()+ ") {";
+//						post += "		if (obj.eContainer() == null) {";
+//						post += "         synchronized(" + outputName + ") {";
+//						post += "			" + outputName + ".add(obj);";
+//						post += "		  }";
+//						post += "		}";									
+//						post += "}";
 						// OUTModel_PartialOutput_
 						
 //						post += "try { ";
@@ -327,7 +327,27 @@ public class EMFDriver implements IMetaDriver {
 //								+ "}";
 					}
 				}
+				
 				post += "}" + "\n";
+				
+				post += "@Override public void doSequentialCleanup() { "
+						+ "\n"; 
+
+				for (ModelInfo m : ATLUtils.getModelInfo(ctx.getEnv().getAnalysis().getATLModel())) {
+					if ( m.isOutput() ) {
+						String outputName = ((LindaTyping) ctx.getTyping()).getAreaName(m.getModelName());
+						String partialOutputName = ((LindaTyping) ctx.getTyping()).getPartialOutputAreaName(m.getModelName());						
+						post += "final Collection<? extends org.eclipse.emf.ecore.EObject> objects_" + m.getModelName() + " = (Collection<? extends org.eclipse.emf.ecore.EObject>)" + partialOutputName + ".allInstances();";
+						post += "for(org.eclipse.emf.ecore.EObject obj : " + "objects_" + m.getModelName()+ ") {";
+						post += "		if (obj.eContainer() == null) {";
+						post += "			" + outputName + ".add(obj);";
+						post += "		}";									
+						post += "}";
+					}
+				}
+
+				post += "}" + "\n";
+
 			}
 			
 			// Create the writer methods

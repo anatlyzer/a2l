@@ -56,7 +56,8 @@ public class DirectExecutor {
 		long numWorkers = Math.min(numThreads, numChunks);
 		
 		Scheduler scheduler = new Scheduler(numWorkers, numChunks);
-		
+		// System.out.println("With increase: " + increase);
+		increase = 500;
 		Worker firstWorker = null;
 		increase = 1;
 		for (long i = 0; i < numWorkers; i++) {
@@ -99,11 +100,8 @@ public class DirectExecutor {
 	}
 	
 	public void postprocessing(IGlobalContext context) {
-		// context.getGlobalTrace().pack();
+		context.getGlobalTrace().pack();
 	
-		for (ITransformation2 t : partialTrafos) {
-			t.doSequentialPostprocessing();
-		}
 		java.util.concurrent.ForkJoinPool myPool = new java.util.concurrent.ForkJoinPool(this.numThreads);
 		try {
 			myPool.submit(() -> {
@@ -115,11 +113,15 @@ public class DirectExecutor {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
-		
-		// TODO: do this with threads
-//		for (ITransformation2 t : partialTrafos) {
-//			t.doPostprocessing();
-//		}
+
+		for (ITransformation2 t : partialTrafos) {
+			t.doSequentialPostprocessing();
+		}
+
+		for (ITransformation2 t : partialTrafos) {
+			t.doSequentialCleanup();;
+		}
+
 	}
 	
 	public static class Scheduler {
@@ -154,6 +156,11 @@ public class DirectExecutor {
 			// This eventually finishes
 		}
 		
+		public long getNextChunk2(long currentChunk) {
+			long next = nextChunk.getAndIncrement();
+			return next;
+		}
+		
 	}
 
 	
@@ -180,6 +187,11 @@ public class DirectExecutor {
 		
 	}	
 	
+	private static enum SchedulingKind {
+		DYNAMIC,
+		GUIDED
+	}
+	
 	private final class Worker implements Runnable {
 		
 		private long currentChunk;
@@ -187,7 +199,9 @@ public class DirectExecutor {
 		private final Scheduler scheduler;
 		private final ITransformation2 trafo;
 		private String name;
-
+		
+		private final SchedulingKind kind = SchedulingKind.DYNAMIC;  
+		
 		public Worker(String name, long chunk, long chunkSize, Scheduler scheduler) {
 			this.name = name;
 			this.currentChunk = chunk;
@@ -206,12 +220,50 @@ public class DirectExecutor {
 
 		@Override
 		public void run() {
-			long total = extent.size();
-			while ( true ) {
-				long min = currentChunk * chunkSize;
-				long max = Math.min(currentChunk * chunkSize + chunkSize, total);
-				//System.out.println(name + " " + currentChunk + "[" + min + ".." + max +"]");
-				//System.out.println("Doing: " + min + "..." + max);
+			if (kind == SchedulingKind.DYNAMIC) {
+			
+				long total = extent.size();
+				while ( true ) {
+					long min = currentChunk * chunkSize;
+					long max = Math.min(currentChunk * chunkSize + chunkSize, total);
+					//System.out.println(name + " " + currentChunk + "[" + min + ".." + max +"]");
+					//System.out.println("Doing: " + min + "..." + max);
+					for(long i = min; i < max; i++) {
+						try {
+							trafo.transform(extent.get(i));
+						} catch (BlackboardException e) {
+							e.printStackTrace();
+							return;
+						}
+					}
+					
+					long nextChunk = scheduler.getNextChunk(currentChunk);
+					if ( nextChunk == - 1 ) {
+						return;
+					} else {
+						currentChunk = nextChunk;
+					}
+				}
+			} else {
+				int fragment = (int) currentChunk / numThreads;
+				int pos = (int) (currentChunk % numThreads);
+				long total = extent.size();
+				
+				
+				long init = fragment == 0 ? 0 : (total / (2 * fragment));
+				long end  = total / (2 * (fragment + 1)); 
+				long size = end - init;
+
+				long chunk_size = size / numThreads;
+				// \/ sumar el principio no?
+				
+				long min = init + pos * chunk_size;
+				long max = init + Math.min(pos * chunk_size + chunk_size, size);
+				
+				if (min >= total) 
+					return;
+				
+				// Same as above
 				for(long i = min; i < max; i++) {
 					try {
 						trafo.transform(extent.get(i));
@@ -221,12 +273,9 @@ public class DirectExecutor {
 					}
 				}
 				
-				long nextChunk = scheduler.getNextChunk(currentChunk);
-				if ( nextChunk == - 1 ) {
-					return;
-				} else {
-					currentChunk = nextChunk;
-				}
+				long nextChunk = scheduler.getNextChunk2(currentChunk);
+				currentChunk = nextChunk;
+				
 			}
 		}
 	}
