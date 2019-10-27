@@ -1,11 +1,15 @@
 package a2l.compiler;
 
 import java.util.Collection;
+import java.util.Collections;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 import java.util.stream.Collectors;
 
 import anatlyzer.atl.types.Type;
+import anatlyzer.atlext.ATL.MatchedRule;
+import anatlyzer.atlext.ATL.OutPatternElement;
 import anatlyzer.atlext.OCL.OclExpression;
 import anatlyzer.atlext.OCL.VariableExp;
 
@@ -19,6 +23,7 @@ import anatlyzer.atlext.OCL.VariableExp;
 public class OptimisationHints {
 
 	private Map<OclExpression, Hotspot> hotspots = new HashMap<>();
+	private Map<OutPatternElement, List<MatchedRule>> dependencyInfo;
 	
 	public void addHotspot(Hotspot h) {
 		hotspots.put(h.getCachedExpression(), h);
@@ -31,7 +36,6 @@ public class OptimisationHints {
 	public Collection<? extends Hotspot> getHotspots() {
 		return hotspots.values();
 	}
-
 	
 	public static interface Hotspot {
 		public OclExpression getCachedExpression();
@@ -86,6 +90,19 @@ public class OptimisationHints {
 
 
 	}
+
+	public void addDependencyInfo(Map<OutPatternElement, List<MatchedRule>> dependencyInfo) {
+		this.dependencyInfo = dependencyInfo;		
+	}
+
+	public boolean isOutputPatternUsed(OutPatternElement ope) {
+		List<MatchedRule> rules = dependencyInfo.get(ope);
+		return rules != null && rules.size() > 0;
+	}
+	
+	//public Map<OutPatternElement, List<MatchedRule>> getDependencyInfo() {
+	//	return Collections.unmodifiableMap(dependencyInfo);
+	//}
 
 
 }

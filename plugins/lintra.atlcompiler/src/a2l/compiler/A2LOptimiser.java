@@ -6,9 +6,11 @@ import java.util.HashMap;
 import java.util.HashSet;
 import java.util.LinkedList;
 import java.util.List;
+import java.util.Map;
 import java.util.Set;
 import java.util.function.Function;
 
+import org.eclipse.emf.common.util.TreeIterator;
 import org.eclipse.emf.ecore.ENamedElement;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.EReference;
@@ -34,6 +36,9 @@ import anatlyzer.atl.util.ATLUtils;
 import anatlyzer.atlext.ATL.Binding;
 import anatlyzer.atlext.ATL.InPattern;
 import anatlyzer.atlext.ATL.LocatedElement;
+import anatlyzer.atlext.ATL.MatchedRule;
+import anatlyzer.atlext.ATL.OutPatternElement;
+import anatlyzer.atlext.ATL.RuleResolutionInfo;
 import anatlyzer.atlext.ATL.Unit;
 import anatlyzer.atlext.OCL.CollectionOperationCallExp;
 import anatlyzer.atlext.OCL.Iterator;
@@ -44,6 +49,7 @@ import anatlyzer.atlext.OCL.OCLPackage;
 import anatlyzer.atlext.OCL.OclExpression;
 import anatlyzer.atlext.OCL.OperationCallExp;
 import anatlyzer.atlext.OCL.PropertyCallExp;
+import anatlyzer.atlext.OCL.ResolveTempResolution;
 import anatlyzer.atlext.OCL.VariableExp;
 import anatlyzer.atlext.processing.AbstractVisitor;
 
@@ -53,7 +59,10 @@ public class A2LOptimiser extends AbstractVisitor {
 		REFERENCE_AS_SET,
 		MUTABLE_COLLECTIONS,
 		FOLD_ITERATOR,
-		PATH_BASED_CACHING
+		PATH_BASED_CACHING,
+		
+		RULE_OPTIMISATION_SORT_FILTERS, 
+		RULE_OPTIMISATION_AVOID_UNUSED_TRACE		
 	}
 	
 	private IAnalyserResult result;
@@ -89,16 +98,55 @@ public class A2LOptimiser extends AbstractVisitor {
 	public OptimisationHints run() {
 		startVisiting(result.getATLModel().getRoot());
 		
+		OptimisationHints hints;
 		if ( isEnabled(Optimisation.PATH_BASED_CACHING) ) {
 			// This is using a second pass
-			return new PathDepdendentCachingOptimisation().run(result.getATLModel());
+			hints = new PathDepdendentCachingOptimisation().run(result.getATLModel());
 		} else {
-			return new OptimisationHints(); // Empty
+			hints = new OptimisationHints(); // Empty
 		}
 		
+		hints.addDependencyInfo(getDependencyInfo(result));
+		
+		return hints;
 	}
 
 	
+	private Map<OutPatternElement, List<MatchedRule>> getDependencyInfo(IAnalyserResult result) {
+		ATLModel model = result.getATLModel();
+		List<MatchedRule> rules = ATLUtils.getAllMatchedRules(model);
+		Map<OutPatternElement, List<MatchedRule>> deps = new HashMap<>();
+
+		for (MatchedRule r : rules) {
+			for(OutPatternElement e : r.getOutPattern().getElements()) {
+				for (Binding b : e.getBindings()) {
+					for (RuleResolutionInfo rri : b.getResolvedBy()) {
+						OutPatternElement ope = rri.getRule().getOutPattern().getElements().get(0);
+						deps.computeIfAbsent(ope, k -> new ArrayList<>());
+						deps.get(ope).add(r);
+					}
+										
+					TreeIterator<EObject> it = b.getValue().eAllContents();
+					while (it.hasNext()) {
+						EObject obj = it.next();
+						if (obj instanceof OperationCallExp) {
+							OperationCallExp op = (OperationCallExp) obj;
+							if ("resolveTemp".equals(op.getOperationName())) {
+								for (ResolveTempResolution rr : op.getResolveTempResolvedBy()) {
+									OutPatternElement ope = rr.getElement();
+									deps.computeIfAbsent(ope, k -> new ArrayList<>());
+									deps.get(ope).add(r);
+								}
+							}
+						}
+					}
+				}
+			}
+		}
+				
+		return deps;
+	}
+
 	@Override
 	public void inCollectionOperationCallExp(CollectionOperationCallExp self) {
 		// Do not execute this optimisation, it fails for findCouples

@@ -27,6 +27,7 @@ import org.eclipse.emf.ecore.EClass;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.EStructuralFeature;
 
+import a2l.compiler.A2LOptimiser.Optimisation;
 import a2l.compiler.AstAnnotations;
 import a2l.compiler.OptimisationHints;
 import a2l.compiler.OptimisationHints.CachedValue;
@@ -130,8 +131,6 @@ public abstract class LindaCompiler extends BaseCompiler {
 	protected JMethod getDriverDynamically;
 	protected Set<String> targetMetamodelNames = new HashSet<>();
 	
-	// Weird, set by subclasses...
-	protected OptimisationHints hints = new OptimisationHints();
 	private JClass globalContextClass;
 	
 	
@@ -552,23 +551,34 @@ public abstract class LindaCompiler extends BaseCompiler {
 	protected LMatchObject createMainMatcher(Module self, JVariableDeclaration matchVariable) {
 		LMatchObject match = JavagenFactory.eINSTANCE.createLMatchObject();		
 		
+		List<MatchedRule> matchedRules = new ArrayList<MatchedRule>();
 		for (ModuleElement e : self.getElements()) {
 			if ( e instanceof MatchedRule ) {
-				MatchedRule r = (MatchedRule) e;
-				JMethod createMethod = get(ruleToCreateMethod, r);
-				
-				JMethod checkPredicate = ruleToCheckMethod.get(r);
-				assertNotNull(checkPredicate);
-				
-				LMatchCase matchCase = JavagenFactory.eINSTANCE.createLMatchCase();
-				matchCase.setObj( refVar(matchVariable) );
-				matchCase.setPredicate( checkPredicate );
-
-				matchCase.getStatements().add( createText(
-						createMethod.getName() + "(" + cast(r.getInPattern().getElements().get(0).getInferredType()) + matchVariable.getName() + ")" ) );
-
-				match.getCases().add(matchCase);
+				matchedRules.add((MatchedRule) e);
 			}
+		}
+		
+		if (optimisations.contains(Optimisation.RULE_OPTIMISATION_SORT_FILTERS)) {
+			// Sort according the likelihood of matching. 
+//			for (MatchedRule r : matchedRules) {
+//				Metaclass t = ATLUtils.getInPatternType(r);
+//			}
+		}
+		
+		for (MatchedRule r : matchedRules) {
+			JMethod createMethod = get(ruleToCreateMethod, r);
+			
+			JMethod checkPredicate = ruleToCheckMethod.get(r);
+			assertNotNull(checkPredicate);
+			
+			LMatchCase matchCase = JavagenFactory.eINSTANCE.createLMatchCase();
+			matchCase.setObj( refVar(matchVariable) );
+			matchCase.setPredicate( checkPredicate );
+
+			matchCase.getStatements().add( createText(
+					createMethod.getName() + "(" + cast(r.getInPattern().getElements().get(0).getInferredType()) + matchVariable.getName() + ")" ) );
+
+			match.getCases().add(matchCase);
 		}
 		return match;
 	}

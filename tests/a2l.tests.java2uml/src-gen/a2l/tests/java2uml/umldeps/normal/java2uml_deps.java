@@ -31,7 +31,7 @@ public class java2uml_deps implements ITransformation, lintra2.transfo.ITransfor
 	private PartialOutputModel UCDModel_PartialOutput_;
 	a2l.runtime.InputExtent inputExtent;
 	a2l.tests.java2uml.umldeps.normal.java2uml_depsGlobalContext globalContext;
-	java.util.Map<Object, Object> trace = new java.util.HashMap<Object, Object>();
+	a2l.runtime.GlobalTrace.PartialTrace trace = null;
 
 	public java2uml_deps(a2l.runtime.InputExtent inputExtent,
 			a2l.tests.java2uml.umldeps.normal.java2uml_depsGlobalContext global) {
@@ -111,13 +111,15 @@ public class java2uml_deps implements ITransformation, lintra2.transfo.ITransfor
 		for (IPendingTask tasks : parallelPendingTasks) {
 			tasks.execute(this.globalContext.getGlobalTrace());
 		}
+	}
+
+	@Override
+	public void doSequentialCleanup() {
 		final Collection<? extends org.eclipse.emf.ecore.EObject> objects_UCD = (Collection<? extends org.eclipse.emf.ecore.EObject>) UCDModel_PartialOutput_
 				.allInstances();
 		for (org.eclipse.emf.ecore.EObject obj : objects_UCD) {
 			if (obj.eContainer() == null) {
-				synchronized (UCDModel_) {
-					UCDModel_.add(obj);
-				}
+				UCDModel_.add(obj);
 			}
 		}
 	}
@@ -133,76 +135,188 @@ public class java2uml_deps implements ITransformation, lintra2.transfo.ITransfor
 		return org.eclipse.uml2.common.util.UML2Util.getXMIIdentifier((org.eclipse.emf.ecore.InternalEObject) obj);
 	}
 
-	class PendingTask_Package_packagedElement implements IPendingTask {
+	final class PendingTask_Package_packagedElement implements IPendingTask {
 		private final org.eclipse.uml2.uml.Package tgt;
 		private final Collection<Object> objId;
 		private final a2l.runtime.IModel area;
+		private final java.util.Set<? extends Object> tgtElems;
 
 		public PendingTask_Package_packagedElement(org.eclipse.uml2.uml.Package tgt, Collection<Object> objId,
-				a2l.runtime.IModel area) {
+				a2l.runtime.IModel area, java.util.Set<? extends Object> tgtElems) {
 			this.tgt = tgt;
 			this.objId = objId;
 			this.area = area;
+			this.tgtElems = tgtElems;
 		}
 
 		public PendingTask_Package_packagedElement(org.eclipse.uml2.uml.Package tgt, Object objId,
-				a2l.runtime.IModel area) {
+				a2l.runtime.IModel area, java.util.Set<? extends Object> tgtElems) {
 			this.tgt = tgt;
 			this.objId = java.util.Collections.singletonList(objId);
 			this.area = area;
+			this.tgtElems = tgtElems;
 		}
 
 		public void execute(a2l.runtime.GlobalTrace globalTrace) {
-			tgt.getPackagedElements()
-					.addAll((Collection<org.eclipse.uml2.uml.PackageableElement>) globalTrace.getAll(objId));
+			if (tgtElems == null) {
+				ArrayList<Object> result = new ArrayList<>(objId.size());
+				for (Object object : objId) {
+					Object tgt = getTrace(object, globalTrace);
+					if (tgt instanceof org.eclipse.uml2.uml.PackageableElement) {
+						result.add(tgt);
+					}
+				}
+				tgt.getPackagedElements()
+						.addAll((Collection<? extends org.eclipse.uml2.uml.PackageableElement>) result);
+			} else {
+				ArrayList<Object> result = new ArrayList<>(objId.size());
+				for (Object object : objId) {
+					if (tgtElems.contains(object)) {
+						result.add(getTargetResolveTempOrSame(object, globalTrace));
+					} else {
+						Object tgt = getTrace(object, globalTrace);
+						if (tgt instanceof org.eclipse.uml2.uml.PackageableElement) {
+							result.add(tgt);
+						}
+					}
+				}
+				tgt.getPackagedElements()
+						.addAll((Collection<? extends org.eclipse.uml2.uml.PackageableElement>) result);
+			}
+		}
+
+		private final Object getTrace(Object object, a2l.runtime.GlobalTrace globalTrace) {
+			return globalTrace.get(object);
+		}
+
+		private final Object getTargetResolveTempOrSame(Object object, a2l.runtime.GlobalTrace globalTrace) {
+			if (object instanceof a2l.runtime.ResolveTempObject) {
+				a2l.runtime.ResolveTempObject rtmp = (a2l.runtime.ResolveTempObject) object;
+				return globalTrace.getSecondary(rtmp.getSource(), rtmp.getOpeName());
+			}
+			return object;
 		}
 	}
 
-	class PendingTask_Dependency_supplier implements IPendingTask {
+	final class PendingTask_Dependency_supplier implements IPendingTask {
 		private final org.eclipse.uml2.uml.Dependency tgt;
 		private final Collection<Object> objId;
 		private final a2l.runtime.IModel area;
+		private final java.util.Set<? extends Object> tgtElems;
 
 		public PendingTask_Dependency_supplier(org.eclipse.uml2.uml.Dependency tgt, Collection<Object> objId,
-				a2l.runtime.IModel area) {
+				a2l.runtime.IModel area, java.util.Set<? extends Object> tgtElems) {
 			this.tgt = tgt;
 			this.objId = objId;
 			this.area = area;
+			this.tgtElems = tgtElems;
 		}
 
 		public PendingTask_Dependency_supplier(org.eclipse.uml2.uml.Dependency tgt, Object objId,
-				a2l.runtime.IModel area) {
+				a2l.runtime.IModel area, java.util.Set<? extends Object> tgtElems) {
 			this.tgt = tgt;
 			this.objId = java.util.Collections.singletonList(objId);
 			this.area = area;
+			this.tgtElems = tgtElems;
 		}
 
 		public void execute(a2l.runtime.GlobalTrace globalTrace) {
-			tgt.getSuppliers().addAll((Collection<org.eclipse.uml2.uml.NamedElement>) globalTrace.getAll(objId));
+			if (tgtElems == null) {
+				ArrayList<Object> result = new ArrayList<>(objId.size());
+				for (Object object : objId) {
+					Object tgt = getTrace(object, globalTrace);
+					if (tgt instanceof org.eclipse.uml2.uml.NamedElement) {
+						result.add(tgt);
+					}
+				}
+				tgt.getSuppliers().addAll((Collection<? extends org.eclipse.uml2.uml.NamedElement>) result);
+			} else {
+				ArrayList<Object> result = new ArrayList<>(objId.size());
+				for (Object object : objId) {
+					if (tgtElems.contains(object)) {
+						result.add(getTargetResolveTempOrSame(object, globalTrace));
+					} else {
+						Object tgt = getTrace(object, globalTrace);
+						if (tgt instanceof org.eclipse.uml2.uml.NamedElement) {
+							result.add(tgt);
+						}
+					}
+				}
+				tgt.getSuppliers().addAll((Collection<? extends org.eclipse.uml2.uml.NamedElement>) result);
+			}
+		}
+
+		private final Object getTrace(Object object, a2l.runtime.GlobalTrace globalTrace) {
+			return globalTrace.get(object);
+		}
+
+		private final Object getTargetResolveTempOrSame(Object object, a2l.runtime.GlobalTrace globalTrace) {
+			if (object instanceof a2l.runtime.ResolveTempObject) {
+				a2l.runtime.ResolveTempObject rtmp = (a2l.runtime.ResolveTempObject) object;
+				return globalTrace.getSecondary(rtmp.getSource(), rtmp.getOpeName());
+			}
+			return object;
 		}
 	}
 
-	class PendingTask_Dependency_client implements IPendingTask {
+	final class PendingTask_Dependency_client implements IPendingTask {
 		private final org.eclipse.uml2.uml.Dependency tgt;
 		private final Collection<Object> objId;
 		private final a2l.runtime.IModel area;
+		private final java.util.Set<? extends Object> tgtElems;
 
 		public PendingTask_Dependency_client(org.eclipse.uml2.uml.Dependency tgt, Collection<Object> objId,
-				a2l.runtime.IModel area) {
+				a2l.runtime.IModel area, java.util.Set<? extends Object> tgtElems) {
 			this.tgt = tgt;
 			this.objId = objId;
 			this.area = area;
+			this.tgtElems = tgtElems;
 		}
 
-		public PendingTask_Dependency_client(org.eclipse.uml2.uml.Dependency tgt, Object objId,
-				a2l.runtime.IModel area) {
+		public PendingTask_Dependency_client(org.eclipse.uml2.uml.Dependency tgt, Object objId, a2l.runtime.IModel area,
+				java.util.Set<? extends Object> tgtElems) {
 			this.tgt = tgt;
 			this.objId = java.util.Collections.singletonList(objId);
 			this.area = area;
+			this.tgtElems = tgtElems;
 		}
 
 		public void execute(a2l.runtime.GlobalTrace globalTrace) {
-			tgt.getClients().addAll((Collection<org.eclipse.uml2.uml.NamedElement>) globalTrace.getAll(objId));
+			if (tgtElems == null) {
+				ArrayList<Object> result = new ArrayList<>(objId.size());
+				for (Object object : objId) {
+					Object tgt = getTrace(object, globalTrace);
+					if (tgt instanceof org.eclipse.uml2.uml.NamedElement) {
+						result.add(tgt);
+					}
+				}
+				tgt.getClients().addAll((Collection<? extends org.eclipse.uml2.uml.NamedElement>) result);
+			} else {
+				ArrayList<Object> result = new ArrayList<>(objId.size());
+				for (Object object : objId) {
+					if (tgtElems.contains(object)) {
+						result.add(getTargetResolveTempOrSame(object, globalTrace));
+					} else {
+						Object tgt = getTrace(object, globalTrace);
+						if (tgt instanceof org.eclipse.uml2.uml.NamedElement) {
+							result.add(tgt);
+						}
+					}
+				}
+				tgt.getClients().addAll((Collection<? extends org.eclipse.uml2.uml.NamedElement>) result);
+			}
+		}
+
+		private final Object getTrace(Object object, a2l.runtime.GlobalTrace globalTrace) {
+			return globalTrace.get(object);
+		}
+
+		private final Object getTargetResolveTempOrSame(Object object, a2l.runtime.GlobalTrace globalTrace) {
+			if (object instanceof a2l.runtime.ResolveTempObject) {
+				a2l.runtime.ResolveTempObject rtmp = (a2l.runtime.ResolveTempObject) object;
+				return globalTrace.getSecondary(rtmp.getSource(), rtmp.getOpeName());
+			}
+			return object;
 		}
 	}
 
@@ -231,170 +345,170 @@ public class java2uml_deps implements ITransformation, lintra2.transfo.ITransfor
 	}
 
 	public boolean check_Class2Class(java.lang.Object s1) throws BlackboardException {
-		ClassDeclaration tmp152;
-		boolean get153;
-		boolean tmp154;
-		boolean tmp155;
+		ClassDeclaration tmp154;
+		boolean get155;
+		boolean tmp156;
+		boolean tmp157;
 		if (s1 instanceof org.eclipse.gmt.modisco.java.ClassDeclaration) {
-			tmp152 = (org.eclipse.gmt.modisco.java.ClassDeclaration) s1;
+			tmp154 = (org.eclipse.gmt.modisco.java.ClassDeclaration) s1;
 
 			/* 66:33-66:41: s1.proxy */
-			get153 = tmp152.isProxy();
+			get155 = tmp154.isProxy();
 
-			tmp154 = false;
+			tmp156 = false;
 
-			tmp155 = get153 == tmp154;
+			tmp157 = get155 == tmp156;
 
-			return tmp155 == true;
+			return tmp157 == true;
 		}
 		return false;
 	}
 
 	public Dependency lazy_rule_createGeneralizationDependency(ClassDeclaration class_) throws BlackboardException {
-		Dependency gTgt156;
-		java.lang.String tmp157;
-		java.lang.String get158;
+		Dependency gTgt158;
 		java.lang.String tmp159;
-		java.lang.String tmp160;
+		java.lang.String get160;
 		java.lang.String tmp161;
-		TypeAccess get162;
-		Type get163;
-		java.lang.String get164;
-		java.lang.String tmp165;
-		TypeAccess get166;
-		Type get167;
-		gTgt156 = org.eclipse.uml2.uml.UMLFactory.eINSTANCE.createDependency();
+		java.lang.String tmp162;
+		java.lang.String tmp163;
+		TypeAccess get164;
+		Type get165;
+		java.lang.String get166;
+		java.lang.String tmp167;
+		TypeAccess get168;
+		Type get169;
+		gTgt158 = org.eclipse.uml2.uml.UMLFactory.eINSTANCE.createDependency();
 
-		UCDModel_PartialOutput_.write(gTgt156);
+		UCDModel_PartialOutput_.write(gTgt158);
 
-		tmp157 = "generalization pointing from ";
+		tmp159 = "generalization pointing from ";
 
 		/* 76:49-76:59: class.name */
-		get158 = class_.getName();
+		get160 = class_.getName();
 
-		tmp159 = tmp157 + get158;
+		tmp161 = tmp159 + get160;
 
-		tmp160 = " to ";
+		tmp162 = " to ";
 
-		tmp161 = tmp159 + tmp160;
+		tmp163 = tmp161 + tmp162;
 
 		/* 76:71-76:97: class.superClass.type.name */
 		/* 76:71-76:92: class.superClass.type */
 		/* 76:71-76:87: class.superClass */
-		get162 = class_.getSuperClass();
+		get164 = class_.getSuperClass();
 
-		get163 = get162.getType();
+		get165 = get164.getType();
 
-		get164 = get163.getName();
+		get166 = get165.getName();
 
-		tmp165 = tmp161 + get164;
+		tmp167 = tmp163 + get166;
 
 		/* 77:15-77:36: class.superClass.type */
 		/* 77:15-77:31: class.superClass */
-		get166 = class_.getSuperClass();
+		get168 = class_.getSuperClass();
 
-		get167 = get166.getType();
+		get169 = get168.getType();
 
-		gTgt156.setName(tmp165);
+		gTgt158.setName(tmp167);
 		;
 
 		boolean matched0 = false;
-		if (check_Class2Class(get167)) {
-			this.parallelPendingTasks.add(new PendingTask_Dependency_supplier(gTgt156, get167, UCDModel_));
+		if (check_Class2Class(get169)) {
+			this.parallelPendingTasks.add(new PendingTask_Dependency_supplier(gTgt158, get169, UCDModel_, null));
 		}
 
 		boolean matched1 = false;
 		if (check_Class2Class(class_)) {
-			this.parallelPendingTasks.add(new PendingTask_Dependency_client(gTgt156, class_, UCDModel_));
+			this.parallelPendingTasks.add(new PendingTask_Dependency_client(gTgt158, class_, UCDModel_, null));
 		}
 
-		return gTgt156;
+		return gTgt158;
 	}
 
 	public Dependency lazy_rule_createUsageDependency(FieldDeclaration field) throws BlackboardException {
-		Dependency gTgt168;
-		java.lang.String tmp169;
-		java.lang.String tmp170;
+		Dependency gTgt170;
 		java.lang.String tmp171;
 		java.lang.String tmp172;
 		java.lang.String tmp173;
-		TypeAccess get174;
-		Type get175;
-		java.lang.String get176;
-		java.lang.String tmp177;
-		TypeAccess get178;
-		Type get179;
-		javaslang.collection.List<ClassDeclaration> call181;
-		javaslang.collection.List<BodyDeclaration> get182;
-		boolean op183;
-		ClassDeclaration r184;
-		gTgt168 = org.eclipse.uml2.uml.UMLFactory.eINSTANCE.createDependency();
+		java.lang.String tmp174;
+		java.lang.String tmp175;
+		TypeAccess get176;
+		Type get177;
+		java.lang.String get178;
+		java.lang.String tmp179;
+		TypeAccess get180;
+		Type get181;
+		javaslang.collection.List<ClassDeclaration> call183;
+		javaslang.collection.List<BodyDeclaration> get184;
+		boolean op185;
+		ClassDeclaration r186;
+		gTgt170 = org.eclipse.uml2.uml.UMLFactory.eINSTANCE.createDependency();
 
-		UCDModel_PartialOutput_.write(gTgt168);
+		UCDModel_PartialOutput_.write(gTgt170);
 
-		tmp169 = "field pointing from ";
+		tmp171 = "field pointing from ";
 
-		tmp170 = "xx";
-
-		tmp171 = tmp169 + tmp170;
-
-		tmp172 = " to ";
+		tmp172 = "xx";
 
 		tmp173 = tmp171 + tmp172;
+
+		tmp174 = " to ";
+
+		tmp175 = tmp173 + tmp174;
 
 		/* 86:52-86:72: field.type.type.name */
 		/* 86:52-86:67: field.type.type */
 		/* 86:52-86:62: field.type */
-		get174 = field.getType();
+		get176 = field.getType();
 
-		get175 = get174.getType();
+		get177 = get176.getType();
 
-		get176 = get175.getName();
+		get178 = get177.getName();
 
-		tmp177 = tmp173 + get176;
+		tmp179 = tmp175 + get178;
 
 		/* 87:16-87:31: field.type.type */
 		/* 87:16-87:26: field.type */
-		get178 = field.getType();
+		get180 = field.getType();
 
-		get179 = get178.getType();
+		get181 = get180.getType();
 
 		/*
 		 * 90:15-90:84: thisModule.allClasses->any(cd |
 		 * cd.bodyDeclarations->includes(field))
 		 */
 		/* 90:15-90:36: thisModule.allClasses */
-		call181 = helper_global_allClasses();
+		call183 = helper_global_allClasses();
 
-		r184 = null;
+		r186 = null;
 
-		for (ClassDeclaration cd180 : call181) {
+		for (ClassDeclaration cd182 : call183) {
 			/* 90:47-90:83: cd.bodyDeclarations->includes(field) */
 			/* 90:47-90:66: cd.bodyDeclarations */
-			get182 = javaslang.collection.List.ofAll(cd180.getBodyDeclarations());
+			get184 = javaslang.collection.List.ofAll(cd182.getBodyDeclarations());
 
-			op183 = get182.contains(field);
+			op185 = get184.contains(field);
 
-			if (op183) {
-				r184 = cd180;
+			if (op185) {
+				r186 = cd182;
 
 				break;
 			}
 		}
-		gTgt168.setName(tmp177);
+		gTgt170.setName(tmp179);
 		;
 
 		boolean matched2 = false;
-		if (check_Class2Class(get179)) {
-			this.parallelPendingTasks.add(new PendingTask_Dependency_supplier(gTgt168, get179, UCDModel_));
+		if (check_Class2Class(get181)) {
+			this.parallelPendingTasks.add(new PendingTask_Dependency_supplier(gTgt170, get181, UCDModel_, null));
 		}
 
 		boolean matched3 = false;
-		if (check_Class2Class(r184)) {
-			this.parallelPendingTasks.add(new PendingTask_Dependency_client(gTgt168, r184, UCDModel_));
+		if (check_Class2Class(r186)) {
+			this.parallelPendingTasks.add(new PendingTask_Dependency_client(gTgt170, r186, UCDModel_, null));
 		}
 
-		return gTgt168;
+		return gTgt170;
 	}
 
 	public javaslang.collection.List<ClassDeclaration> helper_org_eclipse_gmt_modisco_java_Package_allNonProxyClassesInPackage(
@@ -887,7 +1001,7 @@ public class java2uml_deps implements ITransformation, lintra2.transfo.ITransfor
 				itTmp105.add(o);
 			}
 		}
-		this.pendingTasks.add(new PendingTask_Package_packagedElement(t197, itTmp105, UCDModel_));
+		this.pendingTasks.add(new PendingTask_Package_packagedElement(t197, itTmp105, UCDModel_, null));
 	}
 
 	public void create_Package2Package(org.eclipse.gmt.modisco.java.Package s1) throws BlackboardException {
@@ -917,7 +1031,9 @@ public class java2uml_deps implements ITransformation, lintra2.transfo.ITransfor
 		List<java.lang.Object> itTmp138;
 		List<java.lang.Object> itTmp139;
 		List<java.lang.Object> itTmp140;
-		List<java.lang.Object> itTmp141;
+		java.util.Set<java.lang.Object> tgtElems141;
+		List<java.lang.Object> itTmp142;
+		java.util.Set<java.lang.Object> tgtElems143;
 		t1106 = org.eclipse.uml2.uml.UMLFactory.eINSTANCE.createPackage();
 
 		this.trace.put(s1, t1106);
@@ -1061,7 +1177,7 @@ public class java2uml_deps implements ITransformation, lintra2.transfo.ITransfor
 				itTmp138.add(o);
 			}
 		}
-		this.pendingTasks.add(new PendingTask_Package_packagedElement(t1106, itTmp138, UCDModel_));
+		this.pendingTasks.add(new PendingTask_Package_packagedElement(t1106, itTmp138, UCDModel_, null));
 
 		itTmp139 = new ArrayList<Object>();
 
@@ -1071,44 +1187,48 @@ public class java2uml_deps implements ITransformation, lintra2.transfo.ITransfor
 				itTmp139.add(o);
 			}
 		}
-		this.pendingTasks.add(new PendingTask_Package_packagedElement(t1106, itTmp139, UCDModel_));
+		this.pendingTasks.add(new PendingTask_Package_packagedElement(t1106, itTmp139, UCDModel_, null));
 
 		itTmp140 = new ArrayList<Object>();
 
+		tgtElems141 = new java.util.HashSet<>();
+
 		for (java.lang.Object o : r125) {
 			boolean matched7 = false;
-			itTmp140.add(o);
+			a2l.runtime.RuntimeUtils.addToBindingTemporal(itTmp140, tgtElems141, o);
 		}
-		this.parallelPendingTasks.add(new PendingTask_Package_packagedElement(t1106, itTmp140, UCDModel_));
+		this.parallelPendingTasks.add(new PendingTask_Package_packagedElement(t1106, itTmp140, UCDModel_, tgtElems141));
 
-		itTmp141 = new ArrayList<Object>();
+		itTmp142 = new ArrayList<Object>();
+
+		tgtElems143 = new java.util.HashSet<>();
 
 		for (java.lang.Object o : r133) {
 			boolean matched8 = false;
-			itTmp141.add(o);
+			a2l.runtime.RuntimeUtils.addToBindingTemporal(itTmp142, tgtElems143, o);
 		}
-		this.parallelPendingTasks.add(new PendingTask_Package_packagedElement(t1106, itTmp141, UCDModel_));
+		this.parallelPendingTasks.add(new PendingTask_Package_packagedElement(t1106, itTmp142, UCDModel_, tgtElems143));
 	}
 
 	public void create_Class2Class(ClassDeclaration s1) throws BlackboardException {
-		Class t1142;
-		java.lang.String get143;
-		java.lang.Object tmp144;
-		Modifier get145;
-		boolean op146;
+		Class t1144;
+		java.lang.String get145;
+		java.lang.Object tmp146;
 		Modifier get147;
-		InheritanceKind get148;
-		java.lang.String tmp149;
-		boolean tmp150;
-		boolean r151;
-		t1142 = org.eclipse.uml2.uml.UMLFactory.eINSTANCE.createClass();
+		boolean op148;
+		Modifier get149;
+		InheritanceKind get150;
+		java.lang.String tmp151;
+		boolean tmp152;
+		boolean r153;
+		t1144 = org.eclipse.uml2.uml.UMLFactory.eINSTANCE.createClass();
 
-		this.trace.put(s1, t1142);
+		this.trace.put(s1, t1144);
 
-		UCDModel_PartialOutput_.write(t1142);
+		UCDModel_PartialOutput_.write(t1144);
 
 		/* 68:12-68:19: s1.name */
-		get143 = s1.getName();
+		get145 = s1.getName();
 
 		/*
 		 * 69:18-69:115: if s1.modifier.oclIsUndefined() then OclUndefined else
@@ -1116,32 +1236,32 @@ public class java2uml_deps implements ITransformation, lintra2.transfo.ITransfor
 		 */
 		/* 69:21-69:49: s1.modifier.oclIsUndefined() */
 		/* 69:21-69:32: s1.modifier */
-		get145 = s1.getModifier();
+		get147 = s1.getModifier();
 
-		op146 = get145 == null;
+		op148 = get147 == null;
 
-		r151 = false;
+		r153 = false;
 
-		if (op146) {
-			tmp144 = null;
+		if (op148) {
+			tmp146 = null;
 
-			r151 = (boolean) tmp144;
+			r153 = (boolean) tmp146;
 		} else { /* 69:73-69:96: s1.modifier.inheritance */
 			/* 69:73-69:84: s1.modifier */
-			get147 = s1.getModifier();
+			get149 = s1.getModifier();
 
-			get148 = get147.getInheritance();
+			get150 = get149.getInheritance();
 
-			tmp149 = "abstract";
+			tmp151 = "abstract";
 
-			tmp150 = get148.equals(tmp149);
+			tmp152 = get150.equals(tmp151);
 
-			r151 = tmp150;
+			r153 = tmp152;
 		}
-		t1142.setName(get143);
+		t1144.setName(get145);
 		;
 
-		t1142.setIsAbstract(r151);
+		t1144.setIsAbstract(r153);
 		;
 	}
 

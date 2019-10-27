@@ -23,6 +23,7 @@ import org.eclipse.emf.ecore.EClass;
 import a2l.anatlyzerext.visitor.AbstractAnatlyzerExtVisitor;
 import a2l.compiler.A2LOptimiser.Optimisation;
 import a2l.compiler.FootprintGenerator;
+import a2l.compiler.OptimisationHints;
 import a2l.compiler.RunnerGenerator;
 import a2l.driver.DriverConfiguration;
 import a2l.driver.IMetaDriver;
@@ -103,7 +104,12 @@ public abstract class BaseCompiler extends AbstractAnatlyzerExtVisitor {
 
 	
 	protected String basePkg;
-	protected DriverConfiguration driverConfiguration;	
+	protected DriverConfiguration driverConfiguration;
+	protected Set<? extends Optimisation> optimisations = new HashSet<Optimisation>();	
+
+	// Weird, set by subclasses...
+	protected OptimisationHints hints = new OptimisationHints();
+
 	
 	public BaseCompiler(IAnalyserResult result, DriverConfiguration driverConfiguration) {
 		this.result = result;
@@ -131,6 +137,7 @@ public abstract class BaseCompiler extends AbstractAnatlyzerExtVisitor {
 	 */
 	public void atlOptimize(Set<? extends Optimisation> opts) {
 		// Does nothing, subclases should override if needed
+		this.optimisations = opts;
 	}
 
 	
@@ -420,8 +427,15 @@ public abstract class BaseCompiler extends AbstractAnatlyzerExtVisitor {
 		for (int i = 0; i < self.getOutPattern().getElements().size(); i++) {
 			OutPatternElement ope = self.getOutPattern().getElements().get(i);			
 			
-			addStm(createMethod, env.getDriver(ope).compileTraceGeneration(self, self.getInPattern().getElements().get(0), ope, ctx()));
-			// addStm(createMethod, outVar.getName() + ".setId(" + "TraceFunction.create(" + inElement.getName() + ".getId(), " + i + "," + quote(self.getName()) + "))");
+			if (optimisations.contains(Optimisation.RULE_OPTIMISATION_AVOID_UNUSED_TRACE)) {
+				if ( hints.isOutputPatternUsed(ope) ) {
+					// Same as the below, but we only generate the trace when needed
+					addStm(createMethod, env.getDriver(ope).compileTraceGeneration(self, self.getInPattern().getElements().get(0), ope, ctx()));				
+				}
+			} else {			
+				addStm(createMethod, env.getDriver(ope).compileTraceGeneration(self, self.getInPattern().getElements().get(0), ope, ctx()));
+				// addStm(createMethod, outVar.getName() + ".setId(" + "TraceFunction.create(" + inElement.getName() + ".getId(), " + i + "," + quote(self.getName()) + "))");
+			}
 		}
 
 		

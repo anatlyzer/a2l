@@ -39,10 +39,10 @@ public class A2LCompiler extends LindaCompiler {
 
 	@Override
 	public void atlOptimize(Set<? extends Optimisation> opts) {
+		super.atlOptimize(opts);
 		hints = new A2LOptimiser(result).
 			withOptimisations(opts).
 			run();
-		System.out.println(hints);
 	}
 
 	
