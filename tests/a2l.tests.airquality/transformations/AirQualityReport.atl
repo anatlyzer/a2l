@@ -1,0 +1,51 @@
+-- @Xatlcompiler emftvm
+-- @path MM=/a2l.tests.airquality/metamodels/AirQuality.ecore
+-- @path MM1=/a2l.tests.airquality/metamodels/AirQuality.ecore
+
+-- @genpath MM=/a2l.tests.airquality/metamodels/AirQuality.genmodel
+-- @genpath MM1=/a2l.tests.airquality/metamodels/AirQuality.genmodel
+
+-- @project a2l.tests.airquality=a2l.tests.airquality.optimised
+-- @driver MM=emf
+-- @driver MM1=emf
+--
+-- @optimizations all
+
+module AirQualityReport;
+create OUT : MM1 from IN : MM;
+
+-- A station detects more than 10 times a high amount of CO in a month
+rule highCO {
+	from
+	-- The ->including(0) is to avoid the issue of not handling well OclUndefined casted to integer types
+		m1 : MM!AirMeasurement  (m1.date.day=1 and
+								-- min() is not supported by the standard VM, so use the sort()->first() trick
+--								 m1.date.hour = MM!AirMeasurement.allInstances()->select(m2 | m1.station=m2.station and m1.date.year = m2.date.year and m1.date.month = m2.date.month and m1.date.day = m2.date.day )->collect(m | m.date.hour)->including(0)->sortedBy(v | v)->first() and
+--								 m1.date.minute = MM!AirMeasurement.allInstances()->select(m2 | m1.station=m2.station and m1.date.year = m2.date.year and m1.date.month = m2.date.month and m1.date.day = m2.date.day and m2.date.hour<1)->collect(m | m.date.minute)->including(0)->sortedBy(v | v)->first() and
+
+
+								 m1.date.hour = MM!AirMeasurement.allInstances()->select(m2 | m1.station=m2.station and m1.date.year = m2.date.year and m1.date.month = m2.date.month and m1.date.day = m2.date.day )->collect(m | m.date.hour)->sortedBy(v | v)->first() and
+								 m1.date.minute = MM!AirMeasurement.allInstances()->select(m2 | m1.station=m2.station and m1.date.year = m2.date.year and m1.date.month = m2.date.month and m1.date.day = m2.date.day and m2.date.hour<1)->collect(m | m.date.minute)->sortedBy(v | v)->first() and 
+
+
+								 MM!AirMeasurement.allInstances()->select(m2 | m1<>m2 and m1.station = m2.station and
+																			  m1.date.month = m2.date.month and
+																			  m1.date.year = m2.date.year)
+																->collect(m3 | m3.co )
+																->select(coLevel | coLevel >= 4.5)->size() > 10)
+	to 
+		w : MM1!Warning (
+			level <- 4.5,
+			pollutant <- 'co',
+			station <- m1.station,
+			date <- d2
+		),
+		d2 : MM1!Date (
+			year <- m1.date.year,
+			month <- m1.date.month,
+			day <- m1.date.day,
+			hour <- m1.date.hour,
+			minute <- m1.date.minute,
+			second <- m1.date.second
+		)
+}

@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<?eclipse version="3.0"?>
+
+<!--
+-->
+
+<plugin>
+
+   <extension point="org.eclipse.emf.ecore.generated_package">
+      <!-- @generated movies -->
+      <package
+            uri="http://movies/1.0"
+            class="imdb.movies.MoviesPackage"
+            genModel="metamodels/movies.genmodel"/>
+   </extension>
+
+   <extension point="org.eclipse.emf.ecore.generated_package">
+      <!-- @generated AirQuality -->
+      <package
+            uri="http://airquality"
+            class="airquality.AirqualityPackage"
+            genModel="metamodels/AirQuality.genmodel"/>
+   </extension>
+
+</plugin>

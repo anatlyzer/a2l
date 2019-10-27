@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<genmodel:GenModel xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:ecore="http://www.eclipse.org/emf/2002/Ecore"
+    xmlns:genmodel="http://www.eclipse.org/emf/2002/GenModel" modelDirectory="/a2l.tests.airquality/src-gen" modelPluginID="a2l.tests.airquality"
+    modelName="AirQuality" rootExtendsClass="org.eclipse.emf.ecore.impl.MinimalEObjectImpl$Container"
+    importerID="org.eclipse.emf.importer.ecore" complianceLevel="8.0" copyrightFields="false"
+    operationReflection="true" importOrganizing="true">
+  <foreignModel>AirQuality.ecore</foreignModel>
+  <genPackages prefix="Airquality" disposableProviderFactory="true" ecorePackage="AirQuality.ecore#/">
+    <genClasses ecoreClass="AirQuality.ecore#//AirMeasurement">
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute AirQuality.ecore#//AirMeasurement/pm2_5"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute AirQuality.ecore#//AirMeasurement/pm10"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute AirQuality.ecore#//AirMeasurement/o3"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute AirQuality.ecore#//AirMeasurement/no2"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute AirQuality.ecore#//AirMeasurement/so2"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute AirQuality.ecore#//AirMeasurement/co"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute AirQuality.ecore#//AirMeasurement/station"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference AirQuality.ecore#//AirMeasurement/date"/>
+    </genClasses>
+    <genClasses ecoreClass="AirQuality.ecore#//Warning">
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute AirQuality.ecore#//Warning/level"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute AirQuality.ecore#//Warning/pollutant"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference AirQuality.ecore#//Warning/date"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute AirQuality.ecore#//Warning/station"/>
+    </genClasses>
+    <genClasses ecoreClass="AirQuality.ecore#//Date">
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute AirQuality.ecore#//Date/year"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute AirQuality.ecore#//Date/month"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute AirQuality.ecore#//Date/day"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute AirQuality.ecore#//Date/hour"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute AirQuality.ecore#//Date/minute"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute AirQuality.ecore#//Date/second"/>
+      <genFeatures property="None" notify="false" createChild="false" ecoreFeature="ecore:EReference AirQuality.ecore#//Date/warning"/>
+      <genFeatures property="None" notify="false" createChild="false" ecoreFeature="ecore:EReference AirQuality.ecore#//Date/measurement"/>
+    </genClasses>
+  </genPackages>
+</genmodel:GenModel>
