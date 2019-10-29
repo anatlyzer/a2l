@@ -1,13 +1,16 @@
 package lintra.evaluation;
 
+import java.io.BufferedReader;
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
+import java.io.FileReader;
 import java.io.IOException;
 import java.io.OutputStream;
 import java.io.PrintStream;
 import java.lang.management.GarbageCollectorMXBean;
 import java.lang.management.ManagementFactory;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.function.Function;
 
@@ -133,15 +136,15 @@ public abstract class AbstractTestCase {
 		EPackage.Registry.INSTANCE.put(pkg.getNsURI(), pkg);
 	}
 
-	protected void assertDiff(Resource m1, Resource m2) {
+	protected void assertDiff(Resource m1, Resource m2) throws Exception {
 		assertDiff(m1, m2, (obj) -> null, null, UseIdentifiers.NEVER);
 	}
 
-	protected void assertDiff(Resource m1, Resource m2, UseIdentifiers idUSE) {
+	protected void assertDiff(Resource m1, Resource m2, UseIdentifiers idUSE) throws Exception {
 		assertDiff(m1, m2, (obj) -> null, null, idUSE);
 	}
 
-	protected void assertDiff(String metamodel, Resource m1, Resource m2) {
+	protected void assertDiff(String metamodel, Resource m1, Resource m2) throws Exception {
 		try {
 			m1.save(new FileOutputStream("temp/m1.xmi"), null);
 			m2.save(new FileOutputStream("temp/m2.xmi"), null);
@@ -163,7 +166,18 @@ public abstract class AbstractTestCase {
 	}
 
 	protected void assertDiff(Resource m1, Resource m2, Function<EObject, String> idFunction,
-			FeatureFilter featureFilter, UseIdentifiers idUSE) {
+			FeatureFilter featureFilter, UseIdentifiers idUSE) throws Exception {
+		
+		if (compareAsTextLevel()) {
+			File f1 = new File("temp/m1.xmi");
+			File f2 = new File("temp/m2.xmi");
+			m1.save(new FileOutputStream(f1), null);
+			m2.save(new FileOutputStream(f2), null);
+			// Identical files
+			if (compare(f1, f2)) 
+				return;			
+		}
+		
 		// 4. Test
 		// We use the result of the evolved transformation as an oracle to test
 		// the patched transformation.
@@ -228,6 +242,18 @@ public abstract class AbstractTestCase {
                 Assert.fail("There are differences! " + differences.size());
 
 	}
+
+	protected boolean compare(File f1, File f2) throws Exception {
+		try(BufferedReader r1 = new BufferedReader(new FileReader(f1));
+			BufferedReader r2 = new BufferedReader(new FileReader(f2))) {
+			ArrayList<String> lines1 = new ArrayList<>();
+			ArrayList<String> lines2 = new ArrayList<>();
+			r1.lines().forEach(l -> lines1.add(l));
+			r2.lines().forEach(l -> lines2.add(l));
+			return lines1.equals(lines2);		
+		}
+	}
+
 
 	public static void registerFactory() {
 		Resource.Factory.Registry.INSTANCE.getExtensionToFactoryMap().put("*", new XMIResourceFactoryImpl() {
@@ -506,6 +532,11 @@ public abstract class AbstractTestCase {
 	
 	private String getPid() {
 		return ManagementFactory.getRuntimeMXBean().getName();
+	}
+
+
+	protected boolean compareAsTextLevel() {
+		return false;
 	}
 	
 }

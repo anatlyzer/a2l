@@ -22,6 +22,7 @@ import java.util.function.Function;
 import java.util.function.Supplier;
 import java.util.stream.Collectors;
 
+import org.eclipse.emf.common.util.TreeIterator;
 import org.eclipse.emf.ecore.EAttribute;
 import org.eclipse.emf.ecore.EClass;
 import org.eclipse.emf.ecore.EObject;
@@ -1216,7 +1217,8 @@ public abstract class LindaCompiler extends BaseCompiler {
 		LMatchObject match = resolveObjectWithRules(block.getStatements(), binding.getResolvedBy(), rightVar, (r) -> Arrays.asList(onMatch.apply(r)));
 		if ( onTargetElement != null ) {
 			// This means it is a pure target assignment. No need to check target element existence.
-			if ( binding.getResolvedBy().isEmpty() ) {
+			// except if this target element comes from a resolveTemp
+			if ( binding.getResolvedBy().isEmpty() && !containsResolveTemp(binding)) {
 				addStm(block, onTargetElement.get());								
 			} else {
 				LMatchCase matchCase = JavagenFactory.eINSTANCE.createLMatchCase();
@@ -1234,6 +1236,10 @@ public abstract class LindaCompiler extends BaseCompiler {
 		}
 	}
 	
+	private boolean containsResolveTemp(Binding binding) {
+		return ATLUtils.findElement(binding.getValue(), (o) -> o instanceof OperationCallExp && ((OperationCallExp) o).getOperationName().equals("resolveTemp")).isPresent();
+	}
+
 	protected LMatchObject resolveObjectWithRules(List<JStatement> stms, Collection<? extends RuleResolutionInfo> resolvingRules, JVariableDeclaration rightVar, Function<MatchedRule, List<JStatement>> onMatch) {		
 		LMatchObject match = JavagenFactory.eINSTANCE.createLMatchObject();
 		stms.add(match);

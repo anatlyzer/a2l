@@ -33,6 +33,11 @@ public class DSLModel2KM2TestCase extends AbstractTestCase {
 	private static final String IN1_MODEL = t + "SimpleExampleM-DSLModel.xmi";
 	private static final String IN2_MODEL = t + "SimpleExampleMM-DSL.xmi";
 	
+	@Override
+	protected boolean compareAsTextLevel() {
+		return true;
+	}
+	
 	@Test
 	public void test() throws Exception {
 		registerMetamodel(DSLPackage.eINSTANCE);
@@ -41,8 +46,7 @@ public class DSLModel2KM2TestCase extends AbstractTestCase {
 		
 		doTest(new Arguments(1, 1, 1, IN1_MODEL, ExecutionFramework.BOTH), t);
 	}
-	
-
+		
 	@Override
 	protected Object executeLintra(Resource input, int numThreads, boolean footprint, boolean optimised,
 			AggregatedStatsRecorder recorder) throws Exception {
