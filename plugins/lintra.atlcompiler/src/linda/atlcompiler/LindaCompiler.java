@@ -65,6 +65,7 @@ import anatlyzer.atlext.ATL.CalledRule;
 import anatlyzer.atlext.ATL.ContextHelper;
 import anatlyzer.atlext.ATL.ExpressionStat;
 import anatlyzer.atlext.ATL.ForStat;
+import anatlyzer.atlext.ATL.Helper;
 import anatlyzer.atlext.ATL.IfStat;
 import anatlyzer.atlext.ATL.InPatternElement;
 import anatlyzer.atlext.ATL.LazyRule;
@@ -564,6 +565,10 @@ public abstract class LindaCompiler extends BaseCompiler {
 //			for (MatchedRule r : matchedRules) {
 //				Metaclass t = ATLUtils.getInPatternType(r);
 //			}
+		} else {
+			// We sort according to the size of the filter
+			// We do this to make sure that we always have the same method ordering
+			matchedRules.sort(this::comparingMatchedRule);
 		}
 		
 		for (MatchedRule r : matchedRules) {
@@ -1244,18 +1249,20 @@ public abstract class LindaCompiler extends BaseCompiler {
 		LMatchObject match = JavagenFactory.eINSTANCE.createLMatchObject();
 		stms.add(match);
 		
-		for (RuleResolutionInfo rri : resolvingRules) {
-			assertNotNull(rri.getRule());
+		List<MatchedRule> rules = resolvingRules.stream().map(RuleResolutionInfo::getRule).sorted(this::comparingMatchedRule).collect(Collectors.toList());
+		
+		for (MatchedRule rule : rules) {
+			assertNotNull(rule);
 			LMatchCase matchCase = JavagenFactory.eINSTANCE.createLMatchCase();
 			match.getCases().add(matchCase);
 
-			JMethod checkPredicate = ruleToCheckMethod.get(rri.getRule());
+			JMethod checkPredicate = ruleToCheckMethod.get(rule);
 			assertNotNull(checkPredicate);
 			
 			matchCase.setObj( refVar(rightVar) );
 			matchCase.setPredicate( checkPredicate );
 
-			addStm(matchCase, onMatch.apply(rri.getRule()));
+			addStm(matchCase, onMatch.apply(rule));
 //			addStm(matchCase, outVar.getName() + ".set" + featAccess + "(" + 
 //					"TraceFunction.resolve(" + rightVar.getName() + ".getId(), " + quote(rri.getRule().getName()) + ")");
 			
@@ -1264,6 +1271,61 @@ public abstract class LindaCompiler extends BaseCompiler {
 		return match;
 	}
 	
+	public int comparingMatchedRule(MatchedRule r1, MatchedRule r2) {
+		int numNodes1 = countFilterNodes(r1);
+		int numNodes2 = countFilterNodes(r2);
+		return Integer.compare(numNodes1, numNodes2);
+	}
+	
+	private int countFilterNodes(MatchedRule r) {
+		if (r.getInPattern().getFilter() == null)
+			return 0;
+		
+		Set<Helper> seen = new HashSet<>();
+		return countNodes(r.getInPattern().getFilter(), seen);
+	}
+
+	protected int countNodes(OclExpression expr, Set<Helper> seen) {
+		int count = 0;
+		TreeIterator<EObject> it = expr.eAllContents();
+		while (it.hasNext()) {
+			EObject obj = it.next();
+			if (obj instanceof OclExpression) {
+				count++;
+				if (obj instanceof OperationCallExp) {
+					OperationCallExp op = (OperationCallExp) obj;
+					if ( ATLUtils.isBuiltinOperation(op) )
+						continue;
+					
+					boolean isStaticCall = false;
+					OclExpression src = op.getSource();
+					if (src instanceof VariableExp) {
+						isStaticCall = (((VariableExp) src).getReferredVariable()).getVarName().equals("thisModule");
+					}
+					
+					if (isStaticCall && op.getStaticResolver() instanceof StaticHelper) {
+						count += countNodes((StaticHelper) op.getStaticResolver(), seen);
+					} else if (! isStaticCall) {
+						
+						for (ContextHelper ctx : op.getDynamicResolvers()) {
+							count += countNodes(ctx, seen);
+						}
+					}
+					
+				}
+			}
+		}
+		return count;
+	}
+
+	private int countNodes(Helper h, Set<Helper> seen) {
+		if (seen.contains(h))
+			return 0;
+		
+		seen.add(h);
+		return countNodes(ATLUtils.getHelperBody(h), seen);
+	}
+
 	private void handleResolveTemp(OperationCallExp self) {
 		List<JStatement> stms = createCommentedList(self);
 		JVariableDeclaration newVar = gen.addLocalVar(env.currentBlock(), "resolveTemp", typ.createTypeRef(self.getInferredType()));		
