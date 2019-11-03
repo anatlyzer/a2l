@@ -35,9 +35,9 @@ public class CompileEvaluationHandler extends AbstractHandler {
 			HashSet<Optimisation> optimisations = new HashSet<Optimisation>();
 			Collections.addAll(optimisations, Optimisation.values());
 			
-			if ( ! (path.getValue().equals("a2l.tests.findcouples") && path.getValue().equals("a2l.tests.dblp_v2") )) {
-				optimisations.remove(Optimisation.PATH_BASED_CACHING);
-			}
+			// if ( ! (path.getValue().equals("a2l.tests.findcouples") && path.getValue().equals("a2l.tests.dblp_v2") )) {			
+			//	optimisations.remove(Optimisation.PATH_BASED_CACHING);
+			//}
 			
 			t.setPackageName(path.getValue() + ".optimised");			
 			t.setOptimisations(optimisations);
