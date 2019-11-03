@@ -2,5 +2,10 @@ name: Measure feature coverage of a set of experiments
 extensionID: anatlyzer.experiments.featurecoverage
 
 projects: 
--  name: example.vmtesting
+-  name: a2l.tests.vmtesting.emf
    ignoredFiles: [ ATL2Problem_fixed.atl, test_iterate.atl ]
+-  name: a2l.tests.imdb
+-  name: a2l.tests.java2uml
+-  name: a2l.tests.airquality
+   
+   
