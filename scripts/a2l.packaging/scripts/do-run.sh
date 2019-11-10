@@ -24,10 +24,11 @@ ATL=`ls $ECLIPSE_PLUGINS/*atl* | paste -s -d ":" -`
 MODISCO=`ls $ECLIPSE_PLUGINS/*modisco* | paste -s -d ":" -`
 UML=`ls $ECLIPSE_PLUGINS/*uml* | paste -s -d ":" -`
 ANTLR=`ls $ECLIPSE_PLUGINS/*antlr*3* | paste -s -d ":" -`
-ECLIPSE=`ls $ECLIPSE_PLUGINS/*org.eclipse.core.* | paste -s -d ":" -`
+ECLIPSE=`ls $ECLIPSE_PLUGINS/*org.eclipse.core* | paste -s -d ":" -`
+OSGI=`ls $ECLIPSE_PLUGINS/*org.eclipse.osgi* | paste -s -d ":" -`
+EQUINOX=`ls $ECLIPSE_PLUGINS/*org.eclipse.equinox* | paste -s -d ":" -`
 
-CLASSPATH=$(pwd)/../../../scripts/a2l.packaging/build/a2l.jar:$EMF:$ATL:$MODISCO:$UML:$ANTLR:$ECLIPSE
-
+CLASSPATH=$(pwd)/../../../scripts/a2l.packaging/build/a2l.jar:$ECLIPSE:$EQUINOX:$OSGI:$EMF:$ATL:$MODISCO:$UML:$ANTLR
 
 case $2 in
   copydeps)
