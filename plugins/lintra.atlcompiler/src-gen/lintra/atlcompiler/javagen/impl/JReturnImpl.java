@@ -62,6 +62,7 @@ public class JReturnImpl extends JStatementImpl implements JReturn {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public JExpression getResult() {
 		return result;
 	}
@@ -86,6 +87,7 @@ public class JReturnImpl extends JStatementImpl implements JReturn {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public void setResult(JExpression newResult) {
 		if (newResult != result) {
 			NotificationChain msgs = null;

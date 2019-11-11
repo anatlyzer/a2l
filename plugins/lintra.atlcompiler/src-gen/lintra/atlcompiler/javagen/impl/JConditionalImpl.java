@@ -80,6 +80,7 @@ public class JConditionalImpl extends JStatementImpl implements JConditional {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public EList<JConditionalBlock> getConditions() {
 		if (conditions == null) {
 			conditions = new EObjectContainmentEList<JConditionalBlock>(JConditionalBlock.class, this, JavagenPackage.JCONDITIONAL__CONDITIONS);
@@ -92,6 +93,7 @@ public class JConditionalImpl extends JStatementImpl implements JConditional {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public JConditionalBlock getElse() {
 		return else_;
 	}
@@ -116,6 +118,7 @@ public class JConditionalImpl extends JStatementImpl implements JConditional {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public void setElse(JConditionalBlock newElse) {
 		if (newElse != else_) {
 			NotificationChain msgs = null;

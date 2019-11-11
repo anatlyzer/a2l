@@ -83,6 +83,7 @@ import lintra.atlcompiler.javagen.JavaGenModel;
 import lintra.atlcompiler.javagen.JavagenFactory;
 import lintra.atlcompiler.javagen.LMatchCase;
 import lintra.atlcompiler.javagen.LMatchObject;
+import lintra.atlcompiler.javagen.Visibility;
 import lintra.lingen.LinGen;
 
 public abstract class BaseCompiler extends AbstractAnatlyzerExtVisitor {
@@ -403,6 +404,7 @@ public abstract class BaseCompiler extends AbstractAnatlyzerExtVisitor {
 		JMethod createMethod = JavagenFactory.eINSTANCE.createJMethod();
 		createMethod.setName("create_" + self.getName());
 		tclass.getMethods().add(createMethod);
+		createMethod.setVisibility(Visibility.PRIVATE);
 		createMethod.getParameters().add( 
 				CreationHelpers.createParameter(self.getInPattern().getElements().get(0).getVarName(), 
 				typ.createMetaTypeRef((Metaclass) self.getInPattern().getElements().get(0).getInferredType() )) );
@@ -445,7 +447,7 @@ public abstract class BaseCompiler extends AbstractAnatlyzerExtVisitor {
 	public void configureLazyRule(LazyRule self) {		
 		JMethod method = JavagenFactory.eINSTANCE.createJMethod();
 		method.setName("lazy_rule_" + self.getName());
-		method.getThrows_().add(typ.createTypeRef("BlackboardException"));
+		// method.getThrows_().add(typ.createTypeRef("BlackboardException"));
 		gen.lazyRuleToMethod.put(self, method);
 		tclass.getMethods().add(method);
 	}
@@ -515,7 +517,7 @@ public abstract class BaseCompiler extends AbstractAnatlyzerExtVisitor {
 	public void configureCalledRule(CalledRule self) {
 		JMethod method = JavagenFactory.eINSTANCE.createJMethod();
 		method.setName("called_rule_" + self.getName());
-		method.getThrows_().add(typ.createTypeRef("BlackboardException"));
+		// method.getThrows_().add(typ.createTypeRef("BlackboardException"));
 		gen.calledRuleToMethod.put(self, method);
 		tclass.getMethods().add(method);
 		
@@ -580,6 +582,7 @@ public abstract class BaseCompiler extends AbstractAnatlyzerExtVisitor {
 	protected JMethod createCheckMethod(MatchedRule self) {
 		JMethod checkMethod = JavagenFactory.eINSTANCE.createJMethod();
 		checkMethod.setName("check_" + self.getName());
+		checkMethod.setVisibility(Visibility.PRIVATE);
 		tclass.getMethods().add(checkMethod);
 		ruleToCheckMethod.put(self, checkMethod);
 		return checkMethod;

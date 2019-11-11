@@ -69,6 +69,7 @@ public class JLibTypeImpl extends JTypeImpl implements JLibType {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public String getPkg() {
 		return pkg;
 	}
@@ -78,6 +79,7 @@ public class JLibTypeImpl extends JTypeImpl implements JLibType {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public void setPkg(String newPkg) {
 		String oldPkg = pkg;
 		pkg = newPkg;
@@ -152,7 +154,7 @@ public class JLibTypeImpl extends JTypeImpl implements JLibType {
 	public String toString() {
 		if (eIsProxy()) return super.toString();
 
-		StringBuffer result = new StringBuffer(super.toString());
+		StringBuilder result = new StringBuilder(super.toString());
 		result.append(" (pkg: ");
 		result.append(pkg);
 		result.append(')');

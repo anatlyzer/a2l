@@ -41,8 +41,10 @@ import lintra.atlcompiler.javagen.JavagenPackage;
 import lintra.atlcompiler.javagen.LMatchCase;
 import lintra.atlcompiler.javagen.LMatchObject;
 
+import lintra.atlcompiler.javagen.Visibility;
 import org.eclipse.emf.ecore.EAttribute;
 import org.eclipse.emf.ecore.EClass;
+import org.eclipse.emf.ecore.EEnum;
 import org.eclipse.emf.ecore.EPackage;
 import org.eclipse.emf.ecore.EReference;
 
@@ -308,6 +310,13 @@ public class JavagenPackageImpl extends EPackageImpl implements JavagenPackage {
 	private EClass jExprStatementEClass = null;
 
 	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	private EEnum visibilityEEnum = null;
+
+	/**
 	 * Creates an instance of the model <b>Package</b>, registered with
 	 * {@link org.eclipse.emf.ecore.EPackage.Registry EPackage.Registry} by the package
 	 * package URI value.
@@ -335,7 +344,7 @@ public class JavagenPackageImpl extends EPackageImpl implements JavagenPackage {
 
 	/**
 	 * Creates, registers, and initializes the <b>Package</b> for this model, and for any others upon which it depends.
-	 * 
+	 *
 	 * <p>This method is used to initialize {@link JavagenPackage#eINSTANCE} when that field is accessed.
 	 * Clients should not invoke it directly. Instead, they should simply access that field to obtain the package.
 	 * <!-- begin-user-doc -->
@@ -349,7 +358,8 @@ public class JavagenPackageImpl extends EPackageImpl implements JavagenPackage {
 		if (isInited) return (JavagenPackage)EPackage.Registry.INSTANCE.getEPackage(JavagenPackage.eNS_URI);
 
 		// Obtain or create and register package
-		JavagenPackageImpl theJavagenPackage = (JavagenPackageImpl)(EPackage.Registry.INSTANCE.get(eNS_URI) instanceof JavagenPackageImpl ? EPackage.Registry.INSTANCE.get(eNS_URI) : new JavagenPackageImpl());
+		Object registeredJavagenPackage = EPackage.Registry.INSTANCE.get(eNS_URI);
+		JavagenPackageImpl theJavagenPackage = registeredJavagenPackage instanceof JavagenPackageImpl ? (JavagenPackageImpl)registeredJavagenPackage : new JavagenPackageImpl();
 
 		isInited = true;
 
@@ -362,7 +372,6 @@ public class JavagenPackageImpl extends EPackageImpl implements JavagenPackage {
 		// Mark meta-data to indicate it can't be changed
 		theJavagenPackage.freeze();
 
-  
 		// Update the registry and return the package
 		EPackage.Registry.INSTANCE.put(JavagenPackage.eNS_URI, theJavagenPackage);
 		return theJavagenPackage;
@@ -373,6 +382,7 @@ public class JavagenPackageImpl extends EPackageImpl implements JavagenPackage {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public EClass getJavaGenModel() {
 		return javaGenModelEClass;
 	}
@@ -382,6 +392,7 @@ public class JavagenPackageImpl extends EPackageImpl implements JavagenPackage {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public EReference getJavaGenModel_LibTypes() {
 		return (EReference)javaGenModelEClass.getEStructuralFeatures().get(0);
 	}
@@ -391,6 +402,7 @@ public class JavagenPackageImpl extends EPackageImpl implements JavagenPackage {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public EReference getJavaGenModel_MetaTypes() {
 		return (EReference)javaGenModelEClass.getEStructuralFeatures().get(1);
 	}
@@ -400,6 +412,7 @@ public class JavagenPackageImpl extends EPackageImpl implements JavagenPackage {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public EReference getJavaGenModel_Classes() {
 		return (EReference)javaGenModelEClass.getEStructuralFeatures().get(2);
 	}
@@ -409,6 +422,7 @@ public class JavagenPackageImpl extends EPackageImpl implements JavagenPackage {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public EClass getJType() {
 		return jTypeEClass;
 	}
@@ -418,6 +432,7 @@ public class JavagenPackageImpl extends EPackageImpl implements JavagenPackage {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public EAttribute getJType_Name() {
 		return (EAttribute)jTypeEClass.getEStructuralFeatures().get(0);
 	}
@@ -427,6 +442,7 @@ public class JavagenPackageImpl extends EPackageImpl implements JavagenPackage {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public EClass getJLibType() {
 		return jLibTypeEClass;
 	}
@@ -436,6 +452,7 @@ public class JavagenPackageImpl extends EPackageImpl implements JavagenPackage {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public EAttribute getJLibType_Pkg() {
 		return (EAttribute)jLibTypeEClass.getEStructuralFeatures().get(0);
 	}
@@ -445,6 +462,7 @@ public class JavagenPackageImpl extends EPackageImpl implements JavagenPackage {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public EClass getJMetaType() {
 		return jMetaTypeEClass;
 	}
@@ -454,6 +472,7 @@ public class JavagenPackageImpl extends EPackageImpl implements JavagenPackage {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public EAttribute getJMetaType_QualifiedJavaName() {
 		return (EAttribute)jMetaTypeEClass.getEStructuralFeatures().get(0);
 	}
@@ -463,6 +482,7 @@ public class JavagenPackageImpl extends EPackageImpl implements JavagenPackage {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public EClass getJTypeRef() {
 		return jTypeRefEClass;
 	}
@@ -472,6 +492,7 @@ public class JavagenPackageImpl extends EPackageImpl implements JavagenPackage {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public EReference getJTypeRef_Type() {
 		return (EReference)jTypeRefEClass.getEStructuralFeatures().get(0);
 	}
@@ -481,6 +502,7 @@ public class JavagenPackageImpl extends EPackageImpl implements JavagenPackage {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public EClass getJParamTypeRef() {
 		return jParamTypeRefEClass;
 	}
@@ -490,6 +512,7 @@ public class JavagenPackageImpl extends EPackageImpl implements JavagenPackage {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public EReference getJParamTypeRef_ContainedType() {
 		return (EReference)jParamTypeRefEClass.getEStructuralFeatures().get(0);
 	}
@@ -499,6 +522,7 @@ public class JavagenPackageImpl extends EPackageImpl implements JavagenPackage {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public EClass getJParamNTypeRef() {
 		return jParamNTypeRefEClass;
 	}
@@ -508,6 +532,7 @@ public class JavagenPackageImpl extends EPackageImpl implements JavagenPackage {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public EReference getJParamNTypeRef_Params() {
 		return (EReference)jParamNTypeRefEClass.getEStructuralFeatures().get(0);
 	}
@@ -517,6 +542,7 @@ public class JavagenPackageImpl extends EPackageImpl implements JavagenPackage {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public EClass getJGenericTypeRef() {
 		return jGenericTypeRefEClass;
 	}
@@ -526,6 +552,7 @@ public class JavagenPackageImpl extends EPackageImpl implements JavagenPackage {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public EReference getJGenericTypeRef_TypeParams() {
 		return (EReference)jGenericTypeRefEClass.getEStructuralFeatures().get(0);
 	}
@@ -535,6 +562,7 @@ public class JavagenPackageImpl extends EPackageImpl implements JavagenPackage {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public EClass getJArrayTypeRef() {
 		return jArrayTypeRefEClass;
 	}
@@ -544,6 +572,7 @@ public class JavagenPackageImpl extends EPackageImpl implements JavagenPackage {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public EReference getJArrayTypeRef_ContainedType() {
 		return (EReference)jArrayTypeRefEClass.getEStructuralFeatures().get(0);
 	}
@@ -553,6 +582,7 @@ public class JavagenPackageImpl extends EPackageImpl implements JavagenPackage {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public EClass getJClass() {
 		return jClassEClass;
 	}
@@ -562,6 +592,7 @@ public class JavagenPackageImpl extends EPackageImpl implements JavagenPackage {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public EAttribute getJClass_Extra() {
 		return (EAttribute)jClassEClass.getEStructuralFeatures().get(0);
 	}
@@ -571,6 +602,7 @@ public class JavagenPackageImpl extends EPackageImpl implements JavagenPackage {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public EAttribute getJClass_Pkg() {
 		return (EAttribute)jClassEClass.getEStructuralFeatures().get(1);
 	}
@@ -580,6 +612,7 @@ public class JavagenPackageImpl extends EPackageImpl implements JavagenPackage {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public EReference getJClass_Methods() {
 		return (EReference)jClassEClass.getEStructuralFeatures().get(2);
 	}
@@ -589,6 +622,7 @@ public class JavagenPackageImpl extends EPackageImpl implements JavagenPackage {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public EReference getJClass_Attributes() {
 		return (EReference)jClassEClass.getEStructuralFeatures().get(3);
 	}
@@ -598,6 +632,7 @@ public class JavagenPackageImpl extends EPackageImpl implements JavagenPackage {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public EReference getJClass_Implements() {
 		return (EReference)jClassEClass.getEStructuralFeatures().get(4);
 	}
@@ -607,6 +642,7 @@ public class JavagenPackageImpl extends EPackageImpl implements JavagenPackage {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public EReference getJClass_Extends_() {
 		return (EReference)jClassEClass.getEStructuralFeatures().get(5);
 	}
@@ -616,6 +652,7 @@ public class JavagenPackageImpl extends EPackageImpl implements JavagenPackage {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public EReference getJClass_Imports() {
 		return (EReference)jClassEClass.getEStructuralFeatures().get(6);
 	}
@@ -625,6 +662,7 @@ public class JavagenPackageImpl extends EPackageImpl implements JavagenPackage {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public EReference getJClass_This_() {
 		return (EReference)jClassEClass.getEStructuralFeatures().get(7);
 	}
@@ -634,6 +672,7 @@ public class JavagenPackageImpl extends EPackageImpl implements JavagenPackage {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public EClass getJThis() {
 		return jThisEClass;
 	}
@@ -643,6 +682,7 @@ public class JavagenPackageImpl extends EPackageImpl implements JavagenPackage {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public EClass getJAttribute() {
 		return jAttributeEClass;
 	}
@@ -652,6 +692,7 @@ public class JavagenPackageImpl extends EPackageImpl implements JavagenPackage {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public EClass getJComment() {
 		return jCommentEClass;
 	}
@@ -661,6 +702,7 @@ public class JavagenPackageImpl extends EPackageImpl implements JavagenPackage {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public EAttribute getJComment_Value() {
 		return (EAttribute)jCommentEClass.getEStructuralFeatures().get(0);
 	}
@@ -670,6 +712,7 @@ public class JavagenPackageImpl extends EPackageImpl implements JavagenPackage {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public EClass getJBlock() {
 		return jBlockEClass;
 	}
@@ -679,6 +722,7 @@ public class JavagenPackageImpl extends EPackageImpl implements JavagenPackage {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public EReference getJBlock_LocalVars() {
 		return (EReference)jBlockEClass.getEStructuralFeatures().get(0);
 	}
@@ -688,6 +732,7 @@ public class JavagenPackageImpl extends EPackageImpl implements JavagenPackage {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public EReference getJBlock_Statements() {
 		return (EReference)jBlockEClass.getEStructuralFeatures().get(1);
 	}
@@ -697,6 +742,7 @@ public class JavagenPackageImpl extends EPackageImpl implements JavagenPackage {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public EClass getJMethod() {
 		return jMethodEClass;
 	}
@@ -706,6 +752,7 @@ public class JavagenPackageImpl extends EPackageImpl implements JavagenPackage {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public EAttribute getJMethod_Name() {
 		return (EAttribute)jMethodEClass.getEStructuralFeatures().get(0);
 	}
@@ -715,6 +762,7 @@ public class JavagenPackageImpl extends EPackageImpl implements JavagenPackage {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public EReference getJMethod_Parameters() {
 		return (EReference)jMethodEClass.getEStructuralFeatures().get(1);
 	}
@@ -724,6 +772,7 @@ public class JavagenPackageImpl extends EPackageImpl implements JavagenPackage {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public EReference getJMethod_ReturnType() {
 		return (EReference)jMethodEClass.getEStructuralFeatures().get(2);
 	}
@@ -733,6 +782,7 @@ public class JavagenPackageImpl extends EPackageImpl implements JavagenPackage {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public EReference getJMethod_Throws_() {
 		return (EReference)jMethodEClass.getEStructuralFeatures().get(3);
 	}
@@ -742,6 +792,17 @@ public class JavagenPackageImpl extends EPackageImpl implements JavagenPackage {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
+	public EAttribute getJMethod_Visibility() {
+		return (EAttribute)jMethodEClass.getEStructuralFeatures().get(4);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
 	public EClass getJStatement() {
 		return jStatementEClass;
 	}
@@ -751,6 +812,7 @@ public class JavagenPackageImpl extends EPackageImpl implements JavagenPackage {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public EClass getJReturn() {
 		return jReturnEClass;
 	}
@@ -760,6 +822,7 @@ public class JavagenPackageImpl extends EPackageImpl implements JavagenPackage {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public EReference getJReturn_Result() {
 		return (EReference)jReturnEClass.getEStructuralFeatures().get(0);
 	}
@@ -769,6 +832,7 @@ public class JavagenPackageImpl extends EPackageImpl implements JavagenPackage {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public EClass getJLoop() {
 		return jLoopEClass;
 	}
@@ -778,6 +842,7 @@ public class JavagenPackageImpl extends EPackageImpl implements JavagenPackage {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public EReference getJLoop_LoopVar() {
 		return (EReference)jLoopEClass.getEStructuralFeatures().get(0);
 	}
@@ -787,6 +852,7 @@ public class JavagenPackageImpl extends EPackageImpl implements JavagenPackage {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public EClass getJForeach() {
 		return jForeachEClass;
 	}
@@ -796,6 +862,7 @@ public class JavagenPackageImpl extends EPackageImpl implements JavagenPackage {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public EReference getJForeach_Collection() {
 		return (EReference)jForeachEClass.getEStructuralFeatures().get(0);
 	}
@@ -805,6 +872,7 @@ public class JavagenPackageImpl extends EPackageImpl implements JavagenPackage {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public EClass getIteratorLoop() {
 		return iteratorLoopEClass;
 	}
@@ -814,6 +882,7 @@ public class JavagenPackageImpl extends EPackageImpl implements JavagenPackage {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public EReference getIteratorLoop_IteratorVar() {
 		return (EReference)iteratorLoopEClass.getEStructuralFeatures().get(0);
 	}
@@ -823,6 +892,7 @@ public class JavagenPackageImpl extends EPackageImpl implements JavagenPackage {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public EReference getIteratorLoop_IteratorInit() {
 		return (EReference)iteratorLoopEClass.getEStructuralFeatures().get(1);
 	}
@@ -832,6 +902,7 @@ public class JavagenPackageImpl extends EPackageImpl implements JavagenPackage {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public EClass getJConditional() {
 		return jConditionalEClass;
 	}
@@ -841,6 +912,7 @@ public class JavagenPackageImpl extends EPackageImpl implements JavagenPackage {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public EReference getJConditional_Conditions() {
 		return (EReference)jConditionalEClass.getEStructuralFeatures().get(0);
 	}
@@ -850,6 +922,7 @@ public class JavagenPackageImpl extends EPackageImpl implements JavagenPackage {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public EReference getJConditional_Else() {
 		return (EReference)jConditionalEClass.getEStructuralFeatures().get(1);
 	}
@@ -859,6 +932,7 @@ public class JavagenPackageImpl extends EPackageImpl implements JavagenPackage {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public EClass getJConditionalBlock() {
 		return jConditionalBlockEClass;
 	}
@@ -868,6 +942,7 @@ public class JavagenPackageImpl extends EPackageImpl implements JavagenPackage {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public EReference getJConditionalBlock_Expr() {
 		return (EReference)jConditionalBlockEClass.getEStructuralFeatures().get(0);
 	}
@@ -877,6 +952,7 @@ public class JavagenPackageImpl extends EPackageImpl implements JavagenPackage {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public EClass getJAssignment() {
 		return jAssignmentEClass;
 	}
@@ -886,6 +962,7 @@ public class JavagenPackageImpl extends EPackageImpl implements JavagenPackage {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public EReference getJAssignment_Declaration() {
 		return (EReference)jAssignmentEClass.getEStructuralFeatures().get(0);
 	}
@@ -895,6 +972,7 @@ public class JavagenPackageImpl extends EPackageImpl implements JavagenPackage {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public EReference getJAssignment_RightPart() {
 		return (EReference)jAssignmentEClass.getEStructuralFeatures().get(1);
 	}
@@ -904,6 +982,7 @@ public class JavagenPackageImpl extends EPackageImpl implements JavagenPackage {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public EClass getJText() {
 		return jTextEClass;
 	}
@@ -913,6 +992,7 @@ public class JavagenPackageImpl extends EPackageImpl implements JavagenPackage {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public EAttribute getJText_Body() {
 		return (EAttribute)jTextEClass.getEStructuralFeatures().get(0);
 	}
@@ -922,6 +1002,7 @@ public class JavagenPackageImpl extends EPackageImpl implements JavagenPackage {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public EClass getJExpression() {
 		return jExpressionEClass;
 	}
@@ -931,6 +1012,7 @@ public class JavagenPackageImpl extends EPackageImpl implements JavagenPackage {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public EClass getJVarExp() {
 		return jVarExpEClass;
 	}
@@ -940,6 +1022,7 @@ public class JavagenPackageImpl extends EPackageImpl implements JavagenPackage {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public EReference getJVarExp_Reference() {
 		return (EReference)jVarExpEClass.getEStructuralFeatures().get(0);
 	}
@@ -949,6 +1032,7 @@ public class JavagenPackageImpl extends EPackageImpl implements JavagenPackage {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public EClass getJTextExp() {
 		return jTextExpEClass;
 	}
@@ -958,6 +1042,7 @@ public class JavagenPackageImpl extends EPackageImpl implements JavagenPackage {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public EAttribute getJTextExp_Body() {
 		return (EAttribute)jTextExpEClass.getEStructuralFeatures().get(0);
 	}
@@ -967,6 +1052,7 @@ public class JavagenPackageImpl extends EPackageImpl implements JavagenPackage {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public EClass getJVariableDeclaration() {
 		return jVariableDeclarationEClass;
 	}
@@ -976,6 +1062,7 @@ public class JavagenPackageImpl extends EPackageImpl implements JavagenPackage {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public EReference getJVariableDeclaration_Type() {
 		return (EReference)jVariableDeclarationEClass.getEStructuralFeatures().get(0);
 	}
@@ -985,6 +1072,7 @@ public class JavagenPackageImpl extends EPackageImpl implements JavagenPackage {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public EAttribute getJVariableDeclaration_Name() {
 		return (EAttribute)jVariableDeclarationEClass.getEStructuralFeatures().get(1);
 	}
@@ -994,6 +1082,7 @@ public class JavagenPackageImpl extends EPackageImpl implements JavagenPackage {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public EClass getLMatchObject() {
 		return lMatchObjectEClass;
 	}
@@ -1003,6 +1092,7 @@ public class JavagenPackageImpl extends EPackageImpl implements JavagenPackage {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public EReference getLMatchObject_Cases() {
 		return (EReference)lMatchObjectEClass.getEStructuralFeatures().get(0);
 	}
@@ -1012,6 +1102,7 @@ public class JavagenPackageImpl extends EPackageImpl implements JavagenPackage {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public EClass getLMatchCase() {
 		return lMatchCaseEClass;
 	}
@@ -1021,6 +1112,7 @@ public class JavagenPackageImpl extends EPackageImpl implements JavagenPackage {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public EReference getLMatchCase_Predicate() {
 		return (EReference)lMatchCaseEClass.getEStructuralFeatures().get(0);
 	}
@@ -1030,6 +1122,7 @@ public class JavagenPackageImpl extends EPackageImpl implements JavagenPackage {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public EReference getLMatchCase_Obj() {
 		return (EReference)lMatchCaseEClass.getEStructuralFeatures().get(1);
 	}
@@ -1039,6 +1132,7 @@ public class JavagenPackageImpl extends EPackageImpl implements JavagenPackage {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public EClass getJParameter() {
 		return jParameterEClass;
 	}
@@ -1048,6 +1142,7 @@ public class JavagenPackageImpl extends EPackageImpl implements JavagenPackage {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public EClass getJClosure() {
 		return jClosureEClass;
 	}
@@ -1057,6 +1152,7 @@ public class JavagenPackageImpl extends EPackageImpl implements JavagenPackage {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public EReference getJClosure_Parameters() {
 		return (EReference)jClosureEClass.getEStructuralFeatures().get(0);
 	}
@@ -1066,6 +1162,7 @@ public class JavagenPackageImpl extends EPackageImpl implements JavagenPackage {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public EClass getJInvoke() {
 		return jInvokeEClass;
 	}
@@ -1075,6 +1172,7 @@ public class JavagenPackageImpl extends EPackageImpl implements JavagenPackage {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public EAttribute getJInvoke_Name() {
 		return (EAttribute)jInvokeEClass.getEStructuralFeatures().get(0);
 	}
@@ -1084,6 +1182,7 @@ public class JavagenPackageImpl extends EPackageImpl implements JavagenPackage {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public EReference getJInvoke_Obj() {
 		return (EReference)jInvokeEClass.getEStructuralFeatures().get(1);
 	}
@@ -1093,6 +1192,7 @@ public class JavagenPackageImpl extends EPackageImpl implements JavagenPackage {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public EReference getJInvoke_Arguments() {
 		return (EReference)jInvokeEClass.getEStructuralFeatures().get(2);
 	}
@@ -1102,6 +1202,7 @@ public class JavagenPackageImpl extends EPackageImpl implements JavagenPackage {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public EClass getJInvokeStatic() {
 		return jInvokeStaticEClass;
 	}
@@ -1111,6 +1212,7 @@ public class JavagenPackageImpl extends EPackageImpl implements JavagenPackage {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public EAttribute getJInvokeStatic_Name() {
 		return (EAttribute)jInvokeStaticEClass.getEStructuralFeatures().get(0);
 	}
@@ -1120,6 +1222,7 @@ public class JavagenPackageImpl extends EPackageImpl implements JavagenPackage {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public EReference getJInvokeStatic_Arguments() {
 		return (EReference)jInvokeStaticEClass.getEStructuralFeatures().get(1);
 	}
@@ -1129,6 +1232,7 @@ public class JavagenPackageImpl extends EPackageImpl implements JavagenPackage {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public EClass getJNewObject() {
 		return jNewObjectEClass;
 	}
@@ -1138,6 +1242,7 @@ public class JavagenPackageImpl extends EPackageImpl implements JavagenPackage {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public EReference getJNewObject_TypeRef() {
 		return (EReference)jNewObjectEClass.getEStructuralFeatures().get(0);
 	}
@@ -1147,6 +1252,7 @@ public class JavagenPackageImpl extends EPackageImpl implements JavagenPackage {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public EReference getJNewObject_Arguments() {
 		return (EReference)jNewObjectEClass.getEStructuralFeatures().get(1);
 	}
@@ -1156,6 +1262,7 @@ public class JavagenPackageImpl extends EPackageImpl implements JavagenPackage {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public EClass getJExprStatement() {
 		return jExprStatementEClass;
 	}
@@ -1165,6 +1272,7 @@ public class JavagenPackageImpl extends EPackageImpl implements JavagenPackage {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public EReference getJExprStatement_Expr() {
 		return (EReference)jExprStatementEClass.getEStructuralFeatures().get(0);
 	}
@@ -1174,6 +1282,17 @@ public class JavagenPackageImpl extends EPackageImpl implements JavagenPackage {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
+	public EEnum getVisibility() {
+		return visibilityEEnum;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
 	public JavagenFactory getJavagenFactory() {
 		return (JavagenFactory)getEFactoryInstance();
 	}
@@ -1252,6 +1371,7 @@ public class JavagenPackageImpl extends EPackageImpl implements JavagenPackage {
 		createEReference(jMethodEClass, JMETHOD__PARAMETERS);
 		createEReference(jMethodEClass, JMETHOD__RETURN_TYPE);
 		createEReference(jMethodEClass, JMETHOD__THROWS_);
+		createEAttribute(jMethodEClass, JMETHOD__VISIBILITY);
 
 		jStatementEClass = createEClass(JSTATEMENT);
 
@@ -1321,6 +1441,9 @@ public class JavagenPackageImpl extends EPackageImpl implements JavagenPackage {
 
 		jExprStatementEClass = createEClass(JEXPR_STATEMENT);
 		createEReference(jExprStatementEClass, JEXPR_STATEMENT__EXPR);
+
+		// Create enums
+		visibilityEEnum = createEEnum(VISIBILITY);
 	}
 
 	/**
@@ -1439,6 +1562,7 @@ public class JavagenPackageImpl extends EPackageImpl implements JavagenPackage {
 		initEReference(getJMethod_Parameters(), this.getJParameter(), null, "parameters", null, 0, -1, JMethod.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 		initEReference(getJMethod_ReturnType(), this.getJTypeRef(), null, "returnType", null, 0, 1, JMethod.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 		initEReference(getJMethod_Throws_(), this.getJTypeRef(), null, "throws_", null, 0, -1, JMethod.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEAttribute(getJMethod_Visibility(), this.getVisibility(), "visibility", null, 1, 1, JMethod.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
 		initEClass(jStatementEClass, JStatement.class, "JStatement", IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
 
@@ -1508,6 +1632,12 @@ public class JavagenPackageImpl extends EPackageImpl implements JavagenPackage {
 
 		initEClass(jExprStatementEClass, JExprStatement.class, "JExprStatement", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
 		initEReference(getJExprStatement_Expr(), this.getJExpression(), null, "expr", null, 1, 1, JExprStatement.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+
+		// Initialize enums and add enum literals
+		initEEnum(visibilityEEnum, Visibility.class, "Visibility");
+		addEEnumLiteral(visibilityEEnum, Visibility.PUBLIC);
+		addEEnumLiteral(visibilityEEnum, Visibility.PRIVATE);
+		addEEnumLiteral(visibilityEEnum, Visibility.PROTECTED);
 
 		// Create resource
 		createResource(eNS_URI);

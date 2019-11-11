@@ -307,6 +307,7 @@ public class RunnerGenerator {
 		{		
 			s3 += "a2l.runtime.DirectExecutor executor = new a2l.runtime.DirectExecutor(numThreads, this, inputExtent);";
 			s3 += "executor.execute();";	
+			s3 += "executor.addProfilingTo(stats);";
 		}	
 		s3 += "stats.endLaunch();" + "\n";
 		

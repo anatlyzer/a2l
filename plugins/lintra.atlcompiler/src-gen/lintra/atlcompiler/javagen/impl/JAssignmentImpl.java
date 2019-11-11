@@ -71,6 +71,7 @@ public class JAssignmentImpl extends JTextImpl implements JAssignment {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public JVariableDeclaration getDeclaration() {
 		if (declaration != null && declaration.eIsProxy()) {
 			InternalEObject oldDeclaration = (InternalEObject)declaration;
@@ -97,6 +98,7 @@ public class JAssignmentImpl extends JTextImpl implements JAssignment {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public void setDeclaration(JVariableDeclaration newDeclaration) {
 		JVariableDeclaration oldDeclaration = declaration;
 		declaration = newDeclaration;
@@ -109,6 +111,7 @@ public class JAssignmentImpl extends JTextImpl implements JAssignment {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public JExpression getRightPart() {
 		return rightPart;
 	}
@@ -133,6 +136,7 @@ public class JAssignmentImpl extends JTextImpl implements JAssignment {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public void setRightPart(JExpression newRightPart) {
 		if (newRightPart != rightPart) {
 			NotificationChain msgs = null;

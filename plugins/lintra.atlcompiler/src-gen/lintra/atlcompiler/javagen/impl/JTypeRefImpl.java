@@ -62,6 +62,7 @@ public class JTypeRefImpl extends MinimalEObjectImpl.Container implements JTypeR
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public JType getType() {
 		if (type != null && type.eIsProxy()) {
 			InternalEObject oldType = (InternalEObject)type;
@@ -88,6 +89,7 @@ public class JTypeRefImpl extends MinimalEObjectImpl.Container implements JTypeR
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public void setType(JType newType) {
 		JType oldType = type;
 		type = newType;

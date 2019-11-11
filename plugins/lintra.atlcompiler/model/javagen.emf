@@ -87,6 +87,13 @@ class JMethod extends JBlock {
 	val JParameter[*] parameters;
 	val JTypeRef[0..1] returnType;
 	val JTypeRef[*] throws_;
+	attr Visibility[1] visibility;
+}
+
+enum Visibility {
+	PUBLIC = 0;
+	PRIVATE = 1;
+	PROTECTED = 2;
 }
 
 abstract class JStatement {

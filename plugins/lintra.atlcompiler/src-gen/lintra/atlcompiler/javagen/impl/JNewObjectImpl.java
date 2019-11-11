@@ -81,6 +81,7 @@ public class JNewObjectImpl extends JExpressionImpl implements JNewObject {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public JTypeRef getTypeRef() {
 		return typeRef;
 	}
@@ -105,6 +106,7 @@ public class JNewObjectImpl extends JExpressionImpl implements JNewObject {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public void setTypeRef(JTypeRef newTypeRef) {
 		if (newTypeRef != typeRef) {
 			NotificationChain msgs = null;
@@ -124,6 +126,7 @@ public class JNewObjectImpl extends JExpressionImpl implements JNewObject {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public EList<JExpression> getArguments() {
 		if (arguments == null) {
 			arguments = new EObjectContainmentEList<JExpression>(JExpression.class, this, JavagenPackage.JNEW_OBJECT__ARGUMENTS);

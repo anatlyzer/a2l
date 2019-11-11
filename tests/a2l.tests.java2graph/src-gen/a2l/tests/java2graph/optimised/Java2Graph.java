@@ -28,47 +28,62 @@ import org.eclipse.gmt.modisco.java.Type;
 public class Java2Graph implements ITransformation, lintra2.transfo.ITransformation2{
 private IModel INModel_;
 	private IOutputModel OUTModel_;
-	private PartialOutputModel OUTModel_PartialOutput_;a2l.runtime.InputExtent inputExtent;a2l.tests.java2graph.optimised.Java2GraphGlobalContext globalContext;java.util.Map<Object, Object> trace = new java.util.HashMap<Object, Object>();public Java2Graph(a2l.runtime.InputExtent inputExtent,a2l.tests.java2graph.optimised.Java2GraphGlobalContext global) {
+	private PartialOutputModel OUTModel_PartialOutput_;a2l.runtime.InputExtent inputExtent;a2l.tests.java2graph.optimised.Java2GraphGlobalContext globalContext;
+a2l.runtime.GlobalTrace.PartialTrace trace = null;
+int numExecutions_ = 0;
+int numMatchedRuleExecutions_ = 0;
+public Java2Graph(a2l.runtime.InputExtent inputExtent,a2l.tests.java2graph.optimised.Java2GraphGlobalContext global) {
 this.inputExtent = inputExtent;
 this.globalContext = global;
 this.OUTModel_PartialOutput_ = new PartialOutputModel();
 this.trace = global.createPartialTrace();; }protected List<String> toList(String[] strings) { return java.util.Arrays.asList(strings); }
-protected <T> javaslang.collection.List<T> getAllInstances(java.lang.Class<T> klass) throws BlackboardException { javaslang.collection.List<T> list_result = globalContext.getFromAllInstancesCache(klass, () -> {javaslang.collection.List<T> IN = javaslang.collection.List.ofAll(INModel_.allInstances()).  filter(e -> klass.isInstance(e)).map(e -> klass.cast(e));
+protected <T> javaslang.collection.List<T> getAllInstances(java.lang.Class<T> klass) { javaslang.collection.List<T> list_result = globalContext.getFromAllInstancesCache(klass, () -> {javaslang.collection.List<T> IN = javaslang.collection.List.ofAll(INModel_.allInstances()).  filter(e -> klass.isInstance(e)).map(e -> klass.cast(e));
 javaslang.collection.List<T> result = javaslang.collection.List.empty();
 result = result.appendAll(IN);return result;
 
 });return list_result;}
- private javaslang.collection.List<Object> flatten(Iterable<?> l) { 	ArrayList<Object> r = new ArrayList<Object>();   addFlatten(r, l);    return javaslang.collection.List.ofAll(r);  } private void addFlatten(ArrayList<Object> r, Iterable<?> l) {    for(Object x : l) {      if ( x instanceof Iterable ) { 	    addFlatten(r, (Iterable<?>) x);      } else { 	    r.add(x);      }   } } private javaslang.collection.Set<Object> flattenSet(Iterable<?> l) {  	javaslang.collection.Set<Object> r = javaslang.collection.HashSet.empty(); 	for (Object object : l) { 		if ( object instanceof Iterable ) { 			r = r.addAll(flattenSet((Iterable<Object>) object)); 		} else { 			r = r.add(object); 		} 	} 	return r; }public static class TransformationResult { }
+ private javaslang.collection.List<Object> flatten(Iterable<?> l) { 	ArrayList<Object> r = new ArrayList<Object>();   addFlatten(r, l);    return javaslang.collection.List.ofAll(r);  } private void addFlatten(ArrayList<Object> r, Iterable<?> l) {    for(Object x : l) {      if ( x instanceof Iterable ) { 	    addFlatten(r, (Iterable<?>) x);      } else { 	    r.add(x);      }   } } private javaslang.collection.Set<Object> flattenSet(Iterable<?> l) {  	javaslang.collection.Set<Object> r = javaslang.collection.HashSet.empty(); 	for (Object object : l) { 		if ( object instanceof Iterable ) { 			r = r.addAll(flattenSet((Iterable<Object>) object)); 		} else { 			r = r.add(object); 		} 	} 	return r; }public int getNumExecutions() { return numExecutions_; }
+public int getNumMatchedRuleExecutions() { return numMatchedRuleExecutions_; }
+public static class TransformationResult { }
 protected String get_EMF_Id(org.eclipse.emf.ecore.EObject obj) { return org.eclipse.emf.ecore.util.EcoreUtil.getURI(obj).toString(); }
 
 @Override public void doSequentialPostprocessing() {   for (IPendingTask tasks : pendingTasks) {			tasks.execute(this.globalContext.getGlobalTrace());  }}
 @Override public void doPostprocessing() { doSequentialPostprocessing(); doParallelPostprocessing(); }
 @Override public void doParallelPostprocessing() { 
-  for (IPendingTask tasks : parallelPendingTasks) {			tasks.execute(this.globalContext.getGlobalTrace());  }final Collection<? extends org.eclipse.emf.ecore.EObject> objects_OUT = (Collection<? extends org.eclipse.emf.ecore.EObject>)OUTModel_PartialOutput_.allInstances();for(org.eclipse.emf.ecore.EObject obj : objects_OUT) {		if (obj.eContainer() == null) {         synchronized(OUTModel_) {			OUTModel_.add(obj);		  }		}}}
+  for (IPendingTask tasks : parallelPendingTasks) {			tasks.execute(this.globalContext.getGlobalTrace());  }}
+@Override public void doSequentialCleanup() { 
+final Collection<? extends org.eclipse.emf.ecore.EObject> objects_OUT = (Collection<? extends org.eclipse.emf.ecore.EObject>)OUTModel_PartialOutput_.allInstances();for(org.eclipse.emf.ecore.EObject obj : objects_OUT) {		if (obj.eContainer() == null) {			OUTModel_.add(obj);		}}}
 
 private java.util.ArrayList<IPendingTask> pendingTasks = new java.util.ArrayList<>();private java.util.ArrayList<IPendingTask> parallelPendingTasks = new java.util.ArrayList<>();interface IPendingTask { public void execute(a2l.runtime.GlobalTrace globalTrace); }
-class PendingTask_Edge_source implements IPendingTask { 
+private static final class PendingTask_Edge_source implements IPendingTask { 
 private final GraphMM.Edge tgt;
 private final Object objId;
 private final a2l.runtime.IModel area;
-public PendingTask_Edge_source(GraphMM.Edge tgt, Object objId, a2l.runtime.IModel area) {
-	this.tgt = tgt; this.objId = objId; this.area = area;
+private final java.util.Set<? extends Object> tgtElems;
+public PendingTask_Edge_source(GraphMM.Edge tgt, Object objId, a2l.runtime.IModel area, java.util.Set<? extends Object> tgtElems) {
+	this.tgt = tgt; this.objId = objId; this.area = area; this.tgtElems = tgtElems;
 }
 public void execute(a2l.runtime.GlobalTrace globalTrace) {
-tgt.setSource((GraphMM.Node)globalTrace.get(objId));}
+if (tgtElems != null && tgtElems.contains(objId)) { tgt.setSource((GraphMM.Node)getTargetResolveTempOrSame(objId, globalTrace)); } else {tgt.setSource((GraphMM.Node)getTrace(objId, globalTrace));}}
+private final Object getTrace(Object object, a2l.runtime.GlobalTrace globalTrace) { return globalTrace.get(object);}
+private final Object getTargetResolveTempOrSame(Object object, a2l.runtime.GlobalTrace globalTrace) {         if (object instanceof a2l.runtime.ResolveTempObject) {             a2l.runtime.ResolveTempObject rtmp = (a2l.runtime.ResolveTempObject) object;             return globalTrace.getSecondary(rtmp.getSource(), rtmp.getOpeName());         } return object;}
 }
 
-class PendingTask_Edge_target implements IPendingTask { 
+private static final class PendingTask_Edge_target implements IPendingTask { 
 private final GraphMM.Edge tgt;
 private final Object objId;
 private final a2l.runtime.IModel area;
-public PendingTask_Edge_target(GraphMM.Edge tgt, Object objId, a2l.runtime.IModel area) {
-	this.tgt = tgt; this.objId = objId; this.area = area;
+private final java.util.Set<? extends Object> tgtElems;
+public PendingTask_Edge_target(GraphMM.Edge tgt, Object objId, a2l.runtime.IModel area, java.util.Set<? extends Object> tgtElems) {
+	this.tgt = tgt; this.objId = objId; this.area = area; this.tgtElems = tgtElems;
 }
 public void execute(a2l.runtime.GlobalTrace globalTrace) {
-tgt.setTarget((GraphMM.Node)globalTrace.get(objId));}
+if (tgtElems != null && tgtElems.contains(objId)) { tgt.setTarget((GraphMM.Node)getTargetResolveTempOrSame(objId, globalTrace)); } else {tgt.setTarget((GraphMM.Node)getTrace(objId, globalTrace));}}
+private final Object getTrace(Object object, a2l.runtime.GlobalTrace globalTrace) { return globalTrace.get(object);}
+private final Object getTargetResolveTempOrSame(Object object, a2l.runtime.GlobalTrace globalTrace) {         if (object instanceof a2l.runtime.ResolveTempObject) {             a2l.runtime.ResolveTempObject rtmp = (a2l.runtime.ResolveTempObject) object;             return globalTrace.getSecondary(rtmp.getSource(), rtmp.getOpeName());         } return object;}
 }
-public boolean check_toNode(java.lang.Object inn) throws BlackboardException{
+
+private boolean check_toNode(java.lang.Object inn){
 ClassDeclaration tmp31;
 boolean tmp32;
 Package get33;
@@ -126,7 +141,7 @@ r42 = tmp41;
 }
 	return false;
 }
-	public boolean check_toEdge(java.lang.Object fd) throws BlackboardException{
+	private boolean check_toEdge(java.lang.Object fd){
 FieldDeclaration tmp47;
 TypeAccess get48;
 Type get49;
@@ -422,7 +437,7 @@ r101 = tmp100;
 }
 	return false;
 }
-	public Package helper_org_eclipse_gmt_modisco_java_Package_rootPackage(Package self_) throws BlackboardException{
+	public Package helper_org_eclipse_gmt_modisco_java_Package_rootPackage(Package self_){
 Package get0;
 boolean op1;
 Package get2;
@@ -454,13 +469,13 @@ r4 = call3;
 }
 	return r4;
 }
-	public Package helper_org_eclipse_gmt_modisco_java_ClassDeclaration_package(ClassDeclaration self_) throws BlackboardException{
+	public Package helper_org_eclipse_gmt_modisco_java_ClassDeclaration_package(ClassDeclaration self_){
 Package get5;/* 21:2-21:14: self.package*/
 	get5 = self_.getPackage();
 
 	return get5;
 }
-	public java.lang.String helper_global_type(ClassDeclaration cd) throws BlackboardException{
+	public java.lang.String helper_global_type(ClassDeclaration cd){
 java.lang.String tmp6;
 Modifier get7;
 InheritanceKind get8;
@@ -583,7 +598,7 @@ OUTModel_ = n;
 
 	return this;
 }
-	public void create_toNode(ClassDeclaration inn) throws BlackboardException{
+	private void create_toNode(ClassDeclaration inn){
 Node out24;
 java.lang.String get25;
 java.lang.String call26;
@@ -617,14 +632,14 @@ r30++;
 
 	out24.setType(call26);;
 
-	boolean matched0 = false;}
-	public void create_toEdge(FieldDeclaration fd) throws BlackboardException{
+	boolean matched0 = false;
+	numMatchedRuleExecutions_++;
+}
+	private void create_toEdge(FieldDeclaration fd){
 Edge e43;
 AbstractTypeDeclaration get44;
 TypeAccess get45;
 Type get46;e43 = GraphMM.GraphMMFactory.eINSTANCE.createEdge();
-
-	this.trace.put(fd,e43);
 
 	OUTModel_PartialOutput_.write(e43);
 
@@ -638,12 +653,14 @@ Type get46;e43 = GraphMM.GraphMMFactory.eINSTANCE.createEdge();
 	get46 = get45.getType();
 
 	boolean matched1 = false;if ( check_toNode( get44) )  {
-this.parallelPendingTasks.add( new PendingTask_Edge_source(e43,get44,OUTModel_) );
+this.parallelPendingTasks.add( new PendingTask_Edge_source(e43,get44,OUTModel_, null) );
 }
 
 	boolean matched2 = false;if ( check_toNode( get46) )  {
-this.parallelPendingTasks.add( new PendingTask_Edge_target(e43,get46,OUTModel_) );
+this.parallelPendingTasks.add( new PendingTask_Edge_target(e43,get46,OUTModel_, null) );
 }
+
+	numMatchedRuleExecutions_++;
 }
 	public void transform(Collection<java.lang.Object> objs, IMaster masterNextTransfo) throws BlackboardException{
 for ( java.lang.Object e: objs) {
@@ -655,4 +672,6 @@ create_toNode((org.eclipse.gmt.modisco.java.ClassDeclaration)e);
 else if ( check_toEdge( e) )  {
 create_toEdge((org.eclipse.gmt.modisco.java.FieldDeclaration)e);
 }
+
+	numExecutions_++;
 }}

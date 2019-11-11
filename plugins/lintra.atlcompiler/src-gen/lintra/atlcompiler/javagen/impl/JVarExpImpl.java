@@ -61,6 +61,7 @@ public class JVarExpImpl extends JExpressionImpl implements JVarExp {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public JVariableDeclaration getReference() {
 		if (reference != null && reference.eIsProxy()) {
 			InternalEObject oldReference = (InternalEObject)reference;
@@ -87,6 +88,7 @@ public class JVarExpImpl extends JExpressionImpl implements JVarExp {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public void setReference(JVariableDeclaration newReference) {
 		JVariableDeclaration oldReference = reference;
 		reference = newReference;

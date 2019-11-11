@@ -73,6 +73,13 @@
         containment="true"/>
     <eStructuralFeatures xsi:type="ecore:EReference" name="throws_" upperBound="-1"
         eType="#//JTypeRef" containment="true"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="visibility" lowerBound="1"
+        eType="#//Visibility"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EEnum" name="Visibility">
+    <eLiterals name="PUBLIC"/>
+    <eLiterals name="PRIVATE" value="1"/>
+    <eLiterals name="PROTECTED" value="2"/>
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="JStatement" abstract="true"/>
   <eClassifiers xsi:type="ecore:EClass" name="JReturn" eSuperTypes="#//JStatement">

@@ -73,7 +73,7 @@ a2l.tests.airquality.normal.AirQualityReport trafo0;if ( this.stats == null ) th
 	stats.endConfiguration();
 
 	stats.startLaunch();
-a2l.runtime.DirectExecutor executor = new a2l.runtime.DirectExecutor(numThreads, this, inputExtent);executor.execute();stats.endLaunch();
+a2l.runtime.DirectExecutor executor = new a2l.runtime.DirectExecutor(numThreads, this, inputExtent);executor.execute();executor.addProfilingTo(stats);stats.endLaunch();
 stats.startPostprocessing();
 executor.postprocessing(this.globalContext);stats.endPostprocessing();
 ;

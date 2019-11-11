@@ -74,6 +74,7 @@ public class LMatchCaseImpl extends JBlockImpl implements LMatchCase {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public JMethod getPredicate() {
 		if (predicate != null && predicate.eIsProxy()) {
 			InternalEObject oldPredicate = (InternalEObject)predicate;
@@ -100,6 +101,7 @@ public class LMatchCaseImpl extends JBlockImpl implements LMatchCase {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public void setPredicate(JMethod newPredicate) {
 		JMethod oldPredicate = predicate;
 		predicate = newPredicate;
@@ -112,6 +114,7 @@ public class LMatchCaseImpl extends JBlockImpl implements LMatchCase {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public JExpression getObj() {
 		return obj;
 	}
@@ -136,6 +139,7 @@ public class LMatchCaseImpl extends JBlockImpl implements LMatchCase {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public void setObj(JExpression newObj) {
 		if (newObj != obj) {
 			NotificationChain msgs = null;

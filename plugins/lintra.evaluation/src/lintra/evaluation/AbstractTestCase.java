@@ -51,6 +51,7 @@ import lintra2.stats.IStatsRecorder;
 
 public abstract class AbstractTestCase {
 	private static final boolean pauseBeforeStart = false;
+	private static final boolean forceMemoryClean = false;
 
 	static {
 		if (!isEclipseRunning()) {
@@ -305,7 +306,7 @@ public abstract class AbstractTestCase {
 	}
 	
 	public static class Arguments {
-		public String reportDir = "/tmp";
+		public String reportDir = "/tmp/benchmark";
 		public boolean save;
 		public boolean footprint = false;
 		public boolean optimised = false;
@@ -350,6 +351,13 @@ public abstract class AbstractTestCase {
 		String inXmiPath = modelPathAdapter.apply(model);
 		Resource input = load(inXmiPath);
 		
+		String folderName =  
+				(this.getClass().getSimpleName().replace("_TestCase", "")) + "-" +
+				(args.optimised ? "optimised" : "normal") + "-" +
+				(args.footprint ? "footprint" : "nofootprint") + "-" +
+				args.minThreads + "-" + args.maxThreads + "-" + args.runs;
+
+		
 		if ( framework == ExecutionFramework.A2L || framework == ExecutionFramework.BOTH ) {
 			AggregatedStatsRecorder recorder = new AggregatedStatsRecorder(getName() + "_" + inXmiPath);
 			
@@ -367,12 +375,12 @@ public abstract class AbstractTestCase {
 			System.out.println("Run finised!");
 			System.out.println("************");
 			recorder.printTo(System.out);
-						
-			PrintStream ps = new PrintStream(createReportFileName(args.reportDir, "benchmark", "A2L"));
+								
+			PrintStream ps = new PrintStream(createReportFileName(args.reportDir, folderName, "A2L"));
 			recorder.printCSVto(ps);
 			ps.close();
 			
-			PrintStream ps2 = new PrintStream(createExtendedReportFileName(args.reportDir, "benchmark", "A2L"));
+			PrintStream ps2 = new PrintStream(createExtendedReportFileName(args.reportDir, folderName, "A2L"));
 			recorder.printExtendedCSVto(ps2);
 			ps2.close();			
 		}
@@ -382,17 +390,17 @@ public abstract class AbstractTestCase {
 			recorder.testWithNumThreads(1);
 			for(int j = 0; j < runsPerTest; j++) {
 				recorder.startNewTest();			
-				outATL = executeATL(trafo, inXmiPath, input, recorder, args.save);
+				outATL = executeATL(trafo, inXmiPath, input, recorder, args.footprint, args.save);
 				recorder.printCurrentTo(System.out);
 			}
 			
 			recorder.printTo(System.out);
 			
-			PrintStream ps = new PrintStream(createReportFileName(args.reportDir, "benchmark", "ATL"));
+			PrintStream ps = new PrintStream(createReportFileName(args.reportDir, folderName, "ATL"));
 			recorder.printCSVto(ps);
 			ps.close();
 
-			PrintStream ps2 = new PrintStream(createExtendedReportFileName(args.reportDir, "benchmark", "ATL"));
+			PrintStream ps2 = new PrintStream(createExtendedReportFileName(args.reportDir, folderName, "ATL"));
 			recorder.printExtendedCSVto(ps2);
 			ps2.close();
 		}
@@ -442,10 +450,15 @@ public abstract class AbstractTestCase {
 				System.in.read();
 			}
 
-			long memory = getSettledUsedMemory();
-			System.out.println(String.format("Used memory: %.2f GB", memory / (1024.0 * 1024 * 1024)));
-			System.out.println(String.format("Free memory: %.2f GB", Runtime.getRuntime().freeMemory() / (1024.0 * 1024 * 1024)));
-			System.out.println();
+			if (forceMemoryClean) {
+				long memory = getSettledUsedMemory();
+				System.out.println(String.format("Used memory: %.2f GB", memory / (1024.0 * 1024 * 1024)));
+				System.out.println(String.format("Free memory: %.2f GB", Runtime.getRuntime().freeMemory() / (1024.0 * 1024 * 1024)));
+				System.out.println();
+			} else {
+				long memory = cleanMemoryFast();
+				System.out.println(String.format("Used memory: %.2f GB", memory / (1024.0 * 1024 * 1024)));
+			}
 		}
 		return outLintra;
 	}	
@@ -462,7 +475,7 @@ public abstract class AbstractTestCase {
 
 	private String createBenchmarkFolder(String base, String name) {
 		if ( base == null )
-			base = "/tmp";
+			base = "/tmp/benchmark";
 		
 		File f = new File(base + File.separator + name);
 		if ( ! f.exists() ) {
@@ -477,7 +490,14 @@ public abstract class AbstractTestCase {
 	 */
 	protected abstract Object executeLintra(Resource input, int numThreads, boolean footprint, boolean optimised, AggregatedStatsRecorder recorder) throws Exception;	
 	
-	protected abstract Object executeATL(String trafo, String inXmiPath, Resource input, IStatsRecorder recorder, boolean save) throws Exception;
+	protected Object executeATL(String trafo, String inXmiPath, Resource input, IStatsRecorder recorder, boolean save) throws Exception {
+		return executeATL(trafo, inXmiPath, input, recorder, true, save);
+	}
+	
+	// By default ignore the footprint, too keep the compatibility with most of the test cases
+	protected Object executeATL(String trafo, String inXmiPath, Resource input, IStatsRecorder recorder, boolean footprint, boolean save) throws Exception {
+		return executeATL(trafo, inXmiPath, input, recorder, save);		
+	}
 	
 	protected void printLintraExec(int numThreads, boolean footprint, boolean optimised) {
 		System.out.println("Executing Lintra with " + numThreads + " ... ");
@@ -486,6 +506,19 @@ public abstract class AbstractTestCase {
 	}
 
 	
+	long cleanMemoryFast() {
+		long before = getGcCount();
+		System.gc();
+		long start = System.currentTimeMillis();
+		while (getGcCount() == before) {
+			// Do not wait more than 30 seconds
+			if (System.currentTimeMillis() - start > 1000 * 15) {
+				break;
+			}
+		}
+		return getCurrentlyUsedMemory();		
+		
+	}
 	
 	// Memory handling.
 	// From: https://cruftex.net/2017/03/28/The-6-Memory-Metrics-You-Should-Track-in-Your-Java-Benchmarks.html#metric-used-memory-after-forced-gc

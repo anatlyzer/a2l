@@ -4,6 +4,7 @@ package lintra.atlcompiler.javagen;
 
 import org.eclipse.emf.ecore.EAttribute;
 import org.eclipse.emf.ecore.EClass;
+import org.eclipse.emf.ecore.EEnum;
 import org.eclipse.emf.ecore.EPackage;
 import org.eclipse.emf.ecore.EReference;
 
@@ -984,13 +985,22 @@ public interface JavagenPackage extends EPackage {
 	int JMETHOD__THROWS_ = JBLOCK_FEATURE_COUNT + 3;
 
 	/**
+	 * The feature id for the '<em><b>Visibility</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int JMETHOD__VISIBILITY = JBLOCK_FEATURE_COUNT + 4;
+
+	/**
 	 * The number of structural features of the '<em>JMethod</em>' class.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int JMETHOD_FEATURE_COUNT = JBLOCK_FEATURE_COUNT + 4;
+	int JMETHOD_FEATURE_COUNT = JBLOCK_FEATURE_COUNT + 5;
 
 	/**
 	 * The number of operations of the '<em>JMethod</em>' class.
@@ -1817,6 +1827,17 @@ public interface JavagenPackage extends EPackage {
 
 
 	/**
+	 * The meta object id for the '{@link lintra.atlcompiler.javagen.Visibility <em>Visibility</em>}' enum.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see lintra.atlcompiler.javagen.Visibility
+	 * @see lintra.atlcompiler.javagen.impl.JavagenPackageImpl#getVisibility()
+	 * @generated
+	 */
+	int VISIBILITY = 36;
+
+
+	/**
 	 * Returns the meta object for class '{@link lintra.atlcompiler.javagen.JavaGenModel <em>Java Gen Model</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -2251,6 +2272,17 @@ public interface JavagenPackage extends EPackage {
 	 * @generated
 	 */
 	EReference getJMethod_Throws_();
+
+	/**
+	 * Returns the meta object for the attribute '{@link lintra.atlcompiler.javagen.JMethod#getVisibility <em>Visibility</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the attribute '<em>Visibility</em>'.
+	 * @see lintra.atlcompiler.javagen.JMethod#getVisibility()
+	 * @see #getJMethod()
+	 * @generated
+	 */
+	EAttribute getJMethod_Visibility();
 
 	/**
 	 * Returns the meta object for class '{@link lintra.atlcompiler.javagen.JStatement <em>JStatement</em>}'.
@@ -2760,6 +2792,16 @@ public interface JavagenPackage extends EPackage {
 	EReference getJExprStatement_Expr();
 
 	/**
+	 * Returns the meta object for enum '{@link lintra.atlcompiler.javagen.Visibility <em>Visibility</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for enum '<em>Visibility</em>'.
+	 * @see lintra.atlcompiler.javagen.Visibility
+	 * @generated
+	 */
+	EEnum getVisibility();
+
+	/**
 	 * Returns the factory that creates the instances of the model.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -3139,6 +3181,14 @@ public interface JavagenPackage extends EPackage {
 		 * @generated
 		 */
 		EReference JMETHOD__THROWS_ = eINSTANCE.getJMethod_Throws_();
+
+		/**
+		 * The meta object literal for the '<em><b>Visibility</b></em>' attribute feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EAttribute JMETHOD__VISIBILITY = eINSTANCE.getJMethod_Visibility();
 
 		/**
 		 * The meta object literal for the '{@link lintra.atlcompiler.javagen.impl.JStatementImpl <em>JStatement</em>}' class.
@@ -3565,6 +3615,16 @@ public interface JavagenPackage extends EPackage {
 		 * @generated
 		 */
 		EReference JEXPR_STATEMENT__EXPR = eINSTANCE.getJExprStatement_Expr();
+
+		/**
+		 * The meta object literal for the '{@link lintra.atlcompiler.javagen.Visibility <em>Visibility</em>}' enum.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @see lintra.atlcompiler.javagen.Visibility
+		 * @see lintra.atlcompiler.javagen.impl.JavagenPackageImpl#getVisibility()
+		 * @generated
+		 */
+		EEnum VISIBILITY = eINSTANCE.getVisibility();
 
 	}
 

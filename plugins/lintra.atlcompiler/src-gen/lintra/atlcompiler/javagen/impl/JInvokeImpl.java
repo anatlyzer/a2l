@@ -101,6 +101,7 @@ public class JInvokeImpl extends JExpressionImpl implements JInvoke {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public String getName() {
 		return name;
 	}
@@ -110,6 +111,7 @@ public class JInvokeImpl extends JExpressionImpl implements JInvoke {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public void setName(String newName) {
 		String oldName = name;
 		name = newName;
@@ -122,6 +124,7 @@ public class JInvokeImpl extends JExpressionImpl implements JInvoke {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public JExpression getObj() {
 		return obj;
 	}
@@ -146,6 +149,7 @@ public class JInvokeImpl extends JExpressionImpl implements JInvoke {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public void setObj(JExpression newObj) {
 		if (newObj != obj) {
 			NotificationChain msgs = null;
@@ -165,6 +169,7 @@ public class JInvokeImpl extends JExpressionImpl implements JInvoke {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public EList<JExpression> getArguments() {
 		if (arguments == null) {
 			arguments = new EObjectContainmentEList<JExpression>(JExpression.class, this, JavagenPackage.JINVOKE__ARGUMENTS);
@@ -277,7 +282,7 @@ public class JInvokeImpl extends JExpressionImpl implements JInvoke {
 	public String toString() {
 		if (eIsProxy()) return super.toString();
 
-		StringBuffer result = new StringBuffer(super.toString());
+		StringBuilder result = new StringBuilder(super.toString());
 		result.append(" (name: ");
 		result.append(name);
 		result.append(')');

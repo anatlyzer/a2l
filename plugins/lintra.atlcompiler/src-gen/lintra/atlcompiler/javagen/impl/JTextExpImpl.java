@@ -69,6 +69,7 @@ public class JTextExpImpl extends JExpressionImpl implements JTextExp {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public String getBody() {
 		return body;
 	}
@@ -78,6 +79,7 @@ public class JTextExpImpl extends JExpressionImpl implements JTextExp {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public void setBody(String newBody) {
 		String oldBody = body;
 		body = newBody;
@@ -152,7 +154,7 @@ public class JTextExpImpl extends JExpressionImpl implements JTextExp {
 	public String toString() {
 		if (eIsProxy()) return super.toString();
 
-		StringBuffer result = new StringBuffer(super.toString());
+		StringBuilder result = new StringBuilder(super.toString());
 		result.append(" (body: ");
 		result.append(body);
 		result.append(')');

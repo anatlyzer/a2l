@@ -7,6 +7,11 @@
   <foreignModel>javagen.ecore</foreignModel>
   <genPackages prefix="Javagen" basePackage="lintra.atlcompiler" disposableProviderFactory="true"
       ecorePackage="javagen.ecore#/">
+    <genEnums typeSafeEnumCompatible="false" ecoreEnum="javagen.ecore#//Visibility">
+      <genEnumLiterals ecoreEnumLiteral="javagen.ecore#//Visibility/PUBLIC"/>
+      <genEnumLiterals ecoreEnumLiteral="javagen.ecore#//Visibility/PRIVATE"/>
+      <genEnumLiterals ecoreEnumLiteral="javagen.ecore#//Visibility/PROTECTED"/>
+    </genEnums>
     <genClasses ecoreClass="javagen.ecore#//JavaGenModel">
       <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference javagen.ecore#//JavaGenModel/libTypes"/>
       <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference javagen.ecore#//JavaGenModel/metaTypes"/>
@@ -60,6 +65,7 @@
       <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference javagen.ecore#//JMethod/parameters"/>
       <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference javagen.ecore#//JMethod/returnType"/>
       <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference javagen.ecore#//JMethod/throws_"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute javagen.ecore#//JMethod/visibility"/>
     </genClasses>
     <genClasses image="false" ecoreClass="javagen.ecore#//JStatement"/>
     <genClasses ecoreClass="javagen.ecore#//JReturn">

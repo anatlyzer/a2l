@@ -7,6 +7,7 @@ import java.util.concurrent.ExecutionException;
 import java.util.concurrent.atomic.AtomicLong;
 
 import lintra2.blackboard.BlackboardException;
+import lintra2.stats.IStatsRecorder;
 import lintra2.transfo.ITransformation2;
 import lintra2.transfo.LinTraParameters;
 
@@ -57,7 +58,7 @@ public class DirectExecutor {
 		
 		Scheduler scheduler = new Scheduler(numWorkers, numChunks);
 		// System.out.println("With increase: " + increase);
-		increase = 500;
+		increase = 25;
 		Worker firstWorker = null;
 		increase = 1;
 		for (long i = 0; i < numWorkers; i++) {
@@ -278,6 +279,16 @@ public class DirectExecutor {
 				
 			}
 		}
+	}
+
+
+	public void addProfilingTo(IStatsRecorder stats) {
+//		int i = 0;
+//		for (ITransformation2 t : partialTrafos) {
+//			System.out.println(i + "numExecutions: " + t.getNumExecutions());
+//			System.out.println(i + "matchedRuleEx: " + t.getNumMatchedRuleExecutions());
+//			i++;
+//		}
 	}
 	
 }

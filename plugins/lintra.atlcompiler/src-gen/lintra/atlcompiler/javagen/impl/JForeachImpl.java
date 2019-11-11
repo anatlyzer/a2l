@@ -61,6 +61,7 @@ public class JForeachImpl extends JLoopImpl implements JForeach {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public JExpression getCollection() {
 		return collection;
 	}
@@ -85,6 +86,7 @@ public class JForeachImpl extends JLoopImpl implements JForeach {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public void setCollection(JExpression newCollection) {
 		if (newCollection != collection) {
 			NotificationChain msgs = null;

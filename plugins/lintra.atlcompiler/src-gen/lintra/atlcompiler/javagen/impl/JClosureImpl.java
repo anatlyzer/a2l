@@ -91,6 +91,7 @@ public class JClosureImpl extends JExpressionImpl implements JClosure {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public EList<JVariableDeclaration> getLocalVars() {
 		if (localVars == null) {
 			localVars = new EObjectContainmentEList<JVariableDeclaration>(JVariableDeclaration.class, this, JavagenPackage.JCLOSURE__LOCAL_VARS);
@@ -103,6 +104,7 @@ public class JClosureImpl extends JExpressionImpl implements JClosure {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public EList<JStatement> getStatements() {
 		if (statements == null) {
 			statements = new EObjectContainmentEList<JStatement>(JStatement.class, this, JavagenPackage.JCLOSURE__STATEMENTS);
@@ -115,6 +117,7 @@ public class JClosureImpl extends JExpressionImpl implements JClosure {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public EList<JParameter> getParameters() {
 		if (parameters == null) {
 			parameters = new EObjectContainmentEList<JParameter>(JParameter.class, this, JavagenPackage.JCLOSURE__PARAMETERS);

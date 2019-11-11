@@ -29,17 +29,22 @@ public class java2uml_deps implements ITransformation, lintra2.transfo.ITransfor
 private IModel CMModel_;
 	private IOutputModel UCDModel_;
 	private PartialOutputModel UCDModel_PartialOutput_;a2l.runtime.InputExtent inputExtent;a2l.tests.java2uml.umldeps.normal.java2uml_depsGlobalContext globalContext;
-a2l.runtime.GlobalTrace.PartialTrace trace = null;public java2uml_deps(a2l.runtime.InputExtent inputExtent,a2l.tests.java2uml.umldeps.normal.java2uml_depsGlobalContext global) {
+a2l.runtime.GlobalTrace.PartialTrace trace = null;
+int numExecutions_ = 0;
+int numMatchedRuleExecutions_ = 0;
+public java2uml_deps(a2l.runtime.InputExtent inputExtent,a2l.tests.java2uml.umldeps.normal.java2uml_depsGlobalContext global) {
 this.inputExtent = inputExtent;
 this.globalContext = global;
 this.UCDModel_PartialOutput_ = new PartialOutputModel();
 this.trace = global.createPartialTrace();; }protected List<String> toList(String[] strings) { return java.util.Arrays.asList(strings); }
-protected <T> javaslang.collection.List<T> getAllInstances(java.lang.Class<T> klass) throws BlackboardException { javaslang.collection.List<T> list_result = globalContext.getFromAllInstancesCache(klass, () -> {javaslang.collection.List<T> CM = javaslang.collection.List.ofAll(CMModel_.allInstances()).  filter(e -> klass.isInstance(e)).map(e -> klass.cast(e));
+protected <T> javaslang.collection.List<T> getAllInstances(java.lang.Class<T> klass) { javaslang.collection.List<T> list_result = globalContext.getFromAllInstancesCache(klass, () -> {javaslang.collection.List<T> CM = javaslang.collection.List.ofAll(CMModel_.allInstances()).  filter(e -> klass.isInstance(e)).map(e -> klass.cast(e));
 javaslang.collection.List<T> result = javaslang.collection.List.empty();
 result = result.appendAll(CM);return result;
 
 });return list_result;}
- private javaslang.collection.List<Object> flatten(Iterable<?> l) { 	ArrayList<Object> r = new ArrayList<Object>();   addFlatten(r, l);    return javaslang.collection.List.ofAll(r);  } private void addFlatten(ArrayList<Object> r, Iterable<?> l) {    for(Object x : l) {      if ( x instanceof Iterable ) { 	    addFlatten(r, (Iterable<?>) x);      } else { 	    r.add(x);      }   } } private javaslang.collection.Set<Object> flattenSet(Iterable<?> l) {  	javaslang.collection.Set<Object> r = javaslang.collection.HashSet.empty(); 	for (Object object : l) { 		if ( object instanceof Iterable ) { 			r = r.addAll(flattenSet((Iterable<Object>) object)); 		} else { 			r = r.add(object); 		} 	} 	return r; }public static class TransformationResult { }
+ private javaslang.collection.List<Object> flatten(Iterable<?> l) { 	ArrayList<Object> r = new ArrayList<Object>();   addFlatten(r, l);    return javaslang.collection.List.ofAll(r);  } private void addFlatten(ArrayList<Object> r, Iterable<?> l) {    for(Object x : l) {      if ( x instanceof Iterable ) { 	    addFlatten(r, (Iterable<?>) x);      } else { 	    r.add(x);      }   } } private javaslang.collection.Set<Object> flattenSet(Iterable<?> l) {  	javaslang.collection.Set<Object> r = javaslang.collection.HashSet.empty(); 	for (Object object : l) { 		if ( object instanceof Iterable ) { 			r = r.addAll(flattenSet((Iterable<Object>) object)); 		} else { 			r = r.add(object); 		} 	} 	return r; }public int getNumExecutions() { return numExecutions_; }
+public int getNumMatchedRuleExecutions() { return numMatchedRuleExecutions_; }
+public static class TransformationResult { }
 protected String get_EMF_Id(org.eclipse.emf.ecore.EObject obj) { return org.eclipse.emf.ecore.util.EcoreUtil.getURI(obj).toString(); }
 
 @Override public void doSequentialPostprocessing() {   for (IPendingTask tasks : pendingTasks) {			tasks.execute(this.globalContext.getGlobalTrace());  }}
@@ -53,7 +58,7 @@ private java.util.ArrayList<IPendingTask> pendingTasks = new java.util.ArrayList
 
 protected String get_UML_Id(org.eclipse.emf.ecore.EObject obj) { return org.eclipse.uml2.common.util.UML2Util.getXMIIdentifier((org.eclipse.emf.ecore.InternalEObject) obj); }
 
-final class PendingTask_Package_packagedElement implements IPendingTask { 
+private static final class PendingTask_Package_packagedElement implements IPendingTask { 
 private final org.eclipse.uml2.uml.Package tgt;
 private final Collection<Object> objId;
 private final a2l.runtime.IModel area;
@@ -71,7 +76,7 @@ private final Object getTrace(Object object, a2l.runtime.GlobalTrace globalTrace
 private final Object getTargetResolveTempOrSame(Object object, a2l.runtime.GlobalTrace globalTrace) {         if (object instanceof a2l.runtime.ResolveTempObject) {             a2l.runtime.ResolveTempObject rtmp = (a2l.runtime.ResolveTempObject) object;             return globalTrace.getSecondary(rtmp.getSource(), rtmp.getOpeName());         } return object;}
 }
 
-final class PendingTask_Dependency_supplier implements IPendingTask { 
+private static final class PendingTask_Dependency_supplier implements IPendingTask { 
 private final org.eclipse.uml2.uml.Dependency tgt;
 private final Collection<Object> objId;
 private final a2l.runtime.IModel area;
@@ -89,7 +94,7 @@ private final Object getTrace(Object object, a2l.runtime.GlobalTrace globalTrace
 private final Object getTargetResolveTempOrSame(Object object, a2l.runtime.GlobalTrace globalTrace) {         if (object instanceof a2l.runtime.ResolveTempObject) {             a2l.runtime.ResolveTempObject rtmp = (a2l.runtime.ResolveTempObject) object;             return globalTrace.getSecondary(rtmp.getSource(), rtmp.getOpeName());         } return object;}
 }
 
-final class PendingTask_Dependency_client implements IPendingTask { 
+private static final class PendingTask_Dependency_client implements IPendingTask { 
 private final org.eclipse.uml2.uml.Dependency tgt;
 private final Collection<Object> objId;
 private final a2l.runtime.IModel area;
@@ -106,10 +111,10 @@ tgt.getClients().addAll((Collection<? extends org.eclipse.uml2.uml.NamedElement>
 private final Object getTrace(Object object, a2l.runtime.GlobalTrace globalTrace) { return globalTrace.get(object);}
 private final Object getTargetResolveTempOrSame(Object object, a2l.runtime.GlobalTrace globalTrace) {         if (object instanceof a2l.runtime.ResolveTempObject) {             a2l.runtime.ResolveTempObject rtmp = (a2l.runtime.ResolveTempObject) object;             return globalTrace.getSecondary(rtmp.getSource(), rtmp.getOpeName());         } return object;}
 }
-public boolean check_Model2Model(java.lang.Object s1) throws BlackboardException{
+private boolean check_Model2Model(java.lang.Object s1){
 return s1 instanceof org.eclipse.gmt.modisco.java.Model;
 }
-	public boolean check_Package2Package(java.lang.Object s1) throws BlackboardException{
+	private boolean check_Package2Package(java.lang.Object s1){
 org.eclipse.gmt.modisco.java.Package tmp134;
 boolean get135;
 boolean tmp136;
@@ -127,7 +132,7 @@ tmp134 = (org.eclipse.gmt.modisco.java.Package)s1;
 }
 	return false;
 }
-	public boolean check_Class2Class(java.lang.Object s1) throws BlackboardException{
+	private boolean check_Class2Class(java.lang.Object s1){
 ClassDeclaration tmp154;
 boolean get155;
 boolean tmp156;
@@ -145,7 +150,7 @@ tmp154 = (org.eclipse.gmt.modisco.java.ClassDeclaration)s1;
 }
 	return false;
 }
-	public Dependency lazy_rule_createGeneralizationDependency(ClassDeclaration class_) throws BlackboardException{
+	public Dependency lazy_rule_createGeneralizationDependency(ClassDeclaration class_){
 Dependency gTgt158;
 java.lang.String tmp159;
 java.lang.String get160;
@@ -201,7 +206,7 @@ this.parallelPendingTasks.add( new PendingTask_Dependency_client(gTgt158,class_,
 
 	return gTgt158;
 }
-	public Dependency lazy_rule_createUsageDependency(FieldDeclaration field) throws BlackboardException{
+	public Dependency lazy_rule_createUsageDependency(FieldDeclaration field){
 Dependency gTgt170;
 java.lang.String tmp171;
 java.lang.String tmp172;
@@ -278,7 +283,7 @@ this.parallelPendingTasks.add( new PendingTask_Dependency_client(gTgt170,r186,UC
 
 	return gTgt170;
 }
-	public javaslang.collection.List<ClassDeclaration> helper_org_eclipse_gmt_modisco_java_Package_allNonProxyClassesInPackage(org.eclipse.gmt.modisco.java.Package self_) throws BlackboardException{
+	public javaslang.collection.List<ClassDeclaration> helper_org_eclipse_gmt_modisco_java_Package_allNonProxyClassesInPackage(org.eclipse.gmt.modisco.java.Package self_){
 javaslang.collection.List<AbstractTypeDeclaration> get3;
 boolean get4;
 boolean tmp5;
@@ -314,7 +319,7 @@ r9 = r9.append((org.eclipse.gmt.modisco.java.ClassDeclaration)e1);
 }}
 	return r9;
 }
-	public Type helper_org_eclipse_gmt_modisco_java_ClassDeclaration_getSuperClass(ClassDeclaration self_) throws BlackboardException{
+	public Type helper_org_eclipse_gmt_modisco_java_ClassDeclaration_getSuperClass(ClassDeclaration self_){
 java.lang.Object tmp10;
 TypeAccess get11;
 boolean op12;
@@ -399,7 +404,7 @@ r26 = r25;
 }
 	return r26;
 }
-	public javaslang.collection.List<FieldDeclaration> helper_org_eclipse_gmt_modisco_java_ClassDeclaration_getRefClassFields(ClassDeclaration self_) throws BlackboardException{
+	public javaslang.collection.List<FieldDeclaration> helper_org_eclipse_gmt_modisco_java_ClassDeclaration_getRefClassFields(ClassDeclaration self_){
 javaslang.collection.List<BodyDeclaration> get29;
 boolean op30;
 javaslang.collection.List<FieldDeclaration> r31;
@@ -474,7 +479,7 @@ r45 = r45.append(e27);
 }}
 	return r45;
 }
-	public boolean helper_org_eclipse_gmt_modisco_java_TypeAccess_isPrimitiveType(TypeAccess self_) throws BlackboardException{
+	public boolean helper_org_eclipse_gmt_modisco_java_TypeAccess_isPrimitiveType(TypeAccess self_){
 boolean tmp46;
 Type get47;
 boolean op48;
@@ -656,7 +661,7 @@ r96 = tmp95;
 }
 	return r96;
 }
-	public javaslang.collection.List<ClassDeclaration> helper_global_allClasses() throws BlackboardException{
+	public javaslang.collection.List<ClassDeclaration> helper_global_allClasses(){
 javaslang.collection.List<ClassDeclaration> op0;/* 13:60-13:95: JMM!ClassDeclaration.allInstances()*/
 	op0 = this.globalContext.getAllInstancesOf_ClassDeclaration();
 
@@ -684,7 +689,7 @@ UCDModel_ = n;
 
 	return this;
 }
-	public void create_Model2Model(org.eclipse.gmt.modisco.java.Model s1) throws BlackboardException{
+	private void create_Model2Model(org.eclipse.gmt.modisco.java.Model s1){
 org.eclipse.uml2.uml.Model t197;
 java.lang.String get98;
 javaslang.collection.List<org.eclipse.gmt.modisco.java.Package> get100;
@@ -728,8 +733,10 @@ itTmp105.add(o);
 }
 }
 	this.pendingTasks.add( new PendingTask_Package_packagedElement(t197,itTmp105,UCDModel_,null) );
+
+	numMatchedRuleExecutions_++;
 }
-	public void create_Package2Package(org.eclipse.gmt.modisco.java.Package s1) throws BlackboardException{
+	private void create_Package2Package(org.eclipse.gmt.modisco.java.Package s1){
 org.eclipse.uml2.uml.Package t1106;
 java.lang.String get107;
 javaslang.collection.List<org.eclipse.gmt.modisco.java.Package> get110;
@@ -905,8 +912,10 @@ boolean matched8 = false;
 	a2l.runtime.RuntimeUtils.addToBindingTemporal(itTmp142, tgtElems143, o);
 }
 	this.parallelPendingTasks.add( new PendingTask_Package_packagedElement(t1106,itTmp142,UCDModel_,tgtElems143) );
+
+	numMatchedRuleExecutions_++;
 }
-	public void create_Class2Class(ClassDeclaration s1) throws BlackboardException{
+	private void create_Class2Class(ClassDeclaration s1){
 Class t1144;
 java.lang.String get145;
 java.lang.Object tmp146;
@@ -957,6 +966,8 @@ r153 = tmp152;
 	t1144.setName(get145);;
 
 	t1144.setIsAbstract(r153);;
+
+	numMatchedRuleExecutions_++;
 }
 	public void transform(Collection<java.lang.Object> objs, IMaster masterNextTransfo) throws BlackboardException{
 for ( java.lang.Object e: objs) {
@@ -971,4 +982,6 @@ create_Package2Package((org.eclipse.gmt.modisco.java.Package)e);
 else if ( check_Class2Class( e) )  {
 create_Class2Class((org.eclipse.gmt.modisco.java.ClassDeclaration)e);
 }
+
+	numExecutions_++;
 }}

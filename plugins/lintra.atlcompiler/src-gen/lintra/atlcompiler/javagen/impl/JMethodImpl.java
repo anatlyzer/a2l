@@ -9,6 +9,7 @@ import lintra.atlcompiler.javagen.JParameter;
 import lintra.atlcompiler.javagen.JTypeRef;
 import lintra.atlcompiler.javagen.JavagenPackage;
 
+import lintra.atlcompiler.javagen.Visibility;
 import org.eclipse.emf.common.notify.Notification;
 import org.eclipse.emf.common.notify.NotificationChain;
 
@@ -34,6 +35,7 @@ import org.eclipse.emf.ecore.util.InternalEList;
  *   <li>{@link lintra.atlcompiler.javagen.impl.JMethodImpl#getParameters <em>Parameters</em>}</li>
  *   <li>{@link lintra.atlcompiler.javagen.impl.JMethodImpl#getReturnType <em>Return Type</em>}</li>
  *   <li>{@link lintra.atlcompiler.javagen.impl.JMethodImpl#getThrows_ <em>Throws </em>}</li>
+ *   <li>{@link lintra.atlcompiler.javagen.impl.JMethodImpl#getVisibility <em>Visibility</em>}</li>
  * </ul>
  *
  * @generated
@@ -90,6 +92,26 @@ public class JMethodImpl extends JBlockImpl implements JMethod {
 	protected EList<JTypeRef> throws_;
 
 	/**
+	 * The default value of the '{@link #getVisibility() <em>Visibility</em>}' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see #getVisibility()
+	 * @generated
+	 * @ordered
+	 */
+	protected static final Visibility VISIBILITY_EDEFAULT = Visibility.PUBLIC;
+
+	/**
+	 * The cached value of the '{@link #getVisibility() <em>Visibility</em>}' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see #getVisibility()
+	 * @generated
+	 * @ordered
+	 */
+	protected Visibility visibility = VISIBILITY_EDEFAULT;
+
+	/**
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
@@ -113,6 +135,7 @@ public class JMethodImpl extends JBlockImpl implements JMethod {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public String getName() {
 		return name;
 	}
@@ -122,6 +145,7 @@ public class JMethodImpl extends JBlockImpl implements JMethod {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public void setName(String newName) {
 		String oldName = name;
 		name = newName;
@@ -134,6 +158,7 @@ public class JMethodImpl extends JBlockImpl implements JMethod {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public EList<JParameter> getParameters() {
 		if (parameters == null) {
 			parameters = new EObjectContainmentEList<JParameter>(JParameter.class, this, JavagenPackage.JMETHOD__PARAMETERS);
@@ -146,6 +171,7 @@ public class JMethodImpl extends JBlockImpl implements JMethod {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public JTypeRef getReturnType() {
 		return returnType;
 	}
@@ -170,6 +196,7 @@ public class JMethodImpl extends JBlockImpl implements JMethod {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public void setReturnType(JTypeRef newReturnType) {
 		if (newReturnType != returnType) {
 			NotificationChain msgs = null;
@@ -189,11 +216,35 @@ public class JMethodImpl extends JBlockImpl implements JMethod {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public EList<JTypeRef> getThrows_() {
 		if (throws_ == null) {
 			throws_ = new EObjectContainmentEList<JTypeRef>(JTypeRef.class, this, JavagenPackage.JMETHOD__THROWS_);
 		}
 		return throws_;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
+	public Visibility getVisibility() {
+		return visibility;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
+	public void setVisibility(Visibility newVisibility) {
+		Visibility oldVisibility = visibility;
+		visibility = newVisibility == null ? VISIBILITY_EDEFAULT : newVisibility;
+		if (eNotificationRequired())
+			eNotify(new ENotificationImpl(this, Notification.SET, JavagenPackage.JMETHOD__VISIBILITY, oldVisibility, visibility));
 	}
 
 	/**
@@ -230,6 +281,8 @@ public class JMethodImpl extends JBlockImpl implements JMethod {
 				return getReturnType();
 			case JavagenPackage.JMETHOD__THROWS_:
 				return getThrows_();
+			case JavagenPackage.JMETHOD__VISIBILITY:
+				return getVisibility();
 		}
 		return super.eGet(featureID, resolve, coreType);
 	}
@@ -257,6 +310,9 @@ public class JMethodImpl extends JBlockImpl implements JMethod {
 				getThrows_().clear();
 				getThrows_().addAll((Collection<? extends JTypeRef>)newValue);
 				return;
+			case JavagenPackage.JMETHOD__VISIBILITY:
+				setVisibility((Visibility)newValue);
+				return;
 		}
 		super.eSet(featureID, newValue);
 	}
@@ -281,6 +337,9 @@ public class JMethodImpl extends JBlockImpl implements JMethod {
 			case JavagenPackage.JMETHOD__THROWS_:
 				getThrows_().clear();
 				return;
+			case JavagenPackage.JMETHOD__VISIBILITY:
+				setVisibility(VISIBILITY_EDEFAULT);
+				return;
 		}
 		super.eUnset(featureID);
 	}
@@ -301,6 +360,8 @@ public class JMethodImpl extends JBlockImpl implements JMethod {
 				return returnType != null;
 			case JavagenPackage.JMETHOD__THROWS_:
 				return throws_ != null && !throws_.isEmpty();
+			case JavagenPackage.JMETHOD__VISIBILITY:
+				return visibility != VISIBILITY_EDEFAULT;
 		}
 		return super.eIsSet(featureID);
 	}
@@ -314,9 +375,11 @@ public class JMethodImpl extends JBlockImpl implements JMethod {
 	public String toString() {
 		if (eIsProxy()) return super.toString();
 
-		StringBuffer result = new StringBuffer(super.toString());
+		StringBuilder result = new StringBuilder(super.toString());
 		result.append(" (name: ");
 		result.append(name);
+		result.append(", visibility: ");
+		result.append(visibility);
 		result.append(')');
 		return result.toString();
 	}

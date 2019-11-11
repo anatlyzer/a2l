@@ -92,6 +92,7 @@ public class JavaGenModelImpl extends MinimalEObjectImpl.Container implements Ja
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public EList<JLibType> getLibTypes() {
 		if (libTypes == null) {
 			libTypes = new EObjectContainmentEList<JLibType>(JLibType.class, this, JavagenPackage.JAVA_GEN_MODEL__LIB_TYPES);
@@ -104,6 +105,7 @@ public class JavaGenModelImpl extends MinimalEObjectImpl.Container implements Ja
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public EList<JMetaType> getMetaTypes() {
 		if (metaTypes == null) {
 			metaTypes = new EObjectContainmentEList<JMetaType>(JMetaType.class, this, JavagenPackage.JAVA_GEN_MODEL__META_TYPES);
@@ -116,6 +118,7 @@ public class JavaGenModelImpl extends MinimalEObjectImpl.Container implements Ja
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public EList<JClass> getClasses() {
 		if (classes == null) {
 			classes = new EObjectContainmentEList<JClass>(JClass.class, this, JavagenPackage.JAVA_GEN_MODEL__CLASSES);

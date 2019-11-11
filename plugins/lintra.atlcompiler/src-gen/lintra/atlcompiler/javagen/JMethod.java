@@ -17,6 +17,7 @@ import org.eclipse.emf.common.util.EList;
  *   <li>{@link lintra.atlcompiler.javagen.JMethod#getParameters <em>Parameters</em>}</li>
  *   <li>{@link lintra.atlcompiler.javagen.JMethod#getReturnType <em>Return Type</em>}</li>
  *   <li>{@link lintra.atlcompiler.javagen.JMethod#getThrows_ <em>Throws </em>}</li>
+ *   <li>{@link lintra.atlcompiler.javagen.JMethod#getVisibility <em>Visibility</em>}</li>
  * </ul>
  *
  * @see lintra.atlcompiler.javagen.JavagenPackage#getJMethod()
@@ -107,5 +108,30 @@ public interface JMethod extends JBlock {
 	 * @generated
 	 */
 	EList<JTypeRef> getThrows_();
+
+	/**
+	 * Returns the value of the '<em><b>Visibility</b></em>' attribute.
+	 * The literals are from the enumeration {@link lintra.atlcompiler.javagen.Visibility}.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the value of the '<em>Visibility</em>' attribute.
+	 * @see lintra.atlcompiler.javagen.Visibility
+	 * @see #setVisibility(Visibility)
+	 * @see lintra.atlcompiler.javagen.JavagenPackage#getJMethod_Visibility()
+	 * @model required="true"
+	 * @generated
+	 */
+	Visibility getVisibility();
+
+	/**
+	 * Sets the value of the '{@link lintra.atlcompiler.javagen.JMethod#getVisibility <em>Visibility</em>}' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @param value the new value of the '<em>Visibility</em>' attribute.
+	 * @see lintra.atlcompiler.javagen.Visibility
+	 * @see #getVisibility()
+	 * @generated
+	 */
+	void setVisibility(Visibility value);
 
 } // JMethod

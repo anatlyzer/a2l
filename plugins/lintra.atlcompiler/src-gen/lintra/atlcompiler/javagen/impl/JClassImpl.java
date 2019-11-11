@@ -171,6 +171,7 @@ public class JClassImpl extends JTypeImpl implements JClass {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public String getExtra() {
 		return extra;
 	}
@@ -180,6 +181,7 @@ public class JClassImpl extends JTypeImpl implements JClass {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public void setExtra(String newExtra) {
 		String oldExtra = extra;
 		extra = newExtra;
@@ -192,6 +194,7 @@ public class JClassImpl extends JTypeImpl implements JClass {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public String getPkg() {
 		return pkg;
 	}
@@ -201,6 +204,7 @@ public class JClassImpl extends JTypeImpl implements JClass {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public void setPkg(String newPkg) {
 		String oldPkg = pkg;
 		pkg = newPkg;
@@ -213,6 +217,7 @@ public class JClassImpl extends JTypeImpl implements JClass {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public EList<JMethod> getMethods() {
 		if (methods == null) {
 			methods = new EObjectContainmentEList<JMethod>(JMethod.class, this, JavagenPackage.JCLASS__METHODS);
@@ -225,6 +230,7 @@ public class JClassImpl extends JTypeImpl implements JClass {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public EList<JAttribute> getAttributes() {
 		if (attributes == null) {
 			attributes = new EObjectContainmentEList<JAttribute>(JAttribute.class, this, JavagenPackage.JCLASS__ATTRIBUTES);
@@ -237,6 +243,7 @@ public class JClassImpl extends JTypeImpl implements JClass {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public EList<JTypeRef> getImplements() {
 		if (implements_ == null) {
 			implements_ = new EObjectContainmentEList<JTypeRef>(JTypeRef.class, this, JavagenPackage.JCLASS__IMPLEMENTS);
@@ -249,6 +256,7 @@ public class JClassImpl extends JTypeImpl implements JClass {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public JTypeRef getExtends_() {
 		return extends_;
 	}
@@ -273,6 +281,7 @@ public class JClassImpl extends JTypeImpl implements JClass {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public void setExtends_(JTypeRef newExtends_) {
 		if (newExtends_ != extends_) {
 			NotificationChain msgs = null;
@@ -292,6 +301,7 @@ public class JClassImpl extends JTypeImpl implements JClass {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public EList<JType> getImports() {
 		if (imports == null) {
 			imports = new EObjectResolvingEList<JType>(JType.class, this, JavagenPackage.JCLASS__IMPORTS);
@@ -304,6 +314,7 @@ public class JClassImpl extends JTypeImpl implements JClass {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public JThis getThis_() {
 		return this_;
 	}
@@ -328,6 +339,7 @@ public class JClassImpl extends JTypeImpl implements JClass {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public void setThis_(JThis newThis_) {
 		if (newThis_ != this_) {
 			NotificationChain msgs = null;
@@ -506,7 +518,7 @@ public class JClassImpl extends JTypeImpl implements JClass {
 	public String toString() {
 		if (eIsProxy()) return super.toString();
 
-		StringBuffer result = new StringBuffer(super.toString());
+		StringBuilder result = new StringBuilder(super.toString());
 		result.append(" (extra: ");
 		result.append(extra);
 		result.append(", pkg: ");

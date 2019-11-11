@@ -62,6 +62,7 @@ public class JGenericTypeRefImpl extends JTypeRefImpl implements JGenericTypeRef
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public EList<JTypeRef> getTypeParams() {
 		if (typeParams == null) {
 			typeParams = new EObjectContainmentEList<JTypeRef>(JTypeRef.class, this, JavagenPackage.JGENERIC_TYPE_REF__TYPE_PARAMS);

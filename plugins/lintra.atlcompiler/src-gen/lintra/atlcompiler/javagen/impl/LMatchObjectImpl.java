@@ -66,6 +66,7 @@ public class LMatchObjectImpl extends JStatementImpl implements LMatchObject {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public EList<LMatchCase> getCases() {
 		if (cases == null) {
 			cases = new EObjectContainmentEList<LMatchCase>(LMatchCase.class, this, JavagenPackage.LMATCH_OBJECT__CASES);

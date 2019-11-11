@@ -25,17 +25,22 @@ public class IdentityIMDb implements ITransformation, lintra2.transfo.ITransform
 private IModel INModel_;
 	private IOutputModel OUTModel_;
 	private PartialOutputModel OUTModel_PartialOutput_;a2l.runtime.InputExtent inputExtent;a2l.tests.imdb.identity.normal.IdentityIMDbGlobalContext globalContext;
-a2l.runtime.GlobalTrace.PartialTrace trace = null;public IdentityIMDb(a2l.runtime.InputExtent inputExtent,a2l.tests.imdb.identity.normal.IdentityIMDbGlobalContext global) {
+a2l.runtime.GlobalTrace.PartialTrace trace = null;
+int numExecutions_ = 0;
+int numMatchedRuleExecutions_ = 0;
+public IdentityIMDb(a2l.runtime.InputExtent inputExtent,a2l.tests.imdb.identity.normal.IdentityIMDbGlobalContext global) {
 this.inputExtent = inputExtent;
 this.globalContext = global;
 this.OUTModel_PartialOutput_ = new PartialOutputModel();
 this.trace = global.createPartialTrace();; }protected List<String> toList(String[] strings) { return java.util.Arrays.asList(strings); }
-protected <T> javaslang.collection.List<T> getAllInstances(java.lang.Class<T> klass) throws BlackboardException { javaslang.collection.List<T> list_result = globalContext.getFromAllInstancesCache(klass, () -> {javaslang.collection.List<T> IN = javaslang.collection.List.ofAll(INModel_.allInstances()).  filter(e -> klass.isInstance(e)).map(e -> klass.cast(e));
+protected <T> javaslang.collection.List<T> getAllInstances(java.lang.Class<T> klass) { javaslang.collection.List<T> list_result = globalContext.getFromAllInstancesCache(klass, () -> {javaslang.collection.List<T> IN = javaslang.collection.List.ofAll(INModel_.allInstances()).  filter(e -> klass.isInstance(e)).map(e -> klass.cast(e));
 javaslang.collection.List<T> result = javaslang.collection.List.empty();
 result = result.appendAll(IN);return result;
 
 });return list_result;}
- private javaslang.collection.List<Object> flatten(Iterable<?> l) { 	ArrayList<Object> r = new ArrayList<Object>();   addFlatten(r, l);    return javaslang.collection.List.ofAll(r);  } private void addFlatten(ArrayList<Object> r, Iterable<?> l) {    for(Object x : l) {      if ( x instanceof Iterable ) { 	    addFlatten(r, (Iterable<?>) x);      } else { 	    r.add(x);      }   } } private javaslang.collection.Set<Object> flattenSet(Iterable<?> l) {  	javaslang.collection.Set<Object> r = javaslang.collection.HashSet.empty(); 	for (Object object : l) { 		if ( object instanceof Iterable ) { 			r = r.addAll(flattenSet((Iterable<Object>) object)); 		} else { 			r = r.add(object); 		} 	} 	return r; }public static class TransformationResult { }
+ private javaslang.collection.List<Object> flatten(Iterable<?> l) { 	ArrayList<Object> r = new ArrayList<Object>();   addFlatten(r, l);    return javaslang.collection.List.ofAll(r);  } private void addFlatten(ArrayList<Object> r, Iterable<?> l) {    for(Object x : l) {      if ( x instanceof Iterable ) { 	    addFlatten(r, (Iterable<?>) x);      } else { 	    r.add(x);      }   } } private javaslang.collection.Set<Object> flattenSet(Iterable<?> l) {  	javaslang.collection.Set<Object> r = javaslang.collection.HashSet.empty(); 	for (Object object : l) { 		if ( object instanceof Iterable ) { 			r = r.addAll(flattenSet((Iterable<Object>) object)); 		} else { 			r = r.add(object); 		} 	} 	return r; }public int getNumExecutions() { return numExecutions_; }
+public int getNumMatchedRuleExecutions() { return numMatchedRuleExecutions_; }
+public static class TransformationResult { }
 protected String get_EMF_Id(org.eclipse.emf.ecore.EObject obj) { return org.eclipse.emf.ecore.util.EcoreUtil.getURI(obj).toString(); }
 
 @Override public void doSequentialPostprocessing() {   for (IPendingTask tasks : pendingTasks) {			tasks.execute(this.globalContext.getGlobalTrace());  }}
@@ -46,7 +51,7 @@ protected String get_EMF_Id(org.eclipse.emf.ecore.EObject obj) { return org.ecli
 final Collection<? extends org.eclipse.emf.ecore.EObject> objects_OUT = (Collection<? extends org.eclipse.emf.ecore.EObject>)OUTModel_PartialOutput_.allInstances();for(org.eclipse.emf.ecore.EObject obj : objects_OUT) {		if (obj.eContainer() == null) {			OUTModel_.add(obj);		}}}
 
 private java.util.ArrayList<IPendingTask> pendingTasks = new java.util.ArrayList<>();private java.util.ArrayList<IPendingTask> parallelPendingTasks = new java.util.ArrayList<>();interface IPendingTask { public void execute(a2l.runtime.GlobalTrace globalTrace); }
-final class PendingTask_Movie_persons implements IPendingTask { 
+private static final class PendingTask_Movie_persons implements IPendingTask { 
 private final imdb.movies.Movie tgt;
 private final Collection<Object> objId;
 private final a2l.runtime.IModel area;
@@ -64,7 +69,7 @@ private final Object getTrace(Object object, a2l.runtime.GlobalTrace globalTrace
 private final Object getTargetResolveTempOrSame(Object object, a2l.runtime.GlobalTrace globalTrace) {         if (object instanceof a2l.runtime.ResolveTempObject) {             a2l.runtime.ResolveTempObject rtmp = (a2l.runtime.ResolveTempObject) object;             return globalTrace.getSecondary(rtmp.getSource(), rtmp.getOpeName());         } return object;}
 }
 
-final class PendingTask_Person_movies implements IPendingTask { 
+private static final class PendingTask_Person_movies implements IPendingTask { 
 private final imdb.movies.Person tgt;
 private final Collection<Object> objId;
 private final a2l.runtime.IModel area;
@@ -82,7 +87,7 @@ private final Object getTrace(Object object, a2l.runtime.GlobalTrace globalTrace
 private final Object getTargetResolveTempOrSame(Object object, a2l.runtime.GlobalTrace globalTrace) {         if (object instanceof a2l.runtime.ResolveTempObject) {             a2l.runtime.ResolveTempObject rtmp = (a2l.runtime.ResolveTempObject) object;             return globalTrace.getSecondary(rtmp.getSource(), rtmp.getOpeName());         } return object;}
 }
 
-final class PendingTask_Group_commonMovies implements IPendingTask { 
+private static final class PendingTask_Group_commonMovies implements IPendingTask { 
 private final imdb.movies.Group tgt;
 private final Collection<Object> objId;
 private final a2l.runtime.IModel area;
@@ -100,7 +105,7 @@ private final Object getTrace(Object object, a2l.runtime.GlobalTrace globalTrace
 private final Object getTargetResolveTempOrSame(Object object, a2l.runtime.GlobalTrace globalTrace) {         if (object instanceof a2l.runtime.ResolveTempObject) {             a2l.runtime.ResolveTempObject rtmp = (a2l.runtime.ResolveTempObject) object;             return globalTrace.getSecondary(rtmp.getSource(), rtmp.getOpeName());         } return object;}
 }
 
-final class PendingTask_Clique_persons implements IPendingTask { 
+private static final class PendingTask_Clique_persons implements IPendingTask { 
 private final imdb.movies.Clique tgt;
 private final Collection<Object> objId;
 private final a2l.runtime.IModel area;
@@ -118,7 +123,7 @@ private final Object getTrace(Object object, a2l.runtime.GlobalTrace globalTrace
 private final Object getTargetResolveTempOrSame(Object object, a2l.runtime.GlobalTrace globalTrace) {         if (object instanceof a2l.runtime.ResolveTempObject) {             a2l.runtime.ResolveTempObject rtmp = (a2l.runtime.ResolveTempObject) object;             return globalTrace.getSecondary(rtmp.getSource(), rtmp.getOpeName());         } return object;}
 }
 
-final class PendingTask_Couple_p1 implements IPendingTask { 
+private static final class PendingTask_Couple_p1 implements IPendingTask { 
 private final imdb.movies.Couple tgt;
 private final Object objId;
 private final a2l.runtime.IModel area;
@@ -132,7 +137,7 @@ private final Object getTrace(Object object, a2l.runtime.GlobalTrace globalTrace
 private final Object getTargetResolveTempOrSame(Object object, a2l.runtime.GlobalTrace globalTrace) {         if (object instanceof a2l.runtime.ResolveTempObject) {             a2l.runtime.ResolveTempObject rtmp = (a2l.runtime.ResolveTempObject) object;             return globalTrace.getSecondary(rtmp.getSource(), rtmp.getOpeName());         } return object;}
 }
 
-final class PendingTask_Couple_p2 implements IPendingTask { 
+private static final class PendingTask_Couple_p2 implements IPendingTask { 
 private final imdb.movies.Couple tgt;
 private final Object objId;
 private final a2l.runtime.IModel area;
@@ -146,19 +151,19 @@ private final Object getTrace(Object object, a2l.runtime.GlobalTrace globalTrace
 private final Object getTargetResolveTempOrSame(Object object, a2l.runtime.GlobalTrace globalTrace) {         if (object instanceof a2l.runtime.ResolveTempObject) {             a2l.runtime.ResolveTempObject rtmp = (a2l.runtime.ResolveTempObject) object;             return globalTrace.getSecondary(rtmp.getSource(), rtmp.getOpeName());         } return object;}
 }
 
-public boolean check_movie(java.lang.Object m1) throws BlackboardException{
+private boolean check_movie(java.lang.Object m1){
 return m1 instanceof imdb.movies.Movie;
 }
-	public boolean check_actor(java.lang.Object p1) throws BlackboardException{
+	private boolean check_actor(java.lang.Object p1){
 return p1 instanceof imdb.movies.Actor;
 }
-	public boolean check_actress(java.lang.Object p1) throws BlackboardException{
+	private boolean check_actress(java.lang.Object p1){
 return p1 instanceof imdb.movies.Actress;
 }
-	public boolean check_clique(java.lang.Object c1) throws BlackboardException{
+	private boolean check_clique(java.lang.Object c1){
 return c1 instanceof imdb.movies.Clique;
 }
-	public boolean check_couple(java.lang.Object c1) throws BlackboardException{
+	private boolean check_couple(java.lang.Object c1){
 return c1 instanceof imdb.movies.Couple;
 }
 	public boolean isTargetElement(java.lang.Object obj){
@@ -183,7 +188,7 @@ OUTModel_ = n;
 
 	return this;
 }
-	public void create_movie(Movie m1) throws BlackboardException{
+	private void create_movie(Movie m1){
 Movie m20;
 java.lang.String get1;
 double get2;
@@ -230,8 +235,10 @@ itTmp6.add(o);
 }
 }
 	this.pendingTasks.add( new PendingTask_Movie_persons(m20,itTmp6,OUTModel_,null) );
+
+	numMatchedRuleExecutions_++;
 }
-	public void create_actor(Actor p1) throws BlackboardException{
+	private void create_actor(Actor p1){
 Actor p27;
 java.lang.String get8;
 javaslang.collection.List<Movie> get9;
@@ -257,8 +264,10 @@ itTmp10.add(o);
 }
 }
 	this.pendingTasks.add( new PendingTask_Person_movies(p27,itTmp10,OUTModel_,null) );
+
+	numMatchedRuleExecutions_++;
 }
-	public void create_actress(Actress p1) throws BlackboardException{
+	private void create_actress(Actress p1){
 Actress p211;
 java.lang.String get12;
 javaslang.collection.List<Movie> get13;
@@ -284,8 +293,10 @@ itTmp14.add(o);
 }
 }
 	this.pendingTasks.add( new PendingTask_Person_movies(p211,itTmp14,OUTModel_,null) );
+
+	numMatchedRuleExecutions_++;
 }
-	public void create_clique(Clique c1) throws BlackboardException{
+	private void create_clique(Clique c1){
 Clique c215;
 double get16;
 javaslang.collection.List<Movie> get17;
@@ -328,8 +339,10 @@ itTmp20.add(o);
 }
 }
 	this.parallelPendingTasks.add( new PendingTask_Clique_persons(c215,itTmp20,OUTModel_,null) );
+
+	numMatchedRuleExecutions_++;
 }
-	public void create_couple(Couple c1) throws BlackboardException{
+	private void create_couple(Couple c1){
 Couple c221;
 double get22;
 javaslang.collection.List<Movie> get23;
@@ -377,6 +390,8 @@ this.parallelPendingTasks.add( new PendingTask_Couple_p2(c221,get25,OUTModel_, n
 else if ( check_actor( get25) )  {
 this.parallelPendingTasks.add( new PendingTask_Couple_p2(c221,get25,OUTModel_, null) );
 }
+
+	numMatchedRuleExecutions_++;
 }
 	public void transform(Collection<java.lang.Object> objs, IMaster masterNextTransfo) throws BlackboardException{
 for ( java.lang.Object e: objs) {
@@ -397,4 +412,6 @@ create_clique((imdb.movies.Clique)e);
 else if ( check_couple( e) )  {
 create_couple((imdb.movies.Couple)e);
 }
+
+	numExecutions_++;
 }}

@@ -19,25 +19,34 @@ import dblp.DBLP.Record;
 public class DBLPv2 implements ITransformation, lintra2.transfo.ITransformation2{
 private IModel INModel_;
 	private IOutputModel OUTModel_;
-	private PartialOutputModel OUTModel_PartialOutput_;a2l.runtime.InputExtent inputExtent;a2l.tests.dblp_v2.normal.DBLPv2GlobalContext globalContext;java.util.Map<Object, Object> trace = new java.util.HashMap<Object, Object>();public DBLPv2(a2l.runtime.InputExtent inputExtent,a2l.tests.dblp_v2.normal.DBLPv2GlobalContext global) {
+	private PartialOutputModel OUTModel_PartialOutput_;a2l.runtime.InputExtent inputExtent;a2l.tests.dblp_v2.normal.DBLPv2GlobalContext globalContext;
+a2l.runtime.GlobalTrace.PartialTrace trace = null;
+int numExecutions_ = 0;
+int numMatchedRuleExecutions_ = 0;
+public DBLPv2(a2l.runtime.InputExtent inputExtent,a2l.tests.dblp_v2.normal.DBLPv2GlobalContext global) {
 this.inputExtent = inputExtent;
 this.globalContext = global;
 this.OUTModel_PartialOutput_ = new PartialOutputModel();
 this.trace = global.createPartialTrace();; }protected List<String> toList(String[] strings) { return java.util.Arrays.asList(strings); }
-protected <T> javaslang.collection.List<T> getAllInstances(java.lang.Class<T> klass) throws BlackboardException { javaslang.collection.List<T> list_result = globalContext.getFromAllInstancesCache(klass, () -> {javaslang.collection.List<T> IN = javaslang.collection.List.ofAll(INModel_.allInstances()).  filter(e -> klass.isInstance(e)).map(e -> klass.cast(e));
+protected <T> javaslang.collection.List<T> getAllInstances(java.lang.Class<T> klass) { javaslang.collection.List<T> list_result = globalContext.getFromAllInstancesCache(klass, () -> {javaslang.collection.List<T> IN = javaslang.collection.List.ofAll(INModel_.allInstances()).  filter(e -> klass.isInstance(e)).map(e -> klass.cast(e));
 javaslang.collection.List<T> result = javaslang.collection.List.empty();
 result = result.appendAll(IN);return result;
 
 });return list_result;}
- private javaslang.collection.List<Object> flatten(Iterable<?> l) { 	ArrayList<Object> r = new ArrayList<Object>();   addFlatten(r, l);    return javaslang.collection.List.ofAll(r);  } private void addFlatten(ArrayList<Object> r, Iterable<?> l) {    for(Object x : l) {      if ( x instanceof Iterable ) { 	    addFlatten(r, (Iterable<?>) x);      } else { 	    r.add(x);      }   } } private javaslang.collection.Set<Object> flattenSet(Iterable<?> l) {  	javaslang.collection.Set<Object> r = javaslang.collection.HashSet.empty(); 	for (Object object : l) { 		if ( object instanceof Iterable ) { 			r = r.addAll(flattenSet((Iterable<Object>) object)); 		} else { 			r = r.add(object); 		} 	} 	return r; }public static class TransformationResult { }
+ private javaslang.collection.List<Object> flatten(Iterable<?> l) { 	ArrayList<Object> r = new ArrayList<Object>();   addFlatten(r, l);    return javaslang.collection.List.ofAll(r);  } private void addFlatten(ArrayList<Object> r, Iterable<?> l) {    for(Object x : l) {      if ( x instanceof Iterable ) { 	    addFlatten(r, (Iterable<?>) x);      } else { 	    r.add(x);      }   } } private javaslang.collection.Set<Object> flattenSet(Iterable<?> l) {  	javaslang.collection.Set<Object> r = javaslang.collection.HashSet.empty(); 	for (Object object : l) { 		if ( object instanceof Iterable ) { 			r = r.addAll(flattenSet((Iterable<Object>) object)); 		} else { 			r = r.add(object); 		} 	} 	return r; }public int getNumExecutions() { return numExecutions_; }
+public int getNumMatchedRuleExecutions() { return numMatchedRuleExecutions_; }
+public static class TransformationResult { }
 protected String get_EMF_Id(org.eclipse.emf.ecore.EObject obj) { return org.eclipse.emf.ecore.util.EcoreUtil.getURI(obj).toString(); }
 
 @Override public void doSequentialPostprocessing() {   for (IPendingTask tasks : pendingTasks) {			tasks.execute(this.globalContext.getGlobalTrace());  }}
 @Override public void doPostprocessing() { doSequentialPostprocessing(); doParallelPostprocessing(); }
 @Override public void doParallelPostprocessing() { 
-  for (IPendingTask tasks : parallelPendingTasks) {			tasks.execute(this.globalContext.getGlobalTrace());  }final Collection<? extends org.eclipse.emf.ecore.EObject> objects_OUT = (Collection<? extends org.eclipse.emf.ecore.EObject>)OUTModel_PartialOutput_.allInstances();for(org.eclipse.emf.ecore.EObject obj : objects_OUT) {		if (obj.eContainer() == null) {         synchronized(OUTModel_) {			OUTModel_.add(obj);		  }		}}}
+  for (IPendingTask tasks : parallelPendingTasks) {			tasks.execute(this.globalContext.getGlobalTrace());  }}
+@Override public void doSequentialCleanup() { 
+final Collection<? extends org.eclipse.emf.ecore.EObject> objects_OUT = (Collection<? extends org.eclipse.emf.ecore.EObject>)OUTModel_PartialOutput_.allInstances();for(org.eclipse.emf.ecore.EObject obj : objects_OUT) {		if (obj.eContainer() == null) {			OUTModel_.add(obj);		}}}
 
-private java.util.ArrayList<IPendingTask> pendingTasks = new java.util.ArrayList<>();private java.util.ArrayList<IPendingTask> parallelPendingTasks = new java.util.ArrayList<>();interface IPendingTask { public void execute(a2l.runtime.GlobalTrace globalTrace); }public boolean check_icmt(java.lang.Object a) throws BlackboardException{
+private java.util.ArrayList<IPendingTask> pendingTasks = new java.util.ArrayList<>();private java.util.ArrayList<IPendingTask> parallelPendingTasks = new java.util.ArrayList<>();interface IPendingTask { public void execute(a2l.runtime.GlobalTrace globalTrace); }
+private boolean check_icmt(java.lang.Object a){
 dblp.DBLP.Author tmp23;
 javaslang.collection.List<Record> get26;
 boolean op27;
@@ -90,19 +99,19 @@ r34 = true;
 }
 	return false;
 }
-	public java.lang.String helper_dblp_DBLP_InProceedings_booktitle(InProceedings self_) throws BlackboardException{
+	public java.lang.String helper_dblp_DBLP_InProceedings_booktitle(InProceedings self_){
 java.lang.String get0;/* 17:62-17:75: self.bootitle*/
 	get0 = self_.getBootitle();
 
 	return get0;
 }
-	public int helper_dblp_DBLP_InProceedings_year(InProceedings self_) throws BlackboardException{
+	public int helper_dblp_DBLP_InProceedings_year(InProceedings self_){
 int get1;/* 19:58-19:67: self.year*/
 	get1 = self_.getYear();
 
 	return get1;
 }
-	public boolean helper_dblp_DBLP_Author_active(dblp.DBLP.Author self_) throws BlackboardException{
+	public boolean helper_dblp_DBLP_Author_active(dblp.DBLP.Author self_){
 javaslang.collection.List<Record> get4;
 boolean op5;
 javaslang.collection.List<InProceedings> r6;
@@ -194,7 +203,7 @@ OUTModel_ = n;
 
 	return this;
 }
-	public void create_icmt(dblp.DBLP.Author a) throws BlackboardException{
+	private void create_icmt(dblp.DBLP.Author a){
 dblp.AuthorInfo.Author out20;
 java.lang.String get21;
 boolean call22;out20 = dblp.AuthorInfo.AuthorInfoFactory.eINSTANCE.createAuthor();
@@ -214,6 +223,8 @@ call22 = helper_dblp_DBLP_Author_active((dblp.DBLP.Author)a);
 	out20.setName(get21);;
 
 	out20.setActive(call22);;
+
+	numMatchedRuleExecutions_++;
 }
 	public void transform(Collection<java.lang.Object> objs, IMaster masterNextTransfo) throws BlackboardException{
 for ( java.lang.Object e: objs) {
@@ -222,4 +233,6 @@ this.transform(e);}}
 boolean matched0 = false;if ( check_icmt( e) )  {
 create_icmt((dblp.DBLP.Author)e);
 }
+
+	numExecutions_++;
 }}

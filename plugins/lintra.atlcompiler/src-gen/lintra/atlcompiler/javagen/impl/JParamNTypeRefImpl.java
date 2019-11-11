@@ -66,6 +66,7 @@ public class JParamNTypeRefImpl extends JTypeRefImpl implements JParamNTypeRef {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public EList<JTypeRef> getParams() {
 		if (params == null) {
 			params = new EObjectContainmentEList<JTypeRef>(JTypeRef.class, this, JavagenPackage.JPARAM_NTYPE_REF__PARAMS);

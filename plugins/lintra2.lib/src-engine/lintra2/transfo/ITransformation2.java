@@ -13,4 +13,11 @@ public interface ITransformation2 {
 	public default void doParallelPostprocessing() { }
 
 	public default void doSequentialCleanup() { }
+	
+	/** Profiling methods */
+	
+	public default int getNumExecutions() { return -1; }
+
+	public default int getNumMatchedRuleExecutions() { return -1; }
+
 }

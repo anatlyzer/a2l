@@ -66,6 +66,7 @@ public class JMetaTypeImpl extends JTypeImpl implements JMetaType {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public String getQualifiedJavaName() {
 		return qualifiedJavaName;
 	}
@@ -75,6 +76,7 @@ public class JMetaTypeImpl extends JTypeImpl implements JMetaType {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public void setQualifiedJavaName(String newQualifiedJavaName) {
 		String oldQualifiedJavaName = qualifiedJavaName;
 		qualifiedJavaName = newQualifiedJavaName;
@@ -149,7 +151,7 @@ public class JMetaTypeImpl extends JTypeImpl implements JMetaType {
 	public String toString() {
 		if (eIsProxy()) return super.toString();
 
-		StringBuffer result = new StringBuffer(super.toString());
+		StringBuilder result = new StringBuilder(super.toString());
 		result.append(" (qualifiedJavaName: ");
 		result.append(qualifiedJavaName);
 		result.append(')');

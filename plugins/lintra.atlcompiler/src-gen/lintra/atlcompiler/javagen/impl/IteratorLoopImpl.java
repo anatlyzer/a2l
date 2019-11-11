@@ -73,6 +73,7 @@ public class IteratorLoopImpl extends JLoopImpl implements IteratorLoop {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public JVariableDeclaration getIteratorVar() {
 		return iteratorVar;
 	}
@@ -97,6 +98,7 @@ public class IteratorLoopImpl extends JLoopImpl implements IteratorLoop {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public void setIteratorVar(JVariableDeclaration newIteratorVar) {
 		if (newIteratorVar != iteratorVar) {
 			NotificationChain msgs = null;
@@ -116,6 +118,7 @@ public class IteratorLoopImpl extends JLoopImpl implements IteratorLoop {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public JExpression getIteratorInit() {
 		return iteratorInit;
 	}
@@ -140,6 +143,7 @@ public class IteratorLoopImpl extends JLoopImpl implements IteratorLoop {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public void setIteratorInit(JExpression newIteratorInit) {
 		if (newIteratorInit != iteratorInit) {
 			NotificationChain msgs = null;

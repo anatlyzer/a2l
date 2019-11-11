@@ -454,7 +454,7 @@ public class EMFDriver implements IMetaDriver {
 				
 				String objType = r.isMany() ? "Collection<Object>" : "Object";
 				
-				String klass = "final class " + className + " implements IPendingTask { " + "\n";
+				String klass = "private static final class " + className + " implements IPendingTask { " + "\n";
 				klass += "private final " + tgtTypeName + " tgt;" + "\n";
 				klass += "private final " + objType + " objId;" + "\n";
 				klass += "private final a2l.runtime.IModel area;" + "\n";

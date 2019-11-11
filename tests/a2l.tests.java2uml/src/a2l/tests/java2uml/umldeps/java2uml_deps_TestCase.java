@@ -6,7 +6,7 @@ import static lintra.evaluation.ATLExecutor.outModel;
 import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
 import java.io.IOException;
-
+import org.eclipse.core.runtime.Platform;
 import org.eclipse.emf.ecore.resource.Resource;
 import org.eclipse.gmt.modisco.java.emf.JavaPackage;
 import org.eclipse.uml2.uml.UMLPackage;
@@ -30,6 +30,7 @@ public class java2uml_deps_TestCase extends AbstractTestCase {
 	private static final String trafo = "java2uml_deps.atl";
 	
 	public static void main(String[] args) throws Exception {
+		System.out.println(Platform.isRunning());
 		registerMetamodel(UMLPackage.eINSTANCE);
 		registerMetamodel(JavaPackage.eINSTANCE);
 		Arguments arguments = parseArguments(args);
@@ -80,13 +81,13 @@ public class java2uml_deps_TestCase extends AbstractTestCase {
 	}
 
 	@Override
-	protected Resource executeATL(String trafo, String inXmiPath, Resource input, IStatsRecorder recorder, boolean save) throws IOException, FileNotFoundException {		
+	protected Resource executeATL(String trafo, String inXmiPath, Resource input, IStatsRecorder recorder, boolean footprint, boolean save) throws IOException, FileNotFoundException {		
 		Resource outATL;
 		System.out.print("Executing EMFVM... ");
 		ATLExecutor executor = new ATLExecutor();
 		executor.useEMFVM();
 		executor.setStatsRecorder(recorder);
-		executor.doModelWarmup(true);
+		executor.doModelWarmup(footprint);
 		executor.allowInterModelReferences(false);
 		executor.perform(t + trafo, 
 				inModel("CM", input, "JMM", METAMODEL_JAVA_ECORE),

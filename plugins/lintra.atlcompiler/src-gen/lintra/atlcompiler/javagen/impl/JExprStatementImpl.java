@@ -62,6 +62,7 @@ public class JExprStatementImpl extends JStatementImpl implements JExprStatement
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public JExpression getExpr() {
 		return expr;
 	}
@@ -86,6 +87,7 @@ public class JExprStatementImpl extends JStatementImpl implements JExprStatement
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public void setExpr(JExpression newExpr) {
 		if (newExpr != expr) {
 			NotificationChain msgs = null;

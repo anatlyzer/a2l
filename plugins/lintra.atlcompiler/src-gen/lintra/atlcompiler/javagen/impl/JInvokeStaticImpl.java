@@ -90,6 +90,7 @@ public class JInvokeStaticImpl extends JExpressionImpl implements JInvokeStatic 
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public String getName() {
 		return name;
 	}
@@ -99,6 +100,7 @@ public class JInvokeStaticImpl extends JExpressionImpl implements JInvokeStatic 
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public void setName(String newName) {
 		String oldName = name;
 		name = newName;
@@ -111,6 +113,7 @@ public class JInvokeStaticImpl extends JExpressionImpl implements JInvokeStatic 
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public EList<JExpression> getArguments() {
 		if (arguments == null) {
 			arguments = new EObjectContainmentEList<JExpression>(JExpression.class, this, JavagenPackage.JINVOKE_STATIC__ARGUMENTS);
@@ -211,7 +214,7 @@ public class JInvokeStaticImpl extends JExpressionImpl implements JInvokeStatic 
 	public String toString() {
 		if (eIsProxy()) return super.toString();
 
-		StringBuffer result = new StringBuffer(super.toString());
+		StringBuilder result = new StringBuilder(super.toString());
 		result.append(" (name: ");
 		result.append(name);
 		result.append(')');

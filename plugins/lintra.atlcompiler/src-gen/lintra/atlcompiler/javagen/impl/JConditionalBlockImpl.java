@@ -62,6 +62,7 @@ public class JConditionalBlockImpl extends JBlockImpl implements JConditionalBlo
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public JExpression getExpr() {
 		return expr;
 	}
@@ -86,6 +87,7 @@ public class JConditionalBlockImpl extends JBlockImpl implements JConditionalBlo
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public void setExpr(JExpression newExpr) {
 		if (newExpr != expr) {
 			NotificationChain msgs = null;

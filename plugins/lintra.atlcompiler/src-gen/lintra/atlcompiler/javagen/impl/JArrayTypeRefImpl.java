@@ -62,6 +62,7 @@ public class JArrayTypeRefImpl extends JTypeRefImpl implements JArrayTypeRef {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public JTypeRef getContainedType() {
 		return containedType;
 	}
@@ -86,6 +87,7 @@ public class JArrayTypeRefImpl extends JTypeRefImpl implements JArrayTypeRef {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public void setContainedType(JTypeRef newContainedType) {
 		if (newContainedType != containedType) {
 			NotificationChain msgs = null;

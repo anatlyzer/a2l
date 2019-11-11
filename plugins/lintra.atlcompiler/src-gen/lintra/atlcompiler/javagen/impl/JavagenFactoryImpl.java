@@ -5,6 +5,7 @@ package lintra.atlcompiler.javagen.impl;
 import lintra.atlcompiler.javagen.*;
 
 import org.eclipse.emf.ecore.EClass;
+import org.eclipse.emf.ecore.EDataType;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.EPackage;
 
@@ -98,6 +99,37 @@ public class JavagenFactoryImpl extends EFactoryImpl implements JavagenFactory {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
+	public Object createFromString(EDataType eDataType, String initialValue) {
+		switch (eDataType.getClassifierID()) {
+			case JavagenPackage.VISIBILITY:
+				return createVisibilityFromString(eDataType, initialValue);
+			default:
+				throw new IllegalArgumentException("The datatype '" + eDataType.getName() + "' is not a valid classifier");
+		}
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
+	public String convertToString(EDataType eDataType, Object instanceValue) {
+		switch (eDataType.getClassifierID()) {
+			case JavagenPackage.VISIBILITY:
+				return convertVisibilityToString(eDataType, instanceValue);
+			default:
+				throw new IllegalArgumentException("The datatype '" + eDataType.getName() + "' is not a valid classifier");
+		}
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
 	public JavaGenModel createJavaGenModel() {
 		JavaGenModelImpl javaGenModel = new JavaGenModelImpl();
 		return javaGenModel;
@@ -108,6 +140,7 @@ public class JavagenFactoryImpl extends EFactoryImpl implements JavagenFactory {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public JLibType createJLibType() {
 		JLibTypeImpl jLibType = new JLibTypeImpl();
 		return jLibType;
@@ -118,6 +151,7 @@ public class JavagenFactoryImpl extends EFactoryImpl implements JavagenFactory {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public JMetaType createJMetaType() {
 		JMetaTypeImpl jMetaType = new JMetaTypeImpl();
 		return jMetaType;
@@ -128,6 +162,7 @@ public class JavagenFactoryImpl extends EFactoryImpl implements JavagenFactory {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public JTypeRef createJTypeRef() {
 		JTypeRefImpl jTypeRef = new JTypeRefImpl();
 		return jTypeRef;
@@ -138,6 +173,7 @@ public class JavagenFactoryImpl extends EFactoryImpl implements JavagenFactory {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public JParamTypeRef createJParamTypeRef() {
 		JParamTypeRefImpl jParamTypeRef = new JParamTypeRefImpl();
 		return jParamTypeRef;
@@ -148,6 +184,7 @@ public class JavagenFactoryImpl extends EFactoryImpl implements JavagenFactory {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public JParamNTypeRef createJParamNTypeRef() {
 		JParamNTypeRefImpl jParamNTypeRef = new JParamNTypeRefImpl();
 		return jParamNTypeRef;
@@ -158,6 +195,7 @@ public class JavagenFactoryImpl extends EFactoryImpl implements JavagenFactory {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public JGenericTypeRef createJGenericTypeRef() {
 		JGenericTypeRefImpl jGenericTypeRef = new JGenericTypeRefImpl();
 		return jGenericTypeRef;
@@ -168,6 +206,7 @@ public class JavagenFactoryImpl extends EFactoryImpl implements JavagenFactory {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public JArrayTypeRef createJArrayTypeRef() {
 		JArrayTypeRefImpl jArrayTypeRef = new JArrayTypeRefImpl();
 		return jArrayTypeRef;
@@ -178,6 +217,7 @@ public class JavagenFactoryImpl extends EFactoryImpl implements JavagenFactory {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public JClass createJClass() {
 		JClassImpl jClass = new JClassImpl();
 		return jClass;
@@ -188,6 +228,7 @@ public class JavagenFactoryImpl extends EFactoryImpl implements JavagenFactory {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public JThis createJThis() {
 		JThisImpl jThis = new JThisImpl();
 		return jThis;
@@ -198,6 +239,7 @@ public class JavagenFactoryImpl extends EFactoryImpl implements JavagenFactory {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public JAttribute createJAttribute() {
 		JAttributeImpl jAttribute = new JAttributeImpl();
 		return jAttribute;
@@ -208,6 +250,7 @@ public class JavagenFactoryImpl extends EFactoryImpl implements JavagenFactory {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public JComment createJComment() {
 		JCommentImpl jComment = new JCommentImpl();
 		return jComment;
@@ -218,6 +261,7 @@ public class JavagenFactoryImpl extends EFactoryImpl implements JavagenFactory {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public JMethod createJMethod() {
 		JMethodImpl jMethod = new JMethodImpl();
 		return jMethod;
@@ -228,6 +272,7 @@ public class JavagenFactoryImpl extends EFactoryImpl implements JavagenFactory {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public JReturn createJReturn() {
 		JReturnImpl jReturn = new JReturnImpl();
 		return jReturn;
@@ -238,6 +283,7 @@ public class JavagenFactoryImpl extends EFactoryImpl implements JavagenFactory {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public JLoop createJLoop() {
 		JLoopImpl jLoop = new JLoopImpl();
 		return jLoop;
@@ -248,6 +294,7 @@ public class JavagenFactoryImpl extends EFactoryImpl implements JavagenFactory {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public JForeach createJForeach() {
 		JForeachImpl jForeach = new JForeachImpl();
 		return jForeach;
@@ -258,6 +305,7 @@ public class JavagenFactoryImpl extends EFactoryImpl implements JavagenFactory {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public IteratorLoop createIteratorLoop() {
 		IteratorLoopImpl iteratorLoop = new IteratorLoopImpl();
 		return iteratorLoop;
@@ -268,6 +316,7 @@ public class JavagenFactoryImpl extends EFactoryImpl implements JavagenFactory {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public JConditional createJConditional() {
 		JConditionalImpl jConditional = new JConditionalImpl();
 		return jConditional;
@@ -278,6 +327,7 @@ public class JavagenFactoryImpl extends EFactoryImpl implements JavagenFactory {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public JConditionalBlock createJConditionalBlock() {
 		JConditionalBlockImpl jConditionalBlock = new JConditionalBlockImpl();
 		return jConditionalBlock;
@@ -288,6 +338,7 @@ public class JavagenFactoryImpl extends EFactoryImpl implements JavagenFactory {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public JAssignment createJAssignment() {
 		JAssignmentImpl jAssignment = new JAssignmentImpl();
 		return jAssignment;
@@ -298,6 +349,7 @@ public class JavagenFactoryImpl extends EFactoryImpl implements JavagenFactory {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public JText createJText() {
 		JTextImpl jText = new JTextImpl();
 		return jText;
@@ -308,6 +360,7 @@ public class JavagenFactoryImpl extends EFactoryImpl implements JavagenFactory {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public JVarExp createJVarExp() {
 		JVarExpImpl jVarExp = new JVarExpImpl();
 		return jVarExp;
@@ -318,6 +371,7 @@ public class JavagenFactoryImpl extends EFactoryImpl implements JavagenFactory {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public JTextExp createJTextExp() {
 		JTextExpImpl jTextExp = new JTextExpImpl();
 		return jTextExp;
@@ -328,6 +382,7 @@ public class JavagenFactoryImpl extends EFactoryImpl implements JavagenFactory {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public JVariableDeclaration createJVariableDeclaration() {
 		JVariableDeclarationImpl jVariableDeclaration = new JVariableDeclarationImpl();
 		return jVariableDeclaration;
@@ -338,6 +393,7 @@ public class JavagenFactoryImpl extends EFactoryImpl implements JavagenFactory {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public LMatchObject createLMatchObject() {
 		LMatchObjectImpl lMatchObject = new LMatchObjectImpl();
 		return lMatchObject;
@@ -348,6 +404,7 @@ public class JavagenFactoryImpl extends EFactoryImpl implements JavagenFactory {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public LMatchCase createLMatchCase() {
 		LMatchCaseImpl lMatchCase = new LMatchCaseImpl();
 		return lMatchCase;
@@ -358,6 +415,7 @@ public class JavagenFactoryImpl extends EFactoryImpl implements JavagenFactory {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public JParameter createJParameter() {
 		JParameterImpl jParameter = new JParameterImpl();
 		return jParameter;
@@ -368,6 +426,7 @@ public class JavagenFactoryImpl extends EFactoryImpl implements JavagenFactory {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public JClosure createJClosure() {
 		JClosureImpl jClosure = new JClosureImpl();
 		return jClosure;
@@ -378,6 +437,7 @@ public class JavagenFactoryImpl extends EFactoryImpl implements JavagenFactory {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public JInvoke createJInvoke() {
 		JInvokeImpl jInvoke = new JInvokeImpl();
 		return jInvoke;
@@ -388,6 +448,7 @@ public class JavagenFactoryImpl extends EFactoryImpl implements JavagenFactory {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public JInvokeStatic createJInvokeStatic() {
 		JInvokeStaticImpl jInvokeStatic = new JInvokeStaticImpl();
 		return jInvokeStatic;
@@ -398,6 +459,7 @@ public class JavagenFactoryImpl extends EFactoryImpl implements JavagenFactory {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public JNewObject createJNewObject() {
 		JNewObjectImpl jNewObject = new JNewObjectImpl();
 		return jNewObject;
@@ -408,6 +470,7 @@ public class JavagenFactoryImpl extends EFactoryImpl implements JavagenFactory {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public JExprStatement createJExprStatement() {
 		JExprStatementImpl jExprStatement = new JExprStatementImpl();
 		return jExprStatement;
@@ -418,6 +481,27 @@ public class JavagenFactoryImpl extends EFactoryImpl implements JavagenFactory {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	public Visibility createVisibilityFromString(EDataType eDataType, String initialValue) {
+		Visibility result = Visibility.get(initialValue);
+		if (result == null) throw new IllegalArgumentException("The value '" + initialValue + "' is not a valid enumerator of '" + eDataType.getName() + "'");
+		return result;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public String convertVisibilityToString(EDataType eDataType, Object instanceValue) {
+		return instanceValue == null ? null : instanceValue.toString();
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
 	public JavagenPackage getJavagenPackage() {
 		return (JavagenPackage)getEPackage();
 	}

@@ -45,6 +45,7 @@
         	<fileset dir="${lintra.dir}/tests/a2l.tests.dblp/bin"/>
         	<fileset dir="${lintra.dir}/tests/a2l.tests.java2graph/bin"/>
         	<fileset dir="${lintra.dir}/tests/a2l.tests.java2uml/bin"/>
+        	<fileset dir="${lintra.dir}/tests/a2l.tests.airquality/bin"/>
 
         </jar>
     </target>

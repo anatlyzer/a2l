@@ -80,6 +80,7 @@ public abstract class JBlockImpl extends MinimalEObjectImpl.Container implements
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public EList<JVariableDeclaration> getLocalVars() {
 		if (localVars == null) {
 			localVars = new EObjectContainmentEList<JVariableDeclaration>(JVariableDeclaration.class, this, JavagenPackage.JBLOCK__LOCAL_VARS);
@@ -92,6 +93,7 @@ public abstract class JBlockImpl extends MinimalEObjectImpl.Container implements
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public EList<JStatement> getStatements() {
 		if (statements == null) {
 			statements = new EObjectContainmentEList<JStatement>(JStatement.class, this, JavagenPackage.JBLOCK__STATEMENTS);

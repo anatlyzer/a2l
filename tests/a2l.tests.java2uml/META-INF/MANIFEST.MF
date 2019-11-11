@@ -12,3 +12,4 @@ Require-Bundle: lintra.emf;bundle-version="1.0.0",
  lintra.evaluation,
  org.junit,
  org.eclipse.m2m.atl.dsls;bundle-version="3.6.0"
+Import-Package: org.eclipse.core.runtime

@@ -144,7 +144,20 @@ public class JavaGenerator extends AbstractJavaGenVisitor {
 		String returnType = self.getReturnType() == null ? "void" : g(self.getReturnType());
 
 		String throws_ = self.getThrows_().isEmpty() ? "" : " throws " + join(self.getThrows_(), ", ");
-		String s = "public " + returnType + " " + self.getName() + 
+		String visibility = "public";
+		switch(self.getVisibility()) {
+		case PRIVATE: 
+			visibility = "private";
+			break;
+		case PUBLIC: 
+			visibility = "public";
+			break;
+		case PROTECTED: 
+			visibility = "protected";
+			break;			
+		}
+		
+		String s = visibility + " " + returnType + " " + self.getName() + 
 				"(" + join(self.getParameters(), ", ") + ")" + throws_ + "{" + cr();
 		inctab();
 		{

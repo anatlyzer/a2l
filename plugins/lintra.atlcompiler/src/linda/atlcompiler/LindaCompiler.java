@@ -218,7 +218,9 @@ public abstract class LindaCompiler extends BaseCompiler {
 //		// This is not the cleanest way, only takes into account 1 source, 1 target
 		String fieldsText = "a2l.runtime.InputExtent inputExtent;" +
 				globalContextClassQName + " globalContext;\n" +
-				"a2l.runtime.GlobalTrace.PartialTrace trace = null;";
+				"a2l.runtime.GlobalTrace.PartialTrace trace = null;\n" +
+				"int numExecutions_ = 0;\n" +
+				"int numMatchedRuleExecutions_ = 0;\n";
 				//"java.util.Map<Object, Object> trace = new java.util.HashMap<Object, Object>();";
 
 		
@@ -280,6 +282,10 @@ public abstract class LindaCompiler extends BaseCompiler {
 			"	return r; " +
 			"}";
 			
+			utilities += 
+					"public int getNumExecutions() { return numExecutions_; }\n" + 
+					"public int getNumMatchedRuleExecutions() { return numMatchedRuleExecutions_; }\n";
+					
 		// Transformation result class
 		String trafoResultClass = "public static class TransformationResult { ";
 				
@@ -478,7 +484,7 @@ public abstract class LindaCompiler extends BaseCompiler {
 		result += inputs.stream().map(m -> "result = result.appendAll(" + m.getModelName() + ");").collect(Collectors.joining("\n"));
 		result += "return result;\n";
 		
-		String generalAllInstances = "protected <T> javaslang.collection.List<T> getAllInstances(java.lang.Class<T> klass) throws BlackboardException { " +
+		String generalAllInstances = "protected <T> javaslang.collection.List<T> getAllInstances(java.lang.Class<T> klass) { " +
 				"javaslang.collection.List<T> list_result = globalContext.getFromAllInstancesCache(klass, () -> {" + 
 					instances + "\n" + result + "\n" +
 				"});" +
@@ -504,7 +510,7 @@ public abstract class LindaCompiler extends BaseCompiler {
 				"  filter(e -> klass.isInstance(e)).map(e -> klass.cast(e))";
 
 		
-		return "protected <T> javaslang.collection.List<T> getAllInstances" + postfix + "(java.lang.Class<T> klass) throws BlackboardException { " +
+		return "protected <T> javaslang.collection.List<T> getAllInstances" + postfix + "(java.lang.Class<T> klass)  { " +
 				instancesColl + ";" + 
 				"return " + modelName + ";" +
 			"}";
@@ -545,7 +551,7 @@ public abstract class LindaCompiler extends BaseCompiler {
 		
 		LMatchObject match = createMainMatcher(self, transformMethodSingle.getParameters().get(0));
 		transformMethodSingle.getStatements().add( match );
-		
+		transformMethodSingle.getStatements().add(createText("numExecutions_++"));
 
 		tclass.getMethods().add(transformMethodSingle);		
 	}
@@ -603,14 +609,14 @@ public abstract class LindaCompiler extends BaseCompiler {
 		}
 		super.inContextHelper(self);
 		JMethod method = gen.helperToMethod.get(self);
-		method.getThrows_().add(typ.createTypeRef("BlackboardException"));
+		// method.getThrows_().add(typ.createTypeRef("BlackboardException"));
 	}
 	
 	@Override
 	public void inStaticHelper(StaticHelper self) {
 		super.inStaticHelper(self);
 		JMethod method = gen.helperToMethod.get(self);
-		method.getThrows_().add(typ.createTypeRef("BlackboardException"));
+		// method.getThrows_().add(typ.createTypeRef("BlackboardException"));
 	}
 	
 	/**
@@ -623,15 +629,11 @@ public abstract class LindaCompiler extends BaseCompiler {
 		// Complete check method in a generic way...
 		completeCheckMethod(self);
 		// Add the exception declaration
-		ruleToCheckMethod.get(self).getThrows_().add(typ.createTypeRef("BlackboardException"));
 		JMethod createMethod = ruleToCreateMethod.get(self);
 
 		// Write before the bindings to make sure that we can check target model elements querying the target model
 		writeToTgtArea(self, createMethod);
 
-		
-		// Complete the create method
-		createMethod.getThrows_().add(typ.createTypeRef("BlackboardException"));
 		
 		// Fill local variables ("using" block)
 		for (RuleVariableDeclaration usingVar : self.getVariables()) {
@@ -660,6 +662,8 @@ public abstract class LindaCompiler extends BaseCompiler {
 				addStm(createMethod, env.getStatements(stm));
 			}
 		}
+		
+		addStm(createMethod, createText("numMatchedRuleExecutions_++"));
 
 	}
 

@@ -59,6 +59,7 @@ public class JParamTypeRefImpl extends JTypeRefImpl implements JParamTypeRef {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public JTypeRef getContainedType() {
 		return containedType;
 	}
@@ -83,6 +84,7 @@ public class JParamTypeRefImpl extends JTypeRefImpl implements JParamTypeRef {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public void setContainedType(JTypeRef newContainedType) {
 		if (newContainedType != containedType) {
 			NotificationChain msgs = null;
