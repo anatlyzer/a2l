@@ -27,8 +27,9 @@ ANTLR=`ls $ECLIPSE_PLUGINS/*antlr*3* | paste -s -d ":" -`
 ECLIPSE=`ls $ECLIPSE_PLUGINS/*org.eclipse.core* | paste -s -d ":" -`
 OSGI=`ls $ECLIPSE_PLUGINS/*org.eclipse.osgi* | paste -s -d ":" -`
 EQUINOX=`ls $ECLIPSE_PLUGINS/*org.eclipse.equinox* | paste -s -d ":" -`
+OBJECTWEB=`ls $ECLIPSE_PLUGINS/*org.objectweb.* | paste -s -d ":" -`
 
-CLASSPATH=$(pwd)/../../../scripts/a2l.packaging/build/a2l.jar:$ECLIPSE:$EQUINOX:$OSGI:$EMF:$ATL:$MODISCO:$UML:$ANTLR
+CLASSPATH=$(pwd)/../../../scripts/a2l.packaging/build/a2l.jar:$ECLIPSE:$EQUINOX:$OSGI:$EMF:$ATL:$MODISCO:$UML:$ANTLR:$OBJECTWEB
 
 case $2 in
   copydeps)

@@ -98,7 +98,28 @@ public class IdentityIMDb_TestCase extends AbstractTestCase {
 		return outATL;
 	}
 
-
+	@Override
+	protected Object executeEMFTVM(String trafo, String inXmiPath, Resource input, IStatsRecorder recorder, boolean footprint, boolean save) throws Exception {
+		Resource outATL;
+		System.out.print("Executing EMTFVM... ");
+		ATLExecutor executor = new ATLExecutor();
+		executor.useEMFTVM();
+		executor.setStatsRecorder(recorder);
+		executor.doModelWarmup(true);
+		executor.allowInterModelReferences(false);
+		executor.perform(t + trafo, 
+				inModel("IN", inXmiPath, "MM", METAMODEL_MOVIES),
+				outModel("OUT", OUT_MODEL_ATL, "MM1", METAMODEL_MOVIES));
+		outATL = executor.getModelResource("OUT");
+		if ( save ) {
+			System.out.println("Finished... saving result...");
+			outATL.save(new FileOutputStream(OUT_MODEL_ATL), null);
+		}
+		System.out.println("Done!");
+		return outATL;
+	}
+	
+	
 
 }
  

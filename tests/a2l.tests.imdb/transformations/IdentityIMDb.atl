@@ -4,7 +4,7 @@
 -- @genpath MM=/a2l.tests.imdb/metamodels/movies.genmodel
 -- @genpath MM1=/a2l.tests.imdb/metamodels/movies.genmodel
 
--- @project a2l.tests.imdb=a2l.tests.imdb.identity
+-- @project a2l.tests.imdb=a2l.tests.imdb.identity.optimised
 -- @driver MM=emf
 -- @driver MM1=emf
 --

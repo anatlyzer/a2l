@@ -13,8 +13,8 @@ import java.util.List;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.Map;
-import imdb.movies.Movie;
 import imdb.movies.Person;
+import imdb.movies.Movie;
 import imdb.movies.Couple;
 import imdb.movies.MovieType;
 import imdb.movies.Actor;
@@ -149,17 +149,17 @@ List<Movie> get2;
 List<Person> get3;
 List<Person> r4;
 javaslang.collection.Set<Person> op5;/* 23:55-23:108: p1.movies.<IteratorChain>[collect-flatten]->asSet()*/
-	get2 = this.globalContext.getcache9_p1(p1, () -> { 
+	get2 = this.globalContext.getcache3_p1(p1, () -> { 
 /* 23:55-23:64: p1.movies*/
-return p1.getMovies();
+return new a2l.runtime.stdlib.FastIterableList<imdb.movies.Movie>(p1.getMovies());
 });
 
 	r4 = new java.util.ArrayList();
 
 	for ( Movie m1: get2) {
-get3 = this.globalContext.getcache8_m(m1, () -> { 
+get3 = this.globalContext.getcache4_m(m1, () -> { 
 /* 23:78-23:87: m.persons*/
-return m1.getPersons();
+return new a2l.runtime.stdlib.FastIterableList<imdb.movies.Person>(m1.getPersons());
 });
 
 	r4.addAll(get3);}
@@ -175,14 +175,14 @@ int op9;
 int tmp10;
 boolean tmp11;/* 25:64-25:126: p1<NavRefAsSet>.movies->intersection(p2<NavRefAsSet>.movies)->size()*/
 	/* 25:65-25:117: p1<NavRefAsSet>.movies->intersection(p2<NavRefAsSet>.movies)*/
-	get6 = this.globalContext.getcache7_p1(p1, () -> { 
+	get6 = this.globalContext.getcache1_p1(p1, () -> { 
 /* null: p1<NavRefAsSet>.movies*/
-return javaslang.collection.HashSet.ofAll(p1.getMovies());
+return javaslang.collection.HashSet.ofAll(new a2l.runtime.stdlib.FastIterableList<imdb.movies.Movie>(p1.getMovies()));
 });
 
-	get7 = this.globalContext.getcache6_p2(p2, () -> { 
+	get7 = this.globalContext.getcache2_p2(p2, () -> { 
 /* null: p2<NavRefAsSet>.movies*/
-return javaslang.collection.HashSet.ofAll(p2.getMovies());
+return javaslang.collection.HashSet.ofAll(new a2l.runtime.stdlib.FastIterableList<imdb.movies.Movie>(p2.getMovies()));
 });
 
 	op8 = get6.intersect(get7);
@@ -243,7 +243,7 @@ List<java.lang.Object> itTmp18;m212 = imdb.movies.MoviesFactory.eINSTANCE.create
 	get16 = m1.getYear();
 
 	/* 36:15-36:25: m1.persons*/
-	get17 = m1.getPersons();
+	get17 = new a2l.runtime.stdlib.FastIterableList<imdb.movies.Person>(m1.getPersons());
 
 	m212.setTitle(get13);;
 
@@ -290,7 +290,7 @@ List<java.lang.Object> itTmp32;p219 = imdb.movies.MoviesFactory.eINSTANCE.create
 	get20 = p1.getName();
 
 	/* 46:14-46:23: p1.movies*/
-	get21 = p1.getMovies();
+	get21 = new a2l.runtime.stdlib.FastIterableList<imdb.movies.Movie>(p1.getMovies());
 
 	p219.setName(get20);;
 
@@ -360,7 +360,7 @@ List<java.lang.Object> itTmp46;p233 = imdb.movies.MoviesFactory.eINSTANCE.create
 	get34 = p1.getName();
 
 	/* 63:14-63:23: p1.movies*/
-	get35 = p1.getMovies();
+	get35 = new a2l.runtime.stdlib.FastIterableList<imdb.movies.Movie>(p1.getMovies());
 
 	p233.setName(get34);;
 

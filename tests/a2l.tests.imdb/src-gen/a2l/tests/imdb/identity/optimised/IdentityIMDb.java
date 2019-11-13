@@ -214,7 +214,7 @@ List<java.lang.Object> itTmp6;m20 = imdb.movies.MoviesFactory.eINSTANCE.createMo
 	get4 = m1.getYear();
 
 	/* 25:15-25:25: m1.persons*/
-	get5 = m1.getPersons();
+	get5 = new a2l.runtime.stdlib.FastIterableList<imdb.movies.Person>(m1.getPersons());
 
 	m20.setTitle(get1);;
 
@@ -252,7 +252,7 @@ List<java.lang.Object> itTmp10;p27 = imdb.movies.MoviesFactory.eINSTANCE.createA
 	get8 = p1.getName();
 
 	/* 35:14-35:23: p1.movies*/
-	get9 = p1.getMovies();
+	get9 = new a2l.runtime.stdlib.FastIterableList<imdb.movies.Movie>(p1.getMovies());
 
 	p27.setName(get8);;
 
@@ -281,7 +281,7 @@ List<java.lang.Object> itTmp14;p211 = imdb.movies.MoviesFactory.eINSTANCE.create
 	get12 = p1.getName();
 
 	/* 45:14-45:23: p1.movies*/
-	get13 = p1.getMovies();
+	get13 = new a2l.runtime.stdlib.FastIterableList<imdb.movies.Movie>(p1.getMovies());
 
 	p211.setName(get12);;
 
@@ -310,10 +310,10 @@ List<java.lang.Object> itTmp20;c215 = imdb.movies.MoviesFactory.eINSTANCE.create
 	get16 = c1.getAvgRating();
 
 	/* 55:20-55:35: c1.commonMovies*/
-	get17 = c1.getCommonMovies();
+	get17 = new a2l.runtime.stdlib.FastIterableList<imdb.movies.Movie>(c1.getCommonMovies());
 
 	/* 56:15-56:25: c1.persons*/
-	get18 = c1.getPersons();
+	get18 = new a2l.runtime.stdlib.FastIterableList<imdb.movies.Person>(c1.getPersons());
 
 	c215.setAvgRating(get16);;
 
@@ -354,7 +354,7 @@ List<java.lang.Object> itTmp26;c221 = imdb.movies.MoviesFactory.eINSTANCE.create
 	get22 = c1.getAvgRating();
 
 	/* 66:20-66:35: c1.commonMovies*/
-	get23 = c1.getCommonMovies();
+	get23 = new a2l.runtime.stdlib.FastIterableList<imdb.movies.Movie>(c1.getCommonMovies());
 
 	/* 67:10-67:15: c1.p1*/
 	get24 = c1.getP1();

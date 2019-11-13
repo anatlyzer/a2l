@@ -262,7 +262,7 @@ ClassDeclaration r186;gTgt170 = org.eclipse.uml2.uml.UMLFactory.eINSTANCE.create
 	for ( ClassDeclaration cd182: call183) {
 /* 90:47-90:83: cd.bodyDeclarations->includes(field)*/
 	/* 90:47-90:66: cd.bodyDeclarations*/
-	get184 = javaslang.collection.List.ofAll(cd182.getBodyDeclarations());
+	get184 = javaslang.collection.List.ofAll(new a2l.runtime.stdlib.FastIterableList<org.eclipse.gmt.modisco.java.BodyDeclaration>(cd182.getBodyDeclarations()));
 
 	op185 = get184.contains(field);
 
@@ -293,7 +293,7 @@ boolean op8;
 javaslang.collection.List<ClassDeclaration> r9;/* 16:2-16:102: self.ownedElements->select(e | e.proxy = false)->select(e | e.oclIsTypeOf(JMM!ClassDeclaration))*/
 	/* 16:2-16:51: self.ownedElements->select(e | e.proxy = false)*/
 	/* 16:2-16:20: self.ownedElements*/
-	get3 = javaslang.collection.List.ofAll(self_.getOwnedElements());
+	get3 = javaslang.collection.List.ofAll(new a2l.runtime.stdlib.FastIterableList<org.eclipse.gmt.modisco.java.AbstractTypeDeclaration>(self_.getOwnedElements()));
 
 	r7 = javaslang.collection.List.empty();
 
@@ -424,7 +424,7 @@ boolean tmp44;
 javaslang.collection.List<FieldDeclaration> r45;/* 29:5-30:126: self.bodyDeclarations->select(e | e.oclIsTypeOf(JMM!FieldDeclaration))->select(e | e.type.type.proxy = false and not e.type.isPrimitiveType() and e.type.type.oclIsTypeOf(JMM!ClassDeclaration))*/
 	/* 29:5-29:77: self.bodyDeclarations->select(e | e.oclIsTypeOf(JMM!FieldDeclaration))*/
 	/* 29:5-29:26: self.bodyDeclarations*/
-	get29 = javaslang.collection.List.ofAll(self_.getBodyDeclarations());
+	get29 = javaslang.collection.List.ofAll(new a2l.runtime.stdlib.FastIterableList<org.eclipse.gmt.modisco.java.BodyDeclaration>(self_.getBodyDeclarations()));
 
 	r31 = javaslang.collection.List.empty();
 
@@ -708,7 +708,7 @@ List<java.lang.Object> itTmp105;t197 = org.eclipse.uml2.uml.UMLFactory.eINSTANCE
 
 	/* 45:23-45:70: s1.ownedElements->select(e | e.proxy = false)*/
 	/* 45:23-45:39: s1.ownedElements*/
-	get100 = javaslang.collection.List.ofAll(s1.getOwnedElements());
+	get100 = javaslang.collection.List.ofAll(new a2l.runtime.stdlib.FastIterableList<org.eclipse.gmt.modisco.java.Package>(s1.getOwnedElements()));
 
 	r104 = javaslang.collection.List.empty();
 
@@ -777,7 +777,7 @@ java.util.Set<java.lang.Object> tgtElems143;t1106 = org.eclipse.uml2.uml.UMLFact
 	/* 53:23-53:112: s1.ownedPackages->select(e | e.proxy = false)->select(e | e.oclIsTypeOf(JMM!Package))*/
 	/* 53:23-53:70: s1.ownedPackages->select(e | e.proxy = false)*/
 	/* 53:23-53:39: s1.ownedPackages*/
-	get110 = javaslang.collection.List.ofAll(s1.getOwnedPackages());
+	get110 = javaslang.collection.List.ofAll(new a2l.runtime.stdlib.FastIterableList<org.eclipse.gmt.modisco.java.Package>(s1.getOwnedPackages()));
 
 	r114 = javaslang.collection.List.empty();
 

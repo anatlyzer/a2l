@@ -617,7 +617,7 @@ int r30;out24 = GraphMM.GraphMMFactory.eINSTANCE.createNode();
 	call26 = helper_global_type(inn);
 
 	/* 51:12-51:32: inn.bodyDeclarations*/
-	get28 = inn.getBodyDeclarations();
+	get28 = new a2l.runtime.stdlib.FastIterableList<org.eclipse.gmt.modisco.java.BodyDeclaration>(inn.getBodyDeclarations());
 
 	r30 = 0;
 

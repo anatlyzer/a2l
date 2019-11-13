@@ -62,7 +62,7 @@ tmp15 = (dblp.DBLP.Author)a;
 	/* 23:18-23:120: a.records->select(r | r.oclIsTypeOf(MM!InProceedings))->exists(ip | ip.booktitle().indexOf('ICMT') >= 0)*/
 	/* 23:18-23:72: a.records->select(r | r.oclIsTypeOf(MM!InProceedings))*/
 	/* 23:18-23:27: a.records*/
-	get18 = javaslang.collection.List.ofAll(tmp15.getRecords());
+	get18 = javaslang.collection.List.ofAll(new a2l.runtime.stdlib.FastIterableList<dblp.DBLP.Record>(tmp15.getRecords()));
 
 	r20 = javaslang.collection.List.empty();
 
@@ -152,7 +152,7 @@ int op14;out1 = dblp.AuthorInfo.AuthorInfoFactory.eINSTANCE.createAuthor();
 	/* 28:5-30:53: a.records->select(r | r.oclIsTypeOf(MM!InProceedings))->select(ip | ip.booktitle().indexOf('ICMT') >= 0)*/
 	/* 28:5-29:50: a.records->select(r | r.oclIsTypeOf(MM!InProceedings))*/
 	/* 28:5-28:14: a.records*/
-	get5 = javaslang.collection.List.ofAll(a.getRecords());
+	get5 = javaslang.collection.List.ofAll(new a2l.runtime.stdlib.FastIterableList<dblp.DBLP.Record>(a.getRecords()));
 
 	r7 = javaslang.collection.List.empty();
 

@@ -39,5 +39,19 @@ public interface ITyping {
 		NON_MUTABLE
 	}
 
+//	public final static TypeContextInformation SIMPLE_MUTABLE = new TypeContextInformation(true);
+//	
+//	public static class TypeContextInformation {
+//		private boolean isMutable;
+//
+//		public TypeContextInformation(boolean isMutable) {
+//			this.isMutable = isMutable;
+//		}
+//		
+//		public boolean isMutable() {
+//			return isMutable;
+//		}
+//	}
+
 	
 }

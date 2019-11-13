@@ -153,13 +153,13 @@ javaslang.collection.Set<Person> op6;/* 23:55-23:108: p1.movies->collect(m | m.p
 	/* 23:55-23:99: p1.movies->collect(m | m.persons)->flatten()*/
 	/* 23:55-23:88: p1.movies->collect(m | m.persons)*/
 	/* 23:55-23:64: p1.movies*/
-	get2 = javaslang.collection.List.ofAll(p1.getMovies());
+	get2 = javaslang.collection.List.ofAll(new a2l.runtime.stdlib.FastIterableList<imdb.movies.Movie>(p1.getMovies()));
 
 	r4 = javaslang.collection.List.empty();
 
 	for ( Movie m1: get2) {
 /* 23:78-23:87: m.persons*/
-	get3 = javaslang.collection.List.ofAll(m1.getPersons());
+	get3 = javaslang.collection.List.ofAll(new a2l.runtime.stdlib.FastIterableList<imdb.movies.Person>(m1.getPersons()));
 
 	r4 = r4.append(get3);
 }
@@ -181,13 +181,13 @@ boolean tmp14;/* 25:64-25:126: p1.movies->asSet()->intersection(p2.movies->asSet
 	/* 25:65-25:117: p1.movies->asSet()->intersection(p2.movies->asSet())*/
 	/* 25:65-25:83: p1.movies->asSet()*/
 	/* 25:65-25:74: p1.movies*/
-	get7 = javaslang.collection.List.ofAll(p1.getMovies());
+	get7 = javaslang.collection.List.ofAll(new a2l.runtime.stdlib.FastIterableList<imdb.movies.Movie>(p1.getMovies()));
 
 	op8 = javaslang.collection.HashSet.ofAll(get7);
 
 	/* 25:98-25:116: p2.movies->asSet()*/
 	/* 25:98-25:107: p2.movies*/
-	get9 = javaslang.collection.List.ofAll(p2.getMovies());
+	get9 = javaslang.collection.List.ofAll(new a2l.runtime.stdlib.FastIterableList<imdb.movies.Movie>(p2.getMovies()));
 
 	op10 = javaslang.collection.HashSet.ofAll(get9);
 
@@ -249,7 +249,7 @@ List<java.lang.Object> itTmp21;m215 = imdb.movies.MoviesFactory.eINSTANCE.create
 	get19 = m1.getYear();
 
 	/* 36:15-36:25: m1.persons*/
-	get20 = javaslang.collection.List.ofAll(m1.getPersons());
+	get20 = javaslang.collection.List.ofAll(new a2l.runtime.stdlib.FastIterableList<imdb.movies.Person>(m1.getPersons()));
 
 	m215.setTitle(get16);;
 
@@ -296,7 +296,7 @@ List<java.lang.Object> itTmp35;p222 = imdb.movies.MoviesFactory.eINSTANCE.create
 	get23 = p1.getName();
 
 	/* 46:14-46:23: p1.movies*/
-	get24 = javaslang.collection.List.ofAll(p1.getMovies());
+	get24 = javaslang.collection.List.ofAll(new a2l.runtime.stdlib.FastIterableList<imdb.movies.Movie>(p1.getMovies()));
 
 	p222.setName(get23);;
 
@@ -366,7 +366,7 @@ List<java.lang.Object> itTmp49;p236 = imdb.movies.MoviesFactory.eINSTANCE.create
 	get37 = p1.getName();
 
 	/* 63:14-63:23: p1.movies*/
-	get38 = javaslang.collection.List.ofAll(p1.getMovies());
+	get38 = javaslang.collection.List.ofAll(new a2l.runtime.stdlib.FastIterableList<imdb.movies.Movie>(p1.getMovies()));
 
 	p236.setName(get37);;
 

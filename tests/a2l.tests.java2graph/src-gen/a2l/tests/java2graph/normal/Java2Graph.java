@@ -620,7 +620,7 @@ int op31;out24 = GraphMM.GraphMMFactory.eINSTANCE.createNode();
 	/* 51:12-52:49: inn.bodyDeclarations->select(bd | bd.oclIsTypeOf(MM!FieldDeclaration))->size()*/
 	/* 51:12-52:39: inn.bodyDeclarations->select(bd | bd.oclIsTypeOf(MM!FieldDeclaration))*/
 	/* 51:12-51:32: inn.bodyDeclarations*/
-	get28 = javaslang.collection.List.ofAll(inn.getBodyDeclarations());
+	get28 = javaslang.collection.List.ofAll(new a2l.runtime.stdlib.FastIterableList<org.eclipse.gmt.modisco.java.BodyDeclaration>(inn.getBodyDeclarations()));
 
 	r30 = javaslang.collection.List.empty();
 

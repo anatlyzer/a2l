@@ -59,7 +59,7 @@ boolean r21;if ( a instanceof dblp.DBLP.Author) {
 tmp12 = (dblp.DBLP.Author)a;
 
 	/* 23:18-23:27: a.records*/
-	get14 = tmp12.getRecords();
+	get14 = new a2l.runtime.stdlib.FastIterableList<dblp.DBLP.Record>(tmp12.getRecords());
 
 	r21 = false;
 
@@ -137,7 +137,7 @@ int r11;out1 = dblp.AuthorInfo.AuthorInfoFactory.eINSTANCE.createAuthor();
 	get2 = a.getName();
 
 	/* 28:5-28:14: a.records*/
-	get4 = a.getRecords();
+	get4 = new a2l.runtime.stdlib.FastIterableList<dblp.DBLP.Record>(a.getRecords());
 
 	r11 = 0;
 

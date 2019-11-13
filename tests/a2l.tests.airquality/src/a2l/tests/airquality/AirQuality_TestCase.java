@@ -82,13 +82,13 @@ public class AirQuality_TestCase extends AbstractTestCase {
 
 
 	@Override
-	protected Resource executeATL(String trafo, String inXmiPath, Resource input, IStatsRecorder recorder, boolean save) throws IOException, FileNotFoundException {
+	protected Resource executeATL(String trafo, String inXmiPath, Resource input, IStatsRecorder recorder, boolean footprint, boolean save) throws IOException, FileNotFoundException {
 		Resource outATL;
 		System.out.print("Executing EMFVM... ");
 		ATLExecutor executor = new ATLExecutor();
 		executor.useEMFVM();
 		executor.setStatsRecorder(recorder);
-		executor.doModelWarmup(true);
+		executor.doModelWarmup(footprint);
 		executor.allowInterModelReferences(false);
 		executor.perform(t + trafo, 
 				inModel("IN", inXmiPath, "MM", METAMODEL_MOVIES),
@@ -101,6 +101,25 @@ public class AirQuality_TestCase extends AbstractTestCase {
 		return outATL;
 	}
 
-
+	@Override
+	protected Object executeEMFTVM(String trafo, String inXmiPath, Resource input, IStatsRecorder recorder,
+			boolean footprint, boolean save) throws Exception {
+		Resource outATL;
+		System.out.print("Executing EMFVM... ");
+		ATLExecutor executor = new ATLExecutor();
+		executor.useEMFTVM();
+		executor.setStatsRecorder(recorder);
+		executor.doModelWarmup(footprint);
+		executor.allowInterModelReferences(false);
+		executor.perform(t + trafo, 
+				inModel("IN", inXmiPath, "MM", METAMODEL_MOVIES),
+				outModel("OUT", OUT_MODEL_ATL, "MM1", METAMODEL_MOVIES));
+		outATL = executor.getModelResource("OUT");
+		if ( save ) {
+			outATL.save(new FileOutputStream(OUT_MODEL_ATL), null);
+		}
+		System.out.println("Done!");
+		return outATL;
+	}
 }
  

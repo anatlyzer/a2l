@@ -59,7 +59,7 @@ boolean r29;if ( a instanceof dblp.DBLP.Author) {
 tmp20 = (dblp.DBLP.Author)a;
 
 	/* 26:18-26:27: a.records*/
-	get22 = tmp20.getRecords();
+	get22 = new a2l.runtime.stdlib.FastIterableList<dblp.DBLP.Record>(tmp20.getRecords());
 
 	r29 = false;
 
@@ -118,7 +118,7 @@ boolean op13;
 int r14;
 int tmp15;
 boolean tmp16;/* 22:2-22:14: self.records*/
-	get3 = self_.getRecords();
+	get3 = new a2l.runtime.stdlib.FastIterableList<dblp.DBLP.Record>(self_.getRecords());
 
 	r14 = 0;
 

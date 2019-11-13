@@ -6,7 +6,6 @@ import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
 import java.io.FileReader;
 import java.io.IOException;
-import java.io.OutputStream;
 import java.io.PrintStream;
 import java.lang.management.GarbageCollectorMXBean;
 import java.lang.management.ManagementFactory;
@@ -405,6 +404,27 @@ public abstract class AbstractTestCase {
 			ps2.close();
 		}
 		
+		if ( framework == ExecutionFramework.EMFTVM || framework == ExecutionFramework.BOTH ) {
+			AggregatedStatsRecorder recorder = new AggregatedStatsRecorder(getName() + "_" + inXmiPath + "_EMFTVM");
+			recorder.testWithNumThreads(1);
+			for(int j = 0; j < runsPerTest; j++) {
+				recorder.startNewTest();			
+				outATL = executeEMFTVM(trafo, inXmiPath, input, recorder, args.footprint, args.save);
+				recorder.printCurrentTo(System.out);
+			}
+			
+			recorder.printTo(System.out);
+			
+			PrintStream ps = new PrintStream(createReportFileName(args.reportDir, folderName, "EMFTVM"));
+			recorder.printCSVto(ps);
+			ps.close();
+
+			PrintStream ps2 = new PrintStream(createExtendedReportFileName(args.reportDir, folderName, "EMFTVM"));
+			recorder.printExtendedCSVto(ps2);
+			ps2.close();
+		
+		}
+		
 		System.out.println("*******");
 		System.out.println("Bye!");
 		System.out.println("*******");
@@ -492,6 +512,11 @@ public abstract class AbstractTestCase {
 	
 	protected Object executeATL(String trafo, String inXmiPath, Resource input, IStatsRecorder recorder, boolean save) throws Exception {
 		return executeATL(trafo, inXmiPath, input, recorder, true, save);
+	}
+	
+	
+	protected Object executeEMFTVM(String trafo, String inXmiPath, Resource input, IStatsRecorder recorder, boolean footprint, boolean save) throws Exception {
+		throw new UnsupportedOperationException("Not implemented yet");
 	}
 	
 	// By default ignore the footprint, too keep the compatibility with most of the test cases

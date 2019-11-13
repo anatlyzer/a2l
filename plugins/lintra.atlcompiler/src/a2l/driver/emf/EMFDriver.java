@@ -29,13 +29,9 @@ import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.EPackage;
 import org.eclipse.emf.ecore.EReference;
 import org.eclipse.emf.ecore.EStructuralFeature;
-import org.eclipse.emf.ecore.util.EcoreUtil;
 
 import a2l.driver.DriverConfiguration;
-import a2l.driver.ICollectionsDriver;
 import a2l.driver.IMetaDriver;
-import a2l.driver.JavaslangDriver;
-import a2l.driver.ICollectionsDriver.BaseType;
 import a2l.utils.A2LUtils;
 import anatlyzer.atl.analyser.batch.ChildStealingAnalysis;
 import anatlyzer.atl.analyser.batch.PossibleStealingNode;
@@ -59,13 +55,12 @@ import anatlyzer.atlext.OCL.NavigationOrAttributeCallExp;
 import anatlyzer.atlext.OCL.OclExpression;
 import anatlyzer.atlext.OCL.OperationCallExp;
 import anatlyzer.atlext.OCL.Parameter;
-import anatlyzer.atlext.OCL.VariableDeclaration;
 import linda.atlcompiler.CompilationEnv;
 import linda.atlcompiler.CreationHelpers;
 import linda.atlcompiler.GenList;
 import linda.atlcompiler.ICompilationContext;
-import linda.atlcompiler.LindaTyping;
 import linda.atlcompiler.ICompilationContext.Context;
+import linda.atlcompiler.LindaTyping;
 import lintra.atlcompiler.javagen.JAssignment;
 import lintra.atlcompiler.javagen.JAttribute;
 import lintra.atlcompiler.javagen.JClass;
@@ -572,7 +567,13 @@ public class EMFDriver implements IMetaDriver {
 	
 	@Override
 	public String compileGetterExpression(JVariableDeclaration srcVar, EStructuralFeature f) {
-		return compileGetterExpression(srcVar.getName(), f);
+		String expr = compileGetterExpression(srcVar.getName(), f);
+		// An optimisation to avoid slow iteration
+		if (f.isMany() && f instanceof EReference) {
+			EReference ref = (EReference) f;
+			return  "new a2l.runtime.stdlib.FastIterableList<" + getClassQName(ref.getEReferenceType()) + ">(" +  expr + ")";
+		}		
+		return expr;
 	}
 
 	@Override
