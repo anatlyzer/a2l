@@ -40,6 +40,7 @@ import a2l.optimiser.anatlyzerext.IteratorChainExp;
 import a2l.optimiser.anatlyzerext.MutableCollectionOperationCallExp;
 import a2l.optimiser.anatlyzerext.MutableIteratorExp;
 import a2l.optimiser.anatlyzerext.NavRefAsSet;
+import a2l.optimiser.anatlyzerext.ShortCircuitOperatorCallExp;
 import a2l.utils.TypeError;
 import anatlyzer.atl.analyser.namespaces.MetamodelNamespace;
 import anatlyzer.atl.model.TypeUtils;
@@ -1312,6 +1313,46 @@ public class LindaOclCompiler implements IOclCompiler, IInitializer {
 		}
 		
 		env.bind(self, newVar, stms);				
+	}
+
+	@Override
+	public void inShortCircuitOperatorCallExp(ShortCircuitOperatorCallExp self) {
+		ArrayList<JStatement> stms = new ArrayList<JStatement>();
+		JVariableDeclaration newVar = gen.addLocalVar(env.currentBlock(), "tmp", typ.createTypeRef(self.getInferredType()));
+
+		stms.addAll(env.getStatements(self.getSource()));
+		JVariableDeclaration var0 = env.getVar( self.getSource() );
+				
+		String name = self.getOperationName();
+		if ("and".equals(name)) {			
+			ArrayList<JStatement> ifBlockStms = new ArrayList<JStatement>();
+			ifBlockStms.addAll(env.getStatements(self.getArguments().get(0)));
+			JVariableDeclaration var1 = env.getVar( self.getArguments().get(0));
+			ifBlockStms.add(createAssignment(newVar, var1.getName()));
+			
+			JConditional if_ = CreationHelpers.createSimpleIf(var0.getName(), ifBlockStms);
+			
+			JConditionalBlock elseBlock = JavagenFactory.eINSTANCE.createJConditionalBlock();
+			elseBlock.getStatements().add(createAssignment(newVar, "true"));
+			if_.setElse(elseBlock);
+			
+			stms.add(if_);			
+		} else if ("or".equals(name)) {
+			JConditional if_ = CreationHelpers.createSimpleIf(var0.getName(), Collections.singletonList(createAssignment(newVar, "true")));
+			JConditionalBlock elseBlock = JavagenFactory.eINSTANCE.createJConditionalBlock();
+			elseBlock.getStatements().addAll(env.getStatements(self.getArguments().get(0)));
+			
+			JVariableDeclaration var1 = env.getVar( self.getArguments().get(0));
+			elseBlock.getStatements().add(createAssignment(newVar, var1.getName()));
+			if_.setElse(elseBlock);
+			
+			stms.add(if_);
+		} else {
+			System.out.println("No support for short-circuit: " + self.getOperationName());
+			inOperatorCallExp(self);
+		}
+
+		env.bind(self, newVar, stms);
 	}
 	
 	@Override

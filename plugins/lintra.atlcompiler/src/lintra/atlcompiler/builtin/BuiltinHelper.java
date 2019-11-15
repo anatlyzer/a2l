@@ -27,6 +27,7 @@ import anatlyzer.atl.types.Type;
 import anatlyzer.atl.util.UnsupportedTranslation;
 import anatlyzer.atlext.OCL.Iterator;
 import anatlyzer.atlext.OCL.IteratorExp;
+import anatlyzer.atlext.OCL.OclExpression;
 import anatlyzer.atlext.OCL.OperationCallExp;
 import linda.atlcompiler.CompilationEnv;
 import linda.atlcompiler.CreationHelpers;
@@ -400,6 +401,66 @@ public class BuiltinHelper {
 					currentBlock = innerForeach;
 				}
 				*/
+				
+				return new VarStatementPair(resultVar, stms);
+			}
+		});
+		
+		// Very similar to collect->flatten
+		r.register(new IIteratorChainHandler.Abstract("select-collect") {
+
+			@Override
+			public VarStatementPair compile(Context ctx, IteratorChainExp self, JVariableDeclaration source, ICollectionsDriver mutableDriver) {
+
+				List<JStatement> stms = newStatements();
+				
+				CompilationEnv env = ctx.getEnv();
+				JVariableDeclaration colVar = env.getVar(self.getSource()); // This returns a collection
+				stms.addAll(env.getStatements(self.getSource()));
+
+				// Result is a flattened list
+				JVariableDeclaration resultVar = ctx.getGenerator().addLocalVar(env.currentBlock(), "r", ctx.getTyping().createTypeRef(self.getInferredType(), true));
+				stms.add(createAssignment(resultVar, ctx.getInitializer().createEmptyValue(self.getInferredType(), true)) );
+				
+				// Generate a for each to maintain the iteration
+				Iterator it = self.getIterator();
+				JForeach foreach = createForeach(colVar, env.getVar(it));
+				stms.add(foreach);
+
+				JBlock currentBlock = foreach;
+				
+				// Compile selects if any
+				currentBlock = compileFoldedSelects(self.getPreChain(), env, currentBlock);
+				
+				// Compile collects
+				List<IteratorChainElement> chain = self.getChain();
+				currentBlock = compileFoldedCollects(chain, env, currentBlock);
+				
+				
+				//IteratorChainElement initialCollect = chain.get(chain.size() - 1);
+				//List<JStatement> nextStms = env.getStatements(initialCollect.getBody());
+				//currentBlock.getStatements().addAll(nextStms);
+				
+				OclExpression resultCollect = chain.get(0).getBody();
+				JVariableDeclaration bodyResult = env.getVar(resultCollect);
+				ITyping.MutabilityAttribute mutable = env.getAttribute(resultCollect, ITyping.MutabilityAttribute.class, MutabilityAttribute.NON_MUTABLE);
+				
+				JVarExp refToResult = CreationHelpers.refVar(bodyResult);
+				
+				JStatement addStatement;
+				if ( mutable == MutabilityAttribute.NON_MUTABLE ) {
+					// Convert the body to a mutable collection
+					// addStatement = CreationHelpers.createText("com.google.common.collect.Iterables.add(" + resultVar.getName() + "," + bodyResult.getName() + ")");
+					// throw new UnsupportedOperationException("Not implemented yet");
+					JInvoke addAll = CreationHelpers.createInvoke("add", CreationHelpers.refVar(resultVar), refToResult);
+					addStatement = CreationHelpers.createExpresionStatement(addAll);
+					
+				} else {
+					JInvoke addAll = CreationHelpers.createInvoke("add", CreationHelpers.refVar(resultVar), refToResult);
+					addStatement = CreationHelpers.createExpresionStatement(addAll);
+				}
+				
+				currentBlock.getStatements().add(addStatement);
 				
 				return new VarStatementPair(resultVar, stms);
 			}

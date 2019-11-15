@@ -80,9 +80,13 @@ public class CreationHelpers {
 	}
 	
 	public static JConditional createSimpleIf(String conditional, List<JStatement> stmts) {
+		return createSimpleIf(createTextExp(conditional), stmts);
+	}
+	
+	public static JConditional createSimpleIf(JExpression conditional, List<JStatement> stmts) {
 		JConditional cond = JavagenFactory.eINSTANCE.createJConditional();
 		JConditionalBlock ifBlock = JavagenFactory.eINSTANCE.createJConditionalBlock();
-		ifBlock.setExpr(createTextExp(conditional));
+		ifBlock.setExpr(conditional);
 		ifBlock.getStatements().addAll(stmts);
 		cond.getConditions().add(ifBlock);
 		return cond;

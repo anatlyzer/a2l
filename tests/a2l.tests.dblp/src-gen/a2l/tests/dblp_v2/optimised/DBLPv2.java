@@ -141,7 +141,8 @@ call4 = helper_dblp_DBLP_InProceedings_booktitle((dblp.DBLP.InProceedings)r2);
 
 	tmp8 = op6 >= tmp7;
 
-	/* 22:111-22:120: r.year()*/
+	if ( tmp8) {
+/* 22:111-22:120: r.year()*/
 	if ( r2 instanceof dblp.DBLP.InProceedings) {
 call9 = helper_dblp_DBLP_InProceedings_year((dblp.DBLP.InProceedings)r2);
 } else { throw new IllegalStateException();
@@ -150,8 +151,9 @@ call9 = helper_dblp_DBLP_InProceedings_year((dblp.DBLP.InProceedings)r2);
 
 	tmp11 = call9 > tmp10;
 
-	tmp12 = tmp8 && tmp11;
-
+	tmp12 = tmp11;
+} else { tmp12 = true;
+}
 	if ( tmp12 == true) {
 r14++;
 }}}

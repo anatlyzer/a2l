@@ -345,7 +345,8 @@ call51 = helper_org_eclipse_gmt_modisco_java_Package_rootPackage((org.eclipse.gm
 
 	tmp56 = op54 < tmp55;
 
-	/* 69:71-82:10: if not fd.abstractTypeDeclaration.oclIsUndefined() then
+	if ( tmp56) {
+/* 69:71-82:10: if not fd.abstractTypeDeclaration.oclIsUndefined() then
 	true and if not fd.abstractTypeDeclaration.package.oclIsUndefined() then
 	fd.abstractTypeDeclaration.package.rootPackage().name.indexOf('java') < 0
 else
@@ -367,7 +368,8 @@ endif*/
 	if ( tmp75) {
 tmp57 = true;
 
-	/* 73:15-79:11: if not fd.abstractTypeDeclaration.package.oclIsUndefined() then
+	if ( tmp57) {
+/* 73:15-79:11: if not fd.abstractTypeDeclaration.package.oclIsUndefined() then
 	fd.abstractTypeDeclaration.package.rootPackage().name.indexOf('java') < 0
 else
 	false
@@ -414,15 +416,17 @@ call60 = helper_org_eclipse_gmt_modisco_java_Package_rootPackage((org.eclipse.gm
 
 r71 = tmp70;
 }
-	tmp72 = tmp57 && r71;
-
+	tmp72 = r71;
+} else { tmp72 = true;
+}
 	r77 = tmp72;
 } else { tmp76 = false;
 
 r77 = tmp76;
 }
-	tmp78 = tmp56 && r77;
-
+	tmp78 = r77;
+} else { tmp78 = true;
+}
 	r85 = tmp78;
 } else { tmp84 = false;
 

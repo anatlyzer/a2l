@@ -59,6 +59,7 @@ public class AnatlyzerExtFactoryImpl extends EFactoryImpl implements AnatlyzerEx
 			case AnatlyzerExtPackage.NAV_REF_AS_SET: return createNavRefAsSet();
 			case AnatlyzerExtPackage.MUTABLE_ITERATOR_EXP: return createMutableIteratorExp();
 			case AnatlyzerExtPackage.MUTABLE_COLLECTION_OPERATION_CALL_EXP: return createMutableCollectionOperationCallExp();
+			case AnatlyzerExtPackage.SHORT_CIRCUIT_OPERATOR_CALL_EXP: return createShortCircuitOperatorCallExp();
 			case AnatlyzerExtPackage.ITERATOR_CHAIN_EXP: return createIteratorChainExp();
 			case AnatlyzerExtPackage.ITERATOR_CHAIN_ELEMENT: return createIteratorChainElement();
 			default:
@@ -71,6 +72,7 @@ public class AnatlyzerExtFactoryImpl extends EFactoryImpl implements AnatlyzerEx
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public NavRefAsSet createNavRefAsSet() {
 		NavRefAsSetImpl navRefAsSet = new NavRefAsSetImpl();
 		return navRefAsSet;
@@ -81,6 +83,7 @@ public class AnatlyzerExtFactoryImpl extends EFactoryImpl implements AnatlyzerEx
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public MutableIteratorExp createMutableIteratorExp() {
 		MutableIteratorExpImpl mutableIteratorExp = new MutableIteratorExpImpl();
 		return mutableIteratorExp;
@@ -91,6 +94,7 @@ public class AnatlyzerExtFactoryImpl extends EFactoryImpl implements AnatlyzerEx
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public MutableCollectionOperationCallExp createMutableCollectionOperationCallExp() {
 		MutableCollectionOperationCallExpImpl mutableCollectionOperationCallExp = new MutableCollectionOperationCallExpImpl();
 		return mutableCollectionOperationCallExp;
@@ -101,6 +105,18 @@ public class AnatlyzerExtFactoryImpl extends EFactoryImpl implements AnatlyzerEx
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
+	public ShortCircuitOperatorCallExp createShortCircuitOperatorCallExp() {
+		ShortCircuitOperatorCallExpImpl shortCircuitOperatorCallExp = new ShortCircuitOperatorCallExpImpl();
+		return shortCircuitOperatorCallExp;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
 	public IteratorChainExp createIteratorChainExp() {
 		IteratorChainExpImpl iteratorChainExp = new IteratorChainExpImpl();
 		return iteratorChainExp;
@@ -111,6 +127,7 @@ public class AnatlyzerExtFactoryImpl extends EFactoryImpl implements AnatlyzerEx
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public IteratorChainElement createIteratorChainElement() {
 		IteratorChainElementImpl iteratorChainElement = new IteratorChainElementImpl();
 		return iteratorChainElement;
@@ -121,6 +138,7 @@ public class AnatlyzerExtFactoryImpl extends EFactoryImpl implements AnatlyzerEx
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public AnatlyzerExtPackage getAnatlyzerExtPackage() {
 		return (AnatlyzerExtPackage)getEPackage();
 	}

@@ -1,13 +1,10 @@
 package linda.atlcompiler;
 
-import org.eclipse.emf.ecore.EStructuralFeature;
-
-import a2l.compiler.OptimisationHints;
 import a2l.optimiser.anatlyzerext.IteratorChainExp;
 import a2l.optimiser.anatlyzerext.MutableCollectionOperationCallExp;
 import a2l.optimiser.anatlyzerext.MutableIteratorExp;
 import a2l.optimiser.anatlyzerext.NavRefAsSet;
-import anatlyzer.atlext.ATL.BindingStat;
+import a2l.optimiser.anatlyzerext.ShortCircuitOperatorCallExp;
 import anatlyzer.atlext.ATL.ForStat;
 import anatlyzer.atlext.ATL.IfStat;
 import anatlyzer.atlext.OCL.BooleanExp;
@@ -43,6 +40,7 @@ public interface IOclCompiler {
 	void prepareIterateVariable(IterateExp self);
 	void inIterateExp(IterateExp self);
 	void inOperatorCallExp(OperatorCallExp self);
+	void inShortCircuitOperatorCallExp(ShortCircuitOperatorCallExp self);
 	void inOperationCallExp(OperationCallExp self);
 	void inThisModuleCall(OperationCallExp self);
 	void inThisModuleCall(NavigationOrAttributeCallExp self);

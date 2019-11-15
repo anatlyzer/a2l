@@ -35,10 +35,12 @@ import a2l.compiler.OptimisationHints.CachedValue;
 import a2l.compiler.OptimisationHints.Hotspot;
 import a2l.driver.DriverConfiguration;
 import a2l.driver.IMetaDriver;
+import a2l.optimiser.anatlyzerext.IteratorChainElement;
 import a2l.optimiser.anatlyzerext.IteratorChainExp;
 import a2l.optimiser.anatlyzerext.MutableCollectionOperationCallExp;
 import a2l.optimiser.anatlyzerext.MutableIteratorExp;
 import a2l.optimiser.anatlyzerext.NavRefAsSet;
+import a2l.optimiser.anatlyzerext.ShortCircuitOperatorCallExp;
 import anatlyzer.atl.analyser.IAnalyserResult;
 import anatlyzer.atl.errors.atl_error.NavigationProblem;
 import anatlyzer.atl.model.ATLModel;
@@ -1001,7 +1003,11 @@ public abstract class LindaCompiler extends BaseCompiler {
 	public void inOperatorCallExp(OperatorCallExp self) {
 		ocl.inOperatorCallExp(self);
 	}
-
+		
+	@Override
+	public void inShortCircuitOperatorCallExp(ShortCircuitOperatorCallExp self) {
+		ocl.inShortCircuitOperatorCallExp(self);
+	}
 	
 	@Override
 	public void beforeForStat(ForStat self) {
@@ -1109,7 +1115,7 @@ public abstract class LindaCompiler extends BaseCompiler {
 	
 	@Override
 	public VisitingActions preIteratorChainExp(IteratorChainExp self) {
-		return actions("source" , "iterator", "chain");
+		return actions("source" , "preChain", "iterator", "chain");
 	}
 	
 	@Override

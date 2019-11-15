@@ -49,6 +49,15 @@ public interface AnatlyzerExtFactory extends EFactory {
 	MutableCollectionOperationCallExp createMutableCollectionOperationCallExp();
 
 	/**
+	 * Returns a new object of class '<em>Short Circuit Operator Call Exp</em>'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return a new object of class '<em>Short Circuit Operator Call Exp</em>'.
+	 * @generated
+	 */
+	ShortCircuitOperatorCallExp createShortCircuitOperatorCallExp();
+
+	/**
 	 * Returns a new object of class '<em>Iterator Chain Exp</em>'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->

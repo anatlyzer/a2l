@@ -97,6 +97,7 @@ public class IteratorChainElementImpl extends MinimalEObjectImpl.Container imple
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public String getName() {
 		return name;
 	}
@@ -106,6 +107,7 @@ public class IteratorChainElementImpl extends MinimalEObjectImpl.Container imple
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public void setName(String newName) {
 		String oldName = name;
 		name = newName;
@@ -118,6 +120,7 @@ public class IteratorChainElementImpl extends MinimalEObjectImpl.Container imple
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public Iterator getIterator() {
 		return iterator;
 	}
@@ -142,6 +145,7 @@ public class IteratorChainElementImpl extends MinimalEObjectImpl.Container imple
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public void setIterator(Iterator newIterator) {
 		if (newIterator != iterator) {
 			NotificationChain msgs = null;
@@ -161,6 +165,7 @@ public class IteratorChainElementImpl extends MinimalEObjectImpl.Container imple
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public OclExpression getBody() {
 		return body;
 	}
@@ -185,6 +190,7 @@ public class IteratorChainElementImpl extends MinimalEObjectImpl.Container imple
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public void setBody(OclExpression newBody) {
 		if (newBody != body) {
 			NotificationChain msgs = null;
@@ -302,7 +308,7 @@ public class IteratorChainElementImpl extends MinimalEObjectImpl.Container imple
 	public String toString() {
 		if (eIsProxy()) return super.toString();
 
-		StringBuffer result = new StringBuffer(super.toString());
+		StringBuilder result = new StringBuilder(super.toString());
 		result.append(" (name: ");
 		result.append(name);
 		result.append(')');

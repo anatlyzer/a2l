@@ -23,11 +23,11 @@ public class GenAnatlyzerExtensionVisitor {
 		rs.getPackageRegistry().put(GenModelPackage.eINSTANCE.getNsURI(), GenModelPackage.eINSTANCE);
 		
 		Resource r4 = rs.getResource(URI.createURI("file:///home/jesus/projects/anatlyzer/plugins/anatlyzer.atl.typing/model/generated/merged.genmodel"), true);		
-		Resource r3 = rs.getResource(URI.createURI("file:///home/jesus/projects/atl-lintra/plugins/lintra.atlcompiler/model/anatlyzer_ext.genmodel"), true);		
+		Resource r3 = rs.getResource(URI.createURI("file:///home/jesus/projects/a2l/plugins/lintra.atlcompiler/model/anatlyzer_ext.genmodel"), true);		
 		
 		// file:///home/jesus/projects/atl-lintra/plugins/anatlyzer.atl.typing/model/generated/merged.ecore#//OCL/NavigationOrAttributeCallExp
 		rs.getURIConverter().getURIMap().put(
-				URI.createURI("file:///home/jesus/projects/atl-lintra/plugins/anatlyzer.atl.typing/model/generated/merged.ecore"),
+				URI.createURI("file:///home/jesus/projects/a2l/plugins/anatlyzer.atl.typing/model/generated/merged.ecore"),
 				URI.createURI("file:///home/jesus/projects/anatlyzer/plugins/anatlyzer.atl.typing/model/generated/merged.ecore"));
 		
 		EcoreUtil.resolveAll(rs); // Make sure all proxies are resolved
@@ -39,7 +39,7 @@ public class GenAnatlyzerExtensionVisitor {
 		options.setQualifiedBaseClass("anatlyzer.atlext.processing.AbstractVisitor"); //Inherit from ATL
 		options.setBaseMetamodel(r4);
 		
-		options.setBaseDir("/home/jesus/projects/atl-lintra/plugins/lintra.atlcompiler/src-gen");
+		options.setBaseDir("/home/jesus/projects/a2l/plugins/lintra.atlcompiler/src-gen");
 		options.setPackagePrefix("a2l.anatlyzerext.visitor");
 		
 		VisitorCreator compiler = new VisitorCreator();

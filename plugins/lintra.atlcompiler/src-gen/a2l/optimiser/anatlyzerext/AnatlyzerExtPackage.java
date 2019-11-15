@@ -991,6 +991,322 @@ public interface AnatlyzerExtPackage extends EPackage {
 
 
 	/**
+	 * The meta object id for the '{@link a2l.optimiser.anatlyzerext.impl.ShortCircuitOperatorCallExpImpl <em>Short Circuit Operator Call Exp</em>}' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see a2l.optimiser.anatlyzerext.impl.ShortCircuitOperatorCallExpImpl
+	 * @see a2l.optimiser.anatlyzerext.impl.AnatlyzerExtPackageImpl#getShortCircuitOperatorCallExp()
+	 * @generated
+	 */
+	int SHORT_CIRCUIT_OPERATOR_CALL_EXP = 3;
+
+	/**
+	 * The feature id for the '<em><b>Location</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int SHORT_CIRCUIT_OPERATOR_CALL_EXP__LOCATION = OCLPackage.OPERATOR_CALL_EXP__LOCATION;
+
+	/**
+	 * The feature id for the '<em><b>Comments Before</b></em>' attribute list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int SHORT_CIRCUIT_OPERATOR_CALL_EXP__COMMENTS_BEFORE = OCLPackage.OPERATOR_CALL_EXP__COMMENTS_BEFORE;
+
+	/**
+	 * The feature id for the '<em><b>Comments After</b></em>' attribute list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int SHORT_CIRCUIT_OPERATOR_CALL_EXP__COMMENTS_AFTER = OCLPackage.OPERATOR_CALL_EXP__COMMENTS_AFTER;
+
+	/**
+	 * The feature id for the '<em><b>File Location</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int SHORT_CIRCUIT_OPERATOR_CALL_EXP__FILE_LOCATION = OCLPackage.OPERATOR_CALL_EXP__FILE_LOCATION;
+
+	/**
+	 * The feature id for the '<em><b>File Object</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int SHORT_CIRCUIT_OPERATOR_CALL_EXP__FILE_OBJECT = OCLPackage.OPERATOR_CALL_EXP__FILE_OBJECT;
+
+	/**
+	 * The feature id for the '<em><b>Problems</b></em>' reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int SHORT_CIRCUIT_OPERATOR_CALL_EXP__PROBLEMS = OCLPackage.OPERATOR_CALL_EXP__PROBLEMS;
+
+	/**
+	 * The feature id for the '<em><b>Annotations</b></em>' map.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int SHORT_CIRCUIT_OPERATOR_CALL_EXP__ANNOTATIONS = OCLPackage.OPERATOR_CALL_EXP__ANNOTATIONS;
+
+	/**
+	 * The feature id for the '<em><b>Inferred Type</b></em>' reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int SHORT_CIRCUIT_OPERATOR_CALL_EXP__INFERRED_TYPE = OCLPackage.OPERATOR_CALL_EXP__INFERRED_TYPE;
+
+	/**
+	 * The feature id for the '<em><b>Type</b></em>' containment reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int SHORT_CIRCUIT_OPERATOR_CALL_EXP__TYPE = OCLPackage.OPERATOR_CALL_EXP__TYPE;
+
+	/**
+	 * The feature id for the '<em><b>If Exp3</b></em>' container reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int SHORT_CIRCUIT_OPERATOR_CALL_EXP__IF_EXP3 = OCLPackage.OPERATOR_CALL_EXP__IF_EXP3;
+
+	/**
+	 * The feature id for the '<em><b>Applied Property</b></em>' container reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int SHORT_CIRCUIT_OPERATOR_CALL_EXP__APPLIED_PROPERTY = OCLPackage.OPERATOR_CALL_EXP__APPLIED_PROPERTY;
+
+	/**
+	 * The feature id for the '<em><b>Collection</b></em>' container reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int SHORT_CIRCUIT_OPERATOR_CALL_EXP__COLLECTION = OCLPackage.OPERATOR_CALL_EXP__COLLECTION;
+
+	/**
+	 * The feature id for the '<em><b>Let Exp</b></em>' container reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int SHORT_CIRCUIT_OPERATOR_CALL_EXP__LET_EXP = OCLPackage.OPERATOR_CALL_EXP__LET_EXP;
+
+	/**
+	 * The feature id for the '<em><b>Loop Exp</b></em>' container reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int SHORT_CIRCUIT_OPERATOR_CALL_EXP__LOOP_EXP = OCLPackage.OPERATOR_CALL_EXP__LOOP_EXP;
+
+	/**
+	 * The feature id for the '<em><b>Parent Operation</b></em>' container reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int SHORT_CIRCUIT_OPERATOR_CALL_EXP__PARENT_OPERATION = OCLPackage.OPERATOR_CALL_EXP__PARENT_OPERATION;
+
+	/**
+	 * The feature id for the '<em><b>Initialized Variable</b></em>' container reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int SHORT_CIRCUIT_OPERATOR_CALL_EXP__INITIALIZED_VARIABLE = OCLPackage.OPERATOR_CALL_EXP__INITIALIZED_VARIABLE;
+
+	/**
+	 * The feature id for the '<em><b>If Exp2</b></em>' container reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int SHORT_CIRCUIT_OPERATOR_CALL_EXP__IF_EXP2 = OCLPackage.OPERATOR_CALL_EXP__IF_EXP2;
+
+	/**
+	 * The feature id for the '<em><b>Owning Operation</b></em>' container reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int SHORT_CIRCUIT_OPERATOR_CALL_EXP__OWNING_OPERATION = OCLPackage.OPERATOR_CALL_EXP__OWNING_OPERATION;
+
+	/**
+	 * The feature id for the '<em><b>If Exp1</b></em>' container reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int SHORT_CIRCUIT_OPERATOR_CALL_EXP__IF_EXP1 = OCLPackage.OPERATOR_CALL_EXP__IF_EXP1;
+
+	/**
+	 * The feature id for the '<em><b>Owning Attribute</b></em>' container reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int SHORT_CIRCUIT_OPERATOR_CALL_EXP__OWNING_ATTRIBUTE = OCLPackage.OPERATOR_CALL_EXP__OWNING_ATTRIBUTE;
+
+	/**
+	 * The feature id for the '<em><b>Implicitly Casted</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int SHORT_CIRCUIT_OPERATOR_CALL_EXP__IMPLICITLY_CASTED = OCLPackage.OPERATOR_CALL_EXP__IMPLICITLY_CASTED;
+
+	/**
+	 * The feature id for the '<em><b>No Casted Type</b></em>' reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int SHORT_CIRCUIT_OPERATOR_CALL_EXP__NO_CASTED_TYPE = OCLPackage.OPERATOR_CALL_EXP__NO_CASTED_TYPE;
+
+	/**
+	 * The feature id for the '<em><b>Source</b></em>' containment reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int SHORT_CIRCUIT_OPERATOR_CALL_EXP__SOURCE = OCLPackage.OPERATOR_CALL_EXP__SOURCE;
+
+	/**
+	 * The feature id for the '<em><b>Used Feature</b></em>' reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int SHORT_CIRCUIT_OPERATOR_CALL_EXP__USED_FEATURE = OCLPackage.OPERATOR_CALL_EXP__USED_FEATURE;
+
+	/**
+	 * The feature id for the '<em><b>Subtype Features</b></em>' reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int SHORT_CIRCUIT_OPERATOR_CALL_EXP__SUBTYPE_FEATURES = OCLPackage.OPERATOR_CALL_EXP__SUBTYPE_FEATURES;
+
+	/**
+	 * The feature id for the '<em><b>Receptor Type</b></em>' reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int SHORT_CIRCUIT_OPERATOR_CALL_EXP__RECEPTOR_TYPE = OCLPackage.OPERATOR_CALL_EXP__RECEPTOR_TYPE;
+
+	/**
+	 * The feature id for the '<em><b>Is Static Call</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int SHORT_CIRCUIT_OPERATOR_CALL_EXP__IS_STATIC_CALL = OCLPackage.OPERATOR_CALL_EXP__IS_STATIC_CALL;
+
+	/**
+	 * The feature id for the '<em><b>Static Resolver</b></em>' reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int SHORT_CIRCUIT_OPERATOR_CALL_EXP__STATIC_RESOLVER = OCLPackage.OPERATOR_CALL_EXP__STATIC_RESOLVER;
+
+	/**
+	 * The feature id for the '<em><b>Dynamic Resolvers</b></em>' reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int SHORT_CIRCUIT_OPERATOR_CALL_EXP__DYNAMIC_RESOLVERS = OCLPackage.OPERATOR_CALL_EXP__DYNAMIC_RESOLVERS;
+
+	/**
+	 * The feature id for the '<em><b>Arguments</b></em>' containment reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int SHORT_CIRCUIT_OPERATOR_CALL_EXP__ARGUMENTS = OCLPackage.OPERATOR_CALL_EXP__ARGUMENTS;
+
+	/**
+	 * The feature id for the '<em><b>Operation Name</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int SHORT_CIRCUIT_OPERATOR_CALL_EXP__OPERATION_NAME = OCLPackage.OPERATOR_CALL_EXP__OPERATION_NAME;
+
+	/**
+	 * The feature id for the '<em><b>Resolve Temp Resolved By</b></em>' containment reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int SHORT_CIRCUIT_OPERATOR_CALL_EXP__RESOLVE_TEMP_RESOLVED_BY = OCLPackage.OPERATOR_CALL_EXP__RESOLVE_TEMP_RESOLVED_BY;
+
+	/**
+	 * The number of structural features of the '<em>Short Circuit Operator Call Exp</em>' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int SHORT_CIRCUIT_OPERATOR_CALL_EXP_FEATURE_COUNT = OCLPackage.OPERATOR_CALL_EXP_FEATURE_COUNT + 0;
+
+	/**
+	 * The number of operations of the '<em>Short Circuit Operator Call Exp</em>' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int SHORT_CIRCUIT_OPERATOR_CALL_EXP_OPERATION_COUNT = OCLPackage.OPERATOR_CALL_EXP_OPERATION_COUNT + 0;
+
+	/**
 	 * The meta object id for the '{@link a2l.optimiser.anatlyzerext.impl.IteratorChainExpImpl <em>Iterator Chain Exp</em>}' class.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -998,7 +1314,7 @@ public interface AnatlyzerExtPackage extends EPackage {
 	 * @see a2l.optimiser.anatlyzerext.impl.AnatlyzerExtPackageImpl#getIteratorChainExp()
 	 * @generated
 	 */
-	int ITERATOR_CHAIN_EXP = 3;
+	int ITERATOR_CHAIN_EXP = 4;
 
 	/**
 	 * The feature id for the '<em><b>Location</b></em>' attribute.
@@ -1324,7 +1640,7 @@ public interface AnatlyzerExtPackage extends EPackage {
 	 * @see a2l.optimiser.anatlyzerext.impl.AnatlyzerExtPackageImpl#getIteratorChainElement()
 	 * @generated
 	 */
-	int ITERATOR_CHAIN_ELEMENT = 4;
+	int ITERATOR_CHAIN_ELEMENT = 5;
 
 	/**
 	 * The feature id for the '<em><b>Name</b></em>' attribute.
@@ -1401,6 +1717,16 @@ public interface AnatlyzerExtPackage extends EPackage {
 	 * @generated
 	 */
 	EClass getMutableCollectionOperationCallExp();
+
+	/**
+	 * Returns the meta object for class '{@link a2l.optimiser.anatlyzerext.ShortCircuitOperatorCallExp <em>Short Circuit Operator Call Exp</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for class '<em>Short Circuit Operator Call Exp</em>'.
+	 * @see a2l.optimiser.anatlyzerext.ShortCircuitOperatorCallExp
+	 * @generated
+	 */
+	EClass getShortCircuitOperatorCallExp();
 
 	/**
 	 * Returns the meta object for class '{@link a2l.optimiser.anatlyzerext.IteratorChainExp <em>Iterator Chain Exp</em>}'.
@@ -1549,6 +1875,15 @@ public interface AnatlyzerExtPackage extends EPackage {
 		 * @generated
 		 */
 		EClass MUTABLE_COLLECTION_OPERATION_CALL_EXP = eINSTANCE.getMutableCollectionOperationCallExp();
+		/**
+		 * The meta object literal for the '{@link a2l.optimiser.anatlyzerext.impl.ShortCircuitOperatorCallExpImpl <em>Short Circuit Operator Call Exp</em>}' class.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @see a2l.optimiser.anatlyzerext.impl.ShortCircuitOperatorCallExpImpl
+		 * @see a2l.optimiser.anatlyzerext.impl.AnatlyzerExtPackageImpl#getShortCircuitOperatorCallExp()
+		 * @generated
+		 */
+		EClass SHORT_CIRCUIT_OPERATOR_CALL_EXP = eINSTANCE.getShortCircuitOperatorCallExp();
 		/**
 		 * The meta object literal for the '{@link a2l.optimiser.anatlyzerext.impl.IteratorChainExpImpl <em>Iterator Chain Exp</em>}' class.
 		 * <!-- begin-user-doc -->

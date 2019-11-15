@@ -12,6 +12,7 @@ import anatlyzer.atlext.OCL.LoopExp;
 import anatlyzer.atlext.OCL.NavigationOrAttributeCallExp;
 import anatlyzer.atlext.OCL.OclExpression;
 import anatlyzer.atlext.OCL.OperationCallExp;
+import anatlyzer.atlext.OCL.OperatorCallExp;
 import anatlyzer.atlext.OCL.PropertyCallExp;
 import anatlyzer.atlext.OCL.TypedElement;
 
@@ -112,6 +113,18 @@ public class AnatlyzerExtSwitch<T> extends Switch<T> {
 				if (result == null) result = defaultCase(theEObject);
 				return result;
 			}
+			case AnatlyzerExtPackage.SHORT_CIRCUIT_OPERATOR_CALL_EXP: {
+				ShortCircuitOperatorCallExp shortCircuitOperatorCallExp = (ShortCircuitOperatorCallExp)theEObject;
+				T result = caseShortCircuitOperatorCallExp(shortCircuitOperatorCallExp);
+				if (result == null) result = caseOperatorCallExp(shortCircuitOperatorCallExp);
+				if (result == null) result = caseOperationCallExp(shortCircuitOperatorCallExp);
+				if (result == null) result = casePropertyCallExp(shortCircuitOperatorCallExp);
+				if (result == null) result = caseOclExpression(shortCircuitOperatorCallExp);
+				if (result == null) result = caseLocatedElement(shortCircuitOperatorCallExp);
+				if (result == null) result = caseTypedElement(shortCircuitOperatorCallExp);
+				if (result == null) result = defaultCase(theEObject);
+				return result;
+			}
 			case AnatlyzerExtPackage.ITERATOR_CHAIN_EXP: {
 				IteratorChainExp iteratorChainExp = (IteratorChainExp)theEObject;
 				T result = caseIteratorChainExp(iteratorChainExp);
@@ -174,6 +187,21 @@ public class AnatlyzerExtSwitch<T> extends Switch<T> {
 	 * @generated
 	 */
 	public T caseMutableCollectionOperationCallExp(MutableCollectionOperationCallExp object) {
+		return null;
+	}
+
+	/**
+	 * Returns the result of interpreting the object as an instance of '<em>Short Circuit Operator Call Exp</em>'.
+	 * <!-- begin-user-doc -->
+	 * This implementation returns null;
+	 * returning a non-null result will terminate the switch.
+	 * <!-- end-user-doc -->
+	 * @param object the target of the switch.
+	 * @return the result of interpreting the object as an instance of '<em>Short Circuit Operator Call Exp</em>'.
+	 * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
+	 * @generated
+	 */
+	public T caseShortCircuitOperatorCallExp(ShortCircuitOperatorCallExp object) {
 		return null;
 	}
 
@@ -339,6 +367,21 @@ public class AnatlyzerExtSwitch<T> extends Switch<T> {
 	 * @generated
 	 */
 	public T caseCollectionOperationCallExp(CollectionOperationCallExp object) {
+		return null;
+	}
+
+	/**
+	 * Returns the result of interpreting the object as an instance of '<em>Operator Call Exp</em>'.
+	 * <!-- begin-user-doc -->
+	 * This implementation returns null;
+	 * returning a non-null result will terminate the switch.
+	 * <!-- end-user-doc -->
+	 * @param object the target of the switch.
+	 * @return the result of interpreting the object as an instance of '<em>Operator Call Exp</em>'.
+	 * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
+	 * @generated
+	 */
+	public T caseOperatorCallExp(OperatorCallExp object) {
 		return null;
 	}
 

@@ -1,0 +1,33 @@
+-- @atlcompiler atl2006
+-- @path ABCD=/a2l.tests.vmtesting.emf/metamodels/simple/ABCD.ecore
+-- @path WXYZ=/a2l.tests.vmtesting.emf/metamodels/simple/WXYZ.ecore
+
+-- @project a2l.tests.vmtesting.emf=a2l.tests.simple.emf.select_collect
+
+-- @genpath ABCD=/a2l.tests.vmtesting.emf/metamodels/simple/ABCD.genmodel
+-- @genpath WXYZ=/a2l.tests.vmtesting.emf/metamodels/simple/WXYZ.genmodel
+
+-- @optimizations all
+
+-- @driver ABCD=emf
+-- @driver WXYZ=emf
+
+
+module SelectCollect;
+create OUT : WXYZ from IN : ABCD;
+
+rule A2B {
+	from
+		a : ABCD!Model
+	to
+		b : WXYZ!Model (
+			name <- thisModule.getAs()->first()
+		)
+}
+
+helper  def: getAs() : Sequence(String) = ABCD!A.allInstances()
+				->select(a | a.name <> 'b')
+				->select(a | a.name <> 'c')
+				->collect(a | if a.anIntegerAttr > 0 then a.name else OclUndefined endif)
+				-- ->collect(a | if a.oclIsUndefined() then '' else a endif)
+				;

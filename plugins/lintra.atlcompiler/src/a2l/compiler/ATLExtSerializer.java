@@ -6,6 +6,7 @@ import a2l.anatlyzerext.visitor.AbstractAnatlyzerExtVisitor;
 import a2l.optimiser.anatlyzerext.IteratorChainExp;
 import a2l.optimiser.anatlyzerext.MutableIteratorExp;
 import a2l.optimiser.anatlyzerext.NavRefAsSet;
+import a2l.optimiser.anatlyzerext.ShortCircuitOperatorCallExp;
 import anatlyzer.atl.model.ATLModel;
 import anatlyzer.atl.util.ATLSerializer;
 import anatlyzer.atlext.ATL.Module;
@@ -55,6 +56,11 @@ public class ATLExtSerializer extends ATLSerializer {
 		@Override
 		public void inIteratorChainExp(IteratorChainExp self) {
 			s(g(self.getSource()) + ".<IteratorChain>[" + self.getName() + "]");
+		}
+		
+		@Override
+		public void inShortCircuitOperatorCallExp(ShortCircuitOperatorCallExp self) {
+			super.inOperatorCallExp(self);
 		}
 		
 		@Override

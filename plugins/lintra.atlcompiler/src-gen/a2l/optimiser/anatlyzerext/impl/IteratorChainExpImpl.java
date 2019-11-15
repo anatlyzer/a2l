@@ -114,6 +114,7 @@ public class IteratorChainExpImpl extends PropertyCallExpImpl implements Iterato
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public String getName() {
 		return name;
 	}
@@ -123,6 +124,7 @@ public class IteratorChainExpImpl extends PropertyCallExpImpl implements Iterato
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public void setName(String newName) {
 		String oldName = name;
 		name = newName;
@@ -135,6 +137,7 @@ public class IteratorChainExpImpl extends PropertyCallExpImpl implements Iterato
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public Iterator getIterator() {
 		return iterator;
 	}
@@ -159,6 +162,7 @@ public class IteratorChainExpImpl extends PropertyCallExpImpl implements Iterato
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public void setIterator(Iterator newIterator) {
 		if (newIterator != iterator) {
 			NotificationChain msgs = null;
@@ -178,6 +182,7 @@ public class IteratorChainExpImpl extends PropertyCallExpImpl implements Iterato
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public EList<IteratorChainElement> getPreChain() {
 		if (preChain == null) {
 			preChain = new EObjectContainmentEList<IteratorChainElement>(IteratorChainElement.class, this, AnatlyzerExtPackage.ITERATOR_CHAIN_EXP__PRE_CHAIN);
@@ -190,6 +195,7 @@ public class IteratorChainExpImpl extends PropertyCallExpImpl implements Iterato
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public EList<IteratorChainElement> getChain() {
 		if (chain == null) {
 			chain = new EObjectContainmentEList<IteratorChainElement>(IteratorChainElement.class, this, AnatlyzerExtPackage.ITERATOR_CHAIN_EXP__CHAIN);
@@ -315,7 +321,7 @@ public class IteratorChainExpImpl extends PropertyCallExpImpl implements Iterato
 	public String toString() {
 		if (eIsProxy()) return super.toString();
 
-		StringBuffer result = new StringBuffer(super.toString());
+		StringBuilder result = new StringBuilder(super.toString());
 		result.append(" (name: ");
 		result.append(name);
 		result.append(')');

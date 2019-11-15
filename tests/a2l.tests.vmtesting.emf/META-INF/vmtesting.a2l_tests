@@ -21,3 +21,7 @@ testcase: /a2l.tests.vmtesting.emf/transformations/XML2DSLModel/XML2DSLModel.atl
 testcase: /a2l.tests.vmtesting.emf/transformations/XML2Ant/XML2Ant.atl
 testcase: /a2l.tests.vmtesting.emf/transformations/UML2Relational/UML2Relational.atl
 testcase: /a2l.tests.vmtesting.emf/transformations/Relational2UML/Relational2UML_modified.atl
+
+
+testcase: /a2l.tests.vmtesting.emf/transformations-simple/optimisations/collect-flatten.atl
+testcase: /a2l.tests.vmtesting.emf/transformations-simple/optimisations/select-collect.atl

@@ -182,7 +182,10 @@ public class ATLExecutor {
 			if ( modelData.kind == ModelKind.OUT ) {
 				r = rs.createResource(URI.createFileURI(new File(modelData.modelPath).getAbsolutePath()));
 			} else {
-				r = rs.getResource(URI.createFileURI(new File(modelData.modelPath).getAbsolutePath()), true);
+				if (modelData.inputResource != null)
+					r = modelData.inputResource;
+				else
+					r = rs.getResource(URI.createFileURI(new File(modelData.modelPath).getAbsolutePath()), true);
 			}
 
 			

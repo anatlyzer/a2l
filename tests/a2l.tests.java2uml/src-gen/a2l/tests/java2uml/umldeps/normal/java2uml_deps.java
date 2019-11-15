@@ -115,173 +115,207 @@ private boolean check_Model2Model(java.lang.Object s1){
 return s1 instanceof org.eclipse.gmt.modisco.java.Model;
 }
 	private boolean check_Package2Package(java.lang.Object s1){
-org.eclipse.gmt.modisco.java.Package tmp134;
-boolean get135;
-boolean tmp136;
-boolean tmp137;if ( s1 instanceof org.eclipse.gmt.modisco.java.Package) {
-tmp134 = (org.eclipse.gmt.modisco.java.Package)s1;
+org.eclipse.gmt.modisco.java.Package tmp135;
+boolean get136;
+boolean tmp137;
+boolean tmp138;if ( s1 instanceof org.eclipse.gmt.modisco.java.Package) {
+tmp135 = (org.eclipse.gmt.modisco.java.Package)s1;
 
 	/* 50:24-50:32: s1.proxy*/
-	get135 = tmp134.isProxy();
+	get136 = tmp135.isProxy();
 
-	tmp136 = false;
+	tmp137 = false;
 
-	tmp137 = get135 == tmp136;
+	tmp138 = get136 == tmp137;
 
-	return tmp137 == true;
+	return tmp138 == true;
 }
 	return false;
 }
 	private boolean check_Class2Class(java.lang.Object s1){
-ClassDeclaration tmp154;
-boolean get155;
-boolean tmp156;
-boolean tmp157;if ( s1 instanceof org.eclipse.gmt.modisco.java.ClassDeclaration) {
-tmp154 = (org.eclipse.gmt.modisco.java.ClassDeclaration)s1;
+ClassDeclaration tmp155;
+boolean get156;
+boolean tmp157;
+boolean tmp158;if ( s1 instanceof org.eclipse.gmt.modisco.java.ClassDeclaration) {
+tmp155 = (org.eclipse.gmt.modisco.java.ClassDeclaration)s1;
 
-	/* 66:33-66:41: s1.proxy*/
-	get155 = tmp154.isProxy();
+	/* 69:33-69:41: s1.proxy*/
+	get156 = tmp155.isProxy();
 
-	tmp156 = false;
+	tmp157 = false;
 
-	tmp157 = get155 == tmp156;
+	tmp158 = get156 == tmp157;
 
-	return tmp157 == true;
+	return tmp158 == true;
 }
 	return false;
 }
 	public Dependency lazy_rule_createGeneralizationDependency(ClassDeclaration class_){
-Dependency gTgt158;
-java.lang.String tmp159;
-java.lang.String get160;
-java.lang.String tmp161;
+Dependency gTgt159;
+java.lang.String tmp160;
+java.lang.String get161;
 java.lang.String tmp162;
 java.lang.String tmp163;
-TypeAccess get164;
-Type get165;
-java.lang.String get166;
-java.lang.String tmp167;
-TypeAccess get168;
-Type get169;gTgt158 = org.eclipse.uml2.uml.UMLFactory.eINSTANCE.createDependency();
+java.lang.String tmp164;
+TypeAccess get165;
+Type get166;
+java.lang.String get167;
+java.lang.String tmp168;
+TypeAccess get169;
+Type get170;
+javaslang.collection.List<Type> tmp171;
+javaslang.collection.List<ClassDeclaration> tmp172;
+List<java.lang.Object> itTmp173;
+List<java.lang.Object> itTmp174;gTgt159 = org.eclipse.uml2.uml.UMLFactory.eINSTANCE.createDependency();
 
-	UCDModel_PartialOutput_.write(gTgt158);
+	UCDModel_PartialOutput_.write(gTgt159);
 
-	tmp159 = "generalization pointing from ";
+	tmp160 = "generalization pointing from ";
 
-	/* 76:49-76:59: class.name*/
-	get160 = class_.getName();
+	/* 79:49-79:59: class.name*/
+	get161 = class_.getName();
 
-	tmp161 = tmp159 + get160;
+	tmp162 = tmp160 + get161;
 
-	tmp162 = " to ";
+	tmp163 = " to ";
 
-	tmp163 = tmp161 + tmp162;
+	tmp164 = tmp162 + tmp163;
 
-	/* 76:71-76:97: class.superClass.type.name*/
-	/* 76:71-76:92: class.superClass.type*/
-	/* 76:71-76:87: class.superClass*/
-	get164 = class_.getSuperClass();
+	/* 79:71-79:97: class.superClass.type.name*/
+	/* 79:71-79:92: class.superClass.type*/
+	/* 79:71-79:87: class.superClass*/
+	get165 = class_.getSuperClass();
 
-	get165 = get164.getType();
+	get166 = get165.getType();
 
-	get166 = get165.getName();
+	get167 = get166.getName();
 
-	tmp167 = tmp163 + get166;
+	tmp168 = tmp164 + get167;
 
-	/* 77:15-77:36: class.superClass.type*/
-	/* 77:15-77:31: class.superClass*/
-	get168 = class_.getSuperClass();
+	/* 80:15-80:49: Sequence {class.superClass.type }*/
+	/* 80:26-80:47: class.superClass.type*/
+	/* 80:26-80:42: class.superClass*/
+	get169 = class_.getSuperClass();
 
-	get169 = get168.getType();
+	get170 = get169.getType();
 
-	gTgt158.setName(tmp167);;
+	tmp171 = javaslang.collection.List.of(get170);
 
-	boolean matched0 = false;if ( check_Class2Class( get169) )  {
-this.parallelPendingTasks.add( new PendingTask_Dependency_supplier(gTgt158,get169,UCDModel_, null) );
+	/* 86:13-86:31: Sequence {class }*/
+	tmp172 = javaslang.collection.List.of(class_);
+
+	gTgt159.setName(tmp168);;
+
+	itTmp173 = new ArrayList<Object>();
+
+	for ( java.lang.Object o: tmp171) {
+boolean matched0 = false;if ( check_Class2Class( o) )  {
+itTmp173.add(o);
 }
-
-	boolean matched1 = false;if ( check_Class2Class( class_) )  {
-this.parallelPendingTasks.add( new PendingTask_Dependency_client(gTgt158,class_,UCDModel_, null) );
 }
+	this.parallelPendingTasks.add( new PendingTask_Dependency_supplier(gTgt159,itTmp173,UCDModel_,null) );
 
-	return gTgt158;
+	itTmp174 = new ArrayList<Object>();
+
+	for ( java.lang.Object o: tmp172) {
+boolean matched1 = false;if ( check_Class2Class( o) )  {
+itTmp174.add(o);
+}
+}
+	this.parallelPendingTasks.add( new PendingTask_Dependency_client(gTgt159,itTmp174,UCDModel_,null) );
+
+	return gTgt159;
 }
 	public Dependency lazy_rule_createUsageDependency(FieldDeclaration field){
-Dependency gTgt170;
-java.lang.String tmp171;
-java.lang.String tmp172;
-java.lang.String tmp173;
-java.lang.String tmp174;
-java.lang.String tmp175;
-TypeAccess get176;
-Type get177;
-java.lang.String get178;
+Dependency gTgt175;
+java.lang.String tmp176;
+java.lang.String tmp177;
+java.lang.String tmp178;
 java.lang.String tmp179;
-TypeAccess get180;
-Type get181;
-javaslang.collection.List<ClassDeclaration> call183;
-javaslang.collection.List<BodyDeclaration> get184;
-boolean op185;
-ClassDeclaration r186;gTgt170 = org.eclipse.uml2.uml.UMLFactory.eINSTANCE.createDependency();
+java.lang.String tmp180;
+TypeAccess get181;
+Type get182;
+java.lang.String get183;
+java.lang.String tmp184;
+TypeAccess get185;
+Type get186;
+javaslang.collection.List<Type> tmp187;
+javaslang.collection.List<ClassDeclaration> call189;
+javaslang.collection.List<BodyDeclaration> get190;
+boolean op191;
+javaslang.collection.List<ClassDeclaration> r192;
+List<java.lang.Object> itTmp193;
+List<java.lang.Object> itTmp194;gTgt175 = org.eclipse.uml2.uml.UMLFactory.eINSTANCE.createDependency();
 
-	UCDModel_PartialOutput_.write(gTgt170);
+	UCDModel_PartialOutput_.write(gTgt175);
 
-	tmp171 = "field pointing from ";
+	tmp176 = "field pointing from ";
 
-	tmp172 = "xx";
+	tmp177 = "xx";
 
-	tmp173 = tmp171 + tmp172;
+	tmp178 = tmp176 + tmp177;
 
-	tmp174 = " to ";
+	tmp179 = " to ";
 
-	tmp175 = tmp173 + tmp174;
+	tmp180 = tmp178 + tmp179;
 
-	/* 86:52-86:72: field.type.type.name*/
-	/* 86:52-86:67: field.type.type*/
-	/* 86:52-86:62: field.type*/
-	get176 = field.getType();
+	/* 94:52-94:72: field.type.type.name*/
+	/* 94:52-94:67: field.type.type*/
+	/* 94:52-94:62: field.type*/
+	get181 = field.getType();
 
-	get177 = get176.getType();
+	get182 = get181.getType();
 
-	get178 = get177.getName();
+	get183 = get182.getName();
 
-	tmp179 = tmp175 + get178;
+	tmp184 = tmp180 + get183;
 
-	/* 87:16-87:31: field.type.type*/
-	/* 87:16-87:26: field.type*/
-	get180 = field.getType();
+	/* 95:15-95:43: Sequence {field.type.type }*/
+	/* 95:26-95:41: field.type.type*/
+	/* 95:26-95:36: field.type*/
+	get185 = field.getType();
 
-	get181 = get180.getType();
+	get186 = get185.getType();
 
-	/* 90:15-90:84: thisModule.allClasses->any(cd | cd.bodyDeclarations->includes(field))*/
-	/* 90:15-90:36: thisModule.allClasses*/
-	call183 = helper_global_allClasses();
+	tmp187 = javaslang.collection.List.of(get186);
 
-	r186 = null;
+	/* 101:15-101:87: thisModule.allClasses->select(cd | cd.bodyDeclarations->includes(field))*/
+	/* 101:15-101:36: thisModule.allClasses*/
+	call189 = helper_global_allClasses();
 
-	for ( ClassDeclaration cd182: call183) {
-/* 90:47-90:83: cd.bodyDeclarations->includes(field)*/
-	/* 90:47-90:66: cd.bodyDeclarations*/
-	get184 = javaslang.collection.List.ofAll(new a2l.runtime.stdlib.FastIterableList<org.eclipse.gmt.modisco.java.BodyDeclaration>(cd182.getBodyDeclarations()));
+	r192 = javaslang.collection.List.empty();
 
-	op185 = get184.contains(field);
+	for ( ClassDeclaration cd188: call189) {
+/* 101:50-101:86: cd.bodyDeclarations->includes(field)*/
+	/* 101:50-101:69: cd.bodyDeclarations*/
+	get190 = javaslang.collection.List.ofAll(new a2l.runtime.stdlib.FastIterableList<org.eclipse.gmt.modisco.java.BodyDeclaration>(cd188.getBodyDeclarations()));
 
-	if ( op185) {
-r186 = cd182;
+	op191 = get190.contains(field);
 
-	break;
+	if ( op191 == true) {
+r192 = r192.append(cd188);
 }}
-	gTgt170.setName(tmp179);;
+	gTgt175.setName(tmp184);;
 
-	boolean matched2 = false;if ( check_Class2Class( get181) )  {
-this.parallelPendingTasks.add( new PendingTask_Dependency_supplier(gTgt170,get181,UCDModel_, null) );
+	itTmp193 = new ArrayList<Object>();
+
+	for ( java.lang.Object o: tmp187) {
+boolean matched2 = false;if ( check_Class2Class( o) )  {
+itTmp193.add(o);
 }
-
-	boolean matched3 = false;if ( check_Class2Class( r186) )  {
-this.parallelPendingTasks.add( new PendingTask_Dependency_client(gTgt170,r186,UCDModel_, null) );
 }
+	this.parallelPendingTasks.add( new PendingTask_Dependency_supplier(gTgt175,itTmp193,UCDModel_,null) );
 
-	return gTgt170;
+	itTmp194 = new ArrayList<Object>();
+
+	for ( java.lang.Object o: r192) {
+boolean matched3 = false;if ( check_Class2Class( o) )  {
+itTmp194.add(o);
+}
+}
+	this.parallelPendingTasks.add( new PendingTask_Dependency_client(gTgt175,itTmp194,UCDModel_,null) );
+
+	return gTgt175;
 }
 	public javaslang.collection.List<ClassDeclaration> helper_org_eclipse_gmt_modisco_java_Package_allNonProxyClassesInPackage(org.eclipse.gmt.modisco.java.Package self_){
 javaslang.collection.List<AbstractTypeDeclaration> get3;
@@ -747,25 +781,25 @@ javaslang.collection.List<org.eclipse.gmt.modisco.java.Package> r114;
 boolean op115;
 javaslang.collection.List<org.eclipse.gmt.modisco.java.Package> r116;
 javaslang.collection.List<ClassDeclaration> call117;
-javaslang.collection.List<ClassDeclaration> call119;
-java.lang.Object tmp120;
+javaslang.collection.List<ClassDeclaration> call120;
 Type call121;
 boolean op122;
-Dependency call123;
-Dependency r124;
-javaslang.collection.List<Dependency> r125;
-javaslang.collection.List<ClassDeclaration> call128;
-javaslang.collection.List<FieldDeclaration> call129;
-javaslang.collection.List<javaslang.collection.List<FieldDeclaration>> r130;
-javaslang.collection.List<FieldDeclaration> op131;
-Dependency call132;
-javaslang.collection.List<Dependency> r133;
-List<java.lang.Object> itTmp138;
+boolean tmp123;
+javaslang.collection.List<ClassDeclaration> r124;
+Dependency call125;
+javaslang.collection.List<Dependency> r126;
+javaslang.collection.List<ClassDeclaration> call129;
+javaslang.collection.List<FieldDeclaration> call130;
+javaslang.collection.List<javaslang.collection.List<FieldDeclaration>> r131;
+javaslang.collection.List<FieldDeclaration> op132;
+Dependency call133;
+javaslang.collection.List<Dependency> r134;
 List<java.lang.Object> itTmp139;
 List<java.lang.Object> itTmp140;
-java.util.Set<java.lang.Object> tgtElems141;
-List<java.lang.Object> itTmp142;
-java.util.Set<java.lang.Object> tgtElems143;t1106 = org.eclipse.uml2.uml.UMLFactory.eINSTANCE.createPackage();
+List<java.lang.Object> itTmp141;
+java.util.Set<java.lang.Object> tgtElems142;
+List<java.lang.Object> itTmp143;
+java.util.Set<java.lang.Object> tgtElems144;t1106 = org.eclipse.uml2.uml.UMLFactory.eINSTANCE.createPackage();
 
 	this.trace.put(s1,t1106);
 
@@ -806,88 +840,71 @@ r116 = r116.append((org.eclipse.gmt.modisco.java.Package)e108);
 call117 = helper_org_eclipse_gmt_modisco_java_Package_allNonProxyClassesInPackage((org.eclipse.gmt.modisco.java.Package)s1);
 } else { throw new IllegalStateException();
 }
-	/* 55:23-59:20: s1.allNonProxyClassesInPackage->collect(s2 | if s2.getSuperClass.oclIsUndefined() then
-	OclUndefined
-else
-	thisModule.createGeneralizationDependency(s2)
-endif)*/
+	/* 55:23-57:70: s1.allNonProxyClassesInPackage->select(s2 | not s2.getSuperClass.oclIsUndefined())->collect(s2 | thisModule.createGeneralizationDependency(s2))*/
+	/* 55:23-56:62: s1.allNonProxyClassesInPackage->select(s2 | not s2.getSuperClass.oclIsUndefined())*/
 	/* 55:23-55:53: s1.allNonProxyClassesInPackage*/
 	if ( s1 instanceof org.eclipse.gmt.modisco.java.Package) {
-call119 = helper_org_eclipse_gmt_modisco_java_Package_allNonProxyClassesInPackage((org.eclipse.gmt.modisco.java.Package)s1);
+call120 = helper_org_eclipse_gmt_modisco_java_Package_allNonProxyClassesInPackage((org.eclipse.gmt.modisco.java.Package)s1);
 } else { throw new IllegalStateException();
 }
-	r125 = javaslang.collection.List.empty();
+	r124 = javaslang.collection.List.empty();
 
-	for ( ClassDeclaration s2118: call119) {
-/* 56:26-59:19: if s2.getSuperClass.oclIsUndefined() then
-	OclUndefined
-else
-	thisModule.createGeneralizationDependency(s2)
-endif*/
-	/* 56:29-56:62: s2.getSuperClass.oclIsUndefined()*/
-	/* 56:29-56:45: s2.getSuperClass*/
-	if ( s2118 instanceof org.eclipse.gmt.modisco.java.ClassDeclaration) {
-call121 = helper_org_eclipse_gmt_modisco_java_ClassDeclaration_getSuperClass((org.eclipse.gmt.modisco.java.ClassDeclaration)s2118);
+	for ( ClassDeclaration s2119: call120) {
+/* 56:27-56:60: s2.getSuperClass.oclIsUndefined()*/
+	/* 56:27-56:43: s2.getSuperClass*/
+	if ( s2119 instanceof org.eclipse.gmt.modisco.java.ClassDeclaration) {
+call121 = helper_org_eclipse_gmt_modisco_java_ClassDeclaration_getSuperClass((org.eclipse.gmt.modisco.java.ClassDeclaration)s2119);
 } else { throw new IllegalStateException();
 }
 	op122 = call121== null;
 
-	r124 = null;
+	tmp123 = ! op122;
 
-	if ( op122) {
-tmp120 = null;
+	if ( tmp123 == true) {
+r124 = r124.append(s2119);
+}}
+	r126 = javaslang.collection.List.empty();
 
-	r124 = (org.eclipse.uml2.uml.Dependency)tmp120;
-} else { /* 58:20-58:65: thisModule.createGeneralizationDependency(s2)*/
-call123 = lazy_rule_createGeneralizationDependency(s2118);
+	for ( ClassDeclaration s2118: r124) {
+/* 57:24-57:69: thisModule.createGeneralizationDependency(s2)*/
+	call125 = lazy_rule_createGeneralizationDependency(s2118);
 
-r124 = call123;
+	r126 = r126.append(call125);
 }
-	r125 = r125.append(r124);
-}
-	/* 60:24-61:110: s1.allNonProxyClassesInPackage->collect(s2 | s2.getRefClassFields)->flatten()->collect(e | thisModule.createUsageDependency(e))*/
-	/* 60:24-61:60: s1.allNonProxyClassesInPackage->collect(s2 | s2.getRefClassFields)->flatten()*/
-	/* 60:24-61:47: s1.allNonProxyClassesInPackage->collect(s2 | s2.getRefClassFields)*/
-	/* 60:24-60:54: s1.allNonProxyClassesInPackage*/
+	/* 63:24-64:110: s1.allNonProxyClassesInPackage->collect(s2 | s2.getRefClassFields)->flatten()->collect(e | thisModule.createUsageDependency(e))*/
+	/* 63:24-64:60: s1.allNonProxyClassesInPackage->collect(s2 | s2.getRefClassFields)->flatten()*/
+	/* 63:24-64:47: s1.allNonProxyClassesInPackage->collect(s2 | s2.getRefClassFields)*/
+	/* 63:24-63:54: s1.allNonProxyClassesInPackage*/
 	if ( s1 instanceof org.eclipse.gmt.modisco.java.Package) {
-call128 = helper_org_eclipse_gmt_modisco_java_Package_allNonProxyClassesInPackage((org.eclipse.gmt.modisco.java.Package)s1);
+call129 = helper_org_eclipse_gmt_modisco_java_Package_allNonProxyClassesInPackage((org.eclipse.gmt.modisco.java.Package)s1);
 } else { throw new IllegalStateException();
 }
-	r130 = javaslang.collection.List.empty();
+	r131 = javaslang.collection.List.empty();
 
-	for ( ClassDeclaration s2127: call128) {
-/* 61:26-61:46: s2.getRefClassFields*/
-	if ( s2127 instanceof org.eclipse.gmt.modisco.java.ClassDeclaration) {
-call129 = helper_org_eclipse_gmt_modisco_java_ClassDeclaration_getRefClassFields((org.eclipse.gmt.modisco.java.ClassDeclaration)s2127);
+	for ( ClassDeclaration s2128: call129) {
+/* 64:26-64:46: s2.getRefClassFields*/
+	if ( s2128 instanceof org.eclipse.gmt.modisco.java.ClassDeclaration) {
+call130 = helper_org_eclipse_gmt_modisco_java_ClassDeclaration_getRefClassFields((org.eclipse.gmt.modisco.java.ClassDeclaration)s2128);
 } else { throw new IllegalStateException();
 }
-	r130 = r130.append(call129);
+	r131 = r131.append(call130);
 }
-	op131 = flatten(r130).map(x_ -> (org.eclipse.gmt.modisco.java.FieldDeclaration)x_);
+	op132 = flatten(r131).map(x_ -> (org.eclipse.gmt.modisco.java.FieldDeclaration)x_);
 
-	r133 = javaslang.collection.List.empty();
+	r134 = javaslang.collection.List.empty();
 
-	for ( FieldDeclaration e126: op131) {
-/* 61:74-61:109: thisModule.createUsageDependency(e)*/
-	call132 = lazy_rule_createUsageDependency(e126);
+	for ( FieldDeclaration e127: op132) {
+/* 64:74-64:109: thisModule.createUsageDependency(e)*/
+	call133 = lazy_rule_createUsageDependency(e127);
 
-	r133 = r133.append(call132);
+	r134 = r134.append(call133);
 }
 	t1106.setName(get107);;
 
-	itTmp138 = new ArrayList<Object>();
+	itTmp139 = new ArrayList<Object>();
 
 	for ( java.lang.Object o: r116) {
 boolean matched5 = false;if ( check_Package2Package( o) )  {
-itTmp138.add(o);
-}
-}
-	this.pendingTasks.add( new PendingTask_Package_packagedElement(t1106,itTmp138,UCDModel_,null) );
-
-	itTmp139 = new ArrayList<Object>();
-
-	for ( java.lang.Object o: call117) {
-boolean matched6 = false;if ( check_Class2Class( o) )  {
 itTmp139.add(o);
 }
 }
@@ -895,77 +912,86 @@ itTmp139.add(o);
 
 	itTmp140 = new ArrayList<Object>();
 
-	tgtElems141 = new java.util.HashSet<>();
+	for ( java.lang.Object o: call117) {
+boolean matched6 = false;if ( check_Class2Class( o) )  {
+itTmp140.add(o);
+}
+}
+	this.pendingTasks.add( new PendingTask_Package_packagedElement(t1106,itTmp140,UCDModel_,null) );
 
-	for ( java.lang.Object o: r125) {
+	itTmp141 = new ArrayList<Object>();
+
+	tgtElems142 = new java.util.HashSet<>();
+
+	for ( java.lang.Object o: r126) {
 boolean matched7 = false;
-	a2l.runtime.RuntimeUtils.addToBindingTemporal(itTmp140, tgtElems141, o);
+	a2l.runtime.RuntimeUtils.addToBindingTemporal(itTmp141, tgtElems142, o);
 }
-	this.parallelPendingTasks.add( new PendingTask_Package_packagedElement(t1106,itTmp140,UCDModel_,tgtElems141) );
+	this.parallelPendingTasks.add( new PendingTask_Package_packagedElement(t1106,itTmp141,UCDModel_,tgtElems142) );
 
-	itTmp142 = new ArrayList<Object>();
+	itTmp143 = new ArrayList<Object>();
 
-	tgtElems143 = new java.util.HashSet<>();
+	tgtElems144 = new java.util.HashSet<>();
 
-	for ( java.lang.Object o: r133) {
+	for ( java.lang.Object o: r134) {
 boolean matched8 = false;
-	a2l.runtime.RuntimeUtils.addToBindingTemporal(itTmp142, tgtElems143, o);
+	a2l.runtime.RuntimeUtils.addToBindingTemporal(itTmp143, tgtElems144, o);
 }
-	this.parallelPendingTasks.add( new PendingTask_Package_packagedElement(t1106,itTmp142,UCDModel_,tgtElems143) );
+	this.parallelPendingTasks.add( new PendingTask_Package_packagedElement(t1106,itTmp143,UCDModel_,tgtElems144) );
 
 	numMatchedRuleExecutions_++;
 }
 	private void create_Class2Class(ClassDeclaration s1){
-Class t1144;
-java.lang.String get145;
-java.lang.Object tmp146;
-Modifier get147;
-boolean op148;
-Modifier get149;
-InheritanceKind get150;
-java.lang.String tmp151;
-boolean tmp152;
-boolean r153;t1144 = org.eclipse.uml2.uml.UMLFactory.eINSTANCE.createClass();
+Class t1145;
+java.lang.String get146;
+java.lang.Object tmp147;
+Modifier get148;
+boolean op149;
+Modifier get150;
+InheritanceKind get151;
+java.lang.String tmp152;
+boolean tmp153;
+boolean r154;t1145 = org.eclipse.uml2.uml.UMLFactory.eINSTANCE.createClass();
 
-	this.trace.put(s1,t1144);
+	this.trace.put(s1,t1145);
 
-	UCDModel_PartialOutput_.write(t1144);
+	UCDModel_PartialOutput_.write(t1145);
 
-	/* 68:12-68:19: s1.name*/
-	get145 = s1.getName();
+	/* 71:12-71:19: s1.name*/
+	get146 = s1.getName();
 
-	/* 69:18-69:115: if s1.modifier.oclIsUndefined() then
+	/* 72:18-72:115: if s1.modifier.oclIsUndefined() then
 	OclUndefined
 else
 	s1.modifier.inheritance = 'abstract'
 endif*/
-	/* 69:21-69:49: s1.modifier.oclIsUndefined()*/
-	/* 69:21-69:32: s1.modifier*/
-	get147 = s1.getModifier();
+	/* 72:21-72:49: s1.modifier.oclIsUndefined()*/
+	/* 72:21-72:32: s1.modifier*/
+	get148 = s1.getModifier();
 
-	op148 = get147== null;
+	op149 = get148== null;
 
-	r153 = false;
+	r154 = false;
 
-	if ( op148) {
-tmp146 = null;
+	if ( op149) {
+tmp147 = null;
 
-	r153 = (boolean)tmp146;
-} else { /* 69:73-69:96: s1.modifier.inheritance*/
-/* 69:73-69:84: s1.modifier*/
-get149 = s1.getModifier();
+	r154 = (boolean)tmp147;
+} else { /* 72:73-72:96: s1.modifier.inheritance*/
+/* 72:73-72:84: s1.modifier*/
+get150 = s1.getModifier();
 
-get150 = get149.getInheritance();
+get151 = get150.getInheritance();
 
-tmp151 = "abstract";
+tmp152 = "abstract";
 
-tmp152 = get150. equals(tmp151);
+tmp153 = get151. equals(tmp152);
 
-r153 = tmp152;
+r154 = tmp153;
 }
-	t1144.setName(get145);;
+	t1145.setName(get146);;
 
-	t1144.setIsAbstract(r153);;
+	t1145.setIsAbstract(r154);;
 
 	numMatchedRuleExecutions_++;
 }

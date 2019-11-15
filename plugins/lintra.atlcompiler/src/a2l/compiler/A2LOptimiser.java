@@ -24,6 +24,7 @@ import a2l.optimiser.anatlyzerext.IteratorChainElement;
 import a2l.optimiser.anatlyzerext.IteratorChainExp;
 import a2l.optimiser.anatlyzerext.MutableIteratorExp;
 import a2l.optimiser.anatlyzerext.NavRefAsSet;
+import a2l.optimiser.anatlyzerext.ShortCircuitOperatorCallExp;
 import anatlyzer.atl.analyser.IAnalyserResult;
 import anatlyzer.atl.graph.AbstractPathVisitor;
 import anatlyzer.atl.graph.ForStatNode;
@@ -48,6 +49,7 @@ import anatlyzer.atlext.OCL.NavigationOrAttributeCallExp;
 import anatlyzer.atlext.OCL.OCLPackage;
 import anatlyzer.atlext.OCL.OclExpression;
 import anatlyzer.atlext.OCL.OperationCallExp;
+import anatlyzer.atlext.OCL.OperatorCallExp;
 import anatlyzer.atlext.OCL.PropertyCallExp;
 import anatlyzer.atlext.OCL.ResolveTempResolution;
 import anatlyzer.atlext.OCL.VariableExp;
@@ -62,11 +64,14 @@ public class A2LOptimiser extends AbstractVisitor {
 		PATH_BASED_CACHING,
 		
 		RULE_OPTIMISATION_SORT_FILTERS, 
-		RULE_OPTIMISATION_AVOID_UNUSED_TRACE		
+		RULE_OPTIMISATION_AVOID_UNUSED_TRACE,
+		
+		SHORT_CIRCUIT
 	}
 	
 	private IAnalyserResult result;
 	private HashSet<Optimisation> optimisations;
+	private List<IReplacement> replacements = new ArrayList<>();
 	
 	public A2LOptimiser(IAnalyserResult result) {
 		this.result = result;
@@ -97,6 +102,8 @@ public class A2LOptimiser extends AbstractVisitor {
 
 	public OptimisationHints run() {
 		startVisiting(result.getATLModel().getRoot());
+		
+		replacements.forEach(IReplacement::doReplacement);
 		
 		OptimisationHints hints;
 		if ( isEnabled(Optimisation.PATH_BASED_CACHING) ) {
@@ -146,6 +153,35 @@ public class A2LOptimiser extends AbstractVisitor {
 				
 		return deps;
 	}
+	
+	private static final Set<String> shortcircuits = new HashSet<String>();
+	static {
+		shortcircuits.add("or");
+		shortcircuits.add("and");
+	}
+	
+	@Override
+	public void inOperatorCallExp(OperatorCallExp self) {
+		if ( !isEnabled(Optimisation.SHORT_CIRCUIT) ) {
+			return;
+		}
+		
+		if (! shortcircuits.contains(self.getOperationName()))
+			return;		
+		
+		replacements.add(() -> {		
+			ShortCircuitOperatorCallExp operator = AnatlyzerExtFactory.eINSTANCE.createShortCircuitOperatorCallExp();
+			operator.setOperationName(self.getOperationName());
+			
+			EcoreUtil.replace(self, operator);
+			
+			operator.setSource(self.getSource());
+			operator.getArguments().addAll(self.getArguments());
+			operator.setInferredType(self.getInferredType());
+			operator.setFileLocation(self.getFileLocation());
+			operator.setNoCastedType(self.getNoCastedType());
+		});
+	}
 
 	@Override
 	public void inCollectionOperationCallExp(CollectionOperationCallExp self) {
@@ -165,7 +201,7 @@ public class A2LOptimiser extends AbstractVisitor {
 			}
 		}
 		
-		if ( isEnabled(Optimisation.FOLD_ITERATOR) ) {
+		if ( isEnabled(Optimisation.FOLD_ITERATOR) ) {			
 			// select->...->size()
 			if ( self.getOperationName().equals("size")) {
 				List<OclExpression> chainList = getSourceChain(self);
@@ -203,8 +239,8 @@ public class A2LOptimiser extends AbstractVisitor {
 				LinkedList<OclExpression> rest0    = new LinkedList<OclExpression>();
 				LinkedList<OclExpression> rest    = new LinkedList<OclExpression>();
 				
-				computeStartingIterator(chainList, "select", selects, rest0);				
-				computeStartingIterator(rest0, "collect", collects, rest);
+				computeStartingIterator(chainList, "collect", collects, rest0);				
+				computeStartingIterator(rest0, "select", selects, rest);
 				
 				if ( collects.size() > 0 ) {
 					// The source is mutable
@@ -251,8 +287,7 @@ public class A2LOptimiser extends AbstractVisitor {
 		
 	}
 
-	private void computeStartingIterator(List<OclExpression> chainList, String iteratorName, LinkedList<IteratorExp> selects,
-			LinkedList<OclExpression> rest) {
+	private void computeStartingIterator(List<OclExpression> chainList, String iteratorName, List<IteratorExp> selects, List<OclExpression> rest) {
 		for (OclExpression exp : chainList) {
 			if ( isIteratorExp(exp, iteratorName) ) {
 				// Must be at the beginning
@@ -314,8 +349,71 @@ public class A2LOptimiser extends AbstractVisitor {
 	@Override
 	public void inIteratorExp(IteratorExp self) {
 		if ( isEnabled(Optimisation.FOLD_ITERATOR) ) {
+			// Pattern: select1->...->select2->collect3->...collect4		
+			if (self.getName().equals("collect")) {
+				EObject container = self.eContainer();
+				if (container instanceof IteratorExp && ((IteratorExp) container).getName().equals("collect"))
+					return;
+				
+				
+				// For the pattern above, This gives: collect3, select2, select1, {sources-of-the-last-select}
+				List<OclExpression> chainList = getSourceChain(self);
+				chainList.add(0, self);
+				ArrayList<IteratorExp> selects = new ArrayList<IteratorExp>();
+				ArrayList<IteratorExp> collects = new ArrayList<IteratorExp>();
+				ArrayList<OclExpression> rest0    = new ArrayList<OclExpression>();
+				ArrayList<OclExpression> rest    = new ArrayList<OclExpression>();
+				
+				computeStartingIterator(chainList, "collect", collects, rest0); // collects = collect3, rest0 = select2, select1, {sources-of-the-last-select} 
+				computeStartingIterator(rest0, "select", selects, rest); // selects = select2, select1 | rest = {sources-of-the-last-select}
+				if (selects.isEmpty())
+					return;
+				
+				// The source is mutable
+				rest0.forEach(AstAnnotations::markMutable);
+				rest.forEach(AstAnnotations::markMutable);
+				
+				IteratorExp original = collects.isEmpty() ? (IteratorExp) selects.get(0) : collects.get(collects.size() - 1);
+								
+				IteratorChainExp chain = AnatlyzerExtFactory.eINSTANCE.createIteratorChainExp();
+				chain.setName("select-collect");
+				chain.setIterator(original.getIterators().get(0));
+				chain.setSource(rest.get(0));
+
+				chain.setInferredType(self.getInferredType());
+				
+				EcoreUtil.replace(self, chain);
+				
+				// All iterator variables point now to the same location
+				addToChain(selects, chain.getIterator(), chain.getPreChain());					
+
+				// This is similar to select-collect-flatten
+				List<IteratorExp> firstCollect = Collections.singletonList((IteratorExp) collects.get(collects.size() - 1));
+				MutableCollectionOptimiser optimiser = new MutableCollectionOptimiser();
+				optimiser.tryOptimise(firstCollect.get(0).getBody(), true);
+				addToChain(firstCollect, chain.getIterator(), chain.getChain());
+			
+				for(int i = collects.size() - 2; i >= 0 ; i--) {
+					// May I need the iterator here?
+					IteratorExp aCollect = (IteratorExp) collects.get(i);
+					
+					optimiser.tryOptimise(aCollect.getBody(), true);
+					//addToChain(Collections.singletonList(aCollect), chain.getIterator(), chain.getChain());
+
+					IteratorChainElement chainCollect = AnatlyzerExtFactory.eINSTANCE.createIteratorChainElement();
+					chainCollect.setIterator(aCollect.getIterators().get(0));
+					chainCollect.setBody(aCollect.getBody());					
+					
+					chain.getChain().add(chainCollect);
+					
+					// TODO: If this doesn't succeed in optimising the body then we need a conversion toList to allow addAll
+				}
+				
+			
+				optimisationApplied(self, Optimisation.FOLD_ITERATOR);							
+			} 			
 			// Pattern: select()->exist()
-			if ( self.getName().equals("exists") ) {
+			else if ( self.getName().equals("exists") ) {
 				if ( self.getSource() instanceof IteratorExp && ((IteratorExp) self.getSource()).getName().equals("select")) {
 					IteratorExp selectIteratorExp = (IteratorExp) self.getSource();
 					
@@ -359,6 +457,7 @@ public class A2LOptimiser extends AbstractVisitor {
 			replaceIteratorVariable(itExp, sourceIterator);	
 		
 			IteratorChainElement aSelect = AnatlyzerExtFactory.eINSTANCE.createIteratorChainElement();
+			aSelect.setName(itExp.getName());
 			aSelect.setBody(itExp.getBody());
 			
 			chain.add(aSelect);

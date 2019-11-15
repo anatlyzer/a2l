@@ -1,0 +1,27 @@
+
+-- @atlcompiler atl2006
+-- @path ABCD=/a2l.tests.vmtesting.emf/metamodels/simple/ABCD.ecore
+-- @path WXYZ=/a2l.tests.vmtesting.emf/metamodels/simple/WXYZ.ecore
+
+-- @project a2l.tests.vmtesting.emf=a2l.tests.simple.emf.collect_flatten 
+
+-- @genpath ABCD=/a2l.tests.vmtesting.emf/metamodels/simple/ABCD.genmodel
+-- @genpath WXYZ=/a2l.tests.vmtesting.emf/metamodels/simple/WXYZ.genmodel
+
+-- @optimizations all
+
+-- @driver ABCD=emf
+-- @driver WXYZ=emf
+
+
+module CollectFlatten;
+create OUT : WXYZ from IN : ABCD;
+
+rule A2B {
+	from
+		a : ABCD!Model
+	to
+		b : WXYZ!Model (
+			name <- ABCD!A.allInstances()->select(a | a.name <> 'b')->collect(a | ABCD!B.allInstances()->select(b | b.name = a.name))->flatten()->first().name
+		)
+}

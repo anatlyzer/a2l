@@ -47,7 +47,7 @@ public interface IIteratorChainHandler {
 		protected JBlock compileFoldedSelects(List<IteratorChainElement> chain, CompilationEnv env, JBlock currentBlock) {
 			JConditional selectIfStm = null;
 			for(int i = chain.size() - 1; i >= 0; i--) {
-				IteratorChainElement nextSelect = chain.get(i);
+				IteratorChainElement nextSelect = chain.get(i);				
 				List<JStatement> nextStms = env.getStatements(nextSelect.getBody());
 				
 				currentBlock.getStatements().addAll(nextStms);
@@ -61,7 +61,14 @@ public interface IIteratorChainHandler {
 			return currentBlock;
 		}
 
-		
+		protected JBlock compileFoldedCollects(List<IteratorChainElement> chain, CompilationEnv env, JBlock currentBlock) {
+			for (IteratorChainElement nextCollect : chain) {
+				List<JStatement> nextStms = env.getStatements(nextCollect.getBody());				
+				currentBlock.getStatements().addAll(nextStms);
+			}
+			return currentBlock;
+		}
+
 	}
 	
 }

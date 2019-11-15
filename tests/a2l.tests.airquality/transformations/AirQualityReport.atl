@@ -18,6 +18,7 @@ create OUT : MM1 from IN : MM;
 rule highCO {
 	from
 	-- The ->including(0) is to avoid the issue of not handling well OclUndefined casted to integer types
+	
 		m1 : MM!AirMeasurement  (m1.date.day=1 and
 								-- min() is not supported by the standard VM, so use the sort()->first() trick
 --								 m1.date.hour = MM!AirMeasurement.allInstances()->select(m2 | m1.station=m2.station and m1.date.year = m2.date.year and m1.date.month = m2.date.month and m1.date.day = m2.date.day )->collect(m | m.date.hour)->including(0)->sortedBy(v | v)->first() and
@@ -32,8 +33,10 @@ rule highCO {
 																			  m1.date.month = m2.date.month and
 																			  m1.date.year = m2.date.year)
 																->collect(m3 | m3.co )
-																->select(coLevel | coLevel >= 4.5)->size() > 10)
-	to 
+																->select(coLevel | coLevel >= 4.5)->size() > 10
+																
+	)
+	to								
 		w : MM1!Warning (
 			level <- 4.5,
 			pollutant <- 'co',

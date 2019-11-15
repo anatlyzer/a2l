@@ -53,10 +53,13 @@ rule Package2Package {
 			packagedElement <- s1.ownedPackages -> select(e | e.proxy = false) -> select(e | e.oclIsTypeOf(JMM!Package)),
 			packagedElement <- s1.allNonProxyClassesInPackage,
 			packagedElement <- s1.allNonProxyClassesInPackage
-							   -> collect(s2 |if s2.getSuperClass.oclIsUndefined() 
-							   				  then OclUndefined 
-											  else  thisModule.createGeneralizationDependency(s2)
-											  endif),
+								->select(s2 | not s2.getSuperClass.oclIsUndefined() )
+								->collect(s2 | thisModule.createGeneralizationDependency(s2)),
+-- Rewritten to make it compatible with EMFTVM which doesn't filter to remove OclUndefined values								
+--							   -> collect(s2 |if s2.getSuperClass.oclIsUndefined() 
+--							   				  then OclUndefined 
+--											  else  thisModule.createGeneralizationDependency(s2)
+--											  endif),
 			packagedElement <- 	s1.allNonProxyClassesInPackage
 								-> collect (s2 | s2.getRefClassFields) -> flatten() -> collect(e|thisModule.createUsageDependency(e))
 		)
@@ -74,8 +77,13 @@ lazy rule createGeneralizationDependency {
    from class : JMM!ClassDeclaration
    to gTgt : UMLMM!Dependency (
      	name <- 'generalization pointing from ' + class.name + ' to ' + class.superClass.type.name,
-		supplier <- class.superClass.type,
-		client <- class
+		supplier <- Sequence { class.superClass.type },
+		-- originally like this, but doesn't supported by EMFTVM
+		-- supplier <- class.superClass.type,
+		
+		-- originally like this, but doesn't supported by EMFTVM
+		-- client <- class
+		client <- Sequence { class }
 	)
 }
 
@@ -84,9 +92,12 @@ lazy rule createUsageDependency {
    to gTgt : UMLMM!Dependency (
      	-- name <- 'field pointing from ' + field.refImmediateComposite().name + ' to ' + field.type.type.name,
 		name <- 'field pointing from ' + 'xx' + ' to ' + field.type.type.name,
-		supplier <-  field.type.type
+		supplier <- Sequence { field.type.type }
+		-- originally like this, but doesn't supported by EMFTVM
+		-- supplier <-  field.type.type
 		--,
+		-- Originally with any, but doesn't supported by EMFTVM
 		--client <- thisModule.allClasses->any(cd | cd.bodyDeclarations->includes(field))
-		, client <- thisModule.allClasses->any(cd | cd.bodyDeclarations->includes(field))
+		, client <- thisModule.allClasses->select(cd | cd.bodyDeclarations->includes(field))
 	)
 }

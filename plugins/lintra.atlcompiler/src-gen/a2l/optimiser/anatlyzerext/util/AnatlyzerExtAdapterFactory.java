@@ -12,6 +12,7 @@ import anatlyzer.atlext.OCL.LoopExp;
 import anatlyzer.atlext.OCL.NavigationOrAttributeCallExp;
 import anatlyzer.atlext.OCL.OclExpression;
 import anatlyzer.atlext.OCL.OperationCallExp;
+import anatlyzer.atlext.OCL.OperatorCallExp;
 import anatlyzer.atlext.OCL.PropertyCallExp;
 import anatlyzer.atlext.OCL.TypedElement;
 
@@ -91,6 +92,10 @@ public class AnatlyzerExtAdapterFactory extends AdapterFactoryImpl {
 				return createMutableCollectionOperationCallExpAdapter();
 			}
 			@Override
+			public Adapter caseShortCircuitOperatorCallExp(ShortCircuitOperatorCallExp object) {
+				return createShortCircuitOperatorCallExpAdapter();
+			}
+			@Override
 			public Adapter caseIteratorChainExp(IteratorChainExp object) {
 				return createIteratorChainExpAdapter();
 			}
@@ -133,6 +138,10 @@ public class AnatlyzerExtAdapterFactory extends AdapterFactoryImpl {
 			@Override
 			public Adapter caseCollectionOperationCallExp(CollectionOperationCallExp object) {
 				return createCollectionOperationCallExpAdapter();
+			}
+			@Override
+			public Adapter caseOperatorCallExp(OperatorCallExp object) {
+				return createOperatorCallExpAdapter();
 			}
 			@Override
 			public Adapter defaultCase(EObject object) {
@@ -193,6 +202,20 @@ public class AnatlyzerExtAdapterFactory extends AdapterFactoryImpl {
 	 * @generated
 	 */
 	public Adapter createMutableCollectionOperationCallExpAdapter() {
+		return null;
+	}
+
+	/**
+	 * Creates a new adapter for an object of class '{@link a2l.optimiser.anatlyzerext.ShortCircuitOperatorCallExp <em>Short Circuit Operator Call Exp</em>}'.
+	 * <!-- begin-user-doc -->
+	 * This default implementation returns null so that we can easily ignore cases;
+	 * it's useful to ignore a case when inheritance will catch all the cases anyway.
+	 * <!-- end-user-doc -->
+	 * @return the new adapter.
+	 * @see a2l.optimiser.anatlyzerext.ShortCircuitOperatorCallExp
+	 * @generated
+	 */
+	public Adapter createShortCircuitOperatorCallExpAdapter() {
 		return null;
 	}
 
@@ -347,6 +370,20 @@ public class AnatlyzerExtAdapterFactory extends AdapterFactoryImpl {
 	 * @generated
 	 */
 	public Adapter createCollectionOperationCallExpAdapter() {
+		return null;
+	}
+
+	/**
+	 * Creates a new adapter for an object of class '{@link anatlyzer.atlext.OCL.OperatorCallExp <em>Operator Call Exp</em>}'.
+	 * <!-- begin-user-doc -->
+	 * This default implementation returns null so that we can easily ignore cases;
+	 * it's useful to ignore a case when inheritance will catch all the cases anyway.
+	 * <!-- end-user-doc -->
+	 * @return the new adapter.
+	 * @see anatlyzer.atlext.OCL.OperatorCallExp
+	 * @generated
+	 */
+	public Adapter createOperatorCallExpAdapter() {
 		return null;
 	}
 

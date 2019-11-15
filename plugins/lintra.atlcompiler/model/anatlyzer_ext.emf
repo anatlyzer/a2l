@@ -18,6 +18,10 @@ class MutableCollectionOperationCallExp extends atlext.OCL.CollectionOperationCa
 	
 }
 
+class ShortCircuitOperatorCallExp extends atlext.OCL.OperatorCallExp {
+	
+}
+
 class IteratorChainExp extends atlext.OCL.PropertyCallExp {
 	attr String[1] name;
 	

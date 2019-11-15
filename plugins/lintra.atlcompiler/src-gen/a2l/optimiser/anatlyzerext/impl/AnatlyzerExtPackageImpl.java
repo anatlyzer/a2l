@@ -9,10 +9,13 @@ import a2l.optimiser.anatlyzerext.IteratorChainExp;
 import a2l.optimiser.anatlyzerext.MutableCollectionOperationCallExp;
 import a2l.optimiser.anatlyzerext.MutableIteratorExp;
 import a2l.optimiser.anatlyzerext.NavRefAsSet;
+import a2l.optimiser.anatlyzerext.ShortCircuitOperatorCallExp;
+import anatlyzer.atl.types.TypesPackage;
 import anatlyzer.atlext.ATL.ATLPackage;
 
 import anatlyzer.atlext.OCL.OCLPackage;
 
+import anatlyzer.atlext.OCL2.OCL2Package;
 import anatlyzer.atlext.PrimitiveTypes.PrimitiveTypesPackage;
 
 import org.eclipse.emf.ecore.EAttribute;
@@ -48,6 +51,13 @@ public class AnatlyzerExtPackageImpl extends EPackageImpl implements AnatlyzerEx
 	 * @generated
 	 */
 	private EClass mutableCollectionOperationCallExpEClass = null;
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	private EClass shortCircuitOperatorCallExpEClass = null;
 
 	/**
 	 * <!-- begin-user-doc -->
@@ -91,7 +101,7 @@ public class AnatlyzerExtPackageImpl extends EPackageImpl implements AnatlyzerEx
 
 	/**
 	 * Creates, registers, and initializes the <b>Package</b> for this model, and for any others upon which it depends.
-	 * 
+	 *
 	 * <p>This method is used to initialize {@link AnatlyzerExtPackage#eINSTANCE} when that field is accessed.
 	 * Clients should not invoke it directly. Instead, they should simply access that field to obtain the package.
 	 * <!-- begin-user-doc -->
@@ -105,7 +115,8 @@ public class AnatlyzerExtPackageImpl extends EPackageImpl implements AnatlyzerEx
 		if (isInited) return (AnatlyzerExtPackage)EPackage.Registry.INSTANCE.getEPackage(AnatlyzerExtPackage.eNS_URI);
 
 		// Obtain or create and register package
-		AnatlyzerExtPackageImpl theAnatlyzerExtPackage = (AnatlyzerExtPackageImpl)(EPackage.Registry.INSTANCE.get(eNS_URI) instanceof AnatlyzerExtPackageImpl ? EPackage.Registry.INSTANCE.get(eNS_URI) : new AnatlyzerExtPackageImpl());
+		Object registeredAnatlyzerExtPackage = EPackage.Registry.INSTANCE.get(eNS_URI);
+		AnatlyzerExtPackageImpl theAnatlyzerExtPackage = registeredAnatlyzerExtPackage instanceof AnatlyzerExtPackageImpl ? (AnatlyzerExtPackageImpl)registeredAnatlyzerExtPackage : new AnatlyzerExtPackageImpl();
 
 		isInited = true;
 
@@ -113,6 +124,8 @@ public class AnatlyzerExtPackageImpl extends EPackageImpl implements AnatlyzerEx
 		ATLPackage.eINSTANCE.eClass();
 		OCLPackage.eINSTANCE.eClass();
 		PrimitiveTypesPackage.eINSTANCE.eClass();
+		OCL2Package.eINSTANCE.eClass();
+		TypesPackage.eINSTANCE.eClass();
 
 		// Create package meta-data objects
 		theAnatlyzerExtPackage.createPackageContents();
@@ -123,7 +136,6 @@ public class AnatlyzerExtPackageImpl extends EPackageImpl implements AnatlyzerEx
 		// Mark meta-data to indicate it can't be changed
 		theAnatlyzerExtPackage.freeze();
 
-  
 		// Update the registry and return the package
 		EPackage.Registry.INSTANCE.put(AnatlyzerExtPackage.eNS_URI, theAnatlyzerExtPackage);
 		return theAnatlyzerExtPackage;
@@ -134,6 +146,7 @@ public class AnatlyzerExtPackageImpl extends EPackageImpl implements AnatlyzerEx
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public EClass getNavRefAsSet() {
 		return navRefAsSetEClass;
 	}
@@ -143,6 +156,7 @@ public class AnatlyzerExtPackageImpl extends EPackageImpl implements AnatlyzerEx
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public EClass getMutableIteratorExp() {
 		return mutableIteratorExpEClass;
 	}
@@ -152,6 +166,7 @@ public class AnatlyzerExtPackageImpl extends EPackageImpl implements AnatlyzerEx
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public EClass getMutableCollectionOperationCallExp() {
 		return mutableCollectionOperationCallExpEClass;
 	}
@@ -161,6 +176,17 @@ public class AnatlyzerExtPackageImpl extends EPackageImpl implements AnatlyzerEx
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
+	public EClass getShortCircuitOperatorCallExp() {
+		return shortCircuitOperatorCallExpEClass;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
 	public EClass getIteratorChainExp() {
 		return iteratorChainExpEClass;
 	}
@@ -170,6 +196,7 @@ public class AnatlyzerExtPackageImpl extends EPackageImpl implements AnatlyzerEx
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public EAttribute getIteratorChainExp_Name() {
 		return (EAttribute)iteratorChainExpEClass.getEStructuralFeatures().get(0);
 	}
@@ -179,6 +206,7 @@ public class AnatlyzerExtPackageImpl extends EPackageImpl implements AnatlyzerEx
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public EReference getIteratorChainExp_Iterator() {
 		return (EReference)iteratorChainExpEClass.getEStructuralFeatures().get(1);
 	}
@@ -188,6 +216,7 @@ public class AnatlyzerExtPackageImpl extends EPackageImpl implements AnatlyzerEx
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public EReference getIteratorChainExp_PreChain() {
 		return (EReference)iteratorChainExpEClass.getEStructuralFeatures().get(2);
 	}
@@ -197,6 +226,7 @@ public class AnatlyzerExtPackageImpl extends EPackageImpl implements AnatlyzerEx
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public EReference getIteratorChainExp_Chain() {
 		return (EReference)iteratorChainExpEClass.getEStructuralFeatures().get(3);
 	}
@@ -206,6 +236,7 @@ public class AnatlyzerExtPackageImpl extends EPackageImpl implements AnatlyzerEx
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public EClass getIteratorChainElement() {
 		return iteratorChainElementEClass;
 	}
@@ -215,6 +246,7 @@ public class AnatlyzerExtPackageImpl extends EPackageImpl implements AnatlyzerEx
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public EAttribute getIteratorChainElement_Name() {
 		return (EAttribute)iteratorChainElementEClass.getEStructuralFeatures().get(0);
 	}
@@ -224,6 +256,7 @@ public class AnatlyzerExtPackageImpl extends EPackageImpl implements AnatlyzerEx
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public EReference getIteratorChainElement_Iterator() {
 		return (EReference)iteratorChainElementEClass.getEStructuralFeatures().get(1);
 	}
@@ -233,6 +266,7 @@ public class AnatlyzerExtPackageImpl extends EPackageImpl implements AnatlyzerEx
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public EReference getIteratorChainElement_Body() {
 		return (EReference)iteratorChainElementEClass.getEStructuralFeatures().get(2);
 	}
@@ -242,6 +276,7 @@ public class AnatlyzerExtPackageImpl extends EPackageImpl implements AnatlyzerEx
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public AnatlyzerExtFactory getAnatlyzerExtFactory() {
 		return (AnatlyzerExtFactory)getEFactoryInstance();
 	}
@@ -270,6 +305,8 @@ public class AnatlyzerExtPackageImpl extends EPackageImpl implements AnatlyzerEx
 		mutableIteratorExpEClass = createEClass(MUTABLE_ITERATOR_EXP);
 
 		mutableCollectionOperationCallExpEClass = createEClass(MUTABLE_COLLECTION_OPERATION_CALL_EXP);
+
+		shortCircuitOperatorCallExpEClass = createEClass(SHORT_CIRCUIT_OPERATOR_CALL_EXP);
 
 		iteratorChainExpEClass = createEClass(ITERATOR_CHAIN_EXP);
 		createEAttribute(iteratorChainExpEClass, ITERATOR_CHAIN_EXP__NAME);
@@ -317,6 +354,7 @@ public class AnatlyzerExtPackageImpl extends EPackageImpl implements AnatlyzerEx
 		navRefAsSetEClass.getESuperTypes().add(theOCLPackage.getNavigationOrAttributeCallExp());
 		mutableIteratorExpEClass.getESuperTypes().add(theOCLPackage.getIteratorExp());
 		mutableCollectionOperationCallExpEClass.getESuperTypes().add(theOCLPackage.getCollectionOperationCallExp());
+		shortCircuitOperatorCallExpEClass.getESuperTypes().add(theOCLPackage.getOperatorCallExp());
 		iteratorChainExpEClass.getESuperTypes().add(theOCLPackage.getPropertyCallExp());
 
 		// Initialize classes, features, and operations; add parameters
@@ -325,6 +363,8 @@ public class AnatlyzerExtPackageImpl extends EPackageImpl implements AnatlyzerEx
 		initEClass(mutableIteratorExpEClass, MutableIteratorExp.class, "MutableIteratorExp", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
 
 		initEClass(mutableCollectionOperationCallExpEClass, MutableCollectionOperationCallExp.class, "MutableCollectionOperationCallExp", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
+
+		initEClass(shortCircuitOperatorCallExpEClass, ShortCircuitOperatorCallExp.class, "ShortCircuitOperatorCallExp", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
 
 		initEClass(iteratorChainExpEClass, IteratorChainExp.class, "IteratorChainExp", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
 		initEAttribute(getIteratorChainExp_Name(), ecorePackage.getEString(), "name", null, 1, 1, IteratorChainExp.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);

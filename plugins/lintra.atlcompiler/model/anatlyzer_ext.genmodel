@@ -11,6 +11,7 @@
     <genClasses ecoreClass="anatlyzer_ext.ecore#//NavRefAsSet"/>
     <genClasses ecoreClass="anatlyzer_ext.ecore#//MutableIteratorExp"/>
     <genClasses ecoreClass="anatlyzer_ext.ecore#//MutableCollectionOperationCallExp"/>
+    <genClasses ecoreClass="anatlyzer_ext.ecore#//ShortCircuitOperatorCallExp"/>
     <genClasses ecoreClass="anatlyzer_ext.ecore#//IteratorChainExp">
       <genFeatures createChild="false" ecoreFeature="ecore:EAttribute anatlyzer_ext.ecore#//IteratorChainExp/name"/>
       <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference anatlyzer_ext.ecore#//IteratorChainExp/iterator"/>

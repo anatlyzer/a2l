@@ -100,6 +100,26 @@ public class java2uml_deps_TestCase extends AbstractTestCase {
 		return outATL;
 		
 	}
+	@Override
+
+	protected Object executeEMFTVM(String trafo, String inXmiPath, Resource input, IStatsRecorder recorder, boolean footprint, boolean save) throws Exception {
+		Resource outATL;
+		System.out.print("Executing EMFTVM... ");
+		ATLExecutor executor = new ATLExecutor();
+		executor.useEMFTVM();
+		executor.setStatsRecorder(recorder);
+		executor.doModelWarmup(footprint);
+		executor.allowInterModelReferences(false);
+		executor.perform(t + trafo, 
+				inModel("CM", input, "JMM", METAMODEL_JAVA_ECORE),
+				outModel("UCD", OUT_MODEL_ATL, "UMLMM", METAMODEL_UML_ECORE));
+		outATL = executor.getModelResource("UCD");
+		if ( save ) {
+			outATL.save(new FileOutputStream(OUT_MODEL_ATL), null);
+		}
+		System.out.println("Done!");
+		return outATL;
+	}
 	
 }
  

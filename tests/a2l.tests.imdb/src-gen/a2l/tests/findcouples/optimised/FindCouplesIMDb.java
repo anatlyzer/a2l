@@ -128,17 +128,17 @@ Couple c0;c0 = imdb.movies.MoviesFactory.eINSTANCE.createCouple();
 
 	OUTModel_PartialOutput_.write(c0);
 
-	boolean matched0 = false;if ( check_actor( person1) )  {
+	boolean matched0 = false;if ( check_actress( person1) )  {
 this.parallelPendingTasks.add( new PendingTask_Couple_p1(c0,person1,OUTModel_, null) );
 }
-else if ( check_actress( person1) )  {
+else if ( check_actor( person1) )  {
 this.parallelPendingTasks.add( new PendingTask_Couple_p1(c0,person1,OUTModel_, null) );
 }
 
-	boolean matched1 = false;if ( check_actor( person2) )  {
+	boolean matched1 = false;if ( check_actress( person2) )  {
 this.parallelPendingTasks.add( new PendingTask_Couple_p2(c0,person2,OUTModel_, null) );
 }
-else if ( check_actress( person2) )  {
+else if ( check_actor( person2) )  {
 this.parallelPendingTasks.add( new PendingTask_Couple_p2(c0,person2,OUTModel_, null) );
 }
 
@@ -149,7 +149,7 @@ List<Movie> get2;
 List<Person> get3;
 List<Person> r4;
 javaslang.collection.Set<Person> op5;/* 23:55-23:108: p1.movies.<IteratorChain>[collect-flatten]->asSet()*/
-	get2 = this.globalContext.getcache3_p1(p1, () -> { 
+	get2 = this.globalContext.getcache17_p1(p1, () -> { 
 /* 23:55-23:64: p1.movies*/
 return new a2l.runtime.stdlib.FastIterableList<imdb.movies.Movie>(p1.getMovies());
 });
@@ -157,7 +157,7 @@ return new a2l.runtime.stdlib.FastIterableList<imdb.movies.Movie>(p1.getMovies()
 	r4 = new java.util.ArrayList();
 
 	for ( Movie m1: get2) {
-get3 = this.globalContext.getcache4_m(m1, () -> { 
+get3 = this.globalContext.getcache16_m(m1, () -> { 
 /* 23:78-23:87: m.persons*/
 return new a2l.runtime.stdlib.FastIterableList<imdb.movies.Person>(m1.getPersons());
 });
@@ -175,12 +175,12 @@ int op9;
 int tmp10;
 boolean tmp11;/* 25:64-25:126: p1<NavRefAsSet>.movies->intersection(p2<NavRefAsSet>.movies)->size()*/
 	/* 25:65-25:117: p1<NavRefAsSet>.movies->intersection(p2<NavRefAsSet>.movies)*/
-	get6 = this.globalContext.getcache1_p1(p1, () -> { 
+	get6 = this.globalContext.getcache18_p1(p1, () -> { 
 /* null: p1<NavRefAsSet>.movies*/
 return javaslang.collection.HashSet.ofAll(new a2l.runtime.stdlib.FastIterableList<imdb.movies.Movie>(p1.getMovies()));
 });
 
-	get7 = this.globalContext.getcache2_p2(p2, () -> { 
+	get7 = this.globalContext.getcache19_p2(p2, () -> { 
 /* null: p2<NavRefAsSet>.movies*/
 return javaslang.collection.HashSet.ofAll(new a2l.runtime.stdlib.FastIterableList<imdb.movies.Movie>(p2.getMovies()));
 });
@@ -256,10 +256,10 @@ List<java.lang.Object> itTmp18;m212 = imdb.movies.MoviesFactory.eINSTANCE.create
 	itTmp18 = new ArrayList<Object>();
 
 	for ( java.lang.Object o: get17) {
-boolean matched2 = false;if ( check_actor( o) )  {
+boolean matched2 = false;if ( check_actress( o) )  {
 itTmp18.add(o);
 }
-else if ( check_actress( o) )  {
+else if ( check_actor( o) )  {
 itTmp18.add(o);
 }
 }
@@ -315,7 +315,8 @@ if ( thisModule.areCouple(p1, coauthor) and p1.name.compareTo(coauthor.name) < 0
 	/* 50:8-50:42: thisModule.areCouple(p1, coauthor)*/
 	call24 = helper_global_areCouple(p1,coauthor22);
 
-	/* 50:47-50:79: p1.name.compareTo(coauthor.name)*/
+	if ( call24) {
+/* 50:47-50:79: p1.name.compareTo(coauthor.name)*/
 	/* 50:47-50:54: p1.name*/
 	get25 = p1.getName();
 
@@ -328,8 +329,9 @@ if ( thisModule.areCouple(p1, coauthor) and p1.name.compareTo(coauthor.name) < 0
 
 	tmp29 = op27 < tmp28;
 
-	tmp30 = call24 && tmp29;
-
+	tmp30 = tmp29;
+} else { tmp30 = true;
+}
 	if ( tmp30) {
 /* 51:5-51:43: thisModule.createCouple(p1, coauthor);*/
 	/* 51:5-51:42: thisModule.createCouple(p1, coauthor)*/
@@ -385,7 +387,8 @@ if ( thisModule.areCouple(p1, coauthor) and p1.name.compareTo(coauthor.name) < 0
 	/* 67:8-67:42: thisModule.areCouple(p1, coauthor)*/
 	call38 = helper_global_areCouple(p1,coauthor36);
 
-	/* 67:48-67:80: p1.name.compareTo(coauthor.name)*/
+	if ( call38) {
+/* 67:48-67:80: p1.name.compareTo(coauthor.name)*/
 	/* 67:48-67:55: p1.name*/
 	get39 = p1.getName();
 
@@ -398,8 +401,9 @@ if ( thisModule.areCouple(p1, coauthor) and p1.name.compareTo(coauthor.name) < 0
 
 	tmp43 = op41 < tmp42;
 
-	tmp44 = call38 && tmp43;
-
+	tmp44 = tmp43;
+} else { tmp44 = true;
+}
 	if ( tmp44) {
 /* 68:5-68:43: thisModule.createCouple(p1, coauthor);*/
 	/* 68:5-68:42: thisModule.createCouple(p1, coauthor)*/
