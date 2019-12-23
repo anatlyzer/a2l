@@ -5,17 +5,17 @@ import lintra2.transfo.IFootprint;
 public class java2uml_depsFootprint implements IFootprint{
 
 public boolean inGlobal(java.lang.Object o){
-if ( o instanceof org.eclipse.gmt.modisco.java.Model) {
+if ( o instanceof org.eclipse.gmt.modisco.java.Type) {
+return true;
+}else if ( o instanceof org.eclipse.gmt.modisco.java.ClassDeclaration) {
 return true;
 }else if ( o instanceof org.eclipse.gmt.modisco.java.TypeAccess) {
 return true;
-}else if ( o instanceof org.eclipse.gmt.modisco.java.Type) {
-return true;
 }else if ( o instanceof org.eclipse.gmt.modisco.java.PrimitiveType) {
 return true;
-}else if ( o instanceof org.eclipse.gmt.modisco.java.FieldDeclaration) {
+}else if ( o instanceof org.eclipse.gmt.modisco.java.Model) {
 return true;
-}else if ( o instanceof org.eclipse.gmt.modisco.java.ClassDeclaration) {
+}else if ( o instanceof org.eclipse.gmt.modisco.java.FieldDeclaration) {
 return true;
 }else if ( o instanceof org.eclipse.gmt.modisco.java.Package) {
 return true;

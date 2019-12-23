@@ -326,6 +326,21 @@ public abstract class AbstractTestCase {
 			this.model = model;
 			this.framework = framework;
 		}
+		
+		@Override
+		public String toString() {
+			String s = "";
+			s += " " + model;
+			s += " " + framework.name().toLowerCase();
+			s += " min=" + minThreads;
+			s += " max=" + maxThreads;
+			s += " runs=" + runs;
+			s += " footprint=" + footprint;
+			s += " optimised=" + optimised;
+			s += " save=" + save;
+			s += " reportDir=" + reportDir;			
+			return s;
+		}
 	}
 	
 
@@ -338,6 +353,7 @@ public abstract class AbstractTestCase {
 	}
 	
 	protected void doTestAux(Arguments args, String trafo, Function<String, String> modelPathAdapter) throws FileNotFoundException, IOException, Exception {
+		System.out.println("Testing with: " + this.getClass().getSimpleName() + " " + args);
 		int minThreads = args.minThreads;
 		int maxThreads = args.maxThreads;
 		String model = args.model;
@@ -350,8 +366,12 @@ public abstract class AbstractTestCase {
 		String inXmiPath = modelPathAdapter.apply(model);
 		Resource input = load(inXmiPath);
 		
+		File modelFile = new File(model);		
+
 		String folderName =  
 				(this.getClass().getSimpleName().replace("_TestCase", "")) + "-" +
+				(modelFile.getName().replace(".xmi", "") + "-") +
+				(args.framework.name().toLowerCase() + "-") +
 				(args.optimised ? "optimised" : "normal") + "-" +
 				(args.footprint ? "footprint" : "nofootprint") + "-" +
 				args.minThreads + "-" + args.maxThreads + "-" + args.runs;

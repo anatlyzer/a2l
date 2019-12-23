@@ -149,18 +149,14 @@ List<Movie> get2;
 List<Person> get3;
 List<Person> r4;
 javaslang.collection.Set<Person> op5;/* 23:55-23:108: p1.movies.<IteratorChain>[collect-flatten]->asSet()*/
-	get2 = this.globalContext.getcache17_p1(p1, () -> { 
-/* 23:55-23:64: p1.movies*/
-return new a2l.runtime.stdlib.FastIterableList<imdb.movies.Movie>(p1.getMovies());
-});
+	/* 23:55-23:64: p1.movies*/
+	get2 = new a2l.runtime.stdlib.FastIterableList<imdb.movies.Movie>(p1.getMovies());
 
 	r4 = new java.util.ArrayList();
 
 	for ( Movie m1: get2) {
-get3 = this.globalContext.getcache16_m(m1, () -> { 
 /* 23:78-23:87: m.persons*/
-return new a2l.runtime.stdlib.FastIterableList<imdb.movies.Person>(m1.getPersons());
-});
+	get3 = new a2l.runtime.stdlib.FastIterableList<imdb.movies.Person>(m1.getPersons());
 
 	r4.addAll(get3);}
 	op5 = javaslang.collection.HashSet.ofAll(r4);
@@ -175,12 +171,12 @@ int op9;
 int tmp10;
 boolean tmp11;/* 25:64-25:126: p1<NavRefAsSet>.movies->intersection(p2<NavRefAsSet>.movies)->size()*/
 	/* 25:65-25:117: p1<NavRefAsSet>.movies->intersection(p2<NavRefAsSet>.movies)*/
-	get6 = this.globalContext.getcache18_p1(p1, () -> { 
+	get6 = this.globalContext.getcache4_p1(p1, () -> { 
 /* null: p1<NavRefAsSet>.movies*/
 return javaslang.collection.HashSet.ofAll(new a2l.runtime.stdlib.FastIterableList<imdb.movies.Movie>(p1.getMovies()));
 });
 
-	get7 = this.globalContext.getcache19_p2(p2, () -> { 
+	get7 = this.globalContext.getcache5_p2(p2, () -> { 
 /* null: p2<NavRefAsSet>.movies*/
 return javaslang.collection.HashSet.ofAll(new a2l.runtime.stdlib.FastIterableList<imdb.movies.Movie>(p2.getMovies()));
 });
@@ -279,8 +275,9 @@ int op27;
 int tmp28;
 boolean tmp29;
 boolean tmp30;
-Couple call31;
-List<java.lang.Object> itTmp32;p219 = imdb.movies.MoviesFactory.eINSTANCE.createActor();
+boolean tmp31;
+Couple call32;
+List<java.lang.Object> itTmp33;p219 = imdb.movies.MoviesFactory.eINSTANCE.createActor();
 
 	this.trace.put(p1,p219);
 
@@ -294,14 +291,14 @@ List<java.lang.Object> itTmp32;p219 = imdb.movies.MoviesFactory.eINSTANCE.create
 
 	p219.setName(get20);;
 
-	itTmp32 = new ArrayList<Object>();
+	itTmp33 = new ArrayList<Object>();
 
 	for ( java.lang.Object o: get21) {
 boolean matched3 = false;if ( check_movie( o) )  {
-itTmp32.add(o);
+itTmp33.add(o);
 }
 }
-	this.pendingTasks.add( new PendingTask_Person_movies(p219,itTmp32,OUTModel_,null) );
+	this.pendingTasks.add( new PendingTask_Person_movies(p219,itTmp33,OUTModel_,null) );
 
 	/* 49:3-53:4: for (coauthor in thisModule.coactor(p1)) {
 if ( thisModule.areCouple(p1, coauthor) and p1.name.compareTo(coauthor.name) < 0 ) {
@@ -315,8 +312,7 @@ if ( thisModule.areCouple(p1, coauthor) and p1.name.compareTo(coauthor.name) < 0
 	/* 50:8-50:42: thisModule.areCouple(p1, coauthor)*/
 	call24 = helper_global_areCouple(p1,coauthor22);
 
-	if ( call24) {
-/* 50:47-50:79: p1.name.compareTo(coauthor.name)*/
+	/* 50:47-50:79: p1.name.compareTo(coauthor.name)*/
 	/* 50:47-50:54: p1.name*/
 	get25 = p1.getName();
 
@@ -329,85 +325,83 @@ if ( thisModule.areCouple(p1, coauthor) and p1.name.compareTo(coauthor.name) < 0
 
 	tmp29 = op27 < tmp28;
 
-	tmp30 = tmp29;
-} else { tmp30 = true;
-}
-	if ( tmp30) {
+	tmp31 = call24 && tmp29;
+
+	if ( tmp31) {
 /* 51:5-51:43: thisModule.createCouple(p1, coauthor);*/
 	/* 51:5-51:42: thisModule.createCouple(p1, coauthor)*/
-	call31 = called_rule_createCouple(p1,coauthor22);
+	call32 = called_rule_createCouple(p1,coauthor22);
 }}
 	numMatchedRuleExecutions_++;
 }
 	private void create_actress(Actress p1){
-Actress p233;
-java.lang.String get34;
-List<Movie> get35;
-javaslang.collection.Set<Person> call37;
-boolean call38;
-java.lang.String get39;
+Actress p234;
+java.lang.String get35;
+List<Movie> get36;
+javaslang.collection.Set<Person> call38;
+boolean call39;
 java.lang.String get40;
-int op41;
-int tmp42;
-boolean tmp43;
+java.lang.String get41;
+int op42;
+int tmp43;
 boolean tmp44;
-Couple call45;
-List<java.lang.Object> itTmp46;p233 = imdb.movies.MoviesFactory.eINSTANCE.createActress();
+boolean tmp45;
+boolean tmp46;
+Couple call47;
+List<java.lang.Object> itTmp48;p234 = imdb.movies.MoviesFactory.eINSTANCE.createActress();
 
-	this.trace.put(p1,p233);
+	this.trace.put(p1,p234);
 
-	OUTModel_PartialOutput_.write(p233);
+	OUTModel_PartialOutput_.write(p234);
 
 	/* 62:12-62:19: p1.name*/
-	get34 = p1.getName();
+	get35 = p1.getName();
 
 	/* 63:14-63:23: p1.movies*/
-	get35 = new a2l.runtime.stdlib.FastIterableList<imdb.movies.Movie>(p1.getMovies());
+	get36 = new a2l.runtime.stdlib.FastIterableList<imdb.movies.Movie>(p1.getMovies());
 
-	p233.setName(get34);;
+	p234.setName(get35);;
 
-	itTmp46 = new ArrayList<Object>();
+	itTmp48 = new ArrayList<Object>();
 
-	for ( java.lang.Object o: get35) {
+	for ( java.lang.Object o: get36) {
 boolean matched4 = false;if ( check_movie( o) )  {
-itTmp46.add(o);
+itTmp48.add(o);
 }
 }
-	this.pendingTasks.add( new PendingTask_Person_movies(p233,itTmp46,OUTModel_,null) );
+	this.pendingTasks.add( new PendingTask_Person_movies(p234,itTmp48,OUTModel_,null) );
 
 	/* 66:3-70:4: for (coauthor in thisModule.coactor(p1)) {
 if ( thisModule.areCouple(p1, coauthor) and p1.name.compareTo(coauthor.name) < 0 ) {
    thisModule.createCouple(p1, coauthor); } }}*/
 	/* 66:20-66:42: thisModule.coactor(p1)*/
-	call37 = helper_global_coactor(p1);
+	call38 = helper_global_coactor(p1);
 
-	for ( Person coauthor36: call37) {
+	for ( Person coauthor37: call38) {
 /* 67:4-69:5: if ( thisModule.areCouple(p1, coauthor) and p1.name.compareTo(coauthor.name) < 0 ) {
    thisModule.createCouple(p1, coauthor); }*/
 	/* 67:8-67:42: thisModule.areCouple(p1, coauthor)*/
-	call38 = helper_global_areCouple(p1,coauthor36);
+	call39 = helper_global_areCouple(p1,coauthor37);
 
-	if ( call38) {
-/* 67:48-67:80: p1.name.compareTo(coauthor.name)*/
+	/* 67:48-67:80: p1.name.compareTo(coauthor.name)*/
 	/* 67:48-67:55: p1.name*/
-	get39 = p1.getName();
+	get40 = p1.getName();
 
 	/* 67:66-67:79: coauthor.name*/
-	get40 = coauthor36.getName();
+	get41 = coauthor37.getName();
 
-	op41 = get39.compareTo(get40);
+	op42 = get40.compareTo(get41);
 
-	tmp42 = 0;
+	tmp43 = 0;
 
-	tmp43 = op41 < tmp42;
+	tmp44 = op42 < tmp43;
 
-	tmp44 = tmp43;
-} else { tmp44 = true;
-}
-	if ( tmp44) {
+	tmp46 = call39 && tmp44;
+
+	if ( tmp46) {
 /* 68:5-68:43: thisModule.createCouple(p1, coauthor);*/
 	/* 68:5-68:42: thisModule.createCouple(p1, coauthor)*/
-	call45 = called_rule_createCouple(p1,coauthor36);
+	call47 = called_rule_createCouple(p1,coauthor37);
 }}
 	numMatchedRuleExecutions_++;
 }

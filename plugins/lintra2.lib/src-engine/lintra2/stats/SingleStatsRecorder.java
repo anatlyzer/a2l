@@ -1,6 +1,9 @@
 package lintra2.stats;
 
 import java.io.PrintStream;
+import java.util.concurrent.TimeUnit;
+
+import com.google.common.base.Stopwatch;
 
 public class SingleStatsRecorder implements IStatsRecorder {
 
@@ -10,21 +13,21 @@ public class SingleStatsRecorder implements IStatsRecorder {
 	private Record serialization;
 	
 	private class Record {
-		private long start;
-		private long end;
 		
+		private Stopwatch watch;
+
 		public Record start() {
-			start = System.currentTimeMillis();
+			watch = Stopwatch.createStarted();
 			return this;
 		}
 		
 		public Record stop() {
-			end = System.currentTimeMillis();
+			watch.stop();
 			return this;
 		}
 		
 		public double getSeconds() {
-			return (end - start) / 1000.0;		
+			return watch.elapsed(TimeUnit.MICROSECONDS) / 1_000_000.0;
 		}
 	}
 	

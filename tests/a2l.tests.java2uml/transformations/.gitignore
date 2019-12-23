@@ -2,3 +2,5 @@
 /Java2Graph.asm
 /java2uml_deps_remove.asm
 /java2uml_deps.emftvm
+/java2uml_deps-emftvm.asm
+/java2uml_deps-std-atl.asm

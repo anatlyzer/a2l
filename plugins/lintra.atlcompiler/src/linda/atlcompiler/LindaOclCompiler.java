@@ -1,25 +1,25 @@
 package linda.atlcompiler;
 
-import static linda.atlcompiler.CreationHelpers.createAssignment;
 import static linda.atlcompiler.CreationHelpers.addStm;
+import static linda.atlcompiler.CreationHelpers.createAssignment;
+import static linda.atlcompiler.CreationHelpers.createCommentedList;
+import static linda.atlcompiler.CreationHelpers.createForeach;
+import static linda.atlcompiler.CreationHelpers.createInvoke;
+import static linda.atlcompiler.CreationHelpers.createLoopVar;
 import static linda.atlcompiler.CreationHelpers.createSimpleIf;
 import static linda.atlcompiler.CreationHelpers.createText;
-import static linda.atlcompiler.CreationHelpers.createLoopVar;
 import static linda.atlcompiler.CreationHelpers.createTextExp;
-import static linda.atlcompiler.CreationHelpers.createCommentedList;
-import static linda.atlcompiler.CreationHelpers.createInvoke;
+import static linda.atlcompiler.CreationHelpers.toStr;
 
 import java.util.ArrayList;
 import java.util.Collections;
-import java.util.HashMap;
-import java.util.LinkedList;
 import java.util.List;
+import java.util.Optional;
 import java.util.Set;
 import java.util.function.Supplier;
 import java.util.stream.Collectors;
 import java.util.stream.Stream;
 
-import org.eclipse.emf.common.util.EList;
 import org.eclipse.emf.ecore.EAttribute;
 import org.eclipse.emf.ecore.EEnum;
 import org.eclipse.emf.ecore.EEnumLiteral;
@@ -31,11 +31,10 @@ import a2l.compiler.OptimisationHints;
 import a2l.compiler.OptimisationHints.CachedValue;
 import a2l.compiler.OptimisationHints.Hotspot;
 import a2l.compiler.VarStatementPair;
-import a2l.driver.MutableListDriver;
 import a2l.driver.ICollectionsDriver;
 import a2l.driver.IMetaDriver;
 import a2l.driver.JavaslangDriver;
-import a2l.optimiser.anatlyzerext.IteratorChainElement;
+import a2l.driver.MutableListDriver;
 import a2l.optimiser.anatlyzerext.IteratorChainExp;
 import a2l.optimiser.anatlyzerext.MutableCollectionOperationCallExp;
 import a2l.optimiser.anatlyzerext.MutableIteratorExp;
@@ -58,12 +57,10 @@ import anatlyzer.atl.types.PrimitiveType;
 import anatlyzer.atl.types.ReflectiveClass;
 import anatlyzer.atl.types.SetType;
 import anatlyzer.atl.types.StringType;
-import anatlyzer.atl.types.TupleType;
 import anatlyzer.atl.types.Type;
 import anatlyzer.atl.types.UnionType;
 import anatlyzer.atl.util.ATLUtils;
 import anatlyzer.atl.util.UnsupportedTranslation;
-import anatlyzer.atlext.ATL.BindingStat;
 import anatlyzer.atlext.ATL.ContextHelper;
 import anatlyzer.atlext.ATL.ForStat;
 import anatlyzer.atlext.ATL.IfStat;
@@ -78,6 +75,7 @@ import anatlyzer.atlext.OCL.IterateExp;
 import anatlyzer.atlext.OCL.Iterator;
 import anatlyzer.atlext.OCL.IteratorExp;
 import anatlyzer.atlext.OCL.LetExp;
+import anatlyzer.atlext.OCL.LoopExp;
 import anatlyzer.atlext.OCL.MapExp;
 import anatlyzer.atlext.OCL.NavigationOrAttributeCallExp;
 import anatlyzer.atlext.OCL.OclExpression;
@@ -112,22 +110,15 @@ import lintra.atlcompiler.javagen.JExpression;
 import lintra.atlcompiler.javagen.JForeach;
 import lintra.atlcompiler.javagen.JInvoke;
 import lintra.atlcompiler.javagen.JInvokeStatic;
-import lintra.atlcompiler.javagen.JMetaType;
 import lintra.atlcompiler.javagen.JMethod;
 import lintra.atlcompiler.javagen.JParameter;
 import lintra.atlcompiler.javagen.JReturn;
 import lintra.atlcompiler.javagen.JStatement;
 import lintra.atlcompiler.javagen.JText;
-import lintra.atlcompiler.javagen.JType;
 import lintra.atlcompiler.javagen.JTypeRef;
 import lintra.atlcompiler.javagen.JVariableDeclaration;
 import lintra.atlcompiler.javagen.JavagenFactory;
 import lintra.lingen.LinGen;
-import lintra.lingen.LinGen2;
-
-import static linda.atlcompiler.CreationHelpers.createForeach;
-import static linda.atlcompiler.CreationHelpers.toStr;
-import static linda.atlcompiler.CreationHelpers.createText;
 
 /**
  * There are several options to implement helpers:
@@ -1320,8 +1311,14 @@ public class LindaOclCompiler implements IOclCompiler, IInitializer {
 		ArrayList<JStatement> stms = new ArrayList<JStatement>();
 		JVariableDeclaration newVar = gen.addLocalVar(env.currentBlock(), "tmp", typ.createTypeRef(self.getInferredType()));
 
-		stms.addAll(env.getStatements(self.getSource()));
-		JVariableDeclaration var0 = env.getVar( self.getSource() );
+		OclExpression source = self.getSource();
+		if (isSimpleOperator(source, self.getArguments())) {
+			inOperatorCallExp(self);
+			return;
+		}
+		
+		stms.addAll(env.getStatements(source));
+		JVariableDeclaration var0 = env.getVar(source);
 				
 		String name = self.getOperationName();
 		if ("and".equals(name)) {			
@@ -1355,6 +1352,32 @@ public class LindaOclCompiler implements IOclCompiler, IInitializer {
 		env.bind(self, newVar, stms);
 	}
 	
+	/**
+	 * For simple expressions it is better not to do the if - else trick because that forbids JVM opts 
+	 * This is asking for a very different code generation approach 
+	 */
+	private boolean isSimpleOperator(OclExpression source, List<OclExpression> arguments) {
+		if (arguments.isEmpty())
+			return true;
+		
+		Optional<EObject> hasLoops1 = ATLUtils.findElement(source, (e) -> e instanceof LoopExp);
+		if (hasLoops1.isPresent()) 
+			return false;
+
+		Optional<EObject> hasLoops2 = ATLUtils.findElement(arguments.get(0), (e) -> e instanceof LoopExp);
+		if (hasLoops2.isPresent()) 
+			return false;
+
+		return true;	
+//		int c1 = LindaCompiler.countExpressionNodes(source);
+//		if (c1 > 4)
+//			return false;
+//		int c2 = LindaCompiler.countExpressionNodes(arguments.get(0));
+//		if (c2 > 4)
+//			return false;		
+//		return true;
+	}
+
 	@Override
 	public void inIfExp(IfExp self) {
 		Type trueType  = self.getThenExpression().getInferredType();

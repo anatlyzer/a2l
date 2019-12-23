@@ -54,6 +54,7 @@ import anatlyzer.atlext.OCL.PropertyCallExp;
 import anatlyzer.atlext.OCL.ResolveTempResolution;
 import anatlyzer.atlext.OCL.VariableExp;
 import anatlyzer.atlext.processing.AbstractVisitor;
+import linda.atlcompiler.LindaCompiler;
 
 public class A2LOptimiser extends AbstractVisitor {
 
@@ -162,10 +163,6 @@ public class A2LOptimiser extends AbstractVisitor {
 	
 	@Override
 	public void inOperatorCallExp(OperatorCallExp self) {
-		if ( !isEnabled(Optimisation.SHORT_CIRCUIT) ) {
-			return;
-		}
-		
 		if (! shortcircuits.contains(self.getOperationName()))
 			return;		
 		
@@ -623,14 +620,19 @@ public class A2LOptimiser extends AbstractVisitor {
 			
 			for (OclExpression oclExpression : hotspots) {
 				OclExpression maximalExpression = getMaximalExpression(oclExpression);
-
-				hints.addHotspot(new OptimisationHints.CachedValue(maximalExpression, oclExpression));
-				AstAnnotations.markCacheable(maximalExpression);			
+				if ( LindaCompiler.countExpressionNodes(maximalExpression) > 2 || containsHeavyOperation(maximalExpression)) {
+					hints.addHotspot(new OptimisationHints.CachedValue(maximalExpression, oclExpression));
+					AstAnnotations.markCacheable(maximalExpression);			
+				}
 			} 			
 			
 			return hints;
 		}
 		
+		private boolean containsHeavyOperation(OclExpression expr) {
+			return ATLUtils.findElement(expr, (e) -> e instanceof NavRefAsSet || e instanceof IteratorChainExp).isPresent();
+		}
+
 		/**
 		 * If we have a basic hot-spot like obj.feature, we try to expand it
 		 * to e.g., obj.feature->select->... because we know that the result of the
@@ -660,7 +662,7 @@ public class A2LOptimiser extends AbstractVisitor {
 			List<NavigationOrAttributeCallExp> navs = model.allObjectsOf(NavigationOrAttributeCallExp.class);
 			for (NavigationOrAttributeCallExp nav : navs) {
 				EStructuralFeature f = (EStructuralFeature) nav.getUsedFeature();
-				if ( f != null && f.isMany() && f instanceof EReference && ((EReference) f).getEOpposite() != null ) {
+				if ( f != null && f.isMany() && f instanceof EReference ) { //&& ((EReference) f).getEOpposite() != null ) {
 					// Construct a path
 					ProblemPath path = new PathGenerator().generatePath(nav);
 					boolean hasLoops = new LoopFinder().hasLoops(path);

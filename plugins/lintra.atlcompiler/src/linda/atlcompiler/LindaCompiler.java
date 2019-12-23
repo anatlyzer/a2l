@@ -1295,7 +1295,12 @@ public abstract class LindaCompiler extends BaseCompiler {
 		return countNodes(r.getInPattern().getFilter(), seen);
 	}
 
-	protected int countNodes(OclExpression expr, Set<Helper> seen) {
+	public static int countExpressionNodes(OclExpression expr) {
+		Set<Helper> seen = new HashSet<>();
+		return countNodes(expr, seen);		
+	}
+	
+	protected static int countNodes(OclExpression expr, Set<Helper> seen) {
 		int count = 0;
 		TreeIterator<EObject> it = expr.eAllContents();
 		while (it.hasNext()) {
@@ -1325,10 +1330,10 @@ public abstract class LindaCompiler extends BaseCompiler {
 				}
 			}
 		}
-		return count;
+		return count + 1;
 	}
 
-	private int countNodes(Helper h, Set<Helper> seen) {
+	protected static int countNodes(Helper h, Set<Helper> seen) {
 		if (seen.contains(h))
 			return 0;
 		

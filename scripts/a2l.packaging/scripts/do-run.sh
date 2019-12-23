@@ -17,8 +17,6 @@ case $1 in
 esac
 
 
-#CLASSPATH=$(pwd)/../../../scripts/a2l.packaging/build/a2l.jar:$ECLIPSE_PLUGINS/*
-
 EMF=`ls $ECLIPSE_PLUGINS/*emf* | paste -s -d ":" -`
 ATL=`ls $ECLIPSE_PLUGINS/*atl* | paste -s -d ":" -`
 MODISCO=`ls $ECLIPSE_PLUGINS/*modisco* | paste -s -d ":" -`
@@ -26,10 +24,22 @@ UML=`ls $ECLIPSE_PLUGINS/*uml* | paste -s -d ":" -`
 ANTLR=`ls $ECLIPSE_PLUGINS/*antlr*3* | paste -s -d ":" -`
 ECLIPSE=`ls $ECLIPSE_PLUGINS/*org.eclipse.core* | paste -s -d ":" -`
 OSGI=`ls $ECLIPSE_PLUGINS/*org.eclipse.osgi* | paste -s -d ":" -`
-EQUINOX=`ls $ECLIPSE_PLUGINS/*org.eclipse.equinox* | paste -s -d ":" -`
-OBJECTWEB=`ls $ECLIPSE_PLUGINS/*org.objectweb.* | paste -s -d ":" -`
+EQUINOX=`ls $ECLIPSE_PLUGINS/*org.eclipse.equinox*jar | paste -s -d ":" -`
+OBJECTWEB=`ls $ECLIPSE_PLUGINS/*org.objectweb.*jar | paste -s -d ":" -`
 
-CLASSPATH=$(pwd)/../../../scripts/a2l.packaging/build/a2l.jar:$ECLIPSE:$EQUINOX:$OSGI:$EMF:$ATL:$MODISCO:$UML:$ANTLR:$OBJECTWEB
+# Restrict the classpath depending on whether we use std (with
+# selected plugins copied) or we target the jars of the Eclipse
+# directory
+case $1 in
+  std)
+      CLASSPATH=$(pwd)/../../../scripts/a2l.packaging/build/a2l.jar:$ECLIPSE_PLUGINS/*
+      echo $CLASSPATH
+      ;;
+  *)
+    CLASSPATH=$(pwd)/../../../scripts/a2l.packaging/build/a2l.jar:$ECLIPSE:$EQUINOX:$OSGI:$EMF:$ATL:$MODISCO:$UML:$ANTLR:$OBJECTWEB
+    ;;
+esac
+
 
 case $2 in
   copydeps)
@@ -41,6 +51,9 @@ case $2 in
 	cp `echo $UML | tr ":" " "` /tmp/eclipse-jars
 	cp `echo $ANTLR | tr ":" " "` /tmp/eclipse-jars
 	cp `echo $ECLIPSE | tr ":" " "` /tmp/eclipse-jars
+	cp `echo $EQUINOX | tr ":" " "` /tmp/eclipse-jars
+	cp `echo $OSGI | tr ":" " "` /tmp/eclipse-jars
+	cp `echo $OBJECTWEB | tr ":" " "` /tmp/eclipse-jars	
 	exit
   ;;
 esac
@@ -65,7 +78,8 @@ MAX=$5
 RUNS=$6
 FOOTPRINT=$7
 OPTIMISED=$8
-BENCHMARK_FOLDER=$9
+SAVE=$9
+BENCHMARK_FOLDER=$10
 
 if [ -z "$MIN" ] 
   then
@@ -103,6 +117,12 @@ if [ -z "$BENCHMARK_FOLDER" ]
     echo "Using /tmp/benchmark as default option"
 fi
 
+if [ -z "$SAVE" ] 
+  then
+    SAVE="nosave"
+    echo "Using save=$SAVE as default option"
+fi
+
 #Some tests!
 #java -d64 -server -XX:+AggressiveOpts -XX:+UseLargePages -Xmn10g 
 # -Xms26g -Xmx26g
@@ -124,4 +144,5 @@ echo "Launching JVM and A2L..."
 echo "    with $JAVA_CUSTOM_OPTS"
 echo "  memory $MEMORY"
 echo
-java -d64 -server $MEMORY $JAVA_CUSTOM_OPTS -cp $CLASSPATH  $TEST_CASE $MIN $MAX $RUNS $MODEL $KIND $FOOTPRINT $OPTIMISED nosave $BENCHMARK_FOLDER
+
+java -d64 -server $MEMORY $JAVA_CUSTOM_OPTS -cp $CLASSPATH  $TEST_CASE $MIN $MAX $RUNS $MODEL $KIND $FOOTPRINT $OPTIMISED $SAVE $BENCHMARK_FOLDER

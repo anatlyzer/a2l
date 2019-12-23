@@ -97,5 +97,25 @@ public class DBLPv2_TestCase extends AbstractTestCase {
 		return outATL;
 	}
 
+	@Override
+	protected Object executeEMFTVM(String trafo, String inXmiPath, Resource input, IStatsRecorder recorder,
+			boolean footprint, boolean save) throws Exception {
+		Resource outATL;
+		System.out.print("Executing EMFTVM... ");
+		ATLExecutor executor = new ATLExecutor();
+		executor.useEMFTVM();
+		executor.setStatsRecorder(recorder);
+		executor.doModelWarmup(footprint);
+		executor.allowInterModelReferences(false);
+		executor.perform(t + trafo, 
+				inModel("IN", inXmiPath, "MM", METAMODEL_DBLP),
+				outModel("OUT", OUT_MODEL_ATL, "MM1", METAMODEL_AUTHOR_INFO));
+		outATL = executor.getModelResource("OUT");
+		if ( save )
+			outATL.save(new FileOutputStream(OUT_MODEL_ATL), null);
+		System.out.println("Done!");
+		return outATL;
+	}
+	
 }
  

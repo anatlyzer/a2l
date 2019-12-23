@@ -45,12 +45,12 @@ public class FastIterableList<E> implements java.util.List<E> {
 
 	@Override
 	public Object[] toArray() {
-		return this.toArray();
+		return impl.toArray();
 	}
 
 	@Override
 	public <T> T[] toArray(T[] a) {
-		return this.toArray(a);
+		return impl.toArray(a);
 	}
 
 	@Override

@@ -79,85 +79,95 @@ Date get31;
 int get32;
 boolean tmp33;
 boolean tmp34;
-Date get35;
-int get36;
-Date get37;
-int get38;
-boolean tmp39;
+boolean tmp35;
+Date get36;
+int get37;
+Date get38;
+int get39;
 boolean tmp40;
-Date get41;
-int get42;
+boolean tmp41;
+boolean tmp42;
 Date get43;
 int get44;
-boolean tmp45;
-boolean tmp46;
-Date get47;
-int get48;
-List<java.lang.Integer> r49;
-int op50;
-boolean tmp51;
-boolean tmp52;
-Date get53;
-int get54;
-javaslang.collection.List<AirMeasurement> op56;
+Date get45;
+int get46;
+boolean tmp47;
+boolean tmp48;
+boolean tmp49;
+Date get50;
+int get51;
+List<java.lang.Integer> r52;
+int op53;
+boolean tmp54;
+boolean tmp55;
+Date get56;
 int get57;
-int get58;
-boolean tmp59;
-Date get60;
+javaslang.collection.List<AirMeasurement> op59;
+int get60;
 int get61;
-Date get62;
-int get63;
-boolean tmp64;
-boolean tmp65;
-Date get66;
-int get67;
-Date get68;
-int get69;
-boolean tmp70;
-boolean tmp71;
+boolean tmp62;
+Date get63;
+int get64;
+Date get65;
+int get66;
+boolean tmp67;
+boolean tmp68;
+boolean tmp69;
+Date get70;
+int get71;
 Date get72;
 int get73;
-Date get74;
-int get75;
+boolean tmp74;
+boolean tmp75;
 boolean tmp76;
-boolean tmp77;
-Date get78;
-int get79;
-int tmp80;
+Date get77;
+int get78;
+Date get79;
+int get80;
 boolean tmp81;
 boolean tmp82;
-Date get83;
-int get84;
-List<java.lang.Integer> r85;
-int op86;
+boolean tmp83;
+Date get84;
+int get85;
+int tmp86;
 boolean tmp87;
 boolean tmp88;
-javaslang.collection.List<AirMeasurement> op91;
-boolean tmp92;
-int get93;
-int get94;
+boolean tmp89;
+Date get90;
+int get91;
+List<java.lang.Integer> r92;
+int op93;
+boolean tmp94;
 boolean tmp95;
-boolean tmp96;
-Date get97;
-int get98;
-Date get99;
+javaslang.collection.List<AirMeasurement> op98;
+boolean tmp99;
 int get100;
-boolean tmp101;
+int get101;
 boolean tmp102;
-Date get103;
-int get104;
+boolean tmp103;
+boolean tmp104;
 Date get105;
 int get106;
-boolean tmp107;
-boolean tmp108;
-double get109;
-List<java.lang.Double> r110;
-double tmp111;
-boolean tmp112;
-int r113;
-int tmp114;
-boolean tmp115;
-boolean tmp116;if ( m1 instanceof airquality.AirMeasurement) {
+Date get107;
+int get108;
+boolean tmp109;
+boolean tmp110;
+boolean tmp111;
+Date get112;
+int get113;
+Date get114;
+int get115;
+boolean tmp116;
+boolean tmp117;
+boolean tmp118;
+double get119;
+List<java.lang.Double> r120;
+double tmp121;
+boolean tmp122;
+int r123;
+int tmp124;
+boolean tmp125;
+boolean tmp126;if ( m1 instanceof airquality.AirMeasurement) {
 tmp17 = (airquality.AirMeasurement)m1;
 
 	/* 22:28-22:39: m1.date.day*/
@@ -182,7 +192,7 @@ tmp17 = (airquality.AirMeasurement)m1;
 	/* 28:25-28:57: MM!AirMeasurement.allInstances()*/
 	op25 = this.globalContext.getAllInstancesOf_AirMeasurement();
 
-	r49 = new java.util.ArrayList();
+	r52 = new java.util.ArrayList();
 
 	for ( AirMeasurement m24: op25) {
 /* 28:71-28:81: m1.station*/
@@ -193,8 +203,7 @@ tmp17 = (airquality.AirMeasurement)m1;
 
 	tmp28 = get26 == get27;
 
-	if ( tmp28) {
-/* 28:97-28:109: m1.date.year*/
+	/* 28:97-28:109: m1.date.year*/
 	/* 28:97-28:104: m1.date*/
 	get29 = tmp17.getDate();
 
@@ -208,252 +217,233 @@ tmp17 = (airquality.AirMeasurement)m1;
 
 	tmp33 = get30 == get32;
 
-	tmp34 = tmp33;
-} else { tmp34 = true;
-}
-	if ( tmp34) {
-/* 28:129-28:142: m1.date.month*/
-	/* 28:129-28:136: m1.date*/
-	get35 = tmp17.getDate();
+	tmp35 = tmp28 && tmp33;
 
-	get36 = get35.getMonth();
+	/* 28:129-28:142: m1.date.month*/
+	/* 28:129-28:136: m1.date*/
+	get36 = tmp17.getDate();
+
+	get37 = get36.getMonth();
 
 	/* 28:145-28:158: m.date.month*/
 	/* 28:145-28:152: m.date*/
-	get37 = m24.getDate();
+	get38 = m24.getDate();
 
-	get38 = get37.getMonth();
+	get39 = get38.getMonth();
 
-	tmp39 = get36 == get38;
+	tmp40 = get37 == get39;
 
-	tmp40 = tmp39;
-} else { tmp40 = true;
-}
-	if ( tmp40) {
-/* 28:163-28:174: m1.date.day*/
+	tmp42 = tmp35 && tmp40;
+
+	/* 28:163-28:174: m1.date.day*/
 	/* 28:163-28:170: m1.date*/
-	get41 = tmp17.getDate();
-
-	get42 = get41.getDay();
-
-	/* 28:177-28:188: m.date.day*/
-	/* 28:177-28:184: m.date*/
-	get43 = m24.getDate();
+	get43 = tmp17.getDate();
 
 	get44 = get43.getDay();
 
-	tmp45 = get42 == get44;
+	/* 28:177-28:188: m.date.day*/
+	/* 28:177-28:184: m.date*/
+	get45 = m24.getDate();
 
-	tmp46 = tmp45;
-} else { tmp46 = true;
-}
-	if ( tmp46 == true) {
+	get46 = get45.getDay();
+
+	tmp47 = get44 == get46;
+
+	tmp49 = tmp42 && tmp47;
+
+	if ( tmp49 == true) {
 /* 28:204-28:215: m.date.hour*/
 	/* 28:204-28:210: m.date*/
-	get47 = m24.getDate();
+	get50 = m24.getDate();
 
-	get48 = get47.getHour();
+	get51 = get50.getHour();
 
-	r49.add(get48);}}
-	a2l.runtime.stdlib.Collections.sort(r49, (p_) -> { 
+	r52.add(get51);}}
+	a2l.runtime.stdlib.Collections.sort(r52, (p_) -> { 
 return p_;
 });
-	op50 = r49.isEmpty() ? Integer.MAX_VALUE : r49.get(0);
+	op53 = r52.isEmpty() ? Integer.MAX_VALUE : r52.get(0);
 
-	tmp51 = get23 == op50;
+	tmp54 = get23 == op53;
 
-	tmp52 = tmp51;
-} else { tmp52 = true;
+	tmp55 = tmp54;
+} else { tmp55 = true;
 }
-	if ( tmp52) {
+	if ( tmp55) {
 /* 29:10-29:24: m1.date.minute*/
 	/* 29:10-29:17: m1.date*/
-	get53 = tmp17.getDate();
+	get56 = tmp17.getDate();
 
-	get54 = get53.getMinute();
+	get57 = get56.getMinute();
 
 	/* 29:27-29:264: MM!AirMeasurement.allInstances().<IteratorChain>[select-collect]->sortedBy(v | v)->first()*/
 	/* null: MM!AirMeasurement.allInstances().<IteratorChain>[select-collect]->sortedBy(v | v)*/
 	/* 29:27-29:59: MM!AirMeasurement.allInstances()*/
-	op56 = this.globalContext.getAllInstancesOf_AirMeasurement();
+	op59 = this.globalContext.getAllInstancesOf_AirMeasurement();
 
-	r85 = new java.util.ArrayList();
+	r92 = new java.util.ArrayList();
 
-	for ( AirMeasurement m55: op56) {
+	for ( AirMeasurement m58: op59) {
 /* 29:73-29:83: m1.station*/
-	get57 = tmp17.getStation();
+	get60 = tmp17.getStation();
 
 	/* 29:84-29:94: m.station*/
-	get58 = m55.getStation();
+	get61 = m58.getStation();
 
-	tmp59 = get57 == get58;
+	tmp62 = get60 == get61;
 
-	if ( tmp59) {
-/* 29:99-29:111: m1.date.year*/
+	/* 29:99-29:111: m1.date.year*/
 	/* 29:99-29:106: m1.date*/
-	get60 = tmp17.getDate();
+	get63 = tmp17.getDate();
 
-	get61 = get60.getYear();
+	get64 = get63.getYear();
 
 	/* 29:114-29:126: m.date.year*/
 	/* 29:114-29:121: m.date*/
-	get62 = m55.getDate();
+	get65 = m58.getDate();
 
-	get63 = get62.getYear();
+	get66 = get65.getYear();
 
-	tmp64 = get61 == get63;
+	tmp67 = get64 == get66;
 
-	tmp65 = tmp64;
-} else { tmp65 = true;
-}
-	if ( tmp65) {
-/* 29:131-29:144: m1.date.month*/
+	tmp69 = tmp62 && tmp67;
+
+	/* 29:131-29:144: m1.date.month*/
 	/* 29:131-29:138: m1.date*/
-	get66 = tmp17.getDate();
+	get70 = tmp17.getDate();
 
-	get67 = get66.getMonth();
+	get71 = get70.getMonth();
 
 	/* 29:147-29:160: m.date.month*/
 	/* 29:147-29:154: m.date*/
-	get68 = m55.getDate();
+	get72 = m58.getDate();
 
-	get69 = get68.getMonth();
+	get73 = get72.getMonth();
 
-	tmp70 = get67 == get69;
+	tmp74 = get71 == get73;
 
-	tmp71 = tmp70;
-} else { tmp71 = true;
-}
-	if ( tmp71) {
-/* 29:165-29:176: m1.date.day*/
+	tmp76 = tmp69 && tmp74;
+
+	/* 29:165-29:176: m1.date.day*/
 	/* 29:165-29:172: m1.date*/
-	get72 = tmp17.getDate();
+	get77 = tmp17.getDate();
 
-	get73 = get72.getDay();
+	get78 = get77.getDay();
 
 	/* 29:179-29:190: m.date.day*/
 	/* 29:179-29:186: m.date*/
-	get74 = m55.getDate();
+	get79 = m58.getDate();
 
-	get75 = get74.getDay();
+	get80 = get79.getDay();
 
-	tmp76 = get73 == get75;
+	tmp81 = get78 == get80;
 
-	tmp77 = tmp76;
-} else { tmp77 = true;
-}
-	if ( tmp77) {
-/* 29:195-29:207: m.date.hour*/
+	tmp83 = tmp76 && tmp81;
+
+	/* 29:195-29:207: m.date.hour*/
 	/* 29:195-29:202: m.date*/
-	get78 = m55.getDate();
+	get84 = m58.getDate();
 
-	get79 = get78.getHour();
+	get85 = get84.getHour();
 
-	tmp80 = 1;
+	tmp86 = 1;
 
-	tmp81 = get79 < tmp80;
+	tmp87 = get85 < tmp86;
 
-	tmp82 = tmp81;
-} else { tmp82 = true;
-}
-	if ( tmp82 == true) {
+	tmp89 = tmp83 && tmp87;
+
+	if ( tmp89 == true) {
 /* 29:224-29:237: m.date.minute*/
 	/* 29:224-29:230: m.date*/
-	get83 = m55.getDate();
+	get90 = m58.getDate();
 
-	get84 = get83.getMinute();
+	get91 = get90.getMinute();
 
-	r85.add(get84);}}
-	a2l.runtime.stdlib.Collections.sort(r85, (p_) -> { 
+	r92.add(get91);}}
+	a2l.runtime.stdlib.Collections.sort(r92, (p_) -> { 
 return p_;
 });
-	op86 = r85.isEmpty() ? Integer.MAX_VALUE : r85.get(0);
+	op93 = r92.isEmpty() ? Integer.MAX_VALUE : r92.get(0);
 
-	tmp87 = get54 == op86;
+	tmp94 = get57 == op93;
 
-	tmp88 = tmp87;
-} else { tmp88 = true;
+	tmp95 = tmp94;
+} else { tmp95 = true;
 }
-	if ( tmp88) {
+	if ( tmp95) {
 /* 32:10-32:42: MM!AirMeasurement.allInstances()*/
-	op91 = this.globalContext.getAllInstancesOf_AirMeasurement();
+	op98 = this.globalContext.getAllInstancesOf_AirMeasurement();
 
-	r110 = new java.util.ArrayList();
+	r120 = new java.util.ArrayList();
 
-	for ( AirMeasurement m390: op91) {
-tmp92 = tmp17 != m390;
+	for ( AirMeasurement m397: op98) {
+tmp99 = tmp17 != m397;
 
-	if ( tmp92) {
-/* 32:67-32:77: m1.station*/
-	get93 = tmp17.getStation();
+	/* 32:67-32:77: m1.station*/
+	get100 = tmp17.getStation();
 
 	/* 32:80-32:90: m3.station*/
-	get94 = m390.getStation();
+	get101 = m397.getStation();
 
-	tmp95 = get93 == get94;
+	tmp102 = get100 == get101;
 
-	tmp96 = tmp95;
-} else { tmp96 = true;
-}
-	if ( tmp96) {
-/* 33:22-33:35: m1.date.month*/
+	tmp104 = tmp99 && tmp102;
+
+	/* 33:22-33:35: m1.date.month*/
 	/* 33:22-33:29: m1.date*/
-	get97 = tmp17.getDate();
+	get105 = tmp17.getDate();
 
-	get98 = get97.getMonth();
+	get106 = get105.getMonth();
 
 	/* 33:38-33:51: m3.date.month*/
 	/* 33:38-33:45: m3.date*/
-	get99 = m390.getDate();
+	get107 = m397.getDate();
 
-	get100 = get99.getMonth();
+	get108 = get107.getMonth();
 
-	tmp101 = get98 == get100;
+	tmp109 = get106 == get108;
 
-	tmp102 = tmp101;
-} else { tmp102 = true;
-}
-	if ( tmp102) {
-/* 34:22-34:34: m1.date.year*/
+	tmp111 = tmp104 && tmp109;
+
+	/* 34:22-34:34: m1.date.year*/
 	/* 34:22-34:29: m1.date*/
-	get103 = tmp17.getDate();
+	get112 = tmp17.getDate();
 
-	get104 = get103.getYear();
+	get113 = get112.getYear();
 
 	/* 34:37-34:49: m3.date.year*/
 	/* 34:37-34:44: m3.date*/
-	get105 = m390.getDate();
+	get114 = m397.getDate();
 
-	get106 = get105.getYear();
+	get115 = get114.getYear();
 
-	tmp107 = get104 == get106;
+	tmp116 = get113 == get115;
 
-	tmp108 = tmp107;
-} else { tmp108 = true;
-}
-	if ( tmp108 == true) {
+	tmp118 = tmp111 && tmp116;
+
+	if ( tmp118 == true) {
 /* 35:32-35:37: m3.co*/
-	get109 = m390.getCo();
+	get119 = m397.getCo();
 
-	r110.add(get109);}}
-	r113 = 0;
+	r120.add(get119);}}
+	r123 = 0;
 
-	for ( double coLevel89: r110) {
-tmp111 = 4.5;
+	for ( double coLevel96: r120) {
+tmp121 = 4.5;
 
-	tmp112 = coLevel89 >= tmp111;
+	tmp122 = coLevel96 >= tmp121;
 
-	if ( tmp112 == true) {
-r113++;
+	if ( tmp122 == true) {
+r123++;
 }}
-	tmp114 = 10;
+	tmp124 = 10;
 
-	tmp115 = r113 > tmp114;
+	tmp125 = r123 > tmp124;
 
-	tmp116 = tmp115;
-} else { tmp116 = true;
+	tmp126 = tmp125;
+} else { tmp126 = true;
 }
-	return tmp116 == true;
+	return tmp126 == true;
 }
 	return false;
 }

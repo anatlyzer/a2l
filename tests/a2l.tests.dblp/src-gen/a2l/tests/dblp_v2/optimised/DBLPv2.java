@@ -47,47 +47,47 @@ final Collection<? extends org.eclipse.emf.ecore.EObject> objects_OUT = (Collect
 
 private java.util.ArrayList<IPendingTask> pendingTasks = new java.util.ArrayList<>();private java.util.ArrayList<IPendingTask> parallelPendingTasks = new java.util.ArrayList<>();interface IPendingTask { public void execute(a2l.runtime.GlobalTrace globalTrace); }
 private boolean check_icmt(java.lang.Object a){
-dblp.DBLP.Author tmp20;
-List<Record> get22;
-boolean op23;
-java.lang.String call24;
-java.lang.String tmp25;
-int op26;
-int tmp27;
-boolean tmp28;
-boolean r29;if ( a instanceof dblp.DBLP.Author) {
-tmp20 = (dblp.DBLP.Author)a;
+dblp.DBLP.Author tmp21;
+List<Record> get23;
+boolean op24;
+java.lang.String call25;
+java.lang.String tmp26;
+int op27;
+int tmp28;
+boolean tmp29;
+boolean r30;if ( a instanceof dblp.DBLP.Author) {
+tmp21 = (dblp.DBLP.Author)a;
 
 	/* 26:18-26:27: a.records*/
-	get22 = new a2l.runtime.stdlib.FastIterableList<dblp.DBLP.Record>(tmp20.getRecords());
+	get23 = new a2l.runtime.stdlib.FastIterableList<dblp.DBLP.Record>(tmp21.getRecords());
 
-	r29 = false;
+	r30 = false;
 
-	for ( Record r21: get22) {
+	for ( Record r22: get23) {
 /* 26:40-26:71: r.oclIsTypeOf(MM!InProceedings)*/
-	op23 = r21!= null && r21.eClass().getInstanceClass() == dblp.DBLP.InProceedings.class;
+	op24 = r22!= null && r22.eClass().getInstanceClass() == dblp.DBLP.InProceedings.class;
 
-	if ( op23 == true) {
+	if ( op24 == true) {
 /* 26:86-26:116: r.booktitle().indexOf('ICMT')*/
 	/* 26:86-26:100: r.booktitle()*/
-	if ( r21 instanceof dblp.DBLP.InProceedings) {
-call24 = helper_dblp_DBLP_InProceedings_booktitle((dblp.DBLP.InProceedings)r21);
+	if ( r22 instanceof dblp.DBLP.InProceedings) {
+call25 = helper_dblp_DBLP_InProceedings_booktitle((dblp.DBLP.InProceedings)r22);
 } else { throw new IllegalStateException();
 }
-	tmp25 = "ICMT";
+	tmp26 = "ICMT";
 
-	op26 = call24.indexOf(tmp25);
+	op27 = call25.indexOf(tmp26);
 
-	tmp27 = 0;
+	tmp28 = 0;
 
-	tmp28 = op26 >= tmp27;
+	tmp29 = op27 >= tmp28;
 
-	if ( tmp28) {
-r29 = true;
+	if ( tmp29) {
+r30 = true;
 
 	break;
 }}}
-	return r29 == true;
+	return r30 == true;
 }
 	return false;
 }
@@ -114,19 +114,20 @@ int call9;
 int tmp10;
 boolean tmp11;
 boolean tmp12;
-boolean op13;
-int r14;
-int tmp15;
-boolean tmp16;/* 22:2-22:14: self.records*/
+boolean tmp13;
+boolean op14;
+int r15;
+int tmp16;
+boolean tmp17;/* 22:2-22:14: self.records*/
 	get3 = new a2l.runtime.stdlib.FastIterableList<dblp.DBLP.Record>(self_.getRecords());
 
-	r14 = 0;
+	r15 = 0;
 
 	for ( Record r2: get3) {
 /* 22:27-22:58: r.oclIsTypeOf(MM!InProceedings)*/
-	op13 = r2!= null && r2.eClass().getInstanceClass() == dblp.DBLP.InProceedings.class;
+	op14 = r2!= null && r2.eClass().getInstanceClass() == dblp.DBLP.InProceedings.class;
 
-	if ( op13 == true) {
+	if ( op14 == true) {
 /* 22:73-22:103: r.booktitle().indexOf('ICMT')*/
 	/* 22:73-22:87: r.booktitle()*/
 	if ( r2 instanceof dblp.DBLP.InProceedings) {
@@ -141,8 +142,7 @@ call4 = helper_dblp_DBLP_InProceedings_booktitle((dblp.DBLP.InProceedings)r2);
 
 	tmp8 = op6 >= tmp7;
 
-	if ( tmp8) {
-/* 22:111-22:120: r.year()*/
+	/* 22:111-22:120: r.year()*/
 	if ( r2 instanceof dblp.DBLP.InProceedings) {
 call9 = helper_dblp_DBLP_InProceedings_year((dblp.DBLP.InProceedings)r2);
 } else { throw new IllegalStateException();
@@ -151,17 +151,16 @@ call9 = helper_dblp_DBLP_InProceedings_year((dblp.DBLP.InProceedings)r2);
 
 	tmp11 = call9 > tmp10;
 
-	tmp12 = tmp11;
-} else { tmp12 = true;
-}
-	if ( tmp12 == true) {
-r14++;
+	tmp13 = tmp8 && tmp11;
+
+	if ( tmp13 == true) {
+r15++;
 }}}
-	tmp15 = 0;
+	tmp16 = 0;
 
-	tmp16 = r14 > tmp15;
+	tmp17 = r15 > tmp16;
 
-	return tmp16;
+	return tmp17;
 }
 	public boolean isTargetElement(java.lang.Object obj){
 if ( obj == null ) return false;;
@@ -186,23 +185,23 @@ OUTModel_ = n;
 	return this;
 }
 	private void create_icmt(dblp.DBLP.Author a){
-dblp.AuthorInfo.Author out17;
-java.lang.String get18;
-boolean call19;out17 = dblp.AuthorInfo.AuthorInfoFactory.eINSTANCE.createAuthor();
+dblp.AuthorInfo.Author out18;
+java.lang.String get19;
+boolean call20;out18 = dblp.AuthorInfo.AuthorInfoFactory.eINSTANCE.createAuthor();
 
-	OUTModel_PartialOutput_.write(out17);
+	OUTModel_PartialOutput_.write(out18);
 
 	/* 29:12-29:18: a.name*/
-	get18 = a.getName();
+	get19 = a.getName();
 
 	/* 30:14-30:24: a.active()*/
 	if ( a instanceof dblp.DBLP.Author) {
-call19 = helper_dblp_DBLP_Author_active((dblp.DBLP.Author)a);
+call20 = helper_dblp_DBLP_Author_active((dblp.DBLP.Author)a);
 } else { throw new IllegalStateException();
 }
-	out17.setName(get18);;
+	out18.setName(get19);;
 
-	out17.setActive(call19);;
+	out18.setActive(call20);;
 
 	numMatchedRuleExecutions_++;
 }
