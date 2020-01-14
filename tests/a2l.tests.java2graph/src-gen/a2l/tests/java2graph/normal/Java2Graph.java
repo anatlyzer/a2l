@@ -152,51 +152,54 @@ java.lang.String tmp54;
 int op55;
 int tmp56;
 boolean tmp57;
-boolean tmp58;
-AbstractTypeDeclaration get59;
-Package get60;
-Package call61;
-java.lang.String get62;
-java.lang.String tmp63;
-int op64;
-int tmp65;
-boolean tmp66;
-AbstractTypeDeclaration get67;
-Package get68;
-boolean op69;
-boolean tmp70;
-boolean tmp71;
-boolean r72;
+AbstractTypeDeclaration get58;
+boolean op59;
+AbstractTypeDeclaration get60;
+Package get61;
+ClassDeclaration cast62;
+Package call63;
+java.lang.String get64;
+java.lang.String tmp65;
+int op66;
+int tmp67;
+boolean tmp68;
+AbstractTypeDeclaration get69;
+Package get70;
+ClassDeclaration cast71;
+boolean op72;
 boolean tmp73;
-AbstractTypeDeclaration get74;
-boolean op75;
+boolean tmp74;
+boolean r75;
 boolean tmp76;
-boolean tmp77;
-boolean r78;
+AbstractTypeDeclaration get77;
+boolean op78;
 boolean tmp79;
-TypeAccess get80;
-Type get81;
-Package call82;
-boolean op83;
-boolean tmp84;
-boolean tmp85;
-boolean r86;
-TypeAccess get87;
-Type get88;
-boolean op89;
+boolean tmp80;
+boolean r81;
+boolean tmp82;
+TypeAccess get83;
+Type get84;
+Package call85;
+boolean op86;
+boolean tmp87;
+boolean tmp88;
+boolean r89;
 TypeAccess get90;
 Type get91;
 boolean op92;
-boolean tmp93;
-boolean tmp94;
-boolean r95;
-TypeAccess get96;
-boolean op97;
-boolean tmp98;
-boolean tmp99;
-boolean r100;
+TypeAccess get93;
+Type get94;
+boolean op95;
+boolean tmp96;
+boolean tmp97;
+boolean r98;
+TypeAccess get99;
+boolean op100;
 boolean tmp101;
-boolean r102;if ( fd instanceof org.eclipse.gmt.modisco.java.FieldDeclaration) {
+boolean tmp102;
+boolean r103;
+boolean tmp104;
+boolean r105;if ( fd instanceof org.eclipse.gmt.modisco.java.FieldDeclaration) {
 tmp48 = (org.eclipse.gmt.modisco.java.FieldDeclaration)fd;
 
 	/* 59:4-88:8: if if not fd.type.oclIsUndefined() then
@@ -210,7 +213,7 @@ else
 endif then
 	if not fd.type.type.package().oclIsUndefined() then
 	fd.type.type.package().rootPackage().name.indexOf('java') < 0 and if not fd.abstractTypeDeclaration.oclIsUndefined() then
-	true and if not fd.abstractTypeDeclaration.package.oclIsUndefined() then
+	fd.abstractTypeDeclaration.oclIsTypeOf(MM!ClassDeclaration) and if not fd.abstractTypeDeclaration.package.oclIsUndefined() then
 	fd.abstractTypeDeclaration.package.rootPackage().name.indexOf('java') < 0
 else
 	false
@@ -235,15 +238,15 @@ else
 endif*/
 	/* 59:15-59:39: fd.type.oclIsUndefined()*/
 	/* 59:15-59:22: fd.type*/
-	get96 = tmp48.getType();
+	get99 = tmp48.getType();
 
-	op97 = get96== null;
+	op100 = get99== null;
 
-	tmp98 = ! op97;
+	tmp101 = ! op100;
 
-	r100 = false;
+	r103 = false;
 
-	if ( tmp98) {
+	if ( tmp101) {
 /* 60:5-64:10: if not fd.type.type.oclIsUndefined() then
 	fd.type.type.oclIsTypeOf(MM!ClassDeclaration)
 else
@@ -252,42 +255,42 @@ endif*/
 	/* 60:12-60:41: fd.type.type.oclIsUndefined()*/
 	/* 60:12-60:24: fd.type.type*/
 	/* 60:12-60:19: fd.type*/
+	get93 = tmp48.getType();
+
+	get94 = get93.getType();
+
+	op95 = get94== null;
+
+	tmp96 = ! op95;
+
+	r98 = false;
+
+	if ( tmp96) {
+/* 61:6-61:51: fd.type.type.oclIsTypeOf(MM!ClassDeclaration)*/
+	/* 61:6-61:18: fd.type.type*/
+	/* 61:6-61:13: fd.type*/
 	get90 = tmp48.getType();
 
 	get91 = get90.getType();
 
-	op92 = get91== null;
+	op92 = get91!= null && get91.eClass().getInstanceClass() == org.eclipse.gmt.modisco.java.ClassDeclaration.class;
 
-	tmp93 = ! op92;
+	r98 = op92;
+} else { tmp97 = false;
 
-	r95 = false;
-
-	if ( tmp93) {
-/* 61:6-61:51: fd.type.type.oclIsTypeOf(MM!ClassDeclaration)*/
-	/* 61:6-61:18: fd.type.type*/
-	/* 61:6-61:13: fd.type*/
-	get87 = tmp48.getType();
-
-	get88 = get87.getType();
-
-	op89 = get88!= null && get88.eClass().getInstanceClass() == org.eclipse.gmt.modisco.java.ClassDeclaration.class;
-
-	r95 = op89;
-} else { tmp94 = false;
-
-r95 = tmp94;
+r98 = tmp97;
 }
-	r100 = r95;
-} else { tmp99 = false;
+	r103 = r98;
+} else { tmp102 = false;
 
-r100 = tmp99;
+r103 = tmp102;
 }
-	r102 = false;
+	r105 = false;
 
-	if ( r100) {
+	if ( r103) {
 /* 68:4-85:9: if not fd.type.type.package().oclIsUndefined() then
 	fd.type.type.package().rootPackage().name.indexOf('java') < 0 and if not fd.abstractTypeDeclaration.oclIsUndefined() then
-	true and if not fd.abstractTypeDeclaration.package.oclIsUndefined() then
+	fd.abstractTypeDeclaration.oclIsTypeOf(MM!ClassDeclaration) and if not fd.abstractTypeDeclaration.package.oclIsUndefined() then
 	fd.abstractTypeDeclaration.package.rootPackage().name.indexOf('java') < 0
 else
 	false
@@ -302,21 +305,21 @@ endif*/
 	/* 68:11-68:33: fd.type.type.package()*/
 	/* 68:11-68:23: fd.type.type*/
 	/* 68:11-68:18: fd.type*/
-	get80 = tmp48.getType();
+	get83 = tmp48.getType();
 
-	get81 = get80.getType();
+	get84 = get83.getType();
 
-	if ( get81 instanceof org.eclipse.gmt.modisco.java.ClassDeclaration) {
-call82 = helper_org_eclipse_gmt_modisco_java_ClassDeclaration_package((org.eclipse.gmt.modisco.java.ClassDeclaration)get81);
+	if ( get84 instanceof org.eclipse.gmt.modisco.java.ClassDeclaration) {
+call85 = helper_org_eclipse_gmt_modisco_java_ClassDeclaration_package((org.eclipse.gmt.modisco.java.ClassDeclaration)get84);
 } else { throw new IllegalStateException();
 }
-	op83 = call82== null;
+	op86 = call85== null;
 
-	tmp84 = ! op83;
+	tmp87 = ! op86;
 
-	r86 = false;
+	r89 = false;
 
-	if ( tmp84) {
+	if ( tmp87) {
 /* 69:5-69:62: fd.type.type.package().rootPackage().name.indexOf('java')*/
 	/* 69:5-69:46: fd.type.type.package().rootPackage().name*/
 	/* 69:5-69:41: fd.type.type.package().rootPackage()*/
@@ -346,7 +349,7 @@ call52 = helper_org_eclipse_gmt_modisco_java_Package_rootPackage((org.eclipse.gm
 	tmp57 = op55 < tmp56;
 
 	/* 69:71-82:10: if not fd.abstractTypeDeclaration.oclIsUndefined() then
-	true and if not fd.abstractTypeDeclaration.package.oclIsUndefined() then
+	fd.abstractTypeDeclaration.oclIsTypeOf(MM!ClassDeclaration) and if not fd.abstractTypeDeclaration.package.oclIsUndefined() then
 	fd.abstractTypeDeclaration.package.rootPackage().name.indexOf('java') < 0
 else
 	false
@@ -356,18 +359,22 @@ else
 endif*/
 	/* 70:7-70:50: fd.abstractTypeDeclaration.oclIsUndefined()*/
 	/* 70:7-70:33: fd.abstractTypeDeclaration*/
-	get74 = tmp48.getAbstractTypeDeclaration();
+	get77 = tmp48.getAbstractTypeDeclaration();
 
-	op75 = get74== null;
+	op78 = get77== null;
 
-	tmp76 = ! op75;
+	tmp79 = ! op78;
 
-	r78 = false;
+	r81 = false;
 
-	if ( tmp76) {
-tmp58 = true;
+	if ( tmp79) {
+/* 72:6-72:65: fd.abstractTypeDeclaration.oclIsTypeOf(MM!ClassDeclaration)*/
+	/* 72:6-72:32: fd.abstractTypeDeclaration*/
+	get58 = tmp48.getAbstractTypeDeclaration();
 
-	/* 73:15-79:11: if not fd.abstractTypeDeclaration.package.oclIsUndefined() then
+	op59 = get58!= null && get58.eClass().getInstanceClass() == org.eclipse.gmt.modisco.java.ClassDeclaration.class;
+
+	/* 72:70-79:11: if not fd.abstractTypeDeclaration.package.oclIsUndefined() then
 	fd.abstractTypeDeclaration.package.rootPackage().name.indexOf('java') < 0
 else
 	false
@@ -375,65 +382,69 @@ endif*/
 	/* 74:12-74:63: fd.abstractTypeDeclaration.package.oclIsUndefined()*/
 	/* 74:12-74:46: fd.abstractTypeDeclaration.package*/
 	/* 74:12-74:38: fd.abstractTypeDeclaration*/
-	get67 = tmp48.getAbstractTypeDeclaration();
+	get69 = tmp48.getAbstractTypeDeclaration();
 
-	get68 = get67.getPackage();
+	cast71 = (org.eclipse.gmt.modisco.java.ClassDeclaration)get69;
 
-	op69 = get68== null;
+	get70 = cast71.getPackage();
 
-	tmp70 = ! op69;
+	op72 = get70== null;
 
-	r72 = false;
+	tmp73 = ! op72;
 
-	if ( tmp70) {
+	r75 = false;
+
+	if ( tmp73) {
 /* 75:7-76:24: fd.abstractTypeDeclaration.package.rootPackage().name.indexOf('java')*/
 	/* 75:7-75:60: fd.abstractTypeDeclaration.package.rootPackage().name*/
 	/* 75:7-75:55: fd.abstractTypeDeclaration.package.rootPackage()*/
 	/* 75:7-75:41: fd.abstractTypeDeclaration.package*/
 	/* 75:7-75:33: fd.abstractTypeDeclaration*/
-	get59 = tmp48.getAbstractTypeDeclaration();
+	get60 = tmp48.getAbstractTypeDeclaration();
 
-	get60 = get59.getPackage();
+	cast62 = (org.eclipse.gmt.modisco.java.ClassDeclaration)get60;
 
-	if ( get60 instanceof org.eclipse.gmt.modisco.java.Package) {
-call61 = helper_org_eclipse_gmt_modisco_java_Package_rootPackage((org.eclipse.gmt.modisco.java.Package)get60);
+	get61 = cast62.getPackage();
+
+	if ( get61 instanceof org.eclipse.gmt.modisco.java.Package) {
+call63 = helper_org_eclipse_gmt_modisco_java_Package_rootPackage((org.eclipse.gmt.modisco.java.Package)get61);
 } else { throw new IllegalStateException();
 }
-	get62 = call61.getName();
+	get64 = call63.getName();
 
-	tmp63 = "java";
+	tmp65 = "java";
 
-	op64 = get62.indexOf(tmp63);
+	op66 = get64.indexOf(tmp65);
 
-	tmp65 = 0;
+	tmp67 = 0;
 
-	tmp66 = op64 < tmp65;
+	tmp68 = op66 < tmp67;
 
-	r72 = tmp66;
-} else { tmp71 = false;
+	r75 = tmp68;
+} else { tmp74 = false;
 
-r72 = tmp71;
+r75 = tmp74;
 }
-	tmp73 = tmp58 && r72;
+	tmp76 = op59 && r75;
 
-	r78 = tmp73;
-} else { tmp77 = false;
+	r81 = tmp76;
+} else { tmp80 = false;
 
-r78 = tmp77;
+r81 = tmp80;
 }
-	tmp79 = tmp57 && r78;
+	tmp82 = tmp57 && r81;
 
-	r86 = tmp79;
-} else { tmp85 = false;
+	r89 = tmp82;
+} else { tmp88 = false;
 
-r86 = tmp85;
+r89 = tmp88;
 }
-	r102 = r86;
-} else { tmp101 = false;
+	r105 = r89;
+} else { tmp104 = false;
 
-r102 = tmp101;
+r105 = tmp104;
 }
-	return r102 == true;
+	return r105 == true;
 }
 	return false;
 }

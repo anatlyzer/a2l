@@ -5,9 +5,5 @@ import lintra2.transfo.IFootprint;
 public class DBLPv2Footprint implements IFootprint{
 
 public boolean inGlobal(java.lang.Object o){
-if ( o instanceof dblp.DBLP.InProceedings) {
-return true;
-}else if ( o instanceof dblp.DBLP.Author) {
-return true;
-} else { return false;
-}}}
+return (o instanceof dblp.DBLP.Author);
+}}

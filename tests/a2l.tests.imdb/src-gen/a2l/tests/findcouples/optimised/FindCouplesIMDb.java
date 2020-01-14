@@ -171,12 +171,12 @@ int op9;
 int tmp10;
 boolean tmp11;/* 25:64-25:126: p1<NavRefAsSet>.movies->intersection(p2<NavRefAsSet>.movies)->size()*/
 	/* 25:65-25:117: p1<NavRefAsSet>.movies->intersection(p2<NavRefAsSet>.movies)*/
-	get6 = this.globalContext.getcache4_p1(p1, () -> { 
+	get6 = this.globalContext.getcache1_p1(p1, () -> { 
 /* null: p1<NavRefAsSet>.movies*/
 return javaslang.collection.HashSet.ofAll(new a2l.runtime.stdlib.FastIterableList<imdb.movies.Movie>(p1.getMovies()));
 });
 
-	get7 = this.globalContext.getcache5_p2(p2, () -> { 
+	get7 = this.globalContext.getcache0_p2(p2, () -> { 
 /* null: p2<NavRefAsSet>.movies*/
 return javaslang.collection.HashSet.ofAll(new a2l.runtime.stdlib.FastIterableList<imdb.movies.Movie>(p2.getMovies()));
 });

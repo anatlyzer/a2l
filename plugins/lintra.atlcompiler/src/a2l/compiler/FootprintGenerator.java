@@ -1,7 +1,5 @@
 package a2l.compiler;
 
-import static linda.atlcompiler.CreationHelpers.createTextExp;
-
 import java.util.HashMap;
 import java.util.HashSet;
 import java.util.List;
@@ -14,18 +12,17 @@ import a2l.driver.DriverConfiguration;
 import a2l.driver.IMetaDriver;
 import a2l.utils.A2LUtils;
 import anatlyzer.atl.analyser.IAnalyserResult;
-import anatlyzer.atl.analyser.namespaces.MetamodelNamespace;
-import anatlyzer.atl.footprint.TrafoMetamodelData;
 import anatlyzer.atl.model.ATLModel;
+import anatlyzer.atl.types.Metaclass;
 import anatlyzer.atl.util.ATLUtils;
-import anatlyzer.atl.util.ATLUtils.ModelInfo;
+import anatlyzer.atlext.ATL.InPatternElement;
+import anatlyzer.atlext.ATL.MatchedRule;
 import anatlyzer.atlext.ATL.Module;
+import anatlyzer.atlext.ATL.SimpleInPatternElement;
 import linda.atlcompiler.CreationHelpers;
 import linda.atlcompiler.ITyping;
 import linda.atlcompiler.LindaTyping;
 import lintra.atlcompiler.javagen.JClass;
-import lintra.atlcompiler.javagen.JConditional;
-import lintra.atlcompiler.javagen.JConditionalBlock;
 import lintra.atlcompiler.javagen.JMethod;
 import lintra.atlcompiler.javagen.JParameter;
 import lintra.atlcompiler.javagen.JavaGenModel;
@@ -49,8 +46,25 @@ public class FootprintGenerator {
 	public JavaGenModel generate(String basePkg) {
 		Module m = result.getATLModel().getModule();
 
+		List<MatchedRule> matchedRules = ATLUtils.getAllMatchedRules(result.getATLModel());		
+				
 		Set<EClass> allFootprintClasses = new HashSet<>();
 		HashMap<EClass, IMetaDriver> class2driver = new HashMap<EClass, IMetaDriver>();
+		
+		for (MatchedRule mr : matchedRules) {
+			for (InPatternElement ipe : mr.getInPattern().getElements()) {
+				SimpleInPatternElement sipe = (SimpleInPatternElement) ipe;
+				if ( sipe.getInferredType() instanceof Metaclass ) {
+					Metaclass metaclass = ((Metaclass) sipe.getInferredType());
+					allFootprintClasses.add(metaclass.getKlass());
+					IMetaDriver d = drivers.get(metaclass.getModel().getName());
+					class2driver.put(metaclass.getKlass(), d);
+				}
+			}
+		}
+
+		
+		/*
 		List<ModelInfo> inputs = ATLUtils.getModelInfo(result.getATLModel()).stream().filter(ModelInfo::isInput).collect(Collectors.toList());
 		for(ModelInfo i : inputs) {
 			MetamodelNamespace mm = result.getNamespaces().getNamespace(i.getMetamodelName());
@@ -59,6 +73,8 @@ public class FootprintGenerator {
 			TrafoMetamodelData footprint = new TrafoMetamodelData(result.getATLModel(), mm);
 			
 			Set<EClass> classes = footprint.getDirectUsedClasses();
+			
+			
 			allFootprintClasses.addAll(classes);
 			
 			IMetaDriver d = drivers.get(i.getMetamodelName());
@@ -66,7 +82,7 @@ public class FootprintGenerator {
 				class2driver.put(eClass, d);
 			}			
 		}
-		
+		*/
 		
 		
 		JavaGenModel jmodel = JavagenFactory.eINSTANCE.createJavaGenModel();
@@ -99,7 +115,7 @@ public class FootprintGenerator {
 		param1.setType(typ.createTypeRef("Object"));
 		method.getParameters().add(param1);
 
-		JConditional conditional = JavagenFactory.eINSTANCE.createJConditional();
+		
 		List<EClass> sorted = allFootprintClasses.stream().sorted((c1, c2) -> {
 			if ( c1 == c2 )
 				return 0;
@@ -108,26 +124,35 @@ public class FootprintGenerator {
 			}
 			return -1;			
 		}).collect(Collectors.toList());
-		
-		for(EClass e : sorted) {
-			JConditionalBlock cond = JavagenFactory.eINSTANCE.createJConditionalBlock();
-			
+
+		// Optimise a bit by generating a large "or"
+		String largeOr = sorted.stream().map(e -> {
 			IMetaDriver driver = class2driver.get(e);
 			String qName = driver.getClassQName(e);
-			
-			//cond.setExpr(createTextExp("o.getClass() == " + qName + ".class"));
-			cond.setExpr(createTextExp("o instanceof " + qName));
-			
-			cond.getStatements().add(CreationHelpers.createReturn(CreationHelpers.createTextExp("true")));
-			conditional.getConditions().add(cond);
-		}
+			return "(o instanceof " + qName + ")";
+		}).collect(Collectors.joining(" || "));
 		
-		JConditionalBlock cond = JavagenFactory.eINSTANCE.createJConditionalBlock();
-		cond.getStatements().add(CreationHelpers.createReturn(CreationHelpers.createTextExp("false")));		
-		conditional.setElse(cond);
+		method.getStatements().add(CreationHelpers.createText("return " + largeOr));
 		
-		
-		method.getStatements().add(conditional);
+
+//		JConditional conditional = JavagenFactory.eINSTANCE.createJConditional();		
+//		for(EClass e : sorted) {
+//			JConditionalBlock cond = JavagenFactory.eINSTANCE.createJConditionalBlock();
+//			
+//			IMetaDriver driver = class2driver.get(e);
+//			String qName = driver.getClassQName(e);
+//			
+//			//cond.setExpr(createTextExp("o.getClass() == " + qName + ".class"));
+//			cond.setExpr(createTextExp("o instanceof " + qName));
+//			
+//			cond.getStatements().add(CreationHelpers.createReturn(CreationHelpers.createTextExp("true")));
+//			conditional.getConditions().add(cond);
+//		}
+//		
+//		JConditionalBlock cond = JavagenFactory.eINSTANCE.createJConditionalBlock();
+//		cond.getStatements().add(CreationHelpers.createReturn(CreationHelpers.createTextExp("false")));		
+//		conditional.setElse(cond);
+//		method.getStatements().add(conditional);
 	}
 
 

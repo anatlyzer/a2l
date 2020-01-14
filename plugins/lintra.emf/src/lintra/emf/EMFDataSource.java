@@ -23,7 +23,7 @@ import lintra2.transfo.IFootprint;
 public class EMFDataSource implements IDataSource {
 
 	private Resource input;
-	private IFootprint footprint;
+	private IFootprint footprint = NullFootprint.INSTANCE;
 	private boolean alreadyFilled = false;
 	
 	public EMFDataSource(Resource input) {
@@ -40,6 +40,16 @@ public class EMFDataSource implements IDataSource {
 		throw new UnsupportedOperationException("Not supported anymore");
 	}
 
+	private static class NullFootprint implements IFootprint {
+		private static NullFootprint INSTANCE = new NullFootprint();
+		
+		@Override
+		public boolean inGlobal(Object o) {
+			return true;
+		}
+		
+	}
+	
 	public void fillList(Collection<Object> l, AllInstancesAdder adder) {
 		if ( alreadyFilled )
 			throw new IllegalArgumentException("Sanity check to make sure we don't fill several models with the same data source");
@@ -52,11 +62,10 @@ public class EMFDataSource implements IDataSource {
 				adder.accept(obj);
 			}
 			
-			// If there is a footprint and the object won't appear, don't use it
-			if ( footprint != null && !footprint.inGlobal(obj) ) 
-				continue;
-			
-			l.add(obj);
+			// Only add if it is in the footprint. By default we use NullFootprint which always add
+			if ( footprint.inGlobal(obj) ) { 
+				l.add(obj);
+			}
 		}
 	}
 	

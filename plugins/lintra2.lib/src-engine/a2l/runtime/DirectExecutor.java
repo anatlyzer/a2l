@@ -1,10 +1,12 @@
 package a2l.runtime;
 
 import java.util.ArrayList;
-import java.util.Iterator;
 import java.util.List;
 import java.util.concurrent.ExecutionException;
+import java.util.concurrent.ForkJoinPool;
+import java.util.concurrent.ForkJoinTask;
 import java.util.concurrent.atomic.AtomicLong;
+import java.util.stream.LongStream;
 
 import lintra2.blackboard.BlackboardException;
 import lintra2.stats.IStatsRecorder;
@@ -35,32 +37,33 @@ public class DirectExecutor {
 	}
 	
 	public void execute() throws InterruptedException {
+		if (numThreads == 1) {
+			executeSingle();
+			return;
+		}
+			
+		
 		List<Worker> workers = new ArrayList<>();
 		List<Thread> threads = new ArrayList<>();
 				
 		long lastId = extent.size();
 		
-		int jobSize = LinTraParameters.JOB_SIZE;
-		jobSize = (int) ((lastId / (numThreads * 1.0)) / 100.0);
-		long increase = computeOptimalIncrease(numThreads, lastId, jobSize);
-		if ( increase == 0 ) {
-			increase = lastId;
-		}
+//		int jobSize = LinTraParameters.JOB_SIZE;
+//		jobSize = (int) ((lastId / (numThreads * 1.0)) / 100.0);
+//		long increase = computeOptimalIncrease(numThreads, lastId, jobSize);
+//		if ( increase == 0 ) {
+//			increase = lastId;
+//		}		
+		long increase = 1_000;
 		
-		increase = 1;
-		
-		//System.out.println();
-		//System.out.println("Input extent is " + lastId);
-		//System.out.println("Increase    is " + increase);
 		long numChunks = lastId / increase;
-		
+		if (lastId % increase != 0)
+			numChunks++;
 		long numWorkers = Math.min(numThreads, numChunks);
 		
 		Scheduler scheduler = new Scheduler(numWorkers, numChunks);
-		// System.out.println("With increase: " + increase);
-		increase = 25;
 		Worker firstWorker = null;
-		increase = 1;
+		
 		for (long i = 0; i < numWorkers; i++) {
 			Worker worker = new Worker("Worker " + i, i, increase, scheduler);
 			if ( firstWorker == null ) {
@@ -100,6 +103,20 @@ public class DirectExecutor {
 		}
 	}
 	
+	private void executeSingle() {
+		ITransformation2 trafo = factory.create();
+		this.partialTrafos = new ArrayList<ITransformation2>();
+		partialTrafos.add(trafo);
+		for(long i = 0, len = extent.size(); i < len; i++) {
+			try {
+				trafo.transform(extent.get(i));
+			} catch (BlackboardException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}			
+		}
+	}
+
 	public void postprocessing(IGlobalContext context) {
 		context.getGlobalTrace().pack();
 	
@@ -190,7 +207,8 @@ public class DirectExecutor {
 	
 	private static enum SchedulingKind {
 		DYNAMIC,
-		GUIDED
+		GUIDED,
+		NESTED
 	}
 	
 	private final class Worker implements Runnable {
@@ -245,7 +263,7 @@ public class DirectExecutor {
 						currentChunk = nextChunk;
 					}
 				}
-			} else {
+			} else if (kind == SchedulingKind.GUIDED) {
 				int fragment = (int) currentChunk / numThreads;
 				int pos = (int) (currentChunk % numThreads);
 				long total = extent.size();
@@ -276,6 +294,44 @@ public class DirectExecutor {
 				
 				long nextChunk = scheduler.getNextChunk2(currentChunk);
 				currentChunk = nextChunk;
+				
+			} else if (kind == SchedulingKind.NESTED) {
+				long total = extent.size();
+				ForkJoinPool customThreadPool = new ForkJoinPool(2);
+				
+				while ( true ) {
+					long min = currentChunk * chunkSize;
+					long max = Math.min(currentChunk * chunkSize + chunkSize, total);
+					
+				    ForkJoinTask<?> future = customThreadPool.submit(() -> {
+						LongStream.rangeClosed(min, max).parallel().forEach(i -> {
+							try {
+								trafo.transform(extent.get(i));
+							} catch (BlackboardException e) {
+								e.printStackTrace();
+								return;
+							}					
+						
+						});										    	
+				    });
+				    
+					try {
+						future.get();
+					} catch (InterruptedException e) {
+						// TODO Auto-generated catch block
+						e.printStackTrace();
+					} catch (ExecutionException e) {
+						// TODO Auto-generated catch block
+						e.printStackTrace();
+					}
+					
+					long nextChunk = scheduler.getNextChunk(currentChunk);
+					if ( nextChunk == - 1 ) {
+						return;
+					} else {
+						currentChunk = nextChunk;
+					}
+				}
 				
 			}
 		}
