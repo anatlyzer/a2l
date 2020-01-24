@@ -32,7 +32,7 @@ public class EMFDataSource implements IDataSource {
 
 	public EMFDataSource(Resource input, IFootprint footprint) {
 		this.input = input;
-		this.footprint = footprint;
+		this.footprint = footprint == null ? NullFootprint.INSTANCE : footprint;
 	}
 
 	@Override
@@ -70,7 +70,7 @@ public class EMFDataSource implements IDataSource {
 	}
 	
 	public InputExtent toInputExtent() {
-		ArrayList<Object> list = new ArrayList<>();
+		ArrayList<Object> list = new ArrayList<>(1024 * 512);
 		fillList(list, null);
 		// TODO: Do all of this is an efficient way without duplicating lists a lot
 		InputExtent extent = new InputExtent();

@@ -25,6 +25,7 @@ import org.eclipse.emf.ecore.impl.MinimalEObjectImpl;
  * <ul>
  *   <li>{@link lintra.atlcompiler.javagen.impl.JVariableDeclarationImpl#getType <em>Type</em>}</li>
  *   <li>{@link lintra.atlcompiler.javagen.impl.JVariableDeclarationImpl#getName <em>Name</em>}</li>
+ *   <li>{@link lintra.atlcompiler.javagen.impl.JVariableDeclarationImpl#isIsFinal <em>Is Final</em>}</li>
  * </ul>
  *
  * @generated
@@ -59,6 +60,26 @@ public class JVariableDeclarationImpl extends MinimalEObjectImpl.Container imple
 	 * @ordered
 	 */
 	protected String name = NAME_EDEFAULT;
+
+	/**
+	 * The default value of the '{@link #isIsFinal() <em>Is Final</em>}' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see #isIsFinal()
+	 * @generated
+	 * @ordered
+	 */
+	protected static final boolean IS_FINAL_EDEFAULT = false;
+
+	/**
+	 * The cached value of the '{@link #isIsFinal() <em>Is Final</em>}' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see #isIsFinal()
+	 * @generated
+	 * @ordered
+	 */
+	protected boolean isFinal = IS_FINAL_EDEFAULT;
 
 	/**
 	 * <!-- begin-user-doc -->
@@ -153,6 +174,29 @@ public class JVariableDeclarationImpl extends MinimalEObjectImpl.Container imple
 	 * @generated
 	 */
 	@Override
+	public boolean isIsFinal() {
+		return isFinal;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
+	public void setIsFinal(boolean newIsFinal) {
+		boolean oldIsFinal = isFinal;
+		isFinal = newIsFinal;
+		if (eNotificationRequired())
+			eNotify(new ENotificationImpl(this, Notification.SET, JavagenPackage.JVARIABLE_DECLARATION__IS_FINAL, oldIsFinal, isFinal));
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
 	public NotificationChain eInverseRemove(InternalEObject otherEnd, int featureID, NotificationChain msgs) {
 		switch (featureID) {
 			case JavagenPackage.JVARIABLE_DECLARATION__TYPE:
@@ -173,6 +217,8 @@ public class JVariableDeclarationImpl extends MinimalEObjectImpl.Container imple
 				return getType();
 			case JavagenPackage.JVARIABLE_DECLARATION__NAME:
 				return getName();
+			case JavagenPackage.JVARIABLE_DECLARATION__IS_FINAL:
+				return isIsFinal();
 		}
 		return super.eGet(featureID, resolve, coreType);
 	}
@@ -190,6 +236,9 @@ public class JVariableDeclarationImpl extends MinimalEObjectImpl.Container imple
 				return;
 			case JavagenPackage.JVARIABLE_DECLARATION__NAME:
 				setName((String)newValue);
+				return;
+			case JavagenPackage.JVARIABLE_DECLARATION__IS_FINAL:
+				setIsFinal((Boolean)newValue);
 				return;
 		}
 		super.eSet(featureID, newValue);
@@ -209,6 +258,9 @@ public class JVariableDeclarationImpl extends MinimalEObjectImpl.Container imple
 			case JavagenPackage.JVARIABLE_DECLARATION__NAME:
 				setName(NAME_EDEFAULT);
 				return;
+			case JavagenPackage.JVARIABLE_DECLARATION__IS_FINAL:
+				setIsFinal(IS_FINAL_EDEFAULT);
+				return;
 		}
 		super.eUnset(featureID);
 	}
@@ -225,6 +277,8 @@ public class JVariableDeclarationImpl extends MinimalEObjectImpl.Container imple
 				return type != null;
 			case JavagenPackage.JVARIABLE_DECLARATION__NAME:
 				return NAME_EDEFAULT == null ? name != null : !NAME_EDEFAULT.equals(name);
+			case JavagenPackage.JVARIABLE_DECLARATION__IS_FINAL:
+				return isFinal != IS_FINAL_EDEFAULT;
 		}
 		return super.eIsSet(featureID);
 	}
@@ -241,6 +295,8 @@ public class JVariableDeclarationImpl extends MinimalEObjectImpl.Container imple
 		StringBuilder result = new StringBuilder(super.toString());
 		result.append(" (name: ");
 		result.append(name);
+		result.append(", isFinal: ");
+		result.append(isFinal);
 		result.append(')');
 		return result.toString();
 	}

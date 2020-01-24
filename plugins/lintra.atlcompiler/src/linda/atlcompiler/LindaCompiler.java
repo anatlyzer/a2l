@@ -700,11 +700,12 @@ public abstract class LindaCompiler extends BaseCompiler {
 			} else {				
 				if ( binding.getValue().getInferredType() instanceof CollectionType ) {
 					JVariableDeclaration tmpVar = gen.addLocalVar(createMethod, "itTmp", typ.createParamTypeRef("List", "Object"));										
-					addStm(createMethod, createAssignment(tmpVar, "new ArrayList<Object>()"));
+					JVariableDeclaration forEachVar = getVar(right);
+					// We use the size directly, but it might be less. Heuristics like "is it filtered" to divide size by some amount could be useful
+					addStm(createMethod, createAssignment(tmpVar, "new ArrayList<Object>(" + forEachVar.getName() + ".size()" + ")"));
 					
 					String baseType = getTransformInputType();
 					
-					JVariableDeclaration forEachVar = getVar(right);
 
 					// First, flatten if needed. Once flattened, automatically filter to IdentifiableElement. Otherwise, filter if needed
 					if ( bindingValueRequiresFlattening(binding.getValue()) ) { 

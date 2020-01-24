@@ -1,6 +1,7 @@
 package a2l.runtime;
 
 import java.util.ArrayList;
+import java.util.Collection;
 import java.util.List;
 
 /**
@@ -16,19 +17,26 @@ import java.util.List;
  */
 public class InputExtent {
 
-	private final List<Object> allInstances = new ArrayList<>();
+	private List<Object> allInstances = null;
 	
 	public void add(Object o) {
+		if (allInstances == null)
+			allInstances = new ArrayList<Object>();
 		this.allInstances.add(o);
 	}
 	
-	public void addAll(Iterable<? extends Object> objects) {
+	public void addAll(Collection<? extends Object> objects) {
+		if (allInstances == null)
+			allInstances = new ArrayList<Object>(objects.size());
+
 		for (Object object : objects) {
 			this.allInstances.add(object);
 		}
 	}
 	
 	public List<Object> getAllInstances() {
+		if (allInstances == null)
+			allInstances = new ArrayList<Object>();		
 		return allInstances;
 	}
 	

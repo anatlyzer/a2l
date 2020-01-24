@@ -23,7 +23,7 @@ public class GenCompiler {
 	public JVariableDeclaration addLocalVar(JBlock method, String varName, JTypeRef type) {
 		JVariableDeclaration var = JavagenFactory.eINSTANCE.createJVariableDeclaration();
 		var.setName(varName + varCounter++);
-		var.setType(type);
+		var.setType(type);		
 		method.getLocalVars().add(var);
 		return var;
 	}

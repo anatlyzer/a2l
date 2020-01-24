@@ -206,7 +206,7 @@ List<java.lang.Object> itTmp174;gTgt159 = org.eclipse.uml2.uml.UMLFactory.eINSTA
 
 	gTgt159.setName(tmp168);;
 
-	itTmp173 = new ArrayList<Object>();
+	itTmp173 = new ArrayList<Object>(tmp171.size());
 
 	for ( java.lang.Object o: tmp171) {
 boolean matched0 = false;if ( check_Class2Class( o) )  {
@@ -215,7 +215,7 @@ itTmp173.add(o);
 }
 	this.parallelPendingTasks.add( new PendingTask_Dependency_supplier(gTgt159,itTmp173,UCDModel_,null) );
 
-	itTmp174 = new ArrayList<Object>();
+	itTmp174 = new ArrayList<Object>(tmp172.size());
 
 	for ( java.lang.Object o: tmp172) {
 boolean matched1 = false;if ( check_Class2Class( o) )  {
@@ -297,7 +297,7 @@ r192 = r192.append(cd188);
 }}
 	gTgt175.setName(tmp184);;
 
-	itTmp193 = new ArrayList<Object>();
+	itTmp193 = new ArrayList<Object>(tmp187.size());
 
 	for ( java.lang.Object o: tmp187) {
 boolean matched2 = false;if ( check_Class2Class( o) )  {
@@ -306,7 +306,7 @@ itTmp193.add(o);
 }
 	this.parallelPendingTasks.add( new PendingTask_Dependency_supplier(gTgt175,itTmp193,UCDModel_,null) );
 
-	itTmp194 = new ArrayList<Object>();
+	itTmp194 = new ArrayList<Object>(r192.size());
 
 	for ( java.lang.Object o: r192) {
 boolean matched3 = false;if ( check_Class2Class( o) )  {
@@ -759,7 +759,7 @@ r104 = r104.append(e99);
 }}
 	t197.setName(get98);;
 
-	itTmp105 = new ArrayList<Object>();
+	itTmp105 = new ArrayList<Object>(r104.size());
 
 	for ( java.lang.Object o: r104) {
 boolean matched4 = false;if ( check_Package2Package( o) )  {
@@ -901,7 +901,7 @@ call130 = helper_org_eclipse_gmt_modisco_java_ClassDeclaration_getRefClassFields
 }
 	t1106.setName(get107);;
 
-	itTmp139 = new ArrayList<Object>();
+	itTmp139 = new ArrayList<Object>(r116.size());
 
 	for ( java.lang.Object o: r116) {
 boolean matched5 = false;if ( check_Package2Package( o) )  {
@@ -910,7 +910,7 @@ itTmp139.add(o);
 }
 	this.pendingTasks.add( new PendingTask_Package_packagedElement(t1106,itTmp139,UCDModel_,null) );
 
-	itTmp140 = new ArrayList<Object>();
+	itTmp140 = new ArrayList<Object>(call117.size());
 
 	for ( java.lang.Object o: call117) {
 boolean matched6 = false;if ( check_Class2Class( o) )  {
@@ -919,7 +919,7 @@ itTmp140.add(o);
 }
 	this.pendingTasks.add( new PendingTask_Package_packagedElement(t1106,itTmp140,UCDModel_,null) );
 
-	itTmp141 = new ArrayList<Object>();
+	itTmp141 = new ArrayList<Object>(r126.size());
 
 	tgtElems142 = new java.util.HashSet<>();
 
@@ -929,7 +929,7 @@ boolean matched7 = false;
 }
 	this.parallelPendingTasks.add( new PendingTask_Package_packagedElement(t1106,itTmp141,UCDModel_,tgtElems142) );
 
-	itTmp143 = new ArrayList<Object>();
+	itTmp143 = new ArrayList<Object>(r134.size());
 
 	tgtElems144 = new java.util.HashSet<>();
 

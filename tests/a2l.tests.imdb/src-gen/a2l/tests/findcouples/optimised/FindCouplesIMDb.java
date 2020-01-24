@@ -128,17 +128,17 @@ Couple c0;c0 = imdb.movies.MoviesFactory.eINSTANCE.createCouple();
 
 	OUTModel_PartialOutput_.write(c0);
 
-	boolean matched0 = false;if ( check_actress( person1) )  {
+	boolean matched0 = false;if ( check_actor( person1) )  {
 this.parallelPendingTasks.add( new PendingTask_Couple_p1(c0,person1,OUTModel_, null) );
 }
-else if ( check_actor( person1) )  {
+else if ( check_actress( person1) )  {
 this.parallelPendingTasks.add( new PendingTask_Couple_p1(c0,person1,OUTModel_, null) );
 }
 
-	boolean matched1 = false;if ( check_actress( person2) )  {
+	boolean matched1 = false;if ( check_actor( person2) )  {
 this.parallelPendingTasks.add( new PendingTask_Couple_p2(c0,person2,OUTModel_, null) );
 }
-else if ( check_actor( person2) )  {
+else if ( check_actress( person2) )  {
 this.parallelPendingTasks.add( new PendingTask_Couple_p2(c0,person2,OUTModel_, null) );
 }
 
@@ -171,12 +171,12 @@ int op9;
 int tmp10;
 boolean tmp11;/* 25:64-25:126: p1<NavRefAsSet>.movies->intersection(p2<NavRefAsSet>.movies)->size()*/
 	/* 25:65-25:117: p1<NavRefAsSet>.movies->intersection(p2<NavRefAsSet>.movies)*/
-	get6 = this.globalContext.getcache1_p1(p1, () -> { 
+	get6 = this.globalContext.getcache0_p1(p1, () -> { 
 /* null: p1<NavRefAsSet>.movies*/
 return javaslang.collection.HashSet.ofAll(new a2l.runtime.stdlib.FastIterableList<imdb.movies.Movie>(p1.getMovies()));
 });
 
-	get7 = this.globalContext.getcache0_p2(p2, () -> { 
+	get7 = this.globalContext.getcache1_p2(p2, () -> { 
 /* null: p2<NavRefAsSet>.movies*/
 return javaslang.collection.HashSet.ofAll(new a2l.runtime.stdlib.FastIterableList<imdb.movies.Movie>(p2.getMovies()));
 });
@@ -249,13 +249,13 @@ List<java.lang.Object> itTmp18;m212 = imdb.movies.MoviesFactory.eINSTANCE.create
 
 	m212.setYear(get16);;
 
-	itTmp18 = new ArrayList<Object>();
+	itTmp18 = new ArrayList<Object>(get17.size());
 
 	for ( java.lang.Object o: get17) {
-boolean matched2 = false;if ( check_actress( o) )  {
+boolean matched2 = false;if ( check_actor( o) )  {
 itTmp18.add(o);
 }
-else if ( check_actor( o) )  {
+else if ( check_actress( o) )  {
 itTmp18.add(o);
 }
 }
@@ -291,7 +291,7 @@ List<java.lang.Object> itTmp33;p219 = imdb.movies.MoviesFactory.eINSTANCE.create
 
 	p219.setName(get20);;
 
-	itTmp33 = new ArrayList<Object>();
+	itTmp33 = new ArrayList<Object>(get21.size());
 
 	for ( java.lang.Object o: get21) {
 boolean matched3 = false;if ( check_movie( o) )  {
@@ -362,7 +362,7 @@ List<java.lang.Object> itTmp48;p234 = imdb.movies.MoviesFactory.eINSTANCE.create
 
 	p234.setName(get35);;
 
-	itTmp48 = new ArrayList<Object>();
+	itTmp48 = new ArrayList<Object>(get36.size());
 
 	for ( java.lang.Object o: get36) {
 boolean matched4 = false;if ( check_movie( o) )  {

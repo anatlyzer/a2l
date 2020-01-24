@@ -224,13 +224,13 @@ List<java.lang.Object> itTmp6;m20 = imdb.movies.MoviesFactory.eINSTANCE.createMo
 
 	m20.setYear(get4);;
 
-	itTmp6 = new ArrayList<Object>();
+	itTmp6 = new ArrayList<Object>(get5.size());
 
 	for ( java.lang.Object o: get5) {
-boolean matched0 = false;if ( check_actress( o) )  {
+boolean matched0 = false;if ( check_actor( o) )  {
 itTmp6.add(o);
 }
-else if ( check_actor( o) )  {
+else if ( check_actress( o) )  {
 itTmp6.add(o);
 }
 }
@@ -256,7 +256,7 @@ List<java.lang.Object> itTmp10;p27 = imdb.movies.MoviesFactory.eINSTANCE.createA
 
 	p27.setName(get8);;
 
-	itTmp10 = new ArrayList<Object>();
+	itTmp10 = new ArrayList<Object>(get9.size());
 
 	for ( java.lang.Object o: get9) {
 boolean matched1 = false;if ( check_movie( o) )  {
@@ -285,7 +285,7 @@ List<java.lang.Object> itTmp14;p211 = imdb.movies.MoviesFactory.eINSTANCE.create
 
 	p211.setName(get12);;
 
-	itTmp14 = new ArrayList<Object>();
+	itTmp14 = new ArrayList<Object>(get13.size());
 
 	for ( java.lang.Object o: get13) {
 boolean matched2 = false;if ( check_movie( o) )  {
@@ -319,7 +319,7 @@ List<java.lang.Object> itTmp20;c215 = imdb.movies.MoviesFactory.eINSTANCE.create
 
 	c215.setAvgRating(get16);;
 
-	itTmp19 = new ArrayList<Object>();
+	itTmp19 = new ArrayList<Object>(get17.size());
 
 	for ( java.lang.Object o: get17) {
 boolean matched3 = false;if ( check_movie( o) )  {
@@ -328,13 +328,13 @@ itTmp19.add(o);
 }
 	this.parallelPendingTasks.add( new PendingTask_Group_commonMovies(c215,itTmp19,OUTModel_,null) );
 
-	itTmp20 = new ArrayList<Object>();
+	itTmp20 = new ArrayList<Object>(get18.size());
 
 	for ( java.lang.Object o: get18) {
-boolean matched4 = false;if ( check_actress( o) )  {
+boolean matched4 = false;if ( check_actor( o) )  {
 itTmp20.add(o);
 }
-else if ( check_actor( o) )  {
+else if ( check_actress( o) )  {
 itTmp20.add(o);
 }
 }
@@ -368,7 +368,7 @@ List<java.lang.Object> itTmp26;c221 = imdb.movies.MoviesFactory.eINSTANCE.create
 
 	c221.setAvgRating(get22);;
 
-	itTmp26 = new ArrayList<Object>();
+	itTmp26 = new ArrayList<Object>(get23.size());
 
 	for ( java.lang.Object o: get23) {
 boolean matched5 = false;if ( check_movie( o) )  {
@@ -377,17 +377,17 @@ itTmp26.add(o);
 }
 	this.parallelPendingTasks.add( new PendingTask_Group_commonMovies(c221,itTmp26,OUTModel_,null) );
 
-	boolean matched6 = false;if ( check_actress( get24) )  {
+	boolean matched6 = false;if ( check_actor( get24) )  {
 this.parallelPendingTasks.add( new PendingTask_Couple_p1(c221,get24,OUTModel_, null) );
 }
-else if ( check_actor( get24) )  {
+else if ( check_actress( get24) )  {
 this.parallelPendingTasks.add( new PendingTask_Couple_p1(c221,get24,OUTModel_, null) );
 }
 
-	boolean matched7 = false;if ( check_actress( get25) )  {
+	boolean matched7 = false;if ( check_actor( get25) )  {
 this.parallelPendingTasks.add( new PendingTask_Couple_p2(c221,get25,OUTModel_, null) );
 }
-else if ( check_actor( get25) )  {
+else if ( check_actress( get25) )  {
 this.parallelPendingTasks.add( new PendingTask_Couple_p2(c221,get25,OUTModel_, null) );
 }
 

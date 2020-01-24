@@ -148,6 +148,7 @@ class JTextExp extends JExpression {
 class JVariableDeclaration {
 	val JTypeRef[1] type;
 	attr String[1] name;	
+	attr boolean isFinal = false;
 }
 
 class LMatchObject extends JStatement {

@@ -1083,6 +1083,16 @@ public class JavagenPackageImpl extends EPackageImpl implements JavagenPackage {
 	 * @generated
 	 */
 	@Override
+	public EAttribute getJVariableDeclaration_IsFinal() {
+		return (EAttribute)jVariableDeclarationEClass.getEStructuralFeatures().get(2);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
 	public EClass getLMatchObject() {
 		return lMatchObjectEClass;
 	}
@@ -1413,6 +1423,7 @@ public class JavagenPackageImpl extends EPackageImpl implements JavagenPackage {
 		jVariableDeclarationEClass = createEClass(JVARIABLE_DECLARATION);
 		createEReference(jVariableDeclarationEClass, JVARIABLE_DECLARATION__TYPE);
 		createEAttribute(jVariableDeclarationEClass, JVARIABLE_DECLARATION__NAME);
+		createEAttribute(jVariableDeclarationEClass, JVARIABLE_DECLARATION__IS_FINAL);
 
 		lMatchObjectEClass = createEClass(LMATCH_OBJECT);
 		createEReference(lMatchObjectEClass, LMATCH_OBJECT__CASES);
@@ -1604,6 +1615,7 @@ public class JavagenPackageImpl extends EPackageImpl implements JavagenPackage {
 		initEClass(jVariableDeclarationEClass, JVariableDeclaration.class, "JVariableDeclaration", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
 		initEReference(getJVariableDeclaration_Type(), this.getJTypeRef(), null, "type", null, 1, 1, JVariableDeclaration.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 		initEAttribute(getJVariableDeclaration_Name(), ecorePackage.getEString(), "name", null, 1, 1, JVariableDeclaration.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEAttribute(getJVariableDeclaration_IsFinal(), ecorePackage.getEBoolean(), "isFinal", "false", 0, 1, JVariableDeclaration.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
 		initEClass(lMatchObjectEClass, LMatchObject.class, "LMatchObject", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
 		initEReference(getLMatchObject_Cases(), this.getLMatchCase(), null, "cases", null, 0, -1, LMatchObject.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);

@@ -15,6 +15,7 @@ import org.eclipse.emf.ecore.EObject;
  * <ul>
  *   <li>{@link lintra.atlcompiler.javagen.JVariableDeclaration#getType <em>Type</em>}</li>
  *   <li>{@link lintra.atlcompiler.javagen.JVariableDeclaration#getName <em>Name</em>}</li>
+ *   <li>{@link lintra.atlcompiler.javagen.JVariableDeclaration#isIsFinal <em>Is Final</em>}</li>
  * </ul>
  *
  * @see lintra.atlcompiler.javagen.JavagenPackage#getJVariableDeclaration()
@@ -73,5 +74,28 @@ public interface JVariableDeclaration extends EObject {
 	 * @generated
 	 */
 	void setName(String value);
+
+	/**
+	 * Returns the value of the '<em><b>Is Final</b></em>' attribute.
+	 * The default value is <code>"false"</code>.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the value of the '<em>Is Final</em>' attribute.
+	 * @see #setIsFinal(boolean)
+	 * @see lintra.atlcompiler.javagen.JavagenPackage#getJVariableDeclaration_IsFinal()
+	 * @model default="false"
+	 * @generated
+	 */
+	boolean isIsFinal();
+
+	/**
+	 * Sets the value of the '{@link lintra.atlcompiler.javagen.JVariableDeclaration#isIsFinal <em>Is Final</em>}' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @param value the new value of the '<em>Is Final</em>' attribute.
+	 * @see #isIsFinal()
+	 * @generated
+	 */
+	void setIsFinal(boolean value);
 
 } // JVariableDeclaration

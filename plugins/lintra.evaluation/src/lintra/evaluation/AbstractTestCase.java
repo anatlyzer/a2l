@@ -10,6 +10,7 @@ import java.io.PrintStream;
 import java.lang.management.GarbageCollectorMXBean;
 import java.lang.management.ManagementFactory;
 import java.util.ArrayList;
+import java.util.Collection;
 import java.util.List;
 import java.util.function.Function;
 
@@ -40,6 +41,7 @@ import org.eclipse.emf.ecore.EPackage;
 import org.eclipse.emf.ecore.resource.Resource;
 import org.eclipse.emf.ecore.resource.ResourceSet;
 import org.eclipse.emf.ecore.resource.impl.ResourceSetImpl;
+import org.eclipse.emf.ecore.util.EcoreUtil;
 import org.eclipse.emf.ecore.xmi.XMIResource;
 import org.eclipse.emf.ecore.xmi.impl.XMIResourceFactoryImpl;
 import org.eclipse.emf.ecore.xmi.impl.XMIResourceImpl;
@@ -50,7 +52,9 @@ import lintra2.stats.IStatsRecorder;
 
 public abstract class AbstractTestCase {
 	private static final boolean pauseBeforeStart = false;
-	private static final boolean forceMemoryClean = false;
+	private static final boolean forceMemoryClean = true;
+	private static final int multiplySize = -1;
+	//private static final int multiplySize = 3;
 
 	static {
 		if (!isEclipseRunning()) {
@@ -365,6 +369,16 @@ public abstract class AbstractTestCase {
 		
 		String inXmiPath = modelPathAdapter.apply(model);
 		Resource input = load(inXmiPath);
+		
+		// Double the size
+		if (multiplySize != -1) {
+			System.out.println("Multiplying size of the model by = " + multiplySize);
+			List<EObject> original = new ArrayList<>(input.getContents());
+			for(int i = 0; i < multiplySize; i++) {
+				Collection<EObject> copiedRoots = EcoreUtil.copyAll(original);
+				input.getContents().addAll(copiedRoots);
+			}
+		}
 		
 		File modelFile = new File(model);		
 

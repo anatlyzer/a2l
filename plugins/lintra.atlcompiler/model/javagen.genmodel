@@ -105,6 +105,7 @@
     <genClasses ecoreClass="javagen.ecore#//JVariableDeclaration">
       <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference javagen.ecore#//JVariableDeclaration/type"/>
       <genFeatures createChild="false" ecoreFeature="ecore:EAttribute javagen.ecore#//JVariableDeclaration/name"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute javagen.ecore#//JVariableDeclaration/isFinal"/>
     </genClasses>
     <genClasses ecoreClass="javagen.ecore#//LMatchObject">
       <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference javagen.ecore#//LMatchObject/cases"/>

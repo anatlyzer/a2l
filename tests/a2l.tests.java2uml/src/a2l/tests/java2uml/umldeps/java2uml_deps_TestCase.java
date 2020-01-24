@@ -6,10 +6,15 @@ import static lintra.evaluation.ATLExecutor.outModel;
 import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
 import java.io.IOException;
+import java.util.Collection;
+
 import org.eclipse.core.runtime.Platform;
+import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.resource.Resource;
+import org.eclipse.emf.ecore.util.EcoreUtil;
 import org.eclipse.gmt.modisco.java.emf.JavaPackage;
 import org.eclipse.uml2.uml.UMLPackage;
+import org.eclipse.uml2.uml.util.UMLUtil.Ecore2UMLConverter;
 import org.junit.Test;
 
 import lintra.evaluation.ATLExecutor;
@@ -47,7 +52,7 @@ public class java2uml_deps_TestCase extends AbstractTestCase {
 	protected Resource executeLintra(Resource input, int numThreads, boolean footprint, boolean optimised, AggregatedStatsRecorder recorder) throws Exception {
 		Resource outLintra;
 		printLintraExec(numThreads, footprint, optimised);				
-		
+				
 		if ( optimised ) {
 			IFootprint footprintObject = footprint ? 
 					new a2l.tests.java2uml.umldeps.optimised.java2uml_depsFootprint() : 

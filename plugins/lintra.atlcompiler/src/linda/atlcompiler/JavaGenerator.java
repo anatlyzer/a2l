@@ -170,7 +170,7 @@ public class JavaGenerator extends AbstractJavaGenVisitor {
 	}
 
 	private String genBlock(JBlock self) {		
-		String s = self.getLocalVars().stream().map(vd -> g(vd.getType()) + " " + vd.getName() + ";").collect(Collectors.joining(cr()));
+		String s = self.getLocalVars().stream().map(vd -> (vd.isIsFinal() ? "final " : "") + g(vd.getType()) + " " + vd.getName() + ";").collect(Collectors.joining(cr()));
 		s += join(self.getStatements(), genTabCr());
 		return s;
 	}

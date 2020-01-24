@@ -740,13 +740,22 @@ public interface JavagenPackage extends EPackage {
 	int JVARIABLE_DECLARATION__NAME = 1;
 
 	/**
+	 * The feature id for the '<em><b>Is Final</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int JVARIABLE_DECLARATION__IS_FINAL = 2;
+
+	/**
 	 * The number of structural features of the '<em>JVariable Declaration</em>' class.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int JVARIABLE_DECLARATION_FEATURE_COUNT = 2;
+	int JVARIABLE_DECLARATION_FEATURE_COUNT = 3;
 
 	/**
 	 * The number of operations of the '<em>JVariable Declaration</em>' class.
@@ -784,6 +793,15 @@ public interface JavagenPackage extends EPackage {
 	 * @ordered
 	 */
 	int JTHIS__NAME = JVARIABLE_DECLARATION__NAME;
+
+	/**
+	 * The feature id for the '<em><b>Is Final</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int JTHIS__IS_FINAL = JVARIABLE_DECLARATION__IS_FINAL;
 
 	/**
 	 * The number of structural features of the '<em>JThis</em>' class.
@@ -830,6 +848,15 @@ public interface JavagenPackage extends EPackage {
 	 * @ordered
 	 */
 	int JATTRIBUTE__NAME = JVARIABLE_DECLARATION__NAME;
+
+	/**
+	 * The feature id for the '<em><b>Is Final</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int JATTRIBUTE__IS_FINAL = JVARIABLE_DECLARATION__IS_FINAL;
 
 	/**
 	 * The number of structural features of the '<em>JAttribute</em>' class.
@@ -1563,6 +1590,15 @@ public interface JavagenPackage extends EPackage {
 	 * @ordered
 	 */
 	int JPARAMETER__NAME = JVARIABLE_DECLARATION__NAME;
+
+	/**
+	 * The feature id for the '<em><b>Is Final</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int JPARAMETER__IS_FINAL = JVARIABLE_DECLARATION__IS_FINAL;
 
 	/**
 	 * The number of structural features of the '<em>JParameter</em>' class.
@@ -2580,6 +2616,17 @@ public interface JavagenPackage extends EPackage {
 	EAttribute getJVariableDeclaration_Name();
 
 	/**
+	 * Returns the meta object for the attribute '{@link lintra.atlcompiler.javagen.JVariableDeclaration#isIsFinal <em>Is Final</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the attribute '<em>Is Final</em>'.
+	 * @see lintra.atlcompiler.javagen.JVariableDeclaration#isIsFinal()
+	 * @see #getJVariableDeclaration()
+	 * @generated
+	 */
+	EAttribute getJVariableDeclaration_IsFinal();
+
+	/**
 	 * Returns the meta object for class '{@link lintra.atlcompiler.javagen.LMatchObject <em>LMatch Object</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -3439,6 +3486,14 @@ public interface JavagenPackage extends EPackage {
 		 * @generated
 		 */
 		EAttribute JVARIABLE_DECLARATION__NAME = eINSTANCE.getJVariableDeclaration_Name();
+
+		/**
+		 * The meta object literal for the '<em><b>Is Final</b></em>' attribute feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EAttribute JVARIABLE_DECLARATION__IS_FINAL = eINSTANCE.getJVariableDeclaration_IsFinal();
 
 		/**
 		 * The meta object literal for the '{@link lintra.atlcompiler.javagen.impl.LMatchObjectImpl <em>LMatch Object</em>}' class.
