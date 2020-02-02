@@ -45,7 +45,7 @@ public class Maven2XMLTestCase extends AbstractTestCase {
 
 	@Override
 	protected Object executeLintra(Resource input, int numThreads, boolean footprint, boolean optimised,
-			AggregatedStatsRecorder recorder) throws Exception {
+			AggregatedStatsRecorder recorder, boolean save) throws Exception {
 		
 		Maven2XMLRunner trafo = new Maven2XMLRunner().
 				setStatsRecorder(recorder).

@@ -27,6 +27,7 @@ import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.EStructuralFeature;
 
 import a2l.compiler.AstAnnotations;
+import a2l.compiler.FootprintGenerator;
 import a2l.compiler.OptimisationHints;
 import a2l.compiler.OptimisationHints.CachedValue;
 import a2l.compiler.OptimisationHints.Hotspot;
@@ -35,6 +36,7 @@ import a2l.driver.ICollectionsDriver;
 import a2l.driver.IMetaDriver;
 import a2l.driver.JavaslangDriver;
 import a2l.driver.MutableListDriver;
+import a2l.optimiser.anatlyzerext.AllInstancesIndexed;
 import a2l.optimiser.anatlyzerext.IteratorChainExp;
 import a2l.optimiser.anatlyzerext.MutableCollectionOperationCallExp;
 import a2l.optimiser.anatlyzerext.MutableIteratorExp;
@@ -99,6 +101,7 @@ import linda.atlcompiler.ICompilationContext.IInitializer;
 import linda.atlcompiler.ITyping.MutabilityAttribute;
 import lintra.atlcompiler.builtin.BuiltinHelper;
 import lintra.atlcompiler.builtin.BuiltinOperationRegistry;
+import lintra.atlcompiler.builtin.IAllInstancesIndex;
 import lintra.atlcompiler.builtin.ICollectionOperationHandler;
 import lintra.atlcompiler.builtin.IIteratorChainHandler;
 import lintra.atlcompiler.builtin.IOperationHandler;
@@ -138,16 +141,18 @@ public class LindaOclCompiler implements IOclCompiler, IInitializer {
 	private GenCompiler gen;
 	private BuiltinOperationRegistry registry;
 	private OptimisationHints hints;
+	private LindaCompiler compiler;
 
-	public LindaOclCompiler(CompilationEnv env, ITyping typ, GenCompiler gen, OptimisationHints hints) {
+	public LindaOclCompiler(LindaCompiler lindaCompiler, CompilationEnv env, ITyping typ, GenCompiler gen, OptimisationHints hints) {
 		this.env = env;
 		this.typ = typ;
 		this.gen = gen;
 		this.hints = hints;
+		this.compiler = lindaCompiler;
 		
 		this.registry = BuiltinHelper.create();
 	}
-	
+
 	@Override
 	public void inAttributeCall(NavigationOrAttributeCallExp self) {
 		// TODO: Attributes are cached		
@@ -399,11 +404,14 @@ public class LindaOclCompiler implements IOclCompiler, IInitializer {
 	}
 	
 	private void translateAllInstances(OperationCallExp self, String modelName) {
-		JVariableDeclaration newVar = gen.addLocalVar(env.currentBlock(), "op", typ.createTypeRef(self.getInferredType()));
+		boolean isMutable = self.eContainer() instanceof MutableIteratorExp;
+		
+		JVariableDeclaration newVar = gen.addLocalVar(env.currentBlock(), "op", typ.createTypeRef(self.getInferredType(), isMutable));
 		List<JStatement> stms = createCommentedList(self);
 		OclModelElement me = (OclModelElement) self.getSource();
 		JTypeRef ref = typ.createTypeRef(me.getInferredType());
 
+		
 		// Not optimised version
 		if ( modelName != null ) {
 
@@ -411,7 +419,12 @@ public class LindaOclCompiler implements IOclCompiler, IInitializer {
 			stms.add( createAssignment(newVar, "getAllInstances" + modelNamePostfix + "(" + toStr(ref) + ".class" + ")") );
 		} else {
 			// Use the global cache configured in LindaCompiler#createGlobalContext
-			stms.add( createAssignment(newVar, "this.globalContext." + LindaCompiler.getAllInstancesMethodAccess(ref.getType()) + "()"));
+			if (isMutable) {
+				// This wrapping is very hacky... I can do it better...
+				stms.add( createAssignment(newVar, "this.globalContext." + LindaCompiler.getAllInstancesMethodAccess(ref.getType()) + "()" + ".toJavaList()"));
+			} else {
+				stms.add( createAssignment(newVar, "this.globalContext." + LindaCompiler.getAllInstancesMethodAccess(ref.getType()) + "()"));
+			}
 		}
 		
 		env.bind(self, newVar, stms);		
@@ -654,7 +667,6 @@ public class LindaOclCompiler implements IOclCompiler, IInitializer {
 	}
 
 	public void createCachedAssignment(OclExpression expression, JVariableDeclaration var, List<JStatement> list) {
-		System.out.println(hints);
 		Hotspot hotspot = hints.getHotspot(expression);
 		if ( hotspot instanceof CachedValue ) {
 			CachedValue v = (CachedValue) hotspot;
@@ -889,6 +901,21 @@ public class LindaOclCompiler implements IOclCompiler, IInitializer {
 
 		env.bind(self, res.getVariable(), res.getStatements());
 	}	
+	
+	@Override
+	public void inAllInstancesIndexed(AllInstancesIndexed self) {
+		IAllInstancesIndex handler = registry.findAllInstancesIndex(self.getIndexType());	
+		if ( handler == null ) {
+			throw new IllegalStateException("No implementation for " + self.getType());
+		}
+
+		Context ctx = new ICompilationContext.Context(env, typ, gen, javaslangDriver, this);
+		
+		VarStatementPair res = handler.compile(ctx, self, compiler);
+
+		env.bind(self, res.getVariable(), res.getStatements());
+
+	}
 	
 	public void toIteratorExp(IteratorExp self, boolean isMutable) {
 		

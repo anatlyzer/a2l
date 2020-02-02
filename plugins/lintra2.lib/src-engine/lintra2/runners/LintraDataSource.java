@@ -12,6 +12,7 @@ import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
 
+import a2l.runtime.IGlobalContext;
 import a2l.runtime.IModel;
 import a2l.runtime.InputExtent;
 import a2l.runtime.lintra.ILintraModel;
@@ -115,7 +116,7 @@ public class LintraDataSource implements IDataSource {
 	}
 
 	@Override
-	public IModel createModel(AllInstancesAdder adder) {
+	public IModel createModel(AllInstancesAdder adder, IGlobalContext context) {
 		return new LintraModel(reader.getAllObjects(), metamodelName);
 	}
 

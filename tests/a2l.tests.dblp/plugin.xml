@@ -22,4 +22,27 @@
             genModel="metamodels/AuthorInfo.genmodel"/>
    </extension>
 
+   <extension point="org.eclipse.emf.ecore.generated_package">
+      <!-- @generated BibTeX -->
+      <package
+            uri="PrimitiveTypes"
+            class="a2l.tests.bibtex.PrimitiveTypes.PrimitiveTypesPackage"
+            genModel="metamodels/BibTeX.genmodel"/>
+   </extension>
+
+   <extension point="org.eclipse.emf.ecore.generated_package">
+      <!-- @generated BibTeX -->
+      <package
+            uri="BibTeX"
+            class="a2l.tests.bibtex.BibTeX.BibTeXPackage"
+            genModel="metamodels/BibTeX.genmodel"/>
+   </extension>
+   <extension point="org.eclipse.emf.ecore.generated_package">
+      <!-- @generated DocBook -->
+      <package
+            uri="DocBook"
+            class="a2l.tests.docbook.DocBook.DocBookPackage"
+            genModel="metamodels/DocBook.genmodel"/>
+   </extension>
+
 </plugin>

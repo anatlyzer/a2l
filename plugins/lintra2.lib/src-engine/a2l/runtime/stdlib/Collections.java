@@ -6,7 +6,7 @@ import java.util.function.Function;
 public class Collections {
 
 	@SuppressWarnings("unchecked")
-	public static <T extends Comparable<? super T>> void sort(List<T> list, Function<T, Comparable<? extends Object>> map) {
+	public static <T> void sort(List<T> list, Function<T, Comparable<? extends Object>> map) {
     	java.util.Collections.sort(list,  (v1, v2) -> {
     		Comparable<? extends Object> c1 = map.apply(v1);
     		Comparable<? extends Object> c2 = map.apply(v2);    		

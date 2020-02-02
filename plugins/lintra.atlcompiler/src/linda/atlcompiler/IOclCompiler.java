@@ -1,5 +1,6 @@
 package linda.atlcompiler;
 
+import a2l.optimiser.anatlyzerext.AllInstancesIndexed;
 import a2l.optimiser.anatlyzerext.IteratorChainExp;
 import a2l.optimiser.anatlyzerext.MutableCollectionOperationCallExp;
 import a2l.optimiser.anatlyzerext.MutableIteratorExp;
@@ -85,6 +86,8 @@ public interface IOclCompiler {
 	void inMutableCollectionOperationCallExp(MutableCollectionOperationCallExp self);
 	void inIteratorChainExp(IteratorChainExp self);
 	void beforeIteratorChainExp(IteratorChainExp self);
+	
+	void inAllInstancesIndexed(AllInstancesIndexed self);
 	
 	
 //	String getSetter(EStructuralFeature writtenFeature);

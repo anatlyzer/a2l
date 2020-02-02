@@ -41,7 +41,7 @@ public class BibTeX2DocBookTestCase extends AbstractTestCase {
 
 	@Override
 	protected Object executeLintra(Resource input, int numThreads, boolean footprint, boolean optimised,
-			AggregatedStatsRecorder recorder) throws Exception {
+			AggregatedStatsRecorder recorder, boolean save) throws Exception {
 		BibTeX2DocBookRunner lintraTrafo = new BibTeX2DocBookRunner().
 				setStatsRecorder(recorder).
 				setIN(load(IN_MODEL)).

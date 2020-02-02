@@ -3,6 +3,7 @@ package a2l.tests.java2uml.umldeps;
 import static lintra.evaluation.ATLExecutor.inModel;
 import static lintra.evaluation.ATLExecutor.outModel;
 
+import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
 import java.io.IOException;
@@ -49,7 +50,7 @@ public class java2uml_deps_TestCase extends AbstractTestCase {
 	}
 	
 	@Override
-	protected Resource executeLintra(Resource input, int numThreads, boolean footprint, boolean optimised, AggregatedStatsRecorder recorder) throws Exception {
+	protected Resource executeLintra(Resource input, int numThreads, boolean footprint, boolean optimised, AggregatedStatsRecorder recorder, boolean save) throws Exception {
 		Resource outLintra;
 		printLintraExec(numThreads, footprint, optimised);				
 				
@@ -66,6 +67,8 @@ public class java2uml_deps_TestCase extends AbstractTestCase {
 					setNumThreads(numThreads).
 					run().
 					getUCDResource();
+			
+			// outLintra.save(new FileOutputStream(new File(OUT_MODEL_LINTRA)), null);
 		} else {
 			IFootprint footprintObject = footprint ? 
 					new a2l.tests.java2uml.umldeps.normal.java2uml_depsFootprint() : 

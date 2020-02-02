@@ -2,6 +2,7 @@ Manifest-Version: 1.0
 Bundle-ManifestVersion: 2
 Bundle-Name: %pluginName
 Bundle-SymbolicName: a2l.tests.dblp;singleton:=true
+Automatic-Module-Name: a2l.tests.dblp
 Bundle-Version: 1.0.0.qualifier
 Bundle-ClassPath: .
 Bundle-Vendor: %providerName
@@ -12,7 +13,15 @@ Export-Package: dblp.DBLP,
  dblp.DBLP.util,
  dblp.AuthorInfo,
  dblp.AuthorInfo.impl,
- dblp.AuthorInfo.util
+ dblp.AuthorInfo.util,
+ a2l.tests.bibtex.BibTeX,
+ a2l.tests.bibtex.BibTeX.impl,
+ a2l.tests.bibtex.BibTeX.util,
+ a2l.tests.bibtex.PrimitiveTypes,
+ a2l.tests.bibtex.PrimitiveTypes.impl,
+ a2l.tests.docbook.DocBook,
+ a2l.tests.docbook.DocBook.impl,
+ a2l.tests.docbook.DocBook.util
 Require-Bundle: org.eclipse.core.runtime,
  org.eclipse.emf.ecore;visibility:=reexport,
  lintra2.lib;bundle-version="1.0.0",

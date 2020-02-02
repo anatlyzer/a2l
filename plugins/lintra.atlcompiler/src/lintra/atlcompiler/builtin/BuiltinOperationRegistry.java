@@ -5,17 +5,20 @@ import java.util.List;
 
 import anatlyzer.atl.types.CollectionType;
 import anatlyzer.atl.types.Type;
+import anatlyzer.atlext.OCL.OclType;
 
 public class BuiltinOperationRegistry {
 
 	protected List<ICollectionOperationHandler> collectionHandlers;
 	protected List<IOperationHandler> operationHandlers;
 	protected List<IIteratorChainHandler> iteratorHandlers;
+	protected List<IAllInstancesIndex> allInstanceIndexHandlers;
 	
 	public BuiltinOperationRegistry() {
 		collectionHandlers = new ArrayList<ICollectionOperationHandler>();
 		operationHandlers = new ArrayList<IOperationHandler>();
 		iteratorHandlers = new ArrayList<IIteratorChainHandler>();
+		allInstanceIndexHandlers = new ArrayList<IAllInstancesIndex>();
 	}
 	
 	public void register(ICollectionOperationHandler handler) {
@@ -28,6 +31,10 @@ public class BuiltinOperationRegistry {
 
 	public void register(IIteratorChainHandler handler) {
 		this.iteratorHandlers.add(handler);
+	}
+	
+	public void register(IAllInstancesIndex handler) {
+		this.allInstanceIndexHandlers.add(handler);
 	}
 	
 	public IIteratorChainHandler findIteratorChain(String op) {
@@ -67,5 +74,14 @@ public class BuiltinOperationRegistry {
 		
 		return null;
 	}
-	
+
+	public IAllInstancesIndex findAllInstancesIndex(String type) {
+		for (IAllInstancesIndex handler : allInstanceIndexHandlers) {
+			if ( handler.getIndexType().equals(type) ) {
+				return handler;
+			}			
+		}
+		return null;
+	}
+
 }

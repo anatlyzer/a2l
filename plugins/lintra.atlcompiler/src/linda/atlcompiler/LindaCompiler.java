@@ -30,11 +30,15 @@ import org.eclipse.emf.ecore.EStructuralFeature;
 
 import a2l.compiler.A2LOptimiser.Optimisation;
 import a2l.compiler.AstAnnotations;
+import a2l.compiler.FootprintGenerator;
 import a2l.compiler.OptimisationHints;
 import a2l.compiler.OptimisationHints.CachedValue;
 import a2l.compiler.OptimisationHints.Hotspot;
+import a2l.compiler.OptimisationHints.IndexedValue;
+import a2l.compiler.OptimisationHints.IndexedValue.IndexType;
 import a2l.driver.DriverConfiguration;
 import a2l.driver.IMetaDriver;
+import a2l.optimiser.anatlyzerext.AllInstancesIndexed;
 import a2l.optimiser.anatlyzerext.IteratorChainElement;
 import a2l.optimiser.anatlyzerext.IteratorChainExp;
 import a2l.optimiser.anatlyzerext.MutableCollectionOperationCallExp;
@@ -135,7 +139,7 @@ public abstract class LindaCompiler extends BaseCompiler {
 	protected JMethod getDriverDynamically;
 	protected Set<String> targetMetamodelNames = new HashSet<>();
 	
-	private JClass globalContextClass;
+	protected JClass globalContextClass;
 	
 	
 	public LindaCompiler(IAnalyserResult result, DriverConfiguration driverConfiguration) {
@@ -158,7 +162,7 @@ public abstract class LindaCompiler extends BaseCompiler {
 	@Override
 	public void beforeModule(Module self) {
 		typ = new LindaTyping(jmodel, model, driverConfiguration);
-		ocl = new LindaOclCompiler(env, typ, gen, hints);
+		ocl = new LindaOclCompiler(this, env, typ, gen, hints);
 		
 		tclass = JavagenFactory.eINSTANCE.createJClass();
 		
@@ -317,11 +321,30 @@ public abstract class LindaCompiler extends BaseCompiler {
 		self.getElements().stream().filter(e -> e instanceof ContextHelper).forEach(m -> configureContextHelper((ContextHelper) m));
 		self.getElements().stream().filter(e -> e instanceof StaticHelper).forEach(m -> configureStaticHelper((StaticHelper) m));
 	
-		createIsTargetElementCheckMethod();
-		createGetDriverDynamically();
+		List<CalledRule> entryPointRules = self.getElements().stream().filter(e -> e instanceof CalledRule).map(e -> (CalledRule) e).
+			filter(r -> r.isIsEntrypoint()).collect(Collectors.toList());
+		if (entryPointRules.size() > 0) {
+			configureEntryPointRules(entryPointRules);
+		}
 		
+		List<CalledRule> endPointRules = self.getElements().stream().filter(e -> e instanceof CalledRule).map(e -> (CalledRule) e).
+				filter(r -> r.isIsEndpoint()).collect(Collectors.toList());
+		if (endPointRules.size() > 0) {
+			configureEndpointRules(endPointRules);
+		}
+		
+		createIsTargetElementCheckMethod();
+		createGetDriverDynamically();		
 	}
 
+	public FootprintGenerator getFootprintGenerator() {
+		return new FootprintGenerator(result, driverConfiguration, this);
+	}
+	
+	public JClass getGlobalContextClass() {
+		return globalContextClass;
+	}
+	
 	private void createGlobalContext(Module self) {
 		this.globalContextClass = JavagenFactory.eINSTANCE.createJClass();
 		this.jmodel.getClasses().add(globalContextClass);
@@ -345,7 +368,9 @@ public abstract class LindaCompiler extends BaseCompiler {
 		 *	.concurrencyLevel(12).<Person, javaslang.collection.Set<Movie>>build();
  		 *
 		 */		
+		int i = 0;
 		for(Hotspot h : hints.getHotspots()) {
+			i++;
 			if ( h instanceof CachedValue ) {
 				CachedValue cv = ((CachedValue) h);
 				
@@ -376,7 +401,38 @@ public abstract class LindaCompiler extends BaseCompiler {
 				methods.add("public " + valueTypeStr + " " + methodName + "(" + keyTypeStr + " key, java.util.concurrent.Callable<" + valueTypeStr + "> closure) { "
 						+ "try { return " + attr.getName() + ".get(key, closure); } catch (java.util.concurrent.ExecutionException e) { throw new IllegalStateException(); } }");
 				
+			} if ( h instanceof IndexedValue ) { 
+				IndexedValue indexedValue = (IndexedValue) h;
+				String attrName = "index_" + indexedValue.getMetaclass().getName() + i; 
+				JTypeRef keyType = typ.createTypeRef(indexedValue.getPreprocessedKeyExpr().getInferredType());
+				
+				JAttribute attr = JavagenFactory.eINSTANCE.createJAttribute();
+				attr.setName(attrName);
+				attr.setType(typ.createParamNTypeRef(typ.getType("java.util.Set"), keyType));				
+				globalContextClass.getAttributes().add(attr);
+
+				String keyTypeStr   = JavaGenerator.textOf(keyType);
+				
+				String init = attr.getName() + " = " + "new java.util.HashSet<" + keyTypeStr + ">(512);";				
+				initializations.add(init);
+				
+				if (indexedValue.getType() == IndexType.SET) {
+					String getMethodName = indexedValue.getCachedGetMethodName();
+										
+					methods.add("public boolean " + getMethodName + "(" + keyTypeStr + " key) { " +
+									"return " + attrName + ".contains(key);" +
+								" }");
+					
+					String setMethodName = indexedValue.getCachedSetMethodName();
+					methods.add("public void " + setMethodName + "(" + keyTypeStr + " key) { " +
+							attrName + ".add(key);" +
+						" }");					
+				} else {
+					throw new UnsupportedOperationException("Not done yet. Return a List<T>");
+				}
+
 			}
+			 
 		}
 		
 		String params = "";
@@ -1120,6 +1176,11 @@ public abstract class LindaCompiler extends BaseCompiler {
 	}
 	
 	@Override
+	public VisitingActions preAllInstancesIndexed(AllInstancesIndexed self) {
+		return actions();
+	}
+	
+	@Override
 	public void beforeIteratorChainExp(IteratorChainExp self) {
 		ocl.beforeIteratorChainExp(self);
 	}
@@ -1127,6 +1188,11 @@ public abstract class LindaCompiler extends BaseCompiler {
 	@Override
 	public void inIteratorChainExp(IteratorChainExp self) {	
 		ocl.inIteratorChainExp(self);
+	}
+	
+	@Override
+	public void inAllInstancesIndexed(AllInstancesIndexed self) {
+		ocl.inAllInstancesIndexed(self);
 	}
 	
 	@Override

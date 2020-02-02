@@ -252,8 +252,9 @@ public class RunnerGenerator {
 
 					// Create the model instance from the data source
 					String modelNameVar = i.getModelName();
-					s1 += "this." + modelNameVar + "Model" + " = " + "this." + i.getModelName() + "DataSource" + "." + "createModel(this.globalContext::addAllInstancesObject);";
-					s1 += "inputExtent.addAll(" + "this." + modelNameVar + "Model" + ".allInstances()" + ");";
+					s1 += "this." + modelNameVar + "Model" + " = " + "this." + i.getModelName() + "DataSource" + "." + "createModel(this.globalContext::addAllInstancesObject, globalContext);";
+					s1 += "inputExtent.addAll(" + "this." + modelNameVar + "Model" + ".allInstances()" + ");\n";
+					s1 += "inputExtent.shuffle();";
 				}
 			}
 	

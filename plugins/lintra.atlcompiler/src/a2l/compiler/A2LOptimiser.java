@@ -11,14 +11,19 @@ import java.util.Set;
 import java.util.function.Function;
 
 import org.eclipse.emf.common.util.TreeIterator;
+import org.eclipse.emf.ecore.EAttribute;
 import org.eclipse.emf.ecore.ENamedElement;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.EReference;
 import org.eclipse.emf.ecore.EStructuralFeature;
+import org.eclipse.emf.ecore.EcorePackage;
 import org.eclipse.emf.ecore.util.EcoreUtil;
 
 import a2l.anatlyzerext.visitor.AbstractAnatlyzerExtVisitor;
 import a2l.compiler.A2LOptimiser.Optimisation;
+import a2l.compiler.OptimisationHints.IndexedValue;
+import a2l.compiler.OptimisationHints.IndexedValue.IndexType;
+import a2l.optimiser.anatlyzerext.AllInstancesIndexed;
 import a2l.optimiser.anatlyzerext.AnatlyzerExtFactory;
 import a2l.optimiser.anatlyzerext.IteratorChainElement;
 import a2l.optimiser.anatlyzerext.IteratorChainExp;
@@ -33,12 +38,14 @@ import anatlyzer.atl.graph.PathGenerator;
 import anatlyzer.atl.graph.ProblemPath;
 import anatlyzer.atl.model.ATLModel;
 import anatlyzer.atl.types.CollectionType;
+import anatlyzer.atl.types.Metaclass;
 import anatlyzer.atl.util.ATLUtils;
 import anatlyzer.atlext.ATL.Binding;
 import anatlyzer.atlext.ATL.InPattern;
 import anatlyzer.atlext.ATL.LocatedElement;
 import anatlyzer.atlext.ATL.MatchedRule;
 import anatlyzer.atlext.ATL.OutPatternElement;
+import anatlyzer.atlext.ATL.Rule;
 import anatlyzer.atlext.ATL.RuleResolutionInfo;
 import anatlyzer.atlext.ATL.Unit;
 import anatlyzer.atlext.OCL.CollectionOperationCallExp;
@@ -46,8 +53,10 @@ import anatlyzer.atlext.OCL.Iterator;
 import anatlyzer.atlext.OCL.IteratorExp;
 import anatlyzer.atlext.OCL.LoopExp;
 import anatlyzer.atlext.OCL.NavigationOrAttributeCallExp;
+import anatlyzer.atlext.OCL.OCLFactory;
 import anatlyzer.atlext.OCL.OCLPackage;
 import anatlyzer.atlext.OCL.OclExpression;
+import anatlyzer.atlext.OCL.OclModelElement;
 import anatlyzer.atlext.OCL.OperationCallExp;
 import anatlyzer.atlext.OCL.OperatorCallExp;
 import anatlyzer.atlext.OCL.PropertyCallExp;
@@ -109,7 +118,7 @@ public class A2LOptimiser extends AbstractVisitor {
 		OptimisationHints hints;
 		if ( isEnabled(Optimisation.PATH_BASED_CACHING) ) {
 			// This is using a second pass
-			hints = new PathDepdendentCachingOptimisation().run(result.getATLModel());
+			hints = new PathDependenCachingOptimisation().run(result.getATLModel());
 		} else {
 			hints = new OptimisationHints(); // Empty
 		}
@@ -120,12 +129,12 @@ public class A2LOptimiser extends AbstractVisitor {
 	}
 
 	
-	private Map<OutPatternElement, List<MatchedRule>> getDependencyInfo(IAnalyserResult result) {
+	private Map<OutPatternElement, List<Rule>> getDependencyInfo(IAnalyserResult result) {
 		ATLModel model = result.getATLModel();
-		List<MatchedRule> rules = ATLUtils.getAllMatchedRules(model);
-		Map<OutPatternElement, List<MatchedRule>> deps = new HashMap<>();
+		List<Rule> rules = model.allObjectsOf(Rule.class);
+		Map<OutPatternElement, List<Rule>> deps = new HashMap<>();
 
-		for (MatchedRule r : rules) {
+		for (Rule r : rules) {
 			for(OutPatternElement e : r.getOutPattern().getElements()) {
 				for (Binding b : e.getBindings()) {
 					for (RuleResolutionInfo rri : b.getResolvedBy()) {
@@ -608,24 +617,13 @@ public class A2LOptimiser extends AbstractVisitor {
 	
 	// Other optimisation
 	// This is for path-based caching
-	public static class PathDepdendentCachingOptimisation extends AbstractAnatlyzerExtVisitor {
+	public static class PathDependenCachingOptimisation extends AbstractAnatlyzerExtVisitor {
 
-		private HashSet<OclExpression> hotspots = new HashSet<OclExpression>();
+		//private HashSet<OclExpression> hotspots = new HashSet<OclExpression>();
 				
 		public OptimisationHints run(ATLModel model) {
-			OptimisationHints hints = new OptimisationHints();
-			
-			// This could be merged in the previous pass but let's make things simple
-			findHotspots(model);
-			
-			for (OclExpression oclExpression : hotspots) {
-				OclExpression maximalExpression = getMaximalExpression(oclExpression);
-				if ( LindaCompiler.countExpressionNodes(maximalExpression) > 2 || containsHeavyOperation(maximalExpression)) {
-					hints.addHotspot(new OptimisationHints.CachedValue(maximalExpression, oclExpression));
-					AstAnnotations.markCacheable(maximalExpression);			
-				}
-			} 			
-			
+			OptimisationHints hints = new OptimisationHints();		
+			findHotspots(model, hints);			
 			return hints;
 		}
 		
@@ -658,7 +656,9 @@ public class A2LOptimiser extends AbstractVisitor {
 			return exp;
 		}
 
-		private void findHotspots(ATLModel model) {
+		private void findHotspots(ATLModel model, OptimisationHints hints) {
+			HashSet<OperationCallExp> allInstancesAlreadyHandled = new HashSet<OperationCallExp>();
+			
 			List<NavigationOrAttributeCallExp> navs = model.allObjectsOf(NavigationOrAttributeCallExp.class);
 			for (NavigationOrAttributeCallExp nav : navs) {
 				EStructuralFeature f = (EStructuralFeature) nav.getUsedFeature();
@@ -667,9 +667,107 @@ public class A2LOptimiser extends AbstractVisitor {
 					ProblemPath path = new PathGenerator().generatePath(nav);
 					boolean hasLoops = new LoopFinder().hasLoops(path);
 				
-					if ( hasLoops )					
-						hotspots.add(nav.getSource());
+					if ( hasLoops )	{
+						OclExpression oclExpression = nav.getSource();
+						OclExpression maximalExpression = getMaximalExpression(oclExpression);
+						if ( LindaCompiler.countExpressionNodes(maximalExpression) > 2 || containsHeavyOperation(maximalExpression)) {
+							hints.addHotspot(new OptimisationHints.CachedValue(maximalExpression, oclExpression));
+							AstAnnotations.markCacheable(maximalExpression);			
+						}						
+					}
+				} else if (f != null && !f.isMany() && f instanceof EAttribute ) {
+					// Tries to find comparision that can be optimised with a hashmap
+					// X.allInstances()->select(x | x.name = <value>)  => hashMap
+					// X.allInstances()->exists(x | x.name = <value>)  => set
+					
+					if ( nav.eContainer() instanceof OperatorCallExp && ((OperationCallExp) nav.eContainer()).getOperationName().equals("=")) {
+						OperationCallExp operatorCall = (OperationCallExp) nav.eContainer();
+						if (!(operatorCall.eContainingFeature() == OCLPackage.Literals.LOOP_EXP__BODY) || !(operatorCall.eContainer() instanceof IteratorExp)) {
+							continue;
+						}
+						
+						IteratorExp loop = (IteratorExp) operatorCall.eContainer();
+						if (!(loop.getName().equals("select") || loop.getName().equals("exists"))) 
+							continue;
+						
+						if (!(loop.getSource() instanceof OperationCallExp && ((OperationCallExp) loop.getSource()).getOperationName().equals("allInstances"))) {
+							continue;
+						}
+						
+						// At this point we know that it has the allInstances()->select/exists(x| <operator>) structure
+						
+						List<VariableExp> sourceVars = ATLUtils.findAllVarExp(operatorCall.getSource());
+						List<VariableExp> argVars = ATLUtils.findAllVarExp(operatorCall.getArguments().get(0));
+						int source_pointing = 0;
+						int arg_pointing = 0;
+						
+						for (VariableExp variableExp : sourceVars) {
+							if (variableExp.getReferredVariable() != loop.getIterators().get(0)) {
+								source_pointing = -1;
+								break;
+							} else {
+								source_pointing++;
+							}
+						}
+						
+						for (VariableExp variableExp : argVars) {
+							if (variableExp.getReferredVariable() != loop.getIterators().get(0)) {
+								arg_pointing = -1;
+								break;
+							} else {
+								arg_pointing++;
+							}
+						}
+						
+						OclExpression preprocessedKeyExp;
+						OclExpression dynamicKeyExp;
+						if (source_pointing <= 0 && arg_pointing <= 0) {
+							// Nothing is pointing to the allInstances variable
+							continue;
+						} else if (source_pointing > 0 && arg_pointing > 0) {
+							// We can't handle this
+							continue;
+						} else if (source_pointing > 0) {
+							preprocessedKeyExp = operatorCall.getSource();
+							dynamicKeyExp = operatorCall.getArguments().get(0);
+						} else if (arg_pointing > 0) {
+							preprocessedKeyExp = operatorCall.getArguments().get(0);
+							dynamicKeyExp = operatorCall.getSource();
+						} else {
+							// fallback
+							continue;
+						}
+
+						OperationCallExp allInstances = ((OperationCallExp) loop.getSource());	
+						if (!(allInstances.getSource() instanceof OclModelElement))
+							continue;
+						
+						if (allInstancesAlreadyHandled.contains(allInstances))
+							continue;
+
+						ProblemPath path = new PathGenerator().generatePath(allInstances);
+						boolean hasLoops = new LoopFinder().hasLoops(path);
+						if (hasLoops) {
+							// This structure is in a hotpath, so we optimise							
+							OclModelElement elem = (OclModelElement) allInstances.getSource();
+							Metaclass m = (Metaclass) elem.getInferredType();
+							IndexType type = loop.getName().equals("select") ? IndexType.MAP_LIST : IndexType.SET;
+							IndexedValue hint = new OptimisationHints.IndexedValue(type, allInstances, preprocessedKeyExp, dynamicKeyExp, m, nav.getName());
+							hints.addHotspot(hint);
+							allInstancesAlreadyHandled.add(allInstances);
+							
+							AllInstancesIndexed newAllInstances = AnatlyzerExtFactory.eINSTANCE.createAllInstancesIndexed();
+							EcoreUtil.replace(loop, newAllInstances);
+							newAllInstances.setOriginal(loop);
+							newAllInstances.setOptimisationHint(hint);
+							newAllInstances.setIndexType(loop.getName());
+						}
+
+					}						
+					
 				}
+				
+				
 			}			
 		}		
 	}

@@ -62,6 +62,7 @@ public class AnatlyzerExtFactoryImpl extends EFactoryImpl implements AnatlyzerEx
 			case AnatlyzerExtPackage.SHORT_CIRCUIT_OPERATOR_CALL_EXP: return createShortCircuitOperatorCallExp();
 			case AnatlyzerExtPackage.ITERATOR_CHAIN_EXP: return createIteratorChainExp();
 			case AnatlyzerExtPackage.ITERATOR_CHAIN_ELEMENT: return createIteratorChainElement();
+			case AnatlyzerExtPackage.ALL_INSTANCES_INDEXED: return createAllInstancesIndexed();
 			default:
 				throw new IllegalArgumentException("The class '" + eClass.getName() + "' is not a valid classifier");
 		}
@@ -131,6 +132,17 @@ public class AnatlyzerExtFactoryImpl extends EFactoryImpl implements AnatlyzerEx
 	public IteratorChainElement createIteratorChainElement() {
 		IteratorChainElementImpl iteratorChainElement = new IteratorChainElementImpl();
 		return iteratorChainElement;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
+	public AllInstancesIndexed createAllInstancesIndexed() {
+		AllInstancesIndexedImpl allInstancesIndexed = new AllInstancesIndexedImpl();
+		return allInstancesIndexed;
 	}
 
 	/**

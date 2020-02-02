@@ -141,6 +141,15 @@ public class AnatlyzerExtSwitch<T> extends Switch<T> {
 				if (result == null) result = defaultCase(theEObject);
 				return result;
 			}
+			case AnatlyzerExtPackage.ALL_INSTANCES_INDEXED: {
+				AllInstancesIndexed allInstancesIndexed = (AllInstancesIndexed)theEObject;
+				T result = caseAllInstancesIndexed(allInstancesIndexed);
+				if (result == null) result = caseOclExpression(allInstancesIndexed);
+				if (result == null) result = caseLocatedElement(allInstancesIndexed);
+				if (result == null) result = caseTypedElement(allInstancesIndexed);
+				if (result == null) result = defaultCase(theEObject);
+				return result;
+			}
 			default: return defaultCase(theEObject);
 		}
 	}
@@ -232,6 +241,21 @@ public class AnatlyzerExtSwitch<T> extends Switch<T> {
 	 * @generated
 	 */
 	public T caseIteratorChainElement(IteratorChainElement object) {
+		return null;
+	}
+
+	/**
+	 * Returns the result of interpreting the object as an instance of '<em>All Instances Indexed</em>'.
+	 * <!-- begin-user-doc -->
+	 * This implementation returns null;
+	 * returning a non-null result will terminate the switch.
+	 * <!-- end-user-doc -->
+	 * @param object the target of the switch.
+	 * @return the result of interpreting the object as an instance of '<em>All Instances Indexed</em>'.
+	 * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
+	 * @generated
+	 */
+	public T caseAllInstancesIndexed(AllInstancesIndexed object) {
 		return null;
 	}
 

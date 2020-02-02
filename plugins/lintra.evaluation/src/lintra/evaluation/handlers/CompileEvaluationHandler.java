@@ -21,6 +21,8 @@ public class CompileEvaluationHandler extends AbstractHandler {
 		Map<String, String> projects = new HashMap<>();
 		projects.put("/a2l.tests.dblp/transformations/DBLP_v1.atl", "a2l.tests.dblp_v1");
 		projects.put("/a2l.tests.dblp/transformations/DBLP_v2.atl", "a2l.tests.dblp_v2");
+		projects.put("/a2l.tests.dblp/transformations/dblp2bibtex/dblp2bibtex.atl", "a2l.tests.dblp2bibtex");
+		projects.put("/a2l.tests.dblp/transformations/bibtex2docbook/BibTeX2DocBook.atl", "a2l.tests.bibtex2docbook");
 		projects.put("/a2l.tests.imdb/transformations/IdentityIMDb.atl", "a2l.tests.imdb.identity");
 		projects.put("/a2l.tests.imdb/transformations/FindCouples.atl", "a2l.tests.findcouples");		
 		projects.put("/a2l.tests.java2uml/transformations/java2uml_deps.atl", "a2l.tests.java2uml.umldeps");

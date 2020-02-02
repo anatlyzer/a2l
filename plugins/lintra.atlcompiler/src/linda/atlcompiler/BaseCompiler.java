@@ -12,6 +12,8 @@ import java.util.HashSet;
 import java.util.LinkedList;
 import java.util.List;
 import java.util.Set;
+import java.util.function.BiFunction;
+import java.util.function.Function;
 import java.util.stream.Collectors;
 
 import org.eclipse.emf.ecore.EClass;
@@ -31,6 +33,7 @@ import anatlyzer.atl.types.TupleType;
 import anatlyzer.atl.types.Type;
 import anatlyzer.atl.util.ATLUtils;
 import anatlyzer.atl.util.AnalyserUtils;
+import anatlyzer.atl.util.Pair;
 import anatlyzer.atlext.ATL.Binding;
 import anatlyzer.atlext.ATL.CalledRule;
 import anatlyzer.atlext.ATL.ContextHelper;
@@ -51,6 +54,7 @@ import linda.atlcompiler.BaseTyping.TupleTypeInformation;
 import linda.atlcompiler.ICompilationContext.Context;
 import linda.atlcompiler.ICompilationContext.IInitializer;
 import lintra.atlcompiler.javagen.JAssignment;
+import lintra.atlcompiler.javagen.JBlock;
 import lintra.atlcompiler.javagen.JClass;
 import lintra.atlcompiler.javagen.JConditional;
 import lintra.atlcompiler.javagen.JMethod;
@@ -105,10 +109,13 @@ public abstract class BaseCompiler extends AbstractAnatlyzerExtVisitor {
 		return new RunnerGenerator(result, driverConfiguration);
 	}
 
-	public FootprintGenerator getFootprintGenerator() {
-		return new FootprintGenerator(result, driverConfiguration);
+	
+	public abstract FootprintGenerator getFootprintGenerator();
+	
+	public OptimisationHints getHints() {
+		return hints;
 	}
-		
+	
 	/**
 	 * Rewrites the ATL AST or do annotations for later phases
 	 * @param opts 
@@ -130,6 +137,9 @@ public abstract class BaseCompiler extends AbstractAnatlyzerExtVisitor {
 		
 		return jmodel;
 	}
+	
+	
+	public abstract Pair<List<JStatement>, JVariableDeclaration>  compileExpression(OclExpression expr, JavaGenModel externalModel, BiFunction<CompilationEnv, GenCompiler, JBlock> setup);
 	
 	private void analyseTupleTypes(ATLModel model) {
 		List<TupleType> types = model.allObjectsOf(TupleType.class);
@@ -513,6 +523,31 @@ public abstract class BaseCompiler extends AbstractAnatlyzerExtVisitor {
 		createOutElements(self, method, true);
 	}
 	
+
+	protected void configureEntryPointRules(List<CalledRule> entryPointRules) {
+		JMethod method = JavagenFactory.eINSTANCE.createJMethod();
+		method.setName("doInitialisation");
+		
+		for (CalledRule calledRule : entryPointRules) {
+			String ruleMethodName = "called_rule_" + calledRule.getName();
+			method.getStatements().add(CreationHelpers.createText(ruleMethodName + "()"));
+		}
+		
+		tclass.getMethods().add(method);
+	}
+
+
+	protected void configureEndpointRules(List<CalledRule> endPointRules) {
+		JMethod method = JavagenFactory.eINSTANCE.createJMethod();
+		method.setName("doEndpoint");
+		
+		for (CalledRule calledRule : endPointRules) {
+			String ruleMethodName = "called_rule_" + calledRule.getName();
+			method.getStatements().add(CreationHelpers.createText(ruleMethodName + "()"));
+		}
+		
+		tclass.getMethods().add(method);
+	}	
 	@Override
 	public void beforeCalledRule(CalledRule self) {
 		JMethod method = gen.calledRuleToMethod.get(self);		

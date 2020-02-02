@@ -35,7 +35,7 @@ public class Book2PublicationTestCase extends AbstractTestCase {
 
 	@Override
 	protected Object executeLintra(Resource input, int numThreads, boolean footprint, boolean optimised,
-			AggregatedStatsRecorder recorder) throws Exception {
+			AggregatedStatsRecorder recorder, boolean save) throws Exception {
 		Book2PublicationRunner lintraTrafo = new Book2PublicationRunner().
 				setStatsRecorder(recorder).
 				setIN(load(IN_MODEL)).

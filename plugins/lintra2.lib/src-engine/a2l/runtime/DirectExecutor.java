@@ -3,15 +3,11 @@ package a2l.runtime;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.concurrent.ExecutionException;
-import java.util.concurrent.ForkJoinPool;
-import java.util.concurrent.ForkJoinTask;
 import java.util.concurrent.atomic.AtomicLong;
-import java.util.stream.LongStream;
 
 import lintra2.blackboard.BlackboardException;
 import lintra2.stats.IStatsRecorder;
 import lintra2.transfo.ITransformation2;
-import lintra2.transfo.LinTraParameters;
 
 /**
  * This class implements a simple execution service which descomposes a list
@@ -25,6 +21,8 @@ import lintra2.transfo.LinTraParameters;
  */
 public class DirectExecutor {
 
+	private static final boolean DEBUG = false;
+	
 	private final int numThreads;
 	private final InputExtent extent;
 	private final ITransformationFactory factory;
@@ -42,39 +40,43 @@ public class DirectExecutor {
 			return;
 		}
 			
+		long size = extent.size();
+		long staticFragmentSize = (size / 5) * 4;
+		if (numThreads * 10 > staticFragmentSize) {
+			executeSingle();
+			return;
+		}
 		
+		// Step 1: Divide work statically for the 3/4 parts of the input
+		long chunkSize_step1 = staticFragmentSize / numThreads;
+		long rest_step1 = staticFragmentSize % numThreads;
+		long numWorkers = numThreads; 
+			
 		List<Worker> workers = new ArrayList<>();
 		List<Thread> threads = new ArrayList<>();
-				
-		long lastId = extent.size();
 		
-//		int jobSize = LinTraParameters.JOB_SIZE;
-//		jobSize = (int) ((lastId / (numThreads * 1.0)) / 100.0);
-//		long increase = computeOptimalIncrease(numThreads, lastId, jobSize);
-//		if ( increase == 0 ) {
-//			increase = lastId;
-//		}		
-		long increase = 1_000;
-		
-		long numChunks = lastId / increase;
-		if (lastId % increase != 0)
+		long increase = 2;	
+		long start_step2 = staticFragmentSize;
+		long numChunks = (size - start_step2) / increase;
+		if ((size - start_step2) % increase != 0)
 			numChunks++;
-		long numWorkers = Math.min(numThreads, numChunks);
 		
 		Scheduler scheduler = new Scheduler(numWorkers, numChunks);
-		Worker firstWorker = null;
 		
 		for (long i = 0; i < numWorkers; i++) {
-			Worker worker = new Worker("Worker " + i, i, increase, scheduler);
-			if ( firstWorker == null ) {
-				firstWorker = worker;
-				continue;
-			}
-			workers.add(worker);
+			long start_phase1 = (i == 0) 
+					? 0 
+					: i * chunkSize_step1 + rest_step1;
+			long end_phase1 = (i == 0)
+					? chunkSize_step1 + rest_step1
+					: start_phase1 + chunkSize_step1;
+				
+			Worker worker = new Worker("Worker " + i, i, 
+					/* phase 1: */ start_phase1, end_phase1,
+					/* phase 2: */ start_step2,
+					increase, scheduler);
 
-//			Thread e = new Thread(worker, worker.getName());
-//			tasks.add(e);
-						
+			workers.add(worker);						
 		}
 
 		for(int i = 0; i < workers.size(); i++) {
@@ -83,30 +85,45 @@ public class DirectExecutor {
 			threads.add(e);
 			e.start();
 		}
-
-		if ( firstWorker != null ) {
-			firstWorker.run();
-		}
-		
+	
 		for (Thread thread : threads) {
 			thread.join();
 		}
 		
 		// 
 		this.partialTrafos = new ArrayList<ITransformation2>();
-		if ( firstWorker != null ) {
-			partialTrafos.add(firstWorker.getTransformation());
+		
+		if (DEBUG)
+			System.out.println("\nStats:");
+		int countNumExecutions = 0;
+		int countNumMatchedExecutions = 0;
+		
+		int i = 0;
+		for (Worker w : workers) {
+			ITransformation2 trafo = w.getTransformation();
+			partialTrafos.add(trafo);
+			if (DEBUG) {			
+				System.out.println("Worker: " + i++);
+				countNumExecutions += trafo.getNumExecutions();
+				System.out.println("  " + trafo.getNumExecutions());
+				countNumMatchedExecutions += trafo.getNumMatchedRuleExecutions();
+				System.out.println("  " + trafo.getNumMatchedRuleExecutions());
+			}
+		}
+		if (DEBUG) {
+			System.out.println("Total:");
+			System.out.println("  " + countNumExecutions);
+			System.out.println("  " + countNumMatchedExecutions);
 		}
 		
-		for (Worker w : workers) {
-			partialTrafos.add(w.getTransformation());
-		}
+		partialTrafos.get(0).doEndpoint();
 	}
 	
 	private void executeSingle() {
 		ITransformation2 trafo = factory.create();
 		this.partialTrafos = new ArrayList<ITransformation2>();
 		partialTrafos.add(trafo);
+		trafo.doInitialisation();
 		for(long i = 0, len = extent.size(); i < len; i++) {
 			try {
 				trafo.transform(extent.get(i));
@@ -114,6 +131,13 @@ public class DirectExecutor {
 				// TODO Auto-generated catch block
 				e.printStackTrace();
 			}			
+		}
+		trafo.doEndpoint();
+		
+		if (DEBUG) {
+			System.out.println("\nStats:");
+			System.out.println("  " + trafo.getNumExecutions());
+			System.out.println("  " + trafo.getNumMatchedRuleExecutions());
 		}
 	}
 
@@ -181,30 +205,6 @@ public class DirectExecutor {
 		
 	}
 
-	
-	private int computeOptimalIncrease(int numThreads, double numElems, int workExcerptSize) {
-//		int increase;
-//		if (numElems / numThreads <  1){
-//			increase = 1;
-//		} else if (numElems / numThreads <  workExcerptSize){
-//			increase = (int) (numElems / numThreads);
-//		} else {
-//			increase = workExcerptSize;
-//		}
-//		return increase;
-		
-		if (numElems / numThreads <  1){
-			return 1;
-		}
-		
-		int maxIncrement = (int) (numElems / numThreads);
-		if ( workExcerptSize * numThreads > maxIncrement ) {
-			return maxIncrement;
-		}
-		return workExcerptSize * numThreads;
-		
-	}	
-	
 	private static enum SchedulingKind {
 		DYNAMIC,
 		GUIDED,
@@ -219,13 +219,21 @@ public class DirectExecutor {
 		private final ITransformation2 trafo;
 		private String name;
 		
-		private final SchedulingKind kind = SchedulingKind.DYNAMIC;  
+		private final SchedulingKind kind = SchedulingKind.DYNAMIC;
 		
-		public Worker(String name, long chunk, long chunkSize, Scheduler scheduler) {
+		private final long start_phase1;  
+		private final long end_phase1;
+		private final long start_phase2;  
+		
+		public Worker(String name, long chunk, long start_phase1, long end_phase1, long start_phase2, long chunkSize, Scheduler scheduler) {
 			this.name = name;
 			this.currentChunk = chunk;
 			this.chunkSize = chunkSize;
 			this.scheduler = scheduler;
+			this.start_phase1 = start_phase1;
+			this.end_phase1 = end_phase1;
+			this.start_phase2 = start_phase2;
+			
 			this.trafo = factory.create();	
 		}
 
@@ -239,50 +247,26 @@ public class DirectExecutor {
 
 		@Override
 		public void run() {
-			if (kind == SchedulingKind.DYNAMIC) {
+			final long total = extent.size();
 			
-				long total = extent.size();
-				while ( true ) {
-					long min = currentChunk * chunkSize;
-					long max = Math.min(currentChunk * chunkSize + chunkSize, total);
-					//System.out.println(name + " " + currentChunk + "[" + min + ".." + max +"]");
-					//System.out.println("Doing: " + min + "..." + max);
-					for(long i = min; i < max; i++) {
-						try {
-							trafo.transform(extent.get(i));
-						} catch (BlackboardException e) {
-							e.printStackTrace();
-							return;
-						}
-					}
-					
-					long nextChunk = scheduler.getNextChunk(currentChunk);
-					if ( nextChunk == - 1 ) {
-						return;
-					} else {
-						currentChunk = nextChunk;
-					}
+			// At the beginning currentChunk = 0 if it is thread 0
+			if (currentChunk == 0) {
+				trafo.doInitialisation();
+			}
+			
+			for(long i = start_phase1; i < end_phase1; i++) {
+				try {
+					trafo.transform(extent.get(i));
+				} catch (BlackboardException e) {
+					e.printStackTrace();
 				}
-			} else if (kind == SchedulingKind.GUIDED) {
-				int fragment = (int) currentChunk / numThreads;
-				int pos = (int) (currentChunk % numThreads);
-				long total = extent.size();
-				
-				
-				long init = fragment == 0 ? 0 : (total / (2 * fragment));
-				long end  = total / (2 * (fragment + 1)); 
-				long size = end - init;
-
-				long chunk_size = size / numThreads;
-				// \/ sumar el principio no?
-				
-				long min = init + pos * chunk_size;
-				long max = init + Math.min(pos * chunk_size + chunk_size, size);
-				
-				if (min >= total) 
-					return;
-				
-				// Same as above
+			}
+			
+			while ( true ) {
+				long min = currentChunk * chunkSize + start_phase2;
+				long max = Math.min(min + chunkSize, total);
+				//System.out.println(name + " " + currentChunk + "[" + min + ".." + max +"]");
+				//System.out.println("Doing: " + min + "..." + max);
 				for(long i = min; i < max; i++) {
 					try {
 						trafo.transform(extent.get(i));
@@ -292,47 +276,13 @@ public class DirectExecutor {
 					}
 				}
 				
-				long nextChunk = scheduler.getNextChunk2(currentChunk);
-				currentChunk = nextChunk;
-				
-			} else if (kind == SchedulingKind.NESTED) {
-				long total = extent.size();
-				ForkJoinPool customThreadPool = new ForkJoinPool(2);
-				
-				while ( true ) {
-					long min = currentChunk * chunkSize;
-					long max = Math.min(currentChunk * chunkSize + chunkSize, total);
-					
-				    ForkJoinTask<?> future = customThreadPool.submit(() -> {
-						LongStream.rangeClosed(min, max).parallel().forEach(i -> {
-							try {
-								trafo.transform(extent.get(i));
-							} catch (BlackboardException e) {
-								e.printStackTrace();
-								return;
-							}					
-						
-						});										    	
-				    });
-				    
-					try {
-						future.get();
-					} catch (InterruptedException e) {
-						// TODO Auto-generated catch block
-						e.printStackTrace();
-					} catch (ExecutionException e) {
-						// TODO Auto-generated catch block
-						e.printStackTrace();
-					}
-					
-					long nextChunk = scheduler.getNextChunk(currentChunk);
-					if ( nextChunk == - 1 ) {
-						return;
-					} else {
-						currentChunk = nextChunk;
-					}
+				long nextChunk = scheduler.getNextChunk(currentChunk);
+				if ( nextChunk == - 1 ) {
+					//System.out.println("Finished: " + System.currentTimeMillis());
+					return;
+				} else {
+					currentChunk = nextChunk;
 				}
-				
 			}
 		}
 	}

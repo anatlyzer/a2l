@@ -37,7 +37,7 @@ public class FlattenTestTestCase extends AbstractTestCase {
 
 	@Override
 	protected Object executeLintra(Resource input, int numThreads, boolean footprint, boolean optimised,
-			AggregatedStatsRecorder recorder) throws Exception {
+			AggregatedStatsRecorder recorder, boolean save) throws Exception {
 		
 		ResourceSet rs = new ResourceSetImpl();
 		Resource outLintra = rs.createResource(URI.createFileURI(OUT_MODEL_LINTRA));

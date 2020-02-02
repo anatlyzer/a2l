@@ -3,6 +3,7 @@ package a2l.compiler;
 import org.eclipse.emf.ecore.EObject;
 
 import a2l.anatlyzerext.visitor.AbstractAnatlyzerExtVisitor;
+import a2l.optimiser.anatlyzerext.AllInstancesIndexed;
 import a2l.optimiser.anatlyzerext.IteratorChainExp;
 import a2l.optimiser.anatlyzerext.MutableIteratorExp;
 import a2l.optimiser.anatlyzerext.NavRefAsSet;
@@ -61,6 +62,11 @@ public class ATLExtSerializer extends ATLSerializer {
 		@Override
 		public void inShortCircuitOperatorCallExp(ShortCircuitOperatorCallExp self) {
 			super.inOperatorCallExp(self);
+		}
+		
+		@Override
+		public void inAllInstancesIndexed(AllInstancesIndexed self) {
+			s("<allInstancesIndexed: " + g(self.getOriginal()) + ">");
 		}
 		
 		@Override

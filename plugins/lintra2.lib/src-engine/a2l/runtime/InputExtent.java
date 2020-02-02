@@ -2,6 +2,7 @@ package a2l.runtime;
 
 import java.util.ArrayList;
 import java.util.Collection;
+import java.util.Collections;
 import java.util.List;
 
 /**
@@ -47,6 +48,10 @@ public class InputExtent {
 	public Object get(long i) {
 		// TODO: Handle this somehow!
 		return allInstances.get((int) i);
+	}
+
+	public void shuffle() {
+		Collections.shuffle(allInstances);		
 	}
 
 }

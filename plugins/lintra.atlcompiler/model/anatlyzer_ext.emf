@@ -35,3 +35,9 @@ class IteratorChainElement {
 	val atlext.OCL.Iterator[0..1] iterator; /* optional because the iterator variable may be defined by the IteratorChainExp */
 	val atlext.OCL.OclExpression[1] body;
 }
+
+class AllInstancesIndexed extends atlext.OCL.OclExpression {
+	val atlext.OCL.IteratorExp[1] original;
+	transient attr Object[1] optimisationHint;
+	attr String[1] indexType; // select or exists 
+}

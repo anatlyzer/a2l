@@ -66,7 +66,8 @@ a2l.tests.java2graph.normal.Java2Graph trafo0;if ( this.stats == null ) this.sta
 
 	stats.startConfiguration();
 
-	this.inputExtent = new InputExtent(); this.globalContext = new a2l.tests.java2graph.normal.Java2GraphGlobalContext();this.INModel = this.INDataSource.createModel(this.globalContext::addAllInstancesObject);inputExtent.addAll(this.INModel.allInstances());;
+	this.inputExtent = new InputExtent(); this.globalContext = new a2l.tests.java2graph.normal.Java2GraphGlobalContext();this.INModel = this.INDataSource.createModel(this.globalContext::addAllInstancesObject, globalContext);inputExtent.addAll(this.INModel.allInstances());
+inputExtent.shuffle();;
 
 	this.OUTModel = new a2l.runtime.emf.EMFOutputModel(OUTModelResource, OUTMetamodelResource);
 

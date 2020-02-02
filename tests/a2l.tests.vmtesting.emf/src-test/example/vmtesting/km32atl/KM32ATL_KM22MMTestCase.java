@@ -44,7 +44,7 @@ public class KM32ATL_KM22MMTestCase extends AbstractTestCase {
 
 	@Override
 	protected Object executeLintra(Resource input, int numThreads, boolean footprint, boolean optimised,
-			AggregatedStatsRecorder recorder) throws Exception {
+			AggregatedStatsRecorder recorder, boolean save) throws Exception {
 		KM32ATL_KM22MMRunner trafo = new KM32ATL_KM22MMRunner().
 				setStatsRecorder(recorder).
 				setIN(load(IN_MODEL)).

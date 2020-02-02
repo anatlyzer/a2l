@@ -40,7 +40,7 @@ public class IdentityIMDb_TestCase extends AbstractTestCase {
 	}
 	
 	
-	protected Resource executeLintra(Resource input, int numThreads, boolean footprint, boolean optimised, AggregatedStatsRecorder recorder) throws Exception {
+	protected Resource executeLintra(Resource input, int numThreads, boolean footprint, boolean optimised, AggregatedStatsRecorder recorder, boolean save) throws Exception {
 		Resource outLintra;
 		printLintraExec(numThreads, footprint, optimised);				
 		

@@ -2,6 +2,7 @@
  */
 package a2l.optimiser.anatlyzerext.impl;
 
+import a2l.optimiser.anatlyzerext.AllInstancesIndexed;
 import a2l.optimiser.anatlyzerext.AnatlyzerExtFactory;
 import a2l.optimiser.anatlyzerext.AnatlyzerExtPackage;
 import a2l.optimiser.anatlyzerext.IteratorChainElement;
@@ -72,6 +73,13 @@ public class AnatlyzerExtPackageImpl extends EPackageImpl implements AnatlyzerEx
 	 * @generated
 	 */
 	private EClass iteratorChainElementEClass = null;
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	private EClass allInstancesIndexedEClass = null;
 
 	/**
 	 * Creates an instance of the model <b>Package</b>, registered with
@@ -277,6 +285,46 @@ public class AnatlyzerExtPackageImpl extends EPackageImpl implements AnatlyzerEx
 	 * @generated
 	 */
 	@Override
+	public EClass getAllInstancesIndexed() {
+		return allInstancesIndexedEClass;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
+	public EReference getAllInstancesIndexed_Original() {
+		return (EReference)allInstancesIndexedEClass.getEStructuralFeatures().get(0);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
+	public EAttribute getAllInstancesIndexed_OptimisationHint() {
+		return (EAttribute)allInstancesIndexedEClass.getEStructuralFeatures().get(1);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
+	public EAttribute getAllInstancesIndexed_IndexType() {
+		return (EAttribute)allInstancesIndexedEClass.getEStructuralFeatures().get(2);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
 	public AnatlyzerExtFactory getAnatlyzerExtFactory() {
 		return (AnatlyzerExtFactory)getEFactoryInstance();
 	}
@@ -318,6 +366,11 @@ public class AnatlyzerExtPackageImpl extends EPackageImpl implements AnatlyzerEx
 		createEAttribute(iteratorChainElementEClass, ITERATOR_CHAIN_ELEMENT__NAME);
 		createEReference(iteratorChainElementEClass, ITERATOR_CHAIN_ELEMENT__ITERATOR);
 		createEReference(iteratorChainElementEClass, ITERATOR_CHAIN_ELEMENT__BODY);
+
+		allInstancesIndexedEClass = createEClass(ALL_INSTANCES_INDEXED);
+		createEReference(allInstancesIndexedEClass, ALL_INSTANCES_INDEXED__ORIGINAL);
+		createEAttribute(allInstancesIndexedEClass, ALL_INSTANCES_INDEXED__OPTIMISATION_HINT);
+		createEAttribute(allInstancesIndexedEClass, ALL_INSTANCES_INDEXED__INDEX_TYPE);
 	}
 
 	/**
@@ -356,6 +409,7 @@ public class AnatlyzerExtPackageImpl extends EPackageImpl implements AnatlyzerEx
 		mutableCollectionOperationCallExpEClass.getESuperTypes().add(theOCLPackage.getCollectionOperationCallExp());
 		shortCircuitOperatorCallExpEClass.getESuperTypes().add(theOCLPackage.getOperatorCallExp());
 		iteratorChainExpEClass.getESuperTypes().add(theOCLPackage.getPropertyCallExp());
+		allInstancesIndexedEClass.getESuperTypes().add(theOCLPackage.getOclExpression());
 
 		// Initialize classes, features, and operations; add parameters
 		initEClass(navRefAsSetEClass, NavRefAsSet.class, "NavRefAsSet", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
@@ -376,6 +430,11 @@ public class AnatlyzerExtPackageImpl extends EPackageImpl implements AnatlyzerEx
 		initEAttribute(getIteratorChainElement_Name(), ecorePackage.getEString(), "name", null, 1, 1, IteratorChainElement.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 		initEReference(getIteratorChainElement_Iterator(), theOCLPackage.getIterator(), null, "iterator", null, 0, 1, IteratorChainElement.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 		initEReference(getIteratorChainElement_Body(), theOCLPackage.getOclExpression(), null, "body", null, 1, 1, IteratorChainElement.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+
+		initEClass(allInstancesIndexedEClass, AllInstancesIndexed.class, "AllInstancesIndexed", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
+		initEReference(getAllInstancesIndexed_Original(), theOCLPackage.getIteratorExp(), null, "original", null, 1, 1, AllInstancesIndexed.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEAttribute(getAllInstancesIndexed_OptimisationHint(), ecorePackage.getEJavaObject(), "optimisationHint", null, 1, 1, AllInstancesIndexed.class, IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEAttribute(getAllInstancesIndexed_IndexType(), ecorePackage.getEString(), "indexType", null, 1, 1, AllInstancesIndexed.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
 		// Create resource
 		createResource(eNS_URI);

@@ -104,6 +104,10 @@ public class AnatlyzerExtAdapterFactory extends AdapterFactoryImpl {
 				return createIteratorChainElementAdapter();
 			}
 			@Override
+			public Adapter caseAllInstancesIndexed(AllInstancesIndexed object) {
+				return createAllInstancesIndexedAdapter();
+			}
+			@Override
 			public Adapter caseLocatedElement(LocatedElement object) {
 				return createLocatedElementAdapter();
 			}
@@ -244,6 +248,20 @@ public class AnatlyzerExtAdapterFactory extends AdapterFactoryImpl {
 	 * @generated
 	 */
 	public Adapter createIteratorChainElementAdapter() {
+		return null;
+	}
+
+	/**
+	 * Creates a new adapter for an object of class '{@link a2l.optimiser.anatlyzerext.AllInstancesIndexed <em>All Instances Indexed</em>}'.
+	 * <!-- begin-user-doc -->
+	 * This default implementation returns null so that we can easily ignore cases;
+	 * it's useful to ignore a case when inheritance will catch all the cases anyway.
+	 * <!-- end-user-doc -->
+	 * @return the new adapter.
+	 * @see a2l.optimiser.anatlyzerext.AllInstancesIndexed
+	 * @generated
+	 */
+	public Adapter createAllInstancesIndexedAdapter() {
 		return null;
 	}
 

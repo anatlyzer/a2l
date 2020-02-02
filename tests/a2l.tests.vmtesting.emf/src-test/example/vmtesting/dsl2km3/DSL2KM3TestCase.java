@@ -35,7 +35,7 @@ public class DSL2KM3TestCase extends AbstractTestCase {
 	
 	@Override
 	protected Object executeLintra(Resource input, int numThreads, boolean footprint, boolean optimised,
-			AggregatedStatsRecorder recorder) throws Exception {
+			AggregatedStatsRecorder recorder, boolean save) throws Exception {
 		DSL2KM3Runner lintraTrafo = new DSL2KM3Runner().
 				setStatsRecorder(recorder).
 				setIN(load(IN_MODEL)).

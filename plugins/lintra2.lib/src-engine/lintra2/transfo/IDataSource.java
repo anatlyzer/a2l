@@ -2,6 +2,7 @@ package lintra2.transfo;
 
 import java.util.function.Consumer;
 
+import a2l.runtime.IGlobalContext;
 import a2l.runtime.IModel;
 import a2l.runtime.InputExtent;
 import lintra2.blackboard.IArea;
@@ -12,8 +13,8 @@ public interface IDataSource {
 	public IdMapper getIdMapper();
 	public void fill(IArea area);
 	
-	public default IModel createModel() { return createModel(null); };
-	public IModel createModel(AllInstancesAdder allInstancesAdder);
+	public default IModel createModel() { return createModel(null, null); };
+	public IModel createModel(AllInstancesAdder allInstancesAdder, IGlobalContext globalContext);
 	
 	public InputExtent toInputExtent();
 	public InputExtent toInputExtentPartitioned(int numThreads);

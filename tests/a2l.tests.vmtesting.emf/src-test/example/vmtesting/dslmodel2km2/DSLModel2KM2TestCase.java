@@ -49,7 +49,7 @@ public class DSLModel2KM2TestCase extends AbstractTestCase {
 		
 	@Override
 	protected Object executeLintra(Resource input, int numThreads, boolean footprint, boolean optimised,
-			AggregatedStatsRecorder recorder) throws Exception {
+			AggregatedStatsRecorder recorder, boolean save) throws Exception {
 		DSLModel2KM2Runner trafo = new DSLModel2KM2Runner().
 				setStatsRecorder(recorder).
 				setIN1(load(IN1_MODEL)).

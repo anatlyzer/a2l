@@ -76,6 +76,15 @@ public interface AnatlyzerExtFactory extends EFactory {
 	IteratorChainElement createIteratorChainElement();
 
 	/**
+	 * Returns a new object of class '<em>All Instances Indexed</em>'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return a new object of class '<em>All Instances Indexed</em>'.
+	 * @generated
+	 */
+	AllInstancesIndexed createAllInstancesIndexed();
+
+	/**
 	 * Returns the package supported by this factory.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->

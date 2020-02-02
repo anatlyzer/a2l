@@ -23,5 +23,10 @@
       <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference anatlyzer_ext.ecore#//IteratorChainElement/iterator"/>
       <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference anatlyzer_ext.ecore#//IteratorChainElement/body"/>
     </genClasses>
+    <genClasses ecoreClass="anatlyzer_ext.ecore#//AllInstancesIndexed">
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference anatlyzer_ext.ecore#//AllInstancesIndexed/original"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute anatlyzer_ext.ecore#//AllInstancesIndexed/optimisationHint"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute anatlyzer_ext.ecore#//AllInstancesIndexed/indexType"/>
+    </genClasses>
   </genPackages>
 </genmodel:GenModel>

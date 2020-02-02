@@ -6,26 +6,45 @@ import static linda.atlcompiler.CreationHelpers.createText;
 import static linda.atlcompiler.CreationHelpers.quote;
 
 import java.util.Set;
+import java.util.function.BiFunction;
+import java.util.function.Function;
 import java.util.HashMap;
+import java.util.HashSet;
 import java.util.List;
+import java.util.Map;
 import java.util.stream.Collectors;
+
+import org.eclipse.emf.ecore.util.EcoreUtil;
 
 import a2l.compiler.A2LOptimiser.Optimisation;
 import a2l.driver.DriverConfiguration;
 import anatlyzer.atl.analyser.IAnalyserResult;
 import anatlyzer.atl.util.ATLUtils;
+import anatlyzer.atl.util.Pair;
 import anatlyzer.atl.util.ATLUtils.ModelInfo;
 import anatlyzer.atlext.ATL.Module;
+import anatlyzer.atlext.OCL.OclExpression;
 import linda.atlcompiler.BaseTyping;
+import linda.atlcompiler.CompilationEnv;
 import linda.atlcompiler.CreationHelpers;
+import linda.atlcompiler.GenCompiler;
 import linda.atlcompiler.ITyping;
 import linda.atlcompiler.LindaCompiler;
+import linda.atlcompiler.LindaOclCompiler;
 import linda.atlcompiler.LindaTyping;
 import linda.atlcompiler.Names;
 import lintra.atlcompiler.javagen.JAttribute;
+import lintra.atlcompiler.javagen.JBlock;
 import lintra.atlcompiler.javagen.JClass;
+import lintra.atlcompiler.javagen.JLibType;
+import lintra.atlcompiler.javagen.JMetaType;
 import lintra.atlcompiler.javagen.JMethod;
 import lintra.atlcompiler.javagen.JParameter;
+import lintra.atlcompiler.javagen.JStatement;
+import lintra.atlcompiler.javagen.JType;
+import lintra.atlcompiler.javagen.JTypeRef;
+import lintra.atlcompiler.javagen.JVariableDeclaration;
+import lintra.atlcompiler.javagen.JavaGenModel;
 import lintra.atlcompiler.javagen.JavagenFactory;
 
 public class A2LCompiler extends LindaCompiler {
@@ -43,6 +62,60 @@ public class A2LCompiler extends LindaCompiler {
 		hints = new A2LOptimiser(result).
 			withOptimisations(opts).
 			run();
+	}
+
+	public Pair<List<JStatement>, JVariableDeclaration>  compileExpression(OclExpression expr, JavaGenModel externalModel, BiFunction<CompilationEnv, GenCompiler, JBlock> setup) {
+		A2LCompiler newCompiler = new A2LCompiler(result, driverConfiguration);
+		
+		newCompiler.typ = new LindaTyping(jmodel, model, driverConfiguration);
+		newCompiler.ocl = new LindaOclCompiler(this, newCompiler.env, typ, gen, hints);		
+		newCompiler.tclass = this.tclass;
+		newCompiler.jmodel = this.jmodel;
+
+		
+		JBlock block = setup.apply(newCompiler.env, newCompiler.gen);
+		newCompiler.env.pushBlock(block);
+		
+		newCompiler.startVisiting(expr);
+		JVariableDeclaration var = newCompiler.env.getVar(expr);
+		block.getStatements().addAll(newCompiler.env.getStatements(expr));
+		newCompiler.env.popBlock();
+		
+		if (externalModel != null) {
+			
+			Set<JType> allTypes = new HashSet<JType>();
+			allTypes.addAll(jmodel.getLibTypes());
+			allTypes.addAll(jmodel.getMetaTypes());
+			Map<JType, JType> typeMap = new HashMap<JType, JType>();
+			
+			// This is a hack to merge the types used in the compiled expression with the current model using by the footprint compiler
+			block.eAllContents().forEachRemaining(o -> {
+				if (o instanceof JTypeRef) {
+					JTypeRef ref = (JTypeRef) o;
+					JType type = ref.getType();
+					if (allTypes.contains(type)) {
+						JType copy = typeMap.get(type);
+						if (copy == null) {
+							copy = EcoreUtil.copy(type);
+							typeMap.put(type, copy);
+						}
+						ref.setType(copy);
+					}
+				}
+			});
+			
+			typeMap.forEach((original, copy) -> {
+				if (copy instanceof JLibType) {
+					externalModel.getLibTypes().add((JLibType) copy);
+				} else if (copy instanceof JMetaType) {
+					externalModel.getMetaTypes().add((JMetaType) copy);
+				} else {
+					throw new IllegalStateException();
+				}
+			});			
+		}
+		
+		return new Pair<List<JStatement>, JVariableDeclaration>(newCompiler.env.getStatements(expr), var);
 	}
 
 	
@@ -173,6 +246,5 @@ public class A2LCompiler extends LindaCompiler {
 		}		
 		
 	}
-	
 
 }

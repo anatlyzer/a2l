@@ -1689,6 +1689,260 @@ public interface AnatlyzerExtPackage extends EPackage {
 
 
 	/**
+	 * The meta object id for the '{@link a2l.optimiser.anatlyzerext.impl.AllInstancesIndexedImpl <em>All Instances Indexed</em>}' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see a2l.optimiser.anatlyzerext.impl.AllInstancesIndexedImpl
+	 * @see a2l.optimiser.anatlyzerext.impl.AnatlyzerExtPackageImpl#getAllInstancesIndexed()
+	 * @generated
+	 */
+	int ALL_INSTANCES_INDEXED = 6;
+
+	/**
+	 * The feature id for the '<em><b>Location</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int ALL_INSTANCES_INDEXED__LOCATION = OCLPackage.OCL_EXPRESSION__LOCATION;
+
+	/**
+	 * The feature id for the '<em><b>Comments Before</b></em>' attribute list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int ALL_INSTANCES_INDEXED__COMMENTS_BEFORE = OCLPackage.OCL_EXPRESSION__COMMENTS_BEFORE;
+
+	/**
+	 * The feature id for the '<em><b>Comments After</b></em>' attribute list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int ALL_INSTANCES_INDEXED__COMMENTS_AFTER = OCLPackage.OCL_EXPRESSION__COMMENTS_AFTER;
+
+	/**
+	 * The feature id for the '<em><b>File Location</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int ALL_INSTANCES_INDEXED__FILE_LOCATION = OCLPackage.OCL_EXPRESSION__FILE_LOCATION;
+
+	/**
+	 * The feature id for the '<em><b>File Object</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int ALL_INSTANCES_INDEXED__FILE_OBJECT = OCLPackage.OCL_EXPRESSION__FILE_OBJECT;
+
+	/**
+	 * The feature id for the '<em><b>Problems</b></em>' reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int ALL_INSTANCES_INDEXED__PROBLEMS = OCLPackage.OCL_EXPRESSION__PROBLEMS;
+
+	/**
+	 * The feature id for the '<em><b>Annotations</b></em>' map.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int ALL_INSTANCES_INDEXED__ANNOTATIONS = OCLPackage.OCL_EXPRESSION__ANNOTATIONS;
+
+	/**
+	 * The feature id for the '<em><b>Inferred Type</b></em>' reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int ALL_INSTANCES_INDEXED__INFERRED_TYPE = OCLPackage.OCL_EXPRESSION__INFERRED_TYPE;
+
+	/**
+	 * The feature id for the '<em><b>Type</b></em>' containment reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int ALL_INSTANCES_INDEXED__TYPE = OCLPackage.OCL_EXPRESSION__TYPE;
+
+	/**
+	 * The feature id for the '<em><b>If Exp3</b></em>' container reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int ALL_INSTANCES_INDEXED__IF_EXP3 = OCLPackage.OCL_EXPRESSION__IF_EXP3;
+
+	/**
+	 * The feature id for the '<em><b>Applied Property</b></em>' container reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int ALL_INSTANCES_INDEXED__APPLIED_PROPERTY = OCLPackage.OCL_EXPRESSION__APPLIED_PROPERTY;
+
+	/**
+	 * The feature id for the '<em><b>Collection</b></em>' container reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int ALL_INSTANCES_INDEXED__COLLECTION = OCLPackage.OCL_EXPRESSION__COLLECTION;
+
+	/**
+	 * The feature id for the '<em><b>Let Exp</b></em>' container reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int ALL_INSTANCES_INDEXED__LET_EXP = OCLPackage.OCL_EXPRESSION__LET_EXP;
+
+	/**
+	 * The feature id for the '<em><b>Loop Exp</b></em>' container reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int ALL_INSTANCES_INDEXED__LOOP_EXP = OCLPackage.OCL_EXPRESSION__LOOP_EXP;
+
+	/**
+	 * The feature id for the '<em><b>Parent Operation</b></em>' container reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int ALL_INSTANCES_INDEXED__PARENT_OPERATION = OCLPackage.OCL_EXPRESSION__PARENT_OPERATION;
+
+	/**
+	 * The feature id for the '<em><b>Initialized Variable</b></em>' container reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int ALL_INSTANCES_INDEXED__INITIALIZED_VARIABLE = OCLPackage.OCL_EXPRESSION__INITIALIZED_VARIABLE;
+
+	/**
+	 * The feature id for the '<em><b>If Exp2</b></em>' container reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int ALL_INSTANCES_INDEXED__IF_EXP2 = OCLPackage.OCL_EXPRESSION__IF_EXP2;
+
+	/**
+	 * The feature id for the '<em><b>Owning Operation</b></em>' container reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int ALL_INSTANCES_INDEXED__OWNING_OPERATION = OCLPackage.OCL_EXPRESSION__OWNING_OPERATION;
+
+	/**
+	 * The feature id for the '<em><b>If Exp1</b></em>' container reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int ALL_INSTANCES_INDEXED__IF_EXP1 = OCLPackage.OCL_EXPRESSION__IF_EXP1;
+
+	/**
+	 * The feature id for the '<em><b>Owning Attribute</b></em>' container reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int ALL_INSTANCES_INDEXED__OWNING_ATTRIBUTE = OCLPackage.OCL_EXPRESSION__OWNING_ATTRIBUTE;
+
+	/**
+	 * The feature id for the '<em><b>Implicitly Casted</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int ALL_INSTANCES_INDEXED__IMPLICITLY_CASTED = OCLPackage.OCL_EXPRESSION__IMPLICITLY_CASTED;
+
+	/**
+	 * The feature id for the '<em><b>No Casted Type</b></em>' reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int ALL_INSTANCES_INDEXED__NO_CASTED_TYPE = OCLPackage.OCL_EXPRESSION__NO_CASTED_TYPE;
+
+	/**
+	 * The feature id for the '<em><b>Original</b></em>' containment reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int ALL_INSTANCES_INDEXED__ORIGINAL = OCLPackage.OCL_EXPRESSION_FEATURE_COUNT + 0;
+
+	/**
+	 * The feature id for the '<em><b>Optimisation Hint</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int ALL_INSTANCES_INDEXED__OPTIMISATION_HINT = OCLPackage.OCL_EXPRESSION_FEATURE_COUNT + 1;
+
+	/**
+	 * The feature id for the '<em><b>Index Type</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int ALL_INSTANCES_INDEXED__INDEX_TYPE = OCLPackage.OCL_EXPRESSION_FEATURE_COUNT + 2;
+
+	/**
+	 * The number of structural features of the '<em>All Instances Indexed</em>' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int ALL_INSTANCES_INDEXED_FEATURE_COUNT = OCLPackage.OCL_EXPRESSION_FEATURE_COUNT + 3;
+
+	/**
+	 * The number of operations of the '<em>All Instances Indexed</em>' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int ALL_INSTANCES_INDEXED_OPERATION_COUNT = OCLPackage.OCL_EXPRESSION_OPERATION_COUNT + 0;
+
+
+	/**
 	 * Returns the meta object for class '{@link a2l.optimiser.anatlyzerext.NavRefAsSet <em>Nav Ref As Set</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -1826,6 +2080,49 @@ public interface AnatlyzerExtPackage extends EPackage {
 	EReference getIteratorChainElement_Body();
 
 	/**
+	 * Returns the meta object for class '{@link a2l.optimiser.anatlyzerext.AllInstancesIndexed <em>All Instances Indexed</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for class '<em>All Instances Indexed</em>'.
+	 * @see a2l.optimiser.anatlyzerext.AllInstancesIndexed
+	 * @generated
+	 */
+	EClass getAllInstancesIndexed();
+
+	/**
+	 * Returns the meta object for the containment reference '{@link a2l.optimiser.anatlyzerext.AllInstancesIndexed#getOriginal <em>Original</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the containment reference '<em>Original</em>'.
+	 * @see a2l.optimiser.anatlyzerext.AllInstancesIndexed#getOriginal()
+	 * @see #getAllInstancesIndexed()
+	 * @generated
+	 */
+	EReference getAllInstancesIndexed_Original();
+
+	/**
+	 * Returns the meta object for the attribute '{@link a2l.optimiser.anatlyzerext.AllInstancesIndexed#getOptimisationHint <em>Optimisation Hint</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the attribute '<em>Optimisation Hint</em>'.
+	 * @see a2l.optimiser.anatlyzerext.AllInstancesIndexed#getOptimisationHint()
+	 * @see #getAllInstancesIndexed()
+	 * @generated
+	 */
+	EAttribute getAllInstancesIndexed_OptimisationHint();
+
+	/**
+	 * Returns the meta object for the attribute '{@link a2l.optimiser.anatlyzerext.AllInstancesIndexed#getIndexType <em>Index Type</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the attribute '<em>Index Type</em>'.
+	 * @see a2l.optimiser.anatlyzerext.AllInstancesIndexed#getIndexType()
+	 * @see #getAllInstancesIndexed()
+	 * @generated
+	 */
+	EAttribute getAllInstancesIndexed_IndexType();
+
+	/**
 	 * Returns the factory that creates the instances of the model.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -1951,6 +2248,36 @@ public interface AnatlyzerExtPackage extends EPackage {
 		 * @generated
 		 */
 		EReference ITERATOR_CHAIN_ELEMENT__BODY = eINSTANCE.getIteratorChainElement_Body();
+		/**
+		 * The meta object literal for the '{@link a2l.optimiser.anatlyzerext.impl.AllInstancesIndexedImpl <em>All Instances Indexed</em>}' class.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @see a2l.optimiser.anatlyzerext.impl.AllInstancesIndexedImpl
+		 * @see a2l.optimiser.anatlyzerext.impl.AnatlyzerExtPackageImpl#getAllInstancesIndexed()
+		 * @generated
+		 */
+		EClass ALL_INSTANCES_INDEXED = eINSTANCE.getAllInstancesIndexed();
+		/**
+		 * The meta object literal for the '<em><b>Original</b></em>' containment reference feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EReference ALL_INSTANCES_INDEXED__ORIGINAL = eINSTANCE.getAllInstancesIndexed_Original();
+		/**
+		 * The meta object literal for the '<em><b>Optimisation Hint</b></em>' attribute feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EAttribute ALL_INSTANCES_INDEXED__OPTIMISATION_HINT = eINSTANCE.getAllInstancesIndexed_OptimisationHint();
+		/**
+		 * The meta object literal for the '<em><b>Index Type</b></em>' attribute feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EAttribute ALL_INSTANCES_INDEXED__INDEX_TYPE = eINSTANCE.getAllInstancesIndexed_IndexType();
 
 	}
 

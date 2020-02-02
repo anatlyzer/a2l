@@ -20,12 +20,7 @@ public class InputExtendPartitioned extends InputExtent {
 	public void add(Object o) {
 		throw new UnsupportedOperationException();
 	}
-	
-	@Override
-	public void addAll(Iterable<? extends Object> objects) {
-		throw new UnsupportedOperationException();
-	}
-	
+		
 	public long size() {
 		throw new UnsupportedOperationException();
 	}

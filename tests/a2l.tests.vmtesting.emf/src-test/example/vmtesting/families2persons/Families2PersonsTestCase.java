@@ -39,7 +39,7 @@ public class Families2PersonsTestCase extends AbstractTestCase {
 
 	@Override
 	protected Object executeLintra(Resource input, int numThreads, boolean footprint, boolean optimised,
-			AggregatedStatsRecorder recorder) throws Exception {
+			AggregatedStatsRecorder recorder, boolean save) throws Exception {
 		
 		Families2PersonsRunner trafo = new Families2PersonsRunner().
 				setStatsRecorder(recorder).

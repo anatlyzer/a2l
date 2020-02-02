@@ -39,7 +39,7 @@ public class AssertionModificationTestCase extends AbstractTestCase {
 
 	@Override
 	protected Object executeLintra(Resource input, int numThreads, boolean footprint, boolean optimised,
-			AggregatedStatsRecorder recorder) throws Exception {
+			AggregatedStatsRecorder recorder, boolean save) throws Exception {
 
 		AssertionModificationRunner lintraTrafo = new AssertionModificationRunner().
 				setStatsRecorder(recorder).

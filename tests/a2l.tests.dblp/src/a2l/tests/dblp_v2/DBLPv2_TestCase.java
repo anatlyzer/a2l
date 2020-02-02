@@ -44,7 +44,7 @@ public class DBLPv2_TestCase extends AbstractTestCase {
 	}
 
 	@Override
-	protected Resource executeLintra(Resource input, int numThreads, boolean footprint, boolean optimised, AggregatedStatsRecorder recorder) throws Exception {
+	protected Resource executeLintra(Resource input, int numThreads, boolean footprint, boolean optimised, AggregatedStatsRecorder recorder, boolean save) throws Exception {
 		Resource outLintra;
 		printLintraExec(numThreads, footprint, optimised);				
 		

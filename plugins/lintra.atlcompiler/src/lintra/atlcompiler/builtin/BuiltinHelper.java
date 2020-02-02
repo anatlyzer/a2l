@@ -2,6 +2,7 @@ package lintra.atlcompiler.builtin;
 
 import static linda.atlcompiler.CreationHelpers.addStm;
 import static linda.atlcompiler.CreationHelpers.createAssignment;
+import static linda.atlcompiler.CreationHelpers.createCommentedList;
 import static linda.atlcompiler.CreationHelpers.createForeach;
 import static linda.atlcompiler.CreationHelpers.createLoopVar;
 import static linda.atlcompiler.CreationHelpers.createSimpleIf;
@@ -13,8 +14,12 @@ import java.util.List;
 
 import org.eclipse.emf.common.util.EList;
 
+import a2l.compiler.OptimisationHints;
 import a2l.compiler.VarStatementPair;
+import a2l.compiler.OptimisationHints.Hotspot;
+import a2l.compiler.OptimisationHints.IndexedValue;
 import a2l.driver.ICollectionsDriver;
+import a2l.optimiser.anatlyzerext.AllInstancesIndexed;
 import a2l.optimiser.anatlyzerext.IteratorChainElement;
 import a2l.optimiser.anatlyzerext.IteratorChainExp;
 import anatlyzer.atl.types.CollectionType;
@@ -31,7 +36,9 @@ import anatlyzer.atlext.OCL.OclExpression;
 import anatlyzer.atlext.OCL.OperationCallExp;
 import linda.atlcompiler.CompilationEnv;
 import linda.atlcompiler.CreationHelpers;
+import linda.atlcompiler.GenCompiler;
 import linda.atlcompiler.ITyping;
+import linda.atlcompiler.LindaCompiler;
 import linda.atlcompiler.ICompilationContext.Context;
 import linda.atlcompiler.ITyping.MutabilityAttribute;
 import lintra.atlcompiler.javagen.JAssignment;
@@ -54,6 +61,7 @@ public class BuiltinHelper {
 		initStringOperations(r);		
 		initCollectionOperations(r);
 		initIteratorChainOperations(r);
+		initAllInstanceIndexOperations(r);
 		return r;
 	}
 
@@ -463,6 +471,35 @@ public class BuiltinHelper {
 				currentBlock.getStatements().add(addStatement);
 				
 				return new VarStatementPair(resultVar, stms);
+			}
+		});
+	}
+
+
+	private static void initAllInstanceIndexOperations(BuiltinOperationRegistry r) {
+		r.register(new IAllInstancesIndex() {
+			
+			@Override
+			public String getIndexType() {
+				return "exists";
+			}
+
+			@Override
+			public VarStatementPair compile(Context ctx, AllInstancesIndexed self, LindaCompiler compiler) {
+				OptimisationHints.IndexedValue hotspot = (IndexedValue) self.getOptimisationHint();
+				GenCompiler gen = ctx.getGenerator();
+				CompilationEnv env = ctx.getEnv();
+				ITyping typ = ctx.getTyping();
+						
+				JVariableDeclaration newVar = gen.addLocalVar(env.currentBlock(), "op", typ.createTypeRef("boolean"));
+				List<JStatement> stms = createCommentedList(self);
+				
+				compiler.startVisiting(hotspot.getDynamicKeyExpr()); // Make sure this gets compiled
+				stms.addAll(env.getStatements(hotspot.getDynamicKeyExpr()));
+						
+				stms.add( createAssignment(newVar, "this.globalContext." + hotspot.getCachedGetMethodName() + "(" + env.getVar(hotspot.getDynamicKeyExpr()).getName() + ")"));
+
+				return new VarStatementPair(newVar, stms);
 			}
 		});
 	}

@@ -11,6 +11,7 @@ import org.eclipse.emf.common.util.TreeIterator;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.resource.Resource;
 
+import a2l.runtime.IGlobalContext;
 import a2l.runtime.IModel;
 import a2l.runtime.InputExtendPartitioned;
 import a2l.runtime.InputExtent;
@@ -44,13 +45,13 @@ public class EMFDataSource implements IDataSource {
 		private static NullFootprint INSTANCE = new NullFootprint();
 		
 		@Override
-		public boolean inGlobal(Object o) {
+		public boolean inGlobal(Object o, IGlobalContext context) {
 			return true;
 		}
 		
 	}
 	
-	public void fillList(Collection<Object> l, AllInstancesAdder adder) {
+	public void fillList(Collection<Object> l, AllInstancesAdder adder, IGlobalContext globalContext) {
 		if ( alreadyFilled )
 			throw new IllegalArgumentException("Sanity check to make sure we don't fill several models with the same data source");
 		alreadyFilled = true;
@@ -63,7 +64,8 @@ public class EMFDataSource implements IDataSource {
 			}
 			
 			// Only add if it is in the footprint. By default we use NullFootprint which always add
-			if ( footprint.inGlobal(obj) ) { 
+			// Also, now inGlobal (which should have another name) has the side effect of adding cached values the global context
+			if ( footprint.inGlobal(obj, globalContext) ) { 
 				l.add(obj);
 			}
 		}
@@ -71,7 +73,7 @@ public class EMFDataSource implements IDataSource {
 	
 	public InputExtent toInputExtent() {
 		ArrayList<Object> list = new ArrayList<>(1024 * 512);
-		fillList(list, null);
+		fillList(list, null, null);
 		// TODO: Do all of this is an efficient way without duplicating lists a lot
 		InputExtent extent = new InputExtent();
 		extent.addAll(list);
@@ -92,7 +94,7 @@ public class EMFDataSource implements IDataSource {
 			EObject obj = it.next();
 
 			// If there is a footprint and the object won't appear, don't use it
-			if ( footprint != null && !footprint.inGlobal(obj) ) 
+			if ( footprint != null && !footprint.inGlobal(obj, null) ) 
 				continue;
 			
 			
@@ -114,12 +116,12 @@ public class EMFDataSource implements IDataSource {
 	}
 
 	@Override
-	public IModel createModel(AllInstancesAdder adder) {
+	public IModel createModel(AllInstancesAdder adder, IGlobalContext globalContext) {
 //		HashSet<Object> list = new HashSet<>();
 //		fillList(list);
 //		return new EMFModel(list);
 		ArrayList<Object> list = new ArrayList<>();
-		fillList(list, adder);
+		fillList(list, adder, globalContext);
 		return new EMFModel(list);
 	}
 	

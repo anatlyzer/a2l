@@ -9,14 +9,6 @@ public class AbstractAnatlyzerExtVisitor  extends anatlyzer.atlext.processing.Ab
 	protected boolean _debug = false;
 	protected EObject current;
 	
-	public VisitingActions preIteratorChainExp(a2l.optimiser.anatlyzerext.IteratorChainExp self) { return new VisitingActions("annotations" , "type" , "source" , "iterator" , "preChain" , "chain"); } 
-	public void inIteratorChainExp(a2l.optimiser.anatlyzerext.IteratorChainExp self) { if ( _debug ) System.out.println("Visiting IteratorChainExp"); }
-	public void beforeIteratorChainExp(a2l.optimiser.anatlyzerext.IteratorChainExp self) { }
-	public void afterIteratorChainExp(a2l.optimiser.anatlyzerext.IteratorChainExp self) { }
-	public VisitingActions preMutableIteratorExp(a2l.optimiser.anatlyzerext.MutableIteratorExp self) { return new VisitingActions("annotations" , "type" , "source" , "body" , "iterators"); } 
-	public void inMutableIteratorExp(a2l.optimiser.anatlyzerext.MutableIteratorExp self) { if ( _debug ) System.out.println("Visiting MutableIteratorExp"); }
-	public void beforeMutableIteratorExp(a2l.optimiser.anatlyzerext.MutableIteratorExp self) { }
-	public void afterMutableIteratorExp(a2l.optimiser.anatlyzerext.MutableIteratorExp self) { }
 	public VisitingActions preShortCircuitOperatorCallExp(a2l.optimiser.anatlyzerext.ShortCircuitOperatorCallExp self) { return new VisitingActions("annotations" , "type" , "source" , "arguments" , "resolveTempResolvedBy"); } 
 	public void inShortCircuitOperatorCallExp(a2l.optimiser.anatlyzerext.ShortCircuitOperatorCallExp self) { if ( _debug ) System.out.println("Visiting ShortCircuitOperatorCallExp"); }
 	public void beforeShortCircuitOperatorCallExp(a2l.optimiser.anatlyzerext.ShortCircuitOperatorCallExp self) { }
@@ -25,14 +17,26 @@ public class AbstractAnatlyzerExtVisitor  extends anatlyzer.atlext.processing.Ab
 	public void inIteratorChainElement(a2l.optimiser.anatlyzerext.IteratorChainElement self) { if ( _debug ) System.out.println("Visiting IteratorChainElement"); }
 	public void beforeIteratorChainElement(a2l.optimiser.anatlyzerext.IteratorChainElement self) { }
 	public void afterIteratorChainElement(a2l.optimiser.anatlyzerext.IteratorChainElement self) { }
-	public VisitingActions preMutableCollectionOperationCallExp(a2l.optimiser.anatlyzerext.MutableCollectionOperationCallExp self) { return new VisitingActions("annotations" , "type" , "source" , "arguments" , "resolveTempResolvedBy"); } 
-	public void inMutableCollectionOperationCallExp(a2l.optimiser.anatlyzerext.MutableCollectionOperationCallExp self) { if ( _debug ) System.out.println("Visiting MutableCollectionOperationCallExp"); }
-	public void beforeMutableCollectionOperationCallExp(a2l.optimiser.anatlyzerext.MutableCollectionOperationCallExp self) { }
-	public void afterMutableCollectionOperationCallExp(a2l.optimiser.anatlyzerext.MutableCollectionOperationCallExp self) { }
+	public VisitingActions preIteratorChainExp(a2l.optimiser.anatlyzerext.IteratorChainExp self) { return new VisitingActions("annotations" , "type" , "source" , "iterator" , "preChain" , "chain"); } 
+	public void inIteratorChainExp(a2l.optimiser.anatlyzerext.IteratorChainExp self) { if ( _debug ) System.out.println("Visiting IteratorChainExp"); }
+	public void beforeIteratorChainExp(a2l.optimiser.anatlyzerext.IteratorChainExp self) { }
+	public void afterIteratorChainExp(a2l.optimiser.anatlyzerext.IteratorChainExp self) { }
 	public VisitingActions preNavRefAsSet(a2l.optimiser.anatlyzerext.NavRefAsSet self) { return new VisitingActions("annotations" , "type" , "source"); } 
 	public void inNavRefAsSet(a2l.optimiser.anatlyzerext.NavRefAsSet self) { if ( _debug ) System.out.println("Visiting NavRefAsSet"); }
 	public void beforeNavRefAsSet(a2l.optimiser.anatlyzerext.NavRefAsSet self) { }
 	public void afterNavRefAsSet(a2l.optimiser.anatlyzerext.NavRefAsSet self) { }
+	public VisitingActions preAllInstancesIndexed(a2l.optimiser.anatlyzerext.AllInstancesIndexed self) { return new VisitingActions("annotations" , "type" , "original"); } 
+	public void inAllInstancesIndexed(a2l.optimiser.anatlyzerext.AllInstancesIndexed self) { if ( _debug ) System.out.println("Visiting AllInstancesIndexed"); }
+	public void beforeAllInstancesIndexed(a2l.optimiser.anatlyzerext.AllInstancesIndexed self) { }
+	public void afterAllInstancesIndexed(a2l.optimiser.anatlyzerext.AllInstancesIndexed self) { }
+	public VisitingActions preMutableCollectionOperationCallExp(a2l.optimiser.anatlyzerext.MutableCollectionOperationCallExp self) { return new VisitingActions("annotations" , "type" , "source" , "arguments" , "resolveTempResolvedBy"); } 
+	public void inMutableCollectionOperationCallExp(a2l.optimiser.anatlyzerext.MutableCollectionOperationCallExp self) { if ( _debug ) System.out.println("Visiting MutableCollectionOperationCallExp"); }
+	public void beforeMutableCollectionOperationCallExp(a2l.optimiser.anatlyzerext.MutableCollectionOperationCallExp self) { }
+	public void afterMutableCollectionOperationCallExp(a2l.optimiser.anatlyzerext.MutableCollectionOperationCallExp self) { }
+	public VisitingActions preMutableIteratorExp(a2l.optimiser.anatlyzerext.MutableIteratorExp self) { return new VisitingActions("annotations" , "type" , "source" , "body" , "iterators"); } 
+	public void inMutableIteratorExp(a2l.optimiser.anatlyzerext.MutableIteratorExp self) { if ( _debug ) System.out.println("Visiting MutableIteratorExp"); }
+	public void beforeMutableIteratorExp(a2l.optimiser.anatlyzerext.MutableIteratorExp self) { }
+	public void afterMutableIteratorExp(a2l.optimiser.anatlyzerext.MutableIteratorExp self) { }
 		
 	protected VisitingActions actions(Object... things) {
 		return new VisitingActions(things);
@@ -45,40 +49,6 @@ public class AbstractAnatlyzerExtVisitor  extends anatlyzer.atlext.processing.Ab
 	public EObject getCurrent() { return current; }
 	public void setCurrent(EObject o) { current = o; }
 	
-	protected void visitIteratorChainExp(a2l.optimiser.anatlyzerext.IteratorChainExp this_) {
-		AbstractAnatlyzerExtVisitor visitor = this;
-		VisitingActions v = visitor.preIteratorChainExp(this_);
-		if ( v == null ) {
-			return;
-		}
-	
-		EObject pop = visitor.getCurrent();
-		visitor.setCurrent(this_);
-		visitor.beforeIteratorChainExp(this_);
-		
-		visitActions(v, this_);		
-					
-		visitor.inIteratorChainExp(this_);
-		visitor.afterIteratorChainExp(this_);
-		visitor.setCurrent(pop);	
-	} 
-	protected void visitMutableIteratorExp(a2l.optimiser.anatlyzerext.MutableIteratorExp this_) {
-		AbstractAnatlyzerExtVisitor visitor = this;
-		VisitingActions v = visitor.preMutableIteratorExp(this_);
-		if ( v == null ) {
-			return;
-		}
-	
-		EObject pop = visitor.getCurrent();
-		visitor.setCurrent(this_);
-		visitor.beforeMutableIteratorExp(this_);
-		
-		visitActions(v, this_);		
-					
-		visitor.inMutableIteratorExp(this_);
-		visitor.afterMutableIteratorExp(this_);
-		visitor.setCurrent(pop);	
-	} 
 	protected void visitShortCircuitOperatorCallExp(a2l.optimiser.anatlyzerext.ShortCircuitOperatorCallExp this_) {
 		AbstractAnatlyzerExtVisitor visitor = this;
 		VisitingActions v = visitor.preShortCircuitOperatorCallExp(this_);
@@ -113,21 +83,21 @@ public class AbstractAnatlyzerExtVisitor  extends anatlyzer.atlext.processing.Ab
 		visitor.afterIteratorChainElement(this_);
 		visitor.setCurrent(pop);	
 	} 
-	protected void visitMutableCollectionOperationCallExp(a2l.optimiser.anatlyzerext.MutableCollectionOperationCallExp this_) {
+	protected void visitIteratorChainExp(a2l.optimiser.anatlyzerext.IteratorChainExp this_) {
 		AbstractAnatlyzerExtVisitor visitor = this;
-		VisitingActions v = visitor.preMutableCollectionOperationCallExp(this_);
+		VisitingActions v = visitor.preIteratorChainExp(this_);
 		if ( v == null ) {
 			return;
 		}
 	
 		EObject pop = visitor.getCurrent();
 		visitor.setCurrent(this_);
-		visitor.beforeMutableCollectionOperationCallExp(this_);
+		visitor.beforeIteratorChainExp(this_);
 		
 		visitActions(v, this_);		
 					
-		visitor.inMutableCollectionOperationCallExp(this_);
-		visitor.afterMutableCollectionOperationCallExp(this_);
+		visitor.inIteratorChainExp(this_);
+		visitor.afterIteratorChainExp(this_);
 		visitor.setCurrent(pop);	
 	} 
 	protected void visitNavRefAsSet(a2l.optimiser.anatlyzerext.NavRefAsSet this_) {
@@ -145,6 +115,57 @@ public class AbstractAnatlyzerExtVisitor  extends anatlyzer.atlext.processing.Ab
 					
 		visitor.inNavRefAsSet(this_);
 		visitor.afterNavRefAsSet(this_);
+		visitor.setCurrent(pop);	
+	} 
+	protected void visitAllInstancesIndexed(a2l.optimiser.anatlyzerext.AllInstancesIndexed this_) {
+		AbstractAnatlyzerExtVisitor visitor = this;
+		VisitingActions v = visitor.preAllInstancesIndexed(this_);
+		if ( v == null ) {
+			return;
+		}
+	
+		EObject pop = visitor.getCurrent();
+		visitor.setCurrent(this_);
+		visitor.beforeAllInstancesIndexed(this_);
+		
+		visitActions(v, this_);		
+					
+		visitor.inAllInstancesIndexed(this_);
+		visitor.afterAllInstancesIndexed(this_);
+		visitor.setCurrent(pop);	
+	} 
+	protected void visitMutableCollectionOperationCallExp(a2l.optimiser.anatlyzerext.MutableCollectionOperationCallExp this_) {
+		AbstractAnatlyzerExtVisitor visitor = this;
+		VisitingActions v = visitor.preMutableCollectionOperationCallExp(this_);
+		if ( v == null ) {
+			return;
+		}
+	
+		EObject pop = visitor.getCurrent();
+		visitor.setCurrent(this_);
+		visitor.beforeMutableCollectionOperationCallExp(this_);
+		
+		visitActions(v, this_);		
+					
+		visitor.inMutableCollectionOperationCallExp(this_);
+		visitor.afterMutableCollectionOperationCallExp(this_);
+		visitor.setCurrent(pop);	
+	} 
+	protected void visitMutableIteratorExp(a2l.optimiser.anatlyzerext.MutableIteratorExp this_) {
+		AbstractAnatlyzerExtVisitor visitor = this;
+		VisitingActions v = visitor.preMutableIteratorExp(this_);
+		if ( v == null ) {
+			return;
+		}
+	
+		EObject pop = visitor.getCurrent();
+		visitor.setCurrent(this_);
+		visitor.beforeMutableIteratorExp(this_);
+		
+		visitActions(v, this_);		
+					
+		visitor.inMutableIteratorExp(this_);
+		visitor.afterMutableIteratorExp(this_);
 		visitor.setCurrent(pop);	
 	} 
 		
@@ -181,12 +202,13 @@ public class AbstractAnatlyzerExtVisitor  extends anatlyzer.atlext.processing.Ab
 	}
 	
 	protected void visit(EObject obj) {	
-	if ( obj.eClass().getName().equals("IteratorChainExp") ) { visitIteratorChainExp((a2l.optimiser.anatlyzerext.IteratorChainExp) obj); return; }
-	if ( obj.eClass().getName().equals("MutableIteratorExp") ) { visitMutableIteratorExp((a2l.optimiser.anatlyzerext.MutableIteratorExp) obj); return; }
 	if ( obj.eClass().getName().equals("ShortCircuitOperatorCallExp") ) { visitShortCircuitOperatorCallExp((a2l.optimiser.anatlyzerext.ShortCircuitOperatorCallExp) obj); return; }
 	if ( obj.eClass().getName().equals("IteratorChainElement") ) { visitIteratorChainElement((a2l.optimiser.anatlyzerext.IteratorChainElement) obj); return; }
-	if ( obj.eClass().getName().equals("MutableCollectionOperationCallExp") ) { visitMutableCollectionOperationCallExp((a2l.optimiser.anatlyzerext.MutableCollectionOperationCallExp) obj); return; }
+	if ( obj.eClass().getName().equals("IteratorChainExp") ) { visitIteratorChainExp((a2l.optimiser.anatlyzerext.IteratorChainExp) obj); return; }
 	if ( obj.eClass().getName().equals("NavRefAsSet") ) { visitNavRefAsSet((a2l.optimiser.anatlyzerext.NavRefAsSet) obj); return; }
+	if ( obj.eClass().getName().equals("AllInstancesIndexed") ) { visitAllInstancesIndexed((a2l.optimiser.anatlyzerext.AllInstancesIndexed) obj); return; }
+	if ( obj.eClass().getName().equals("MutableCollectionOperationCallExp") ) { visitMutableCollectionOperationCallExp((a2l.optimiser.anatlyzerext.MutableCollectionOperationCallExp) obj); return; }
+	if ( obj.eClass().getName().equals("MutableIteratorExp") ) { visitMutableIteratorExp((a2l.optimiser.anatlyzerext.MutableIteratorExp) obj); return; }
 		
 	   super.visit(obj);
 

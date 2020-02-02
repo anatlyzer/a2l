@@ -36,7 +36,7 @@ public class Class2RelationalTestCase extends AbstractTestCase {
 
 	@Override
 	protected Object executeLintra(Resource input, int numThreads, boolean footprint, boolean optimised,
-			AggregatedStatsRecorder recorder) throws Exception {
+			AggregatedStatsRecorder recorder, boolean save) throws Exception {
 		Class2RelationalRunner lintraTrafo = new Class2RelationalRunner().
 				setStatsRecorder(recorder).
 				setIN(load(IN_MODEL)).

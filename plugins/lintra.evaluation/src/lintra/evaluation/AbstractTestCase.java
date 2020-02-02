@@ -496,7 +496,7 @@ public abstract class AbstractTestCase {
 				System.out.print("Paused before starting. " + getPid() + " Press a key...");
 				System.in.read();
 			}
-			outLintra = executeLintra(input, numThreads, args.footprint, args.optimised, recorder);
+			outLintra = executeLintra(input, numThreads, args.footprint, args.optimised, recorder, args.save);
 			// outLintra = null; // free
 			recorder.printCurrentTo(System.out);
 			if ( pauseBeforeStart ) {
@@ -541,9 +541,10 @@ public abstract class AbstractTestCase {
 
 	/**
 	 * May return Resource or List<Resource> if there are multiple outputs 
+	 * @param save TODO
 	 */
-	protected abstract Object executeLintra(Resource input, int numThreads, boolean footprint, boolean optimised, AggregatedStatsRecorder recorder) throws Exception;	
-	
+	protected abstract Object executeLintra(Resource input, int numThreads, boolean footprint, boolean optimised, AggregatedStatsRecorder recorder, boolean save) throws Exception;
+		
 	protected Object executeATL(String trafo, String inXmiPath, Resource input, IStatsRecorder recorder, boolean save) throws Exception {
 		return executeATL(trafo, inXmiPath, input, recorder, true, save);
 	}

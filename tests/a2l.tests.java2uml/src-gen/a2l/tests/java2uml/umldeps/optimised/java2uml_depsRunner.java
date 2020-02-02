@@ -66,7 +66,8 @@ a2l.tests.java2uml.umldeps.optimised.java2uml_deps trafo0;if ( this.stats == nul
 
 	stats.startConfiguration();
 
-	this.inputExtent = new InputExtent(); this.globalContext = new a2l.tests.java2uml.umldeps.optimised.java2uml_depsGlobalContext();this.CMModel = this.CMDataSource.createModel(this.globalContext::addAllInstancesObject);inputExtent.addAll(this.CMModel.allInstances());;
+	this.inputExtent = new InputExtent(); this.globalContext = new a2l.tests.java2uml.umldeps.optimised.java2uml_depsGlobalContext();this.CMModel = this.CMDataSource.createModel(this.globalContext::addAllInstancesObject, globalContext);inputExtent.addAll(this.CMModel.allInstances());
+inputExtent.shuffle();;
 
 	this.UCDModel = new a2l.runtime.emf.EMFOutputModel(UCDModelResource, UCDMetamodelResource);
 

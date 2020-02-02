@@ -1,5 +1,7 @@
 package lintra2.transfo;
 
+import a2l.runtime.IGlobalContext;
+
 /**
  * Implementations of this class will check if an object is 
  * part of the footprint of the transformation, this means,
@@ -18,6 +20,6 @@ public interface IFootprint {
 
 	public default boolean inEntrypoint(Object o) { throw new UnsupportedOperationException(); }
 	
-	public boolean inGlobal(Object o);
+	public boolean inGlobal(Object o, IGlobalContext context);
 	
 }
