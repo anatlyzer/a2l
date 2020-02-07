@@ -146,22 +146,22 @@ List<java.lang.Object> itTmp7;b0 = a2l.tests.bibtex.BibTeX.BibTeXFactory.eINSTAN
 	itTmp7 = new ArrayList<Object>(op6.size());
 
 	for ( java.lang.Object o: op6) {
-boolean matched0 = false;if ( check_MasterThesis( o) )  {
+boolean matched0 = false;if ( check_Book( o) )  {
 itTmp7.add(o);
 }
-else if ( check_PhDThesis( o) )  {
-itTmp7.add(o);
-}
-else if ( check_Book( o) )  {
-itTmp7.add(o);
-}
-else if ( check_Article( o) )  {
+else if ( check_MasterThesis( o) )  {
 itTmp7.add(o);
 }
 else if ( check_InCollection( o) )  {
 itTmp7.add(o);
 }
 else if ( check_InProceedings( o) )  {
+itTmp7.add(o);
+}
+else if ( check_Article( o) )  {
+itTmp7.add(o);
+}
+else if ( check_PhDThesis( o) )  {
 itTmp7.add(o);
 }
 else if ( check_Proceedings( o) )  {

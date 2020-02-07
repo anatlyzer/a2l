@@ -17,15 +17,15 @@ allInstancesCache = com.google.common.cache.CacheBuilder.newBuilder().concurrenc
 private Cache<java.lang.Class<?>, javaslang.collection.List<?>> allInstancesCache; 
 	@SuppressWarnings("unchecked")	public <T> javaslang.collection.List<T> getFromAllInstancesCache(java.lang.Class<T> key, java.util.concurrent.Callable<javaslang.collection.List<T>> closure) {  try {   return (javaslang.collection.List<T>) allInstancesCache.get(key, closure);  } catch (java.util.concurrent.ExecutionException e) {    throw new IllegalStateException();  } }private javaslang.collection.List<dblp.DBLP.Author> allInstancesOf_Author = javaslang.collection.List.empty();
 private javaslang.collection.List<dblp.DBLP.Record> allInstancesOf_Record = javaslang.collection.List.empty();
-public void addAllInstancesObject(Object obj) {if ( obj instanceof dblp.DBLP.Record) { 
-   allInstancesOf_Record = allInstancesOf_Record.prepend( (dblp.DBLP.Record) obj);
-}if ( obj instanceof dblp.DBLP.Author) { 
+public void addAllInstancesObject(Object obj) {if ( obj instanceof dblp.DBLP.Author) { 
    allInstancesOf_Author = allInstancesOf_Author.prepend( (dblp.DBLP.Author) obj);
+}if ( obj instanceof dblp.DBLP.Record) { 
+   allInstancesOf_Record = allInstancesOf_Record.prepend( (dblp.DBLP.Record) obj);
 }}
-public javaslang.collection.List<dblp.DBLP.Record> getAllInstancesOf_Record() {
-  return allInstancesOf_Record;
-}
 public javaslang.collection.List<dblp.DBLP.Author> getAllInstancesOf_Author() {
   return allInstancesOf_Author;
+}
+public javaslang.collection.List<dblp.DBLP.Record> getAllInstancesOf_Record() {
+  return allInstancesOf_Record;
 }
 }

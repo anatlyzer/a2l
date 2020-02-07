@@ -56,6 +56,7 @@ import anatlyzer.atl.types.IntegerType;
 import anatlyzer.atl.types.Metaclass;
 import anatlyzer.atl.types.PrimitiveType;
 import anatlyzer.atl.types.ReflectiveClass;
+import anatlyzer.atl.types.SetType;
 import anatlyzer.atl.types.TupleAttribute;
 import anatlyzer.atl.types.TupleType;
 import anatlyzer.atl.types.Type;
@@ -799,7 +800,7 @@ public abstract class LindaCompiler extends BaseCompiler {
 						JVariableDeclaration rightVar = getVar(right);
 						if (!isMutable) {
 							JVariableDeclaration conversionVar = gen.addLocalVar(createMethod, "convList", typ.createTypeRef(right.getInferredType(), true));
-							addStm(createMethod, CreationHelpers.createAssignment(conversionVar, rightVar.getName() + ".toJavaList()"));
+							addStm(createMethod, CreationHelpers.createAssignment(conversionVar, convertToMutableList(rightVar.getName(), right.getInferredType())));
 							rightVar = conversionVar;
 						}
 						
@@ -878,6 +879,13 @@ public abstract class LindaCompiler extends BaseCompiler {
 				}
 			}
 		}
+	}
+
+	private String convertToMutableList(String expr, Type type) {
+		if (type instanceof SetType ) {
+			return expr + ".toJavaSet()";		
+		}
+		return expr + ".toJavaList()";
 	}
 
 	private String genGetIdCall(JVariableDeclaration objVar) {
