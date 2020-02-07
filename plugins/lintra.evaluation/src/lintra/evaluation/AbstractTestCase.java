@@ -53,8 +53,6 @@ import lintra2.stats.IStatsRecorder;
 public abstract class AbstractTestCase {
 	private static final boolean pauseBeforeStart = false;
 	private static final boolean forceMemoryClean = true;
-	private static final int multiplySize = -1;
-	//private static final int multiplySize = 3;
 
 	static {
 		if (!isEclipseRunning()) {
@@ -66,7 +64,8 @@ public abstract class AbstractTestCase {
 		A2L,
 		ATL,
 		EMFTVM,
-		BOTH /* A2L - ATL */		
+		BOTH, /* A2L - ATL */
+		ALL 		
 	}
 	
 	public static ExecutionFramework toFramework(String str) {
@@ -292,6 +291,11 @@ public abstract class AbstractTestCase {
 			arguments.maxThreads  = Integer.parseInt(args[1]);
 			arguments.runs = Integer.parseInt(args[2]);			
 			arguments.model = args[3];
+			// Just a trick... to enable mymodel.xmi(2x)
+			if (arguments.model.endsWith(")")) {
+				arguments.multiply  = Integer.parseInt("" + arguments.model.charAt(arguments.model.length() - 3));
+				arguments.model = arguments.model.substring(0, arguments.model.length() - 4);
+			}
 			arguments.framework = toFramework(args[4]);
 			if (args.length >= 6) {
 				arguments.footprint = args[5].toLowerCase().startsWith("footprint"); 
@@ -309,6 +313,7 @@ public abstract class AbstractTestCase {
 	}
 	
 	public static class Arguments {
+		public int multiply = -1;
 		public String reportDir = "/tmp/benchmark";
 		public boolean save;
 		public boolean footprint = false;
@@ -371,10 +376,10 @@ public abstract class AbstractTestCase {
 		Resource input = load(inXmiPath);
 		
 		// Double the size
-		if (multiplySize != -1) {
-			System.out.println("Multiplying size of the model by = " + multiplySize);
+		if (args.multiply != -1) {
+			System.out.println("Multiplying size of the model by = " + args.multiply);
 			List<EObject> original = new ArrayList<>(input.getContents());
-			for(int i = 0; i < multiplySize; i++) {
+			for(int i = 0; i < args.multiply; i++) {
 				Collection<EObject> copiedRoots = EcoreUtil.copyAll(original);
 				input.getContents().addAll(copiedRoots);
 			}
@@ -391,7 +396,7 @@ public abstract class AbstractTestCase {
 				args.minThreads + "-" + args.maxThreads + "-" + args.runs;
 
 		
-		if ( framework == ExecutionFramework.A2L || framework == ExecutionFramework.BOTH ) {
+		if ( framework == ExecutionFramework.A2L || framework == ExecutionFramework.BOTH || framework == ExecutionFramework.ALL ) {
 			AggregatedStatsRecorder recorder = new AggregatedStatsRecorder(getName() + "_" + inXmiPath);
 			
 			if ( minThreads <= maxThreads ) {
@@ -418,7 +423,7 @@ public abstract class AbstractTestCase {
 			ps2.close();			
 		}
 
-		if ( framework == ExecutionFramework.ATL || framework == ExecutionFramework.BOTH ) {
+		if ( framework == ExecutionFramework.ATL || framework == ExecutionFramework.BOTH || framework == ExecutionFramework.ALL) {
 			AggregatedStatsRecorder recorder = new AggregatedStatsRecorder(getName() + "_" + inXmiPath + "_ATL");
 			recorder.testWithNumThreads(1);
 			for(int j = 0; j < runsPerTest; j++) {
@@ -438,7 +443,7 @@ public abstract class AbstractTestCase {
 			ps2.close();
 		}
 		
-		if ( framework == ExecutionFramework.EMFTVM || framework == ExecutionFramework.BOTH ) {
+		if ( framework == ExecutionFramework.EMFTVM || framework == ExecutionFramework.ALL ) {
 			AggregatedStatsRecorder recorder = new AggregatedStatsRecorder(getName() + "_" + inXmiPath + "_EMFTVM");
 			recorder.testWithNumThreads(1);
 			for(int j = 0; j < runsPerTest; j++) {

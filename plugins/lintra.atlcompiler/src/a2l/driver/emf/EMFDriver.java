@@ -576,6 +576,12 @@ public class EMFDriver implements IMetaDriver {
 		return expr;
 	}
 
+	// Similar to compileGetterExpression but it doesn't optimise so that we can add to the collection
+	public String compileGetterExpressionDirect(JVariableDeclaration srcVar, EStructuralFeature f) {
+		String expr = compileGetterExpression(srcVar.getName(), f);
+		return expr;
+	}
+
 	@Override
 	public List<JStatement> compileMonovaluedGetter(NavigationOrAttributeCallExp self, EStructuralFeature f, JVariableDeclaration newVar, String getterExpr, ICompilationContext ctx) {
 		return compileGetter(self, f, newVar, getterExpr, ctx);
@@ -652,9 +658,9 @@ public class EMFDriver implements IMetaDriver {
 			
 		if ( f.isMany() ) {
 			if ( valueType instanceof CollectionType ) {
-				stms.add( createText( compileGetterExpression(receptor, f) + ".addAll(" + cast + value.getName() + ")"  ));
+				stms.add( createText( compileGetterExpressionDirect(receptor, f) + ".addAll(" + cast + value.getName() + ")"  ));
 			} else {
-				stms.add( createText( "if (" + value.getName() + "!= null ) { " + compileGetterExpression(receptor, f) + ".add(" + cast + value.getName() + ");" + "}"  ));
+				stms.add( createText( "if (" + value.getName() + "!= null ) { " + compileGetterExpressionDirect(receptor, f) + ".add(" + cast + value.getName() + ");" + "}"  ));
 			}
 			
 		} else {

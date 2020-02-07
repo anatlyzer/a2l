@@ -27,7 +27,7 @@ public class DBLP2BibTeX_TestCase extends AbstractTestCase {
 	
 	private static final String OUT_MODEL_ATL = "outputs/bibtex.atl.xmi";
 	private static final String OUT_MODEL_LINTRA = "outputs/bibtex.a2l.xmi";
-	private static final String trafo = "dblp2bibtex/dblp2bibtex.atl";
+	private static final String trafo = "dblp2bibtex/dblp2bibtex_map.atl";
 	
 	public static void main(String[] args) throws Exception {
 		registerMetamodel(DBLPPackage.eINSTANCE);

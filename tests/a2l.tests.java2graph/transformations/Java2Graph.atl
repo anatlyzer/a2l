@@ -68,12 +68,23 @@ rule toEdge {
 			if not fd.type.type.package().oclIsUndefined() then
 				fd.type.type.package().rootPackage().name.indexOf('java') < 0 and if not
 						fd.abstractTypeDeclaration.oclIsUndefined() then					
+--					--This line used to show a bug in AnAtLyzer
+--					fd.abstractTypeDeclaration.oclIsTypeOf(MM!ClassDeclaration) and if
+--					--true and if
+--							not fd.abstractTypeDeclaration.package.oclIsUndefined() then
+--						fd.abstractTypeDeclaration.package.rootPackage().name.
+--								indexOf('java') < 0
+--					else
+--						false
+--					endif
 					--This line used to show a bug in AnAtLyzer
-					fd.abstractTypeDeclaration.oclIsTypeOf(MM!ClassDeclaration) and if
-					--true and if
-							not fd.abstractTypeDeclaration.package.oclIsUndefined() then
+					if fd.abstractTypeDeclaration.oclIsTypeOf(MM!ClassDeclaration) then
+						if	not fd.abstractTypeDeclaration.package.oclIsUndefined() then
 						fd.abstractTypeDeclaration.package.rootPackage().name.
 								indexOf('java') < 0
+						else
+							false
+						endif
 					else
 						false
 					endif

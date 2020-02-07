@@ -56,7 +56,10 @@ import linda.atlcompiler.ICompilationContext.IInitializer;
 import lintra.atlcompiler.javagen.JAssignment;
 import lintra.atlcompiler.javagen.JBlock;
 import lintra.atlcompiler.javagen.JClass;
+import lintra.atlcompiler.javagen.JClosure;
 import lintra.atlcompiler.javagen.JConditional;
+import lintra.atlcompiler.javagen.JExpression;
+import lintra.atlcompiler.javagen.JInvoke;
 import lintra.atlcompiler.javagen.JMethod;
 import lintra.atlcompiler.javagen.JParameter;
 import lintra.atlcompiler.javagen.JStatement;
@@ -276,7 +279,7 @@ public abstract class BaseCompiler extends AbstractAnatlyzerExtVisitor {
 		generateHelperReturnMethod(self, method, returnVar);		
 	}
 
-	private void generateHelperReturnMethod(Helper self, JMethod method, JVariableDeclaration returnVar) {
+	private void generateHelperReturnMethod(Helper self, JBlock block, JVariableDeclaration returnVar) {
 		String castReturnType = "";
 		
 		Type returnType = ATLUtils.getHelperReturnType(self).getInferredType();
@@ -293,7 +296,7 @@ public abstract class BaseCompiler extends AbstractAnatlyzerExtVisitor {
 			
 		}
 		
-		method.getStatements().add( createText("return " + returnVar.getName() + castReturnType) );
+		block.getStatements().add( createText("return " + returnVar.getName() + castReturnType) );
 	}
 	
 	/**
@@ -348,13 +351,30 @@ public abstract class BaseCompiler extends AbstractAnatlyzerExtVisitor {
 		OclExpression body = ATLUtils.getBody(self);
 
 		JMethod method = gen.helperToMethod.get(self);
+		String helperName = ATLUtils.getHelperName(self);
 		
-		List<JStatement> stmts = env.getStatements(body);
-		JVariableDeclaration returnVar = env.getVar(body);
-		
-		method.getStatements().addAll(stmts);
-		
-		generateHelperReturnMethod(self, method, returnVar);		
+		if (false && ATLUtils.isAttributeHelper(self)) {		
+			List<JStatement> stmts = env.getStatements(body);
+			JVariableDeclaration returnVar = env.getVar(body);
+			
+			JClosure closure = JavagenFactory.eINSTANCE.createJClosure();
+			closure.getLocalVars().addAll(method.getLocalVars()); // move local vars... not very elegant but it works
+			closure.getStatements().addAll(stmts);
+			generateHelperReturnMethod(self, closure, returnVar);
+			
+			JExpression cacheAccess = CreationHelpers.createTextExp("this.globalContext");
+			
+			JInvoke cacheInvocation = CreationHelpers.createInvoke(helperName, cacheAccess, closure);
+			
+			method.getStatements().add( CreationHelpers.createReturn(cacheInvocation) );			
+		} else {
+			List<JStatement> stmts = env.getStatements(body);
+			JVariableDeclaration returnVar = env.getVar(body);
+			
+			method.getStatements().addAll(stmts);
+			
+			generateHelperReturnMethod(self, method, returnVar);							
+		}
 	}
 		
 	protected void addImport(JClass tclass, String pkg, String name) {

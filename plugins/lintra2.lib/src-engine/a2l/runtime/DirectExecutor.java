@@ -55,7 +55,7 @@ public class DirectExecutor {
 		List<Worker> workers = new ArrayList<>();
 		List<Thread> threads = new ArrayList<>();
 		
-		long increase = 2;	
+		long increase = 10;	
 		long start_step2 = staticFragmentSize;
 		long numChunks = (size - start_step2) / increase;
 		if ((size - start_step2) % increase != 0)

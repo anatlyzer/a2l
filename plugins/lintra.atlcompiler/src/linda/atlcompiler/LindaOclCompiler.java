@@ -251,7 +251,7 @@ public class LindaOclCompiler implements IOclCompiler, IInitializer {
 	
 	@Override
 	public void inTupleAccess(NavigationOrAttributeCallExp self) {
-		// List<JStatement> stms = createCommentedList(self);
+		// Lwist<JStatement> stms = createCommentedList(self);
 		JVariableDeclaration newVar = gen.addLocalVar(env.currentBlock(), "nav", typ.createTypeRef(self.getInferredType()));
 		JVariableDeclaration receptor = env.getVar(self.getSource());
 		JStatement nav = createAssignment(newVar, receptor.getName() + "." + self.getName());

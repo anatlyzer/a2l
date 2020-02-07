@@ -13,6 +13,7 @@ import org.junit.Test;
 
 import com.google.common.base.Function;
 
+import a2l.tests.vmtesting.emf.xml2ant.XML2AntRunner;
 import lintra.evaluation.ATLExecutor;
 import lintra.evaluation.AbstractTestCase;
 import metrics.MetricValue;

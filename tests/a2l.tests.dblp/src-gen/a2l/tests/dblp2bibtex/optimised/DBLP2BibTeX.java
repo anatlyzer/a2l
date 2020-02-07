@@ -107,31 +107,31 @@ return a instanceof dblp.DBLP.Book;
 return a instanceof dblp.DBLP.PhDThesis;
 }
 	private boolean check_Proceedings(java.lang.Object a){
-dblp.DBLP.Proceedings tmp116;
-boolean call117;if ( a instanceof dblp.DBLP.Proceedings) {
-tmp116 = (dblp.DBLP.Proceedings)a;
+dblp.DBLP.Proceedings tmp110;
+boolean call111;if ( a instanceof dblp.DBLP.Proceedings) {
+tmp110 = (dblp.DBLP.Proceedings)a;
 
 	/* 120:30-120:48: a.isEditorAuthor()*/
-	if ( tmp116 instanceof dblp.DBLP.Proceedings) {
-call117 = helper_dblp_DBLP_Proceedings_isEditorAuthor((dblp.DBLP.Proceedings)tmp116);
+	if ( tmp110 instanceof dblp.DBLP.Proceedings) {
+call111 = helper_dblp_DBLP_Proceedings_isEditorAuthor((dblp.DBLP.Proceedings)tmp110);
 } else { throw new IllegalStateException();
 }
-	return call117 == true;
+	return call111 == true;
 }
 	return false;
 }
 	public a2l.tests.bibtex.BibTeX.Author lazy_rule_toAuthor(dblp.DBLP.Author a){
-a2l.tests.bibtex.BibTeX.Author a2118;
-java.lang.String get119;a2118 = a2l.tests.bibtex.BibTeX.BibTeXFactory.eINSTANCE.createAuthor();
+a2l.tests.bibtex.BibTeX.Author a2112;
+java.lang.String get113;a2112 = a2l.tests.bibtex.BibTeX.BibTeXFactory.eINSTANCE.createAuthor();
 
-	OUTModel_PartialOutput_.write(a2118);
+	OUTModel_PartialOutput_.write(a2112);
 
 	/* 131:13-131:19: a.name*/
-	get119 = a.getName();
+	get113 = a.getName();
 
-	a2118.setAuthor(get119);;
+	a2112.setAuthor(get113);;
 
-	return a2118;
+	return a2112;
 }
 	public BibTeXFile called_rule_rootElement(){
 BibTeXFile b0;
@@ -146,19 +146,19 @@ List<java.lang.Object> itTmp7;b0 = a2l.tests.bibtex.BibTeX.BibTeXFactory.eINSTAN
 	itTmp7 = new ArrayList<Object>(op6.size());
 
 	for ( java.lang.Object o: op6) {
-boolean matched0 = false;if ( check_InCollection( o) )  {
+boolean matched0 = false;if ( check_MasterThesis( o) )  {
 itTmp7.add(o);
 }
-else if ( check_Article( o) )  {
+else if ( check_PhDThesis( o) )  {
 itTmp7.add(o);
 }
 else if ( check_Book( o) )  {
 itTmp7.add(o);
 }
-else if ( check_MasterThesis( o) )  {
+else if ( check_Article( o) )  {
 itTmp7.add(o);
 }
-else if ( check_PhDThesis( o) )  {
+else if ( check_InCollection( o) )  {
 itTmp7.add(o);
 }
 else if ( check_InProceedings( o) )  {
@@ -202,6 +202,8 @@ called_rule_rootElement();
 	public boolean isTargetElement(java.lang.Object obj){
 if ( obj == null ) return false;;
 
+	if ( obj instanceof a2l.runtime.ResolveTempObject ) return true;;
+
 	return OUTModel_PartialOutput_.belongsTo(obj);
 }
 	public IModel findModelDynamically(java.lang.Object obj){
@@ -237,15 +239,14 @@ java.lang.String r19;
 List<dblp.DBLP.Author> get21;
 a2l.tests.bibtex.BibTeX.Author call22;
 List<a2l.tests.bibtex.BibTeX.Author> r23;
-List<java.lang.Object> itTmp24;
-java.util.Set<java.lang.Object> tgtElems25;b8 = a2l.tests.bibtex.BibTeX.BibTeXFactory.eINSTANCE.createArticle();
+List<java.lang.Object> itTmp24;b8 = a2l.tests.bibtex.BibTeX.BibTeXFactory.eINSTANCE.createArticle();
 
 	this.trace.put(a,b8);
 
 	OUTModel_PartialOutput_.write(b8);
 
-	/* 34:9-34:16: a.title*/
-	get9 = a.getTitle();
+	/* 34:9-34:14: a.key*/
+	get9 = a.getKey();
 
 	/* 35:12-35:19: a.title*/
 	get10 = a.getTitle();
@@ -305,126 +306,112 @@ r19 = tmp18;
 
 	itTmp24 = new ArrayList<Object>(r23.size());
 
-	tgtElems25 = new java.util.HashSet<>();
-
-	for ( java.lang.Object o: r23) {
-boolean matched1 = false;
-	a2l.runtime.RuntimeUtils.addToBindingTemporal(itTmp24, tgtElems25, o);
-}
-	this.parallelPendingTasks.add( new PendingTask_AuthoredEntry_authors(b8,itTmp24,OUTModel_,tgtElems25) );
+	b8.getAuthors().addAll(r23);
 
 	numMatchedRuleExecutions_++;
 }
 	private void create_InProceedings(dblp.DBLP.InProceedings a){
-a2l.tests.bibtex.BibTeX.InProceedings b26;
+a2l.tests.bibtex.BibTeX.InProceedings b25;
+java.lang.String get26;
 java.lang.String get27;
-java.lang.String get28;
-int get29;
-java.lang.String op30;
-List<dblp.DBLP.Author> get32;
-a2l.tests.bibtex.BibTeX.Author call33;
-List<a2l.tests.bibtex.BibTeX.Author> r34;
-java.lang.String get35;
-List<java.lang.Object> itTmp36;
-java.util.Set<java.lang.Object> tgtElems37;b26 = a2l.tests.bibtex.BibTeX.BibTeXFactory.eINSTANCE.createInProceedings();
+int get28;
+java.lang.String op29;
+List<dblp.DBLP.Author> get31;
+a2l.tests.bibtex.BibTeX.Author call32;
+List<a2l.tests.bibtex.BibTeX.Author> r33;
+java.lang.String get34;
+List<java.lang.Object> itTmp35;b25 = a2l.tests.bibtex.BibTeX.BibTeXFactory.eINSTANCE.createInProceedings();
 
-	this.trace.put(a,b26);
+	this.trace.put(a,b25);
 
-	OUTModel_PartialOutput_.write(b26);
+	OUTModel_PartialOutput_.write(b25);
 
-	/* 49:9-49:16: a.title*/
-	get27 = a.getTitle();
+	/* 49:9-49:14: a.key*/
+	get26 = a.getKey();
 
 	/* 50:12-50:19: a.title*/
-	get28 = a.getTitle();
+	get27 = a.getTitle();
 
 	/* 51:11-51:28: a.year.toString()*/
 	/* 51:11-51:17: a.year*/
-	get29 = a.getYear();
+	get28 = a.getYear();
 
-	op30 = get29 + "";
+	op29 = get28 + "";
 
 	/* null: a.authors->collect(author | thisModule.toAuthor(author))*/
 	/* 52:14-52:23: a.authors*/
-	get32 = new a2l.runtime.stdlib.FastIterableList<dblp.DBLP.Author>(a.getAuthors());
+	get31 = new a2l.runtime.stdlib.FastIterableList<dblp.DBLP.Author>(a.getAuthors());
 
-	r34 = new java.util.ArrayList();
+	r33 = new java.util.ArrayList();
 
-	for ( dblp.DBLP.Author author31: get32) {
+	for ( dblp.DBLP.Author author30: get31) {
 /* 52:42-52:69: thisModule.toAuthor(author)*/
-	call33 = lazy_rule_toAuthor(author31);
+	call32 = lazy_rule_toAuthor(author30);
 
-	r34.add(call33);
+	r33.add(call32);
 }
 	/* 53:16-53:26: a.bootitle*/
-	get35 = a.getBootitle();
+	get34 = a.getBootitle();
 
-	b26.setId(get27);;
+	b25.setId(get26);;
 
-	b26.setTitle(get28);;
+	b25.setTitle(get27);;
 
-	b26.setYear(op30);;
+	b25.setYear(op29);;
 
-	itTmp36 = new ArrayList<Object>(r34.size());
+	itTmp35 = new ArrayList<Object>(r33.size());
 
-	tgtElems37 = new java.util.HashSet<>();
+	b25.getAuthors().addAll(r33);
 
-	for ( java.lang.Object o: r34) {
-boolean matched2 = false;
-	a2l.runtime.RuntimeUtils.addToBindingTemporal(itTmp36, tgtElems37, o);
-}
-	this.parallelPendingTasks.add( new PendingTask_AuthoredEntry_authors(b26,itTmp36,OUTModel_,tgtElems37) );
-
-	b26.setBooktitle(get35);;
+	b25.setBooktitle(get34);;
 
 	numMatchedRuleExecutions_++;
 }
 	private void create_MasterThesis(MastersThesis a){
-MasterThesis b38;
-java.lang.String get39;
-java.lang.String get40;
-int get41;
-java.lang.String op42;
-List<dblp.DBLP.Author> get44;
-a2l.tests.bibtex.BibTeX.Author call45;
-List<a2l.tests.bibtex.BibTeX.Author> r46;
+MasterThesis b36;
+java.lang.String get37;
+java.lang.String get38;
+int get39;
+java.lang.String op40;
+List<dblp.DBLP.Author> get42;
+a2l.tests.bibtex.BibTeX.Author call43;
+List<a2l.tests.bibtex.BibTeX.Author> r44;
+School get45;
+java.lang.String get46;
 School get47;
-java.lang.String get48;
-School get49;
-boolean op50;
-boolean tmp51;
-java.lang.String tmp52;
-java.lang.String r53;
-List<java.lang.Object> itTmp54;
-java.util.Set<java.lang.Object> tgtElems55;b38 = a2l.tests.bibtex.BibTeX.BibTeXFactory.eINSTANCE.createMasterThesis();
+boolean op48;
+boolean tmp49;
+java.lang.String tmp50;
+java.lang.String r51;
+List<java.lang.Object> itTmp52;b36 = a2l.tests.bibtex.BibTeX.BibTeXFactory.eINSTANCE.createMasterThesis();
 
-	this.trace.put(a,b38);
+	this.trace.put(a,b36);
 
-	OUTModel_PartialOutput_.write(b38);
+	OUTModel_PartialOutput_.write(b36);
 
-	/* 60:9-60:16: a.title*/
-	get39 = a.getTitle();
+	/* 60:9-60:14: a.key*/
+	get37 = a.getKey();
 
 	/* 61:12-61:19: a.title*/
-	get40 = a.getTitle();
+	get38 = a.getTitle();
 
 	/* 62:11-62:28: a.year.toString()*/
 	/* 62:11-62:17: a.year*/
-	get41 = a.getYear();
+	get39 = a.getYear();
 
-	op42 = get41 + "";
+	op40 = get39 + "";
 
 	/* null: a.authors->collect(author | thisModule.toAuthor(author))*/
 	/* 63:14-63:23: a.authors*/
-	get44 = new a2l.runtime.stdlib.FastIterableList<dblp.DBLP.Author>(a.getAuthors());
+	get42 = new a2l.runtime.stdlib.FastIterableList<dblp.DBLP.Author>(a.getAuthors());
 
-	r46 = new java.util.ArrayList();
+	r44 = new java.util.ArrayList();
 
-	for ( dblp.DBLP.Author author43: get44) {
+	for ( dblp.DBLP.Author author41: get42) {
 /* 63:42-63:69: thisModule.toAuthor(author)*/
-	call45 = lazy_rule_toAuthor(author43);
+	call43 = lazy_rule_toAuthor(author41);
 
-	r46.add(call45);
+	r44.add(call43);
 }
 	/* 64:13-68:9: if not a.school.oclIsUndefined() then
 	a.school.name
@@ -433,96 +420,89 @@ else
 endif*/
 	/* 64:20-64:45: a.school.oclIsUndefined()*/
 	/* 64:20-64:28: a.school*/
-	get49 = a.getSchool();
-
-	op50 = get49== null;
-
-	tmp51 = ! op50;
-
-	r53 = "";
-
-	if ( tmp51) {
-/* 65:5-65:18: a.school.name*/
-	/* 65:5-65:13: a.school*/
 	get47 = a.getSchool();
 
-	get48 = get47.getName();
+	op48 = get47== null;
 
-	r53 = get48;
-} else { tmp52 = "<unknown>";
+	tmp49 = ! op48;
 
-r53 = tmp52;
+	r51 = "";
+
+	if ( tmp49) {
+/* 65:5-65:18: a.school.name*/
+	/* 65:5-65:13: a.school*/
+	get45 = a.getSchool();
+
+	get46 = get45.getName();
+
+	r51 = get46;
+} else { tmp50 = "<unknown>";
+
+r51 = tmp50;
 }
-	b38.setId(get39);;
+	b36.setId(get37);;
 
-	b38.setTitle(get40);;
+	b36.setTitle(get38);;
 
-	b38.setYear(op42);;
+	b36.setYear(op40);;
 
-	itTmp54 = new ArrayList<Object>(r46.size());
+	itTmp52 = new ArrayList<Object>(r44.size());
 
-	tgtElems55 = new java.util.HashSet<>();
+	b36.getAuthors().addAll(r44);
 
-	for ( java.lang.Object o: r46) {
-boolean matched3 = false;
-	a2l.runtime.RuntimeUtils.addToBindingTemporal(itTmp54, tgtElems55, o);
-}
-	this.parallelPendingTasks.add( new PendingTask_AuthoredEntry_authors(b38,itTmp54,OUTModel_,tgtElems55) );
-
-	b38.setSchool(r53);;
+	b36.setSchool(r51);;
 
 	numMatchedRuleExecutions_++;
 }
 	private void create_InCollection(dblp.DBLP.InCollection a){
-a2l.tests.bibtex.BibTeX.InCollection b56;
-java.lang.String get57;
-java.lang.String get58;
-int get59;
-java.lang.String op60;
-List<dblp.DBLP.Author> get62;
-a2l.tests.bibtex.BibTeX.Author call63;
-List<a2l.tests.bibtex.BibTeX.Author> r64;
-java.lang.String get65;
-Publisher get66;
-java.lang.String get67;
-Publisher get68;
-boolean op69;
-boolean tmp70;
-java.lang.String tmp71;
-java.lang.String r72;
-List<java.lang.Object> itTmp73;
-java.util.Set<java.lang.Object> tgtElems74;b56 = a2l.tests.bibtex.BibTeX.BibTeXFactory.eINSTANCE.createInCollection();
+a2l.tests.bibtex.BibTeX.InCollection b53;
+java.lang.String get54;
+java.lang.String get55;
+int get56;
+java.lang.String op57;
+List<dblp.DBLP.Author> get59;
+a2l.tests.bibtex.BibTeX.Author call60;
+List<a2l.tests.bibtex.BibTeX.Author> r61;
+java.lang.String get62;
+Publisher get63;
+java.lang.String get64;
+Publisher get65;
+boolean op66;
+boolean tmp67;
+java.lang.String tmp68;
+java.lang.String r69;
+List<java.lang.Object> itTmp70;b53 = a2l.tests.bibtex.BibTeX.BibTeXFactory.eINSTANCE.createInCollection();
 
-	this.trace.put(a,b56);
+	this.trace.put(a,b53);
 
-	OUTModel_PartialOutput_.write(b56);
+	OUTModel_PartialOutput_.write(b53);
 
-	/* 76:9-76:16: a.title*/
-	get57 = a.getTitle();
+	/* 76:9-76:14: a.key*/
+	get54 = a.getKey();
 
 	/* 77:12-77:19: a.title*/
-	get58 = a.getTitle();
+	get55 = a.getTitle();
 
 	/* 78:11-78:28: a.year.toString()*/
 	/* 78:11-78:17: a.year*/
-	get59 = a.getYear();
+	get56 = a.getYear();
 
-	op60 = get59 + "";
+	op57 = get56 + "";
 
 	/* null: a.authors->collect(author | thisModule.toAuthor(author))*/
 	/* 79:14-79:23: a.authors*/
-	get62 = new a2l.runtime.stdlib.FastIterableList<dblp.DBLP.Author>(a.getAuthors());
+	get59 = new a2l.runtime.stdlib.FastIterableList<dblp.DBLP.Author>(a.getAuthors());
 
-	r64 = new java.util.ArrayList();
+	r61 = new java.util.ArrayList();
 
-	for ( dblp.DBLP.Author author61: get62) {
+	for ( dblp.DBLP.Author author58: get59) {
 /* 79:42-79:69: thisModule.toAuthor(author)*/
-	call63 = lazy_rule_toAuthor(author61);
+	call60 = lazy_rule_toAuthor(author58);
 
-	r64.add(call63);
+	r61.add(call60);
 }
 	/* 80:16-80:27: a.bookTitle*/
-	get65 = a.getBookTitle();
+	get62 = a.getBookTitle();
 
 	/* 81:16-85:9: if not a.publisher.oclIsUndefined() then
 	a.publisher.name
@@ -531,94 +511,87 @@ else
 endif*/
 	/* 81:23-81:51: a.publisher.oclIsUndefined()*/
 	/* 81:23-81:34: a.publisher*/
-	get68 = a.getPublisher();
+	get65 = a.getPublisher();
 
-	op69 = get68== null;
+	op66 = get65== null;
 
-	tmp70 = ! op69;
+	tmp67 = ! op66;
 
-	r72 = "";
+	r69 = "";
 
-	if ( tmp70) {
+	if ( tmp67) {
 /* 82:5-82:21: a.publisher.name*/
 	/* 82:5-82:16: a.publisher*/
-	get66 = a.getPublisher();
+	get63 = a.getPublisher();
 
-	get67 = get66.getName();
+	get64 = get63.getName();
 
-	r72 = get67;
-} else { tmp71 = "<unknown>";
+	r69 = get64;
+} else { tmp68 = "<unknown>";
 
-r72 = tmp71;
+r69 = tmp68;
 }
-	b56.setId(get57);;
+	b53.setId(get54);;
 
-	b56.setTitle(get58);;
+	b53.setTitle(get55);;
 
-	b56.setYear(op60);;
+	b53.setYear(op57);;
 
-	itTmp73 = new ArrayList<Object>(r64.size());
+	itTmp70 = new ArrayList<Object>(r61.size());
 
-	tgtElems74 = new java.util.HashSet<>();
+	b53.getAuthors().addAll(r61);
 
-	for ( java.lang.Object o: r64) {
-boolean matched4 = false;
-	a2l.runtime.RuntimeUtils.addToBindingTemporal(itTmp73, tgtElems74, o);
-}
-	this.parallelPendingTasks.add( new PendingTask_AuthoredEntry_authors(b56,itTmp73,OUTModel_,tgtElems74) );
+	b53.setBooktitle(get62);;
 
-	b56.setBooktitle(get65);;
-
-	b56.setPublisher(r72);;
+	b53.setPublisher(r69);;
 
 	numMatchedRuleExecutions_++;
 }
 	private void create_Book(dblp.DBLP.Book a){
-a2l.tests.bibtex.BibTeX.Book b75;
-java.lang.String get76;
-java.lang.String get77;
-int get78;
-java.lang.String op79;
-List<dblp.DBLP.Author> get81;
-a2l.tests.bibtex.BibTeX.Author call82;
-List<a2l.tests.bibtex.BibTeX.Author> r83;
-Publisher get84;
-java.lang.String get85;
-Publisher get86;
-boolean op87;
-boolean tmp88;
-java.lang.String tmp89;
-java.lang.String r90;
-List<java.lang.Object> itTmp91;
-java.util.Set<java.lang.Object> tgtElems92;b75 = a2l.tests.bibtex.BibTeX.BibTeXFactory.eINSTANCE.createBook();
+a2l.tests.bibtex.BibTeX.Book b71;
+java.lang.String get72;
+java.lang.String get73;
+int get74;
+java.lang.String op75;
+List<dblp.DBLP.Author> get77;
+a2l.tests.bibtex.BibTeX.Author call78;
+List<a2l.tests.bibtex.BibTeX.Author> r79;
+Publisher get80;
+java.lang.String get81;
+Publisher get82;
+boolean op83;
+boolean tmp84;
+java.lang.String tmp85;
+java.lang.String r86;
+List<java.lang.Object> itTmp87;b71 = a2l.tests.bibtex.BibTeX.BibTeXFactory.eINSTANCE.createBook();
 
-	this.trace.put(a,b75);
+	this.trace.put(a,b71);
 
-	OUTModel_PartialOutput_.write(b75);
+	OUTModel_PartialOutput_.write(b71);
 
-	/* 92:9-92:16: a.title*/
-	get76 = a.getTitle();
+	/* 92:9-92:14: a.key*/
+	get72 = a.getKey();
 
 	/* 93:12-93:19: a.title*/
-	get77 = a.getTitle();
+	get73 = a.getTitle();
 
 	/* 94:11-94:28: a.year.toString()*/
 	/* 94:11-94:17: a.year*/
-	get78 = a.getYear();
+	get74 = a.getYear();
 
-	op79 = get78 + "";
+	op75 = get74 + "";
 
 	/* null: a.authors->collect(author | thisModule.toAuthor(author))*/
 	/* 95:14-95:23: a.authors*/
-	get81 = new a2l.runtime.stdlib.FastIterableList<dblp.DBLP.Author>(a.getAuthors());
+	get77 = new a2l.runtime.stdlib.FastIterableList<dblp.DBLP.Author>(a.getAuthors());
 
-	r83 = new java.util.ArrayList();
+	r79 = new java.util.ArrayList();
 
-	for ( dblp.DBLP.Author author80: get81) {
+	for ( dblp.DBLP.Author author76: get77) {
 /* 95:42-95:69: thisModule.toAuthor(author)*/
-	call82 = lazy_rule_toAuthor(author80);
+	call78 = lazy_rule_toAuthor(author76);
 
-	r83.add(call82);
+	r79.add(call78);
 }
 	/* 96:16-100:9: if not a.publisher.oclIsUndefined() then
 	a.publisher.name
@@ -627,92 +600,85 @@ else
 endif*/
 	/* 96:23-96:51: a.publisher.oclIsUndefined()*/
 	/* 96:23-96:34: a.publisher*/
-	get86 = a.getPublisher();
+	get82 = a.getPublisher();
 
-	op87 = get86== null;
+	op83 = get82== null;
 
-	tmp88 = ! op87;
+	tmp84 = ! op83;
 
-	r90 = "";
+	r86 = "";
 
-	if ( tmp88) {
+	if ( tmp84) {
 /* 97:5-97:21: a.publisher.name*/
 	/* 97:5-97:16: a.publisher*/
-	get84 = a.getPublisher();
+	get80 = a.getPublisher();
 
-	get85 = get84.getName();
+	get81 = get80.getName();
 
-	r90 = get85;
-} else { tmp89 = "<unknown>";
+	r86 = get81;
+} else { tmp85 = "<unknown>";
 
-r90 = tmp89;
+r86 = tmp85;
 }
-	b75.setId(get76);;
+	b71.setId(get72);;
 
-	b75.setTitle(get77);;
+	b71.setTitle(get73);;
 
-	b75.setYear(op79);;
+	b71.setYear(op75);;
 
-	itTmp91 = new ArrayList<Object>(r83.size());
+	itTmp87 = new ArrayList<Object>(r79.size());
 
-	tgtElems92 = new java.util.HashSet<>();
+	b71.getAuthors().addAll(r79);
 
-	for ( java.lang.Object o: r83) {
-boolean matched5 = false;
-	a2l.runtime.RuntimeUtils.addToBindingTemporal(itTmp91, tgtElems92, o);
-}
-	this.parallelPendingTasks.add( new PendingTask_AuthoredEntry_authors(b75,itTmp91,OUTModel_,tgtElems92) );
-
-	b75.setPublisher(r90);;
+	b71.setPublisher(r86);;
 
 	numMatchedRuleExecutions_++;
 }
 	private void create_PhDThesis(dblp.DBLP.PhDThesis a){
-a2l.tests.bibtex.BibTeX.PhDThesis b93;
-java.lang.String get94;
-java.lang.String get95;
-int get96;
-java.lang.String op97;
-List<dblp.DBLP.Author> get99;
-a2l.tests.bibtex.BibTeX.Author call100;
-List<a2l.tests.bibtex.BibTeX.Author> r101;
-School get102;
-java.lang.String get103;
-School get104;
-boolean op105;
-boolean tmp106;
-java.lang.String tmp107;
-java.lang.String r108;
-List<java.lang.Object> itTmp109;
-java.util.Set<java.lang.Object> tgtElems110;b93 = a2l.tests.bibtex.BibTeX.BibTeXFactory.eINSTANCE.createPhDThesis();
+a2l.tests.bibtex.BibTeX.PhDThesis b88;
+java.lang.String get89;
+java.lang.String get90;
+int get91;
+java.lang.String op92;
+List<dblp.DBLP.Author> get94;
+a2l.tests.bibtex.BibTeX.Author call95;
+List<a2l.tests.bibtex.BibTeX.Author> r96;
+School get97;
+java.lang.String get98;
+School get99;
+boolean op100;
+boolean tmp101;
+java.lang.String tmp102;
+java.lang.String r103;
+List<java.lang.Object> itTmp104;b88 = a2l.tests.bibtex.BibTeX.BibTeXFactory.eINSTANCE.createPhDThesis();
 
-	this.trace.put(a,b93);
+	this.trace.put(a,b88);
 
-	OUTModel_PartialOutput_.write(b93);
+	OUTModel_PartialOutput_.write(b88);
 
-	/* 107:9-107:16: a.title*/
-	get94 = a.getTitle();
+	/* 107:9-107:14: a.key*/
+	get89 = a.getKey();
 
 	/* 108:12-108:19: a.title*/
-	get95 = a.getTitle();
+	get90 = a.getTitle();
 
 	/* 109:11-109:28: a.year.toString()*/
 	/* 109:11-109:17: a.year*/
-	get96 = a.getYear();
+	get91 = a.getYear();
 
-	op97 = get96 + "";
+	op92 = get91 + "";
 
 	/* null: a.authors->collect(author | thisModule.toAuthor(author))*/
 	/* 110:14-110:23: a.authors*/
-	get99 = new a2l.runtime.stdlib.FastIterableList<dblp.DBLP.Author>(a.getAuthors());
+	get94 = new a2l.runtime.stdlib.FastIterableList<dblp.DBLP.Author>(a.getAuthors());
 
-	r101 = new java.util.ArrayList();
+	r96 = new java.util.ArrayList();
 
-	for ( dblp.DBLP.Author author98: get99) {
+	for ( dblp.DBLP.Author author93: get94) {
 /* 110:42-110:69: thisModule.toAuthor(author)*/
-	call100 = lazy_rule_toAuthor(author98);
+	call95 = lazy_rule_toAuthor(author93);
 
-	r101.add(call100);
+	r96.add(call95);
 }
 	/* 111:13-115:9: if not a.school.oclIsUndefined() then
 	a.school.name
@@ -721,74 +687,68 @@ else
 endif*/
 	/* 111:20-111:45: a.school.oclIsUndefined()*/
 	/* 111:20-111:28: a.school*/
-	get104 = a.getSchool();
+	get99 = a.getSchool();
 
-	op105 = get104== null;
+	op100 = get99== null;
 
-	tmp106 = ! op105;
+	tmp101 = ! op100;
 
-	r108 = "";
+	r103 = "";
 
-	if ( tmp106) {
+	if ( tmp101) {
 /* 112:5-112:18: a.school.name*/
 	/* 112:5-112:13: a.school*/
-	get102 = a.getSchool();
+	get97 = a.getSchool();
 
-	get103 = get102.getName();
+	get98 = get97.getName();
 
-	r108 = get103;
-} else { tmp107 = "<unknown>";
+	r103 = get98;
+} else { tmp102 = "<unknown>";
 
-r108 = tmp107;
+r103 = tmp102;
 }
-	b93.setId(get94);;
+	b88.setId(get89);;
 
-	b93.setTitle(get95);;
+	b88.setTitle(get90);;
 
-	b93.setYear(op97);;
+	b88.setYear(op92);;
 
-	itTmp109 = new ArrayList<Object>(r101.size());
+	itTmp104 = new ArrayList<Object>(r96.size());
 
-	tgtElems110 = new java.util.HashSet<>();
+	b88.getAuthors().addAll(r96);
 
-	for ( java.lang.Object o: r101) {
-boolean matched6 = false;
-	a2l.runtime.RuntimeUtils.addToBindingTemporal(itTmp109, tgtElems110, o);
-}
-	this.parallelPendingTasks.add( new PendingTask_AuthoredEntry_authors(b93,itTmp109,OUTModel_,tgtElems110) );
-
-	b93.setSchool(r108);;
+	b88.setSchool(r103);;
 
 	numMatchedRuleExecutions_++;
 }
 	private void create_Proceedings(dblp.DBLP.Proceedings a){
-a2l.tests.bibtex.BibTeX.Proceedings b111;
-java.lang.String get112;
-java.lang.String get113;
-int get114;
-java.lang.String op115;b111 = a2l.tests.bibtex.BibTeX.BibTeXFactory.eINSTANCE.createProceedings();
+a2l.tests.bibtex.BibTeX.Proceedings b105;
+java.lang.String get106;
+java.lang.String get107;
+int get108;
+java.lang.String op109;b105 = a2l.tests.bibtex.BibTeX.BibTeXFactory.eINSTANCE.createProceedings();
 
-	this.trace.put(a,b111);
+	this.trace.put(a,b105);
 
-	OUTModel_PartialOutput_.write(b111);
+	OUTModel_PartialOutput_.write(b105);
 
-	/* 122:9-122:16: a.title*/
-	get112 = a.getTitle();
+	/* 122:9-122:14: a.key*/
+	get106 = a.getKey();
 
 	/* 123:12-123:19: a.title*/
-	get113 = a.getTitle();
+	get107 = a.getTitle();
 
 	/* 124:11-124:28: a.year.toString()*/
 	/* 124:11-124:17: a.year*/
-	get114 = a.getYear();
+	get108 = a.getYear();
 
-	op115 = get114 + "";
+	op109 = get108 + "";
 
-	b111.setId(get112);;
+	b105.setId(get106);;
 
-	b111.setTitle(get113);;
+	b105.setTitle(get107);;
 
-	b111.setYear(op115);;
+	b105.setYear(op109);;
 
 	numMatchedRuleExecutions_++;
 }
@@ -796,7 +756,7 @@ java.lang.String op115;b111 = a2l.tests.bibtex.BibTeX.BibTeXFactory.eINSTANCE.cr
 for ( java.lang.Object e: objs) {
 this.transform(e);}}
 	public void transform(java.lang.Object e) throws BlackboardException{
-boolean matched7 = false;if ( check_Article( e) )  {
+boolean matched1 = false;if ( check_Article( e) )  {
 create_Article((dblp.DBLP.Article)e);
 }
 else if ( check_InProceedings( e) )  {

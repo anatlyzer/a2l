@@ -1,5 +1,7 @@
 package lintra.utils;
 
+import org.eclipse.emf.ecore.EObject;
+
 public class ReflectiveObject {
 
 	private Object obj;
@@ -9,7 +11,12 @@ public class ReflectiveObject {
 	}
 	
 	public String getName() {
-		return obj.getClass().getSimpleName();
+		String name = obj.getClass().getSimpleName();
+		// TODO: Do this in a general way
+		if ( obj instanceof EObject && name.endsWith("Impl")) {
+			name = name.substring(0, name.length() - 4);
+		}
+		return name;
 	}
 	
 }

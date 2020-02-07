@@ -51,6 +51,7 @@ public class InputExtent {
 	}
 
 	public void shuffle() {
+		//System.out.println("Shuffle ignoredción ");
 		Collections.shuffle(allInstances);		
 	}
 

@@ -112,6 +112,7 @@ import anatlyzer.atlext.OCL.TupleExp;
 import anatlyzer.atlext.OCL.VariableDeclaration;
 import anatlyzer.atlext.OCL.VariableExp;
 import linda.atlcompiler.BaseTyping.TupleTypeInformation;
+import linda.atlcompiler.ITyping.MutabilityAttribute;
 import lintra.atlcompiler.javagen.JAttribute;
 import lintra.atlcompiler.javagen.JBlock;
 import lintra.atlcompiler.javagen.JClass;
@@ -733,8 +734,7 @@ public abstract class LindaCompiler extends BaseCompiler {
 		IMetaDriver driver = env.getDriver(ope);
 		for (Binding binding : ope.getBindings()) {
 			OclExpression right = binding.getValue();
-	
-			
+						
 			// The type checking code needs to take account that a binding may have a
 			// union type in the right part
 			// Type rightType = ATLUtils.getUnderlyingBindingRightType(binding);
@@ -762,7 +762,6 @@ public abstract class LindaCompiler extends BaseCompiler {
 					
 					String baseType = getTransformInputType();
 					
-
 					// First, flatten if needed. Once flattened, automatically filter to IdentifiableElement. Otherwise, filter if needed
 					if ( bindingValueRequiresFlattening(binding.getValue()) ) { 
 						JVariableDeclaration newFiltering = gen.addLocalVar(createMethod, "filterBinding", typ.createParamTypeRef("javaslang.collection.List", baseType ));					
@@ -787,7 +786,27 @@ public abstract class LindaCompiler extends BaseCompiler {
 
 					JVariableDeclaration tmpTargetElements;
 					Supplier<List<JStatement>> onTargetElement = null;
-					if ( typeContainsTargetElements(binding.getValue().getInferredType())) {
+					Type bindingRHSType = binding.getValue().getInferredType();
+					if ( typeIsOnlyTargetElement(bindingRHSType) && !containsResolveTemp(binding)) {
+						// We can assign directly, but we have to make sure that there isn't a resolveTemp
+						//addStm(createMethod, foreach);
+						
+						// Should be possible to do it like this, but...
+						// ITyping.MutabilityAttribute attr = env.getAttribute(right, ITyping.MutabilityAttribute.class, MutabilityAttribute.NON_MUTABLE);
+						// boolean isMutable = attr == ITyping.MutabilityAttribute.MUTABLE;
+						boolean isMutable = AstAnnotations.isMutable(right) || right instanceof MutableIteratorExp || right instanceof IteratorChainExp;
+						
+						JVariableDeclaration rightVar = getVar(right);
+						if (!isMutable) {
+							JVariableDeclaration conversionVar = gen.addLocalVar(createMethod, "convList", typ.createTypeRef(right.getInferredType(), true));
+							addStm(createMethod, CreationHelpers.createAssignment(conversionVar, rightVar.getName() + ".toJavaList()"));
+							rightVar = conversionVar;
+						}
+						
+						List<JStatement> statements = driver.compileSetValue(outVar, feature, rightVar, bindingRHSType, ctx());
+						addStm(createMethod, statements);
+						continue;
+					} else if ( typeContainsTargetElements(bindingRHSType) ) {
 						tmpTargetElements = gen.addLocalVar(createMethod, "tgtElems", typ.createParamTypeRef("java.util.Set", "Object"));
 						addStm(createMethod, createAssignment(tmpTargetElements, createTextExp("new java.util.HashSet<>()")));
 						
@@ -886,6 +905,16 @@ public abstract class LindaCompiler extends BaseCompiler {
 		return false;
 	}
 
+	
+	private boolean typeIsOnlyTargetElement(Type type) {
+		if ( type instanceof Metaclass ) {
+			return targetMetamodelNames.contains( ((Metaclass) type).getModel().getName());
+		} if ( type instanceof CollectionType ) {
+			return typeIsOnlyTargetElement( ((CollectionType) type).getContainedType());
+		}
+		return false;
+	}
+	
 	private boolean typeContainsTargetElements(Type type) {
 		if ( type instanceof CollectionType ) {
 			return typeContainsTargetElements( ((CollectionType) type).getContainedType());

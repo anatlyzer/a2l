@@ -450,6 +450,8 @@ r123++;
 	public boolean isTargetElement(java.lang.Object obj){
 if ( obj == null ) return false;;
 
+	if ( obj instanceof a2l.runtime.ResolveTempObject ) return true;;
+
 	return OUTModel_PartialOutput_.belongsTo(obj);
 }
 	public IModel findModelDynamically(java.lang.Object obj){

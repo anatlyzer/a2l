@@ -1,7 +1,7 @@
 -- @nsURI UMLMM=http://www.eclipse.org/uml2/3.0.0/UML
 -- @nsURI JMM=http://www.eclipse.org/MoDisco/Java/0.2.incubation/java
 
--- @project a2l.tests.java2uml=a2l.tests.java2uml.umldeps
+-- @project a2l.tests.java2uml=a2l.tests.java2uml.umldeps.optimised
 -- @driver UMLMM=emf-uml
 -- @driver JMM=emf
 

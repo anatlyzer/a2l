@@ -181,6 +181,8 @@ public class A2LCompiler extends LindaCompiler {
 			collect(Collectors.joining(" || "));
 		
 		addStm(isTargetElementCheckMethod, createText("if ( obj == null ) return false;"));
+		addStm(isTargetElementCheckMethod, createText("if ( obj instanceof a2l.runtime.ResolveTempObject ) return true;"));
+		
 		addStm(isTargetElementCheckMethod, createText("return " + checks));
 	}
 

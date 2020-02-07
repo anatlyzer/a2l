@@ -3,7 +3,8 @@ Bundle-ManifestVersion: 2
 Bundle-Name: %pluginName
 Bundle-SymbolicName: a2l.tests.vmtesting.emf;singleton:=true
 Bundle-Version: 1.0.0.qualifier
-Bundle-ClassPath: .
+Bundle-ClassPath: .,
+ lib/guava-28.0-jre.jar
 Bundle-Vendor: %providerName
 Bundle-Localization: plugin
 Bundle-RequiredExecutionEnvironment: JavaSE-1.8
@@ -122,7 +123,13 @@ Require-Bundle: lintra.emf;bundle-version="1.0.0",
  org.eclipse.core.runtime,
  org.eclipse.emf.ecore;visibility:=reexport,
  org.antlr.runtime;bundle-version="[3.0.0,3.2.0]",
- org.eclipse.m2m.atl.dsls;bundle-version="3.6.0"
+ org.eclipse.m2m.atl.dsls;bundle-version="3.6.0",
+ org.eclipse.m2m.atl;bundle-version="4.0.1",
+ org.eclipse.m2m.atl.core;bundle-version="4.0.1",
+ org.eclipse.m2m.atl.emftvm;bundle-version="4.0.1",
+ org.eclipse.m2m.atl.engine;bundle-version="4.0.1",
+ org.eclipse.m2m.atl.engine.emfvm;bundle-version="4.0.1",
+ org.apache.log4j;bundle-version="1.2.15"
 Bundle-ActivationPolicy: lazy
 Import-Package: com.google.common.base,
  org.eclipse.emf.ecore

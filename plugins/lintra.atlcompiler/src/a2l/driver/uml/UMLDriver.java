@@ -64,6 +64,10 @@ public class UMLDriver extends EMFDriver implements IMetaDriver {
 		return compileGetterExpressionUML(srcVar.getName(), f);
 	}
 
+	public String compileGetterExpressionDirect(JVariableDeclaration srcVar, EStructuralFeature f) {
+		return compileGetterExpression(srcVar, f);
+	}
+	
 	protected static String compileGetterExpressionUML(String objExpr, EStructuralFeature f) {
 		// TODO: Use UML/EMF naming rules
 		String getterName = LinGen.getter(f);

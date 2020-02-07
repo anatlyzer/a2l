@@ -704,6 +704,8 @@ javaslang.collection.List<ClassDeclaration> op0;/* 13:60-13:95: JMM!ClassDeclara
 	public boolean isTargetElement(java.lang.Object obj){
 if ( obj == null ) return false;;
 
+	if ( obj instanceof a2l.runtime.ResolveTempObject ) return true;;
+
 	return UCDModel_PartialOutput_.belongsTo(obj);
 }
 	public IModel findModelDynamically(java.lang.Object obj){
@@ -797,9 +799,9 @@ javaslang.collection.List<Dependency> r134;
 List<java.lang.Object> itTmp139;
 List<java.lang.Object> itTmp140;
 List<java.lang.Object> itTmp141;
-java.util.Set<java.lang.Object> tgtElems142;
+List<Dependency> convList142;
 List<java.lang.Object> itTmp143;
-java.util.Set<java.lang.Object> tgtElems144;t1106 = org.eclipse.uml2.uml.UMLFactory.eINSTANCE.createPackage();
+List<Dependency> convList144;t1106 = org.eclipse.uml2.uml.UMLFactory.eINSTANCE.createPackage();
 
 	this.trace.put(s1,t1106);
 
@@ -921,23 +923,15 @@ itTmp140.add(o);
 
 	itTmp141 = new ArrayList<Object>(r126.size());
 
-	tgtElems142 = new java.util.HashSet<>();
+	convList142 = r126.toJavaList();
 
-	for ( java.lang.Object o: r126) {
-boolean matched7 = false;
-	a2l.runtime.RuntimeUtils.addToBindingTemporal(itTmp141, tgtElems142, o);
-}
-	this.parallelPendingTasks.add( new PendingTask_Package_packagedElement(t1106,itTmp141,UCDModel_,tgtElems142) );
+	t1106.getPackagedElements().addAll(convList142);
 
 	itTmp143 = new ArrayList<Object>(r134.size());
 
-	tgtElems144 = new java.util.HashSet<>();
+	convList144 = r134.toJavaList();
 
-	for ( java.lang.Object o: r134) {
-boolean matched8 = false;
-	a2l.runtime.RuntimeUtils.addToBindingTemporal(itTmp143, tgtElems144, o);
-}
-	this.parallelPendingTasks.add( new PendingTask_Package_packagedElement(t1106,itTmp143,UCDModel_,tgtElems144) );
+	t1106.getPackagedElements().addAll(convList144);
 
 	numMatchedRuleExecutions_++;
 }
@@ -999,7 +993,7 @@ r154 = tmp153;
 for ( java.lang.Object e: objs) {
 this.transform(e);}}
 	public void transform(java.lang.Object e) throws BlackboardException{
-boolean matched9 = false;if ( check_Model2Model( e) )  {
+boolean matched7 = false;if ( check_Model2Model( e) )  {
 create_Model2Model((org.eclipse.gmt.modisco.java.Model)e);
 }
 else if ( check_Package2Package( e) )  {

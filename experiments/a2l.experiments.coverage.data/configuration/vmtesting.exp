@@ -4,8 +4,12 @@ extensionID: anatlyzer.experiments.featurecoverage
 projects: 
 -  name: a2l.tests.vmtesting.emf
    ignoredFiles: [ ATL2Problem_fixed.atl, test_iterate.atl ]
+   
 -  name: a2l.tests.imdb
 -  name: a2l.tests.java2uml
+-  name: a2l.tests.java2graph
 -  name: a2l.tests.airquality
+-  name: a2l.tests.dblp
+   ignoredFiles: [ DBLP_v2.atl, DBLP_v3.atl, DBLP_v4.atl ]
    
    

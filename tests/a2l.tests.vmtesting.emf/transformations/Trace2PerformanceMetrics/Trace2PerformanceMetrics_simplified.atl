@@ -1,7 +1,7 @@
 -- @atlcompiler atl2006
--- @project example.vmtesting=example.vmtesting.trace2performancemetrics 
--- @path Trace=/example.vmtesting/transformations/Trace2PerformanceMetrics/Trace.ecore
--- @path Metrics=/example.vmtesting/transformations/Trace2PerformanceMetrics/Metrics.ecore
+-- @project a2l.tests.vmtesting.emf=a2l.tests.vmtesting.emf.trace2performancemetrics 
+-- @path Trace=/a2l.tests.vmtesting.emf/transformations/Trace2PerformanceMetrics/Trace.ecore
+-- @path Metrics=/a2l.tests.vmtesting.emf/transformations/Trace2PerformanceMetrics/Metrics.ecore
 
 --@author Hugo Bruneliere (Hugo.Bruneliere <at> gmail.com)
 
