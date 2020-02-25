@@ -21,7 +21,7 @@ import lintra2.stats.IStatsRecorder;
 public class Maven2XMLTestCase extends AbstractTestCase {
 	private static final String t = "transformations/Maven2XML/";
 	
-	private static final String METAMODEL_XML_ECORE = t + "XML.ecore";
+	private static final String METAMODEL_XML_ECORE = "metamodels/XML.ecore";
 	private static final String METAMODEL_MAVEN_MAVEN_ECORE =  t + "MavenMaven.ecore";
 	private static final String METAMODEL_MAVEN_PROJECT_ECORE =  t + "MavenProject.ecore";
 	

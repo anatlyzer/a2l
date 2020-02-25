@@ -48,6 +48,7 @@ import a2l.optimiser.anatlyzerext.ShortCircuitOperatorCallExp;
 import anatlyzer.atl.analyser.IAnalyserResult;
 import anatlyzer.atl.errors.atl_error.NavigationProblem;
 import anatlyzer.atl.model.ATLModel;
+import anatlyzer.atl.model.TypeUtils;
 import anatlyzer.atl.model.TypingModel;
 import anatlyzer.atl.types.CollectionType;
 import anatlyzer.atl.types.EnumType;
@@ -795,7 +796,7 @@ public abstract class LindaCompiler extends BaseCompiler {
 						// Should be possible to do it like this, but...
 						// ITyping.MutabilityAttribute attr = env.getAttribute(right, ITyping.MutabilityAttribute.class, MutabilityAttribute.NON_MUTABLE);
 						// boolean isMutable = attr == ITyping.MutabilityAttribute.MUTABLE;
-						boolean isMutable = AstAnnotations.isMutable(right) || right instanceof MutableIteratorExp || right instanceof IteratorChainExp;
+						boolean isMutable = isMutable(right);
 						
 						JVariableDeclaration rightVar = getVar(right);
 						if (!isMutable) {
@@ -881,6 +882,10 @@ public abstract class LindaCompiler extends BaseCompiler {
 		}
 	}
 
+	private boolean isMutable(OclExpression right) {
+		return AstAnnotations.isMutable(right) || right instanceof MutableIteratorExp || right instanceof IteratorChainExp;
+	}
+
 	private String convertToMutableList(String expr, Type type) {
 		if (type instanceof SetType ) {
 			return expr + ".toJavaSet()";		
@@ -899,7 +904,7 @@ public abstract class LindaCompiler extends BaseCompiler {
 		}
 		return false;
 	}
-
+	
 	private boolean bindingValueRequiresFlattening(OclExpression value) {
 		Type type = value.getInferredType();
 		if ( type instanceof CollectionType ) {
@@ -972,13 +977,30 @@ public abstract class LindaCompiler extends BaseCompiler {
 			NavigationOrAttributeCallExp nav = (NavigationOrAttributeCallExp) self.getSource();
 			
 			EStructuralFeature f = (EStructuralFeature) nav.getUsedFeature();
-			// String setterAccess = ocl.getSetter(f);
 			
 			JVariableDeclaration outVar = env.getVar(((VariableExp) nav.getSource()).getReferredVariable());
 
 			IMetaDriver driver = env.getDriver(self.getSource());
 			
-			stms.addAll(driver.compileSetValue(outVar, f, valueVar, nav.getInferredType(), ctx()));
+			// This is work in a compatible manner with EMFDriver, which doesn't know about mutability
+			if (isCollectionUnion(self.getValue().getInferredType()) && !isMutable(self.getValue())) {
+				// Same strategy as in LindaOclCompiler#translateCollectionOperaiton
+				Supplier<JTypeRef> createBaseType = () -> {
+					try {
+						String baseType = driver.getBaseType();
+						return typ.createTypeRef(baseType);
+					} catch (UnsupportedTranslation e) {
+						return typ.createTypeRef("java.lang.Object");
+					}
+				};
+				
+				JVariableDeclaration newVar = gen.addLocalVar(env.currentBlock(), "op", typ.createTypeRef(self.getValue().getInferredType(), createBaseType, true));				
+				// JVariableDeclaration newVar = gen.addLocalVar(env.currentBlock(), "convert", typ.createTypeRef(self.getValue().getInferredType(), true));
+				stms.add(CreationHelpers.createAssignment(newVar, convertToMutableList(valueVar.getName(), self.getValue().getInferredType())));
+				valueVar = newVar;
+			}
+			
+			stms.addAll(driver.compileSetValue(outVar, f, valueVar, self.getValue().getInferredType(), ctx()));
 
 			
 //			if ( nav.getInferredType() instanceof CollectionType )  {
@@ -993,6 +1015,13 @@ public abstract class LindaCompiler extends BaseCompiler {
 		}
 		
 		env.bind(self, stms);
+	}
+	
+	private boolean isCollectionUnion(Type type) {
+		if ( type instanceof CollectionType ) {
+			return ((CollectionType) type).getContainedType() instanceof UnionType;
+		} 
+		return false;
 	}
 	
 	@Override

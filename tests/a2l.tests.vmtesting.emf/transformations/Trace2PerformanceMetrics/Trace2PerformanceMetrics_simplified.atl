@@ -3,6 +3,12 @@
 -- @path Trace=/a2l.tests.vmtesting.emf/transformations/Trace2PerformanceMetrics/Trace.ecore
 -- @path Metrics=/a2l.tests.vmtesting.emf/transformations/Trace2PerformanceMetrics/Metrics.ecore
 
+-- @genpath Trace=/a2l.tests.vmtesting.emf/transformations/Trace2PerformanceMetrics/Trace.genmodel
+-- @genpath Metrics=/a2l.tests.vmtesting.emf/transformations/Trace2PerformanceMetrics/Metrics.genmodel
+
+-- @driver Trace=emf
+-- @driver Metrics=emf
+
 --@author Hugo Bruneliere (Hugo.Bruneliere <at> gmail.com)
 
 module Trace2PerformanceMetrics; 

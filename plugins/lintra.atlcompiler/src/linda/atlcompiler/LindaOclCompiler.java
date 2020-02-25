@@ -113,11 +113,13 @@ import lintra.atlcompiler.javagen.JExpression;
 import lintra.atlcompiler.javagen.JForeach;
 import lintra.atlcompiler.javagen.JInvoke;
 import lintra.atlcompiler.javagen.JInvokeStatic;
+import lintra.atlcompiler.javagen.JLibType;
 import lintra.atlcompiler.javagen.JMethod;
 import lintra.atlcompiler.javagen.JParameter;
 import lintra.atlcompiler.javagen.JReturn;
 import lintra.atlcompiler.javagen.JStatement;
 import lintra.atlcompiler.javagen.JText;
+import lintra.atlcompiler.javagen.JType;
 import lintra.atlcompiler.javagen.JTypeRef;
 import lintra.atlcompiler.javagen.JVariableDeclaration;
 import lintra.atlcompiler.javagen.JavagenFactory;
@@ -624,7 +626,12 @@ public class LindaOclCompiler implements IOclCompiler, IInitializer {
 			CollectionType t = (CollectionType) self.getInferredType();
 			String castByMap = ""; 
 			if ( t.getContainedType() instanceof UnionType ) {
-				String baseType = createBaseType.get().getType().getName();
+				JType type = createBaseType.get().getType();
+				String baseType = type.getName();
+				if (type instanceof JLibType) {
+					JLibType libt = (JLibType) type;
+					baseType = libt.getPkg() + "." + libt.getName();
+				}
 				// Cast to be on the safe side
 				// castByMap = ".map(e_ -> (IdentifiableElement) e_)";
 				castByMap = ".map(e_ -> (" + baseType + ") e_)";

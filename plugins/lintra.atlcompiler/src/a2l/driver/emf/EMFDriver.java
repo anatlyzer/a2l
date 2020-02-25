@@ -647,6 +647,14 @@ public class EMFDriver implements IMetaDriver {
 		return getterName;
 	}
 	
+	// Same as LindaCompiler
+	private boolean isUnion(Type type) {
+		if ( type instanceof CollectionType ) {
+			return ((CollectionType) type).getContainedType() instanceof UnionType;
+		} 
+		return type instanceof UnionType;
+	}
+
 	@Override
 	public List<JStatement> compileSetValue(JVariableDeclaration receptor, EStructuralFeature f, JVariableDeclaration value, Type valueType, ICompilationContext ctx) {
 		ArrayList<JStatement> stms = new ArrayList<JStatement>();
@@ -654,6 +662,8 @@ public class EMFDriver implements IMetaDriver {
 		String cast = "";
 		if ( valueType instanceof UnionType && f instanceof EReference ) {
 			cast = "(" + this.getClassQName(((EReference) f).getEReferenceType()) + ")"; 
+		} else if (isUnion(valueType)) {
+			cast = "(Collection<? extends " + this.getClassQName(((EReference) f).getEReferenceType()) + ">)";
 		}
 			
 		if ( f.isMany() ) {

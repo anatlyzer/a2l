@@ -336,4 +336,34 @@
             genModel="metamodels/simple/WXYZ.genmodel"/>
    </extension>
 
+   <extension point="org.eclipse.emf.ecore.generated_package">
+      <!-- @generated Trace -->
+      <package
+            uri="Trace"
+            class="a2l.tests.vmtesting.emf.trace2performancemetrics.Trace.TracePackage"
+            genModel="transformations/Trace2PerformanceMetrics/Trace.genmodel"/>
+   </extension>
+
+   <extension point="org.eclipse.emf.ecore.generated_package">
+      <!-- @generated Trace -->
+      <package
+            uri="Trace2PerformanceMetrics/trace/ptypes"
+            class="a2l.tests.vmtesting.emf.trace2performancemetrics.PrimitiveTypes.TracePrimitiveTypesPackage"
+            genModel="transformations/Trace2PerformanceMetrics/Trace.genmodel"/>
+   </extension>
+   <extension point="org.eclipse.emf.ecore.generated_package">
+      <!-- @generated Metrics -->
+      <package
+            uri="Trace2PerformanceMetrics/metrics/ptypes"
+            class="a2l.tests.vmtesting.emf.trace2performancemetrics.PrimitiveTypes.MetricsPrimitiveTypesPackage"
+            genModel="transformations/Trace2PerformanceMetrics/Metrics.genmodel"/>
+   </extension>
+
+   <extension point="org.eclipse.emf.ecore.generated_package">
+      <!-- @generated Metrics -->
+      <package
+            uri="Trace2PerformanceMetrics/metrics"
+            class="a2l.tests.vmtesting.emf.trace2performancemetrics.Metrics.MetricsPackage"
+            genModel="transformations/Trace2PerformanceMetrics/Metrics.genmodel"/>
+   </extension>
 </plugin>

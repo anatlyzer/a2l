@@ -2,6 +2,7 @@ Manifest-Version: 1.0
 Bundle-ManifestVersion: 2
 Bundle-Name: %pluginName
 Bundle-SymbolicName: a2l.tests.vmtesting.emf;singleton:=true
+Automatic-Module-Name: a2l.tests.vmtesting.emf
 Bundle-Version: 1.0.0.qualifier
 Bundle-ClassPath: .,
  lib/guava-28.0-jre.jar
@@ -112,7 +113,15 @@ Export-Package: a2l.tests.vmtesting.emf.ant2maven.ant.Ant,
  a2l.tests.simple.emf.abcd.util,
  a2l.tests.simple.emf.wxyz,
  a2l.tests.simple.emf.wxyz.impl,
- a2l.tests.simple.emf.wxyz.util
+ a2l.tests.simple.emf.wxyz.util,
+ a2l.tests.vmtesting.emf.trace2performancemetrics.Metrics,
+ a2l.tests.vmtesting.emf.trace2performancemetrics.Metrics.impl,
+ a2l.tests.vmtesting.emf.trace2performancemetrics.Metrics.util,
+ a2l.tests.vmtesting.emf.trace2performancemetrics.PrimitiveTypes,
+ a2l.tests.vmtesting.emf.trace2performancemetrics.PrimitiveTypes.impl,
+ a2l.tests.vmtesting.emf.trace2performancemetrics.Trace,
+ a2l.tests.vmtesting.emf.trace2performancemetrics.Trace.impl,
+ a2l.tests.vmtesting.emf.trace2performancemetrics.Trace.util
 Require-Bundle: lintra.emf;bundle-version="1.0.0",
  org.eclipse.emf.ecore.xmi,
  lintra.evaluation,

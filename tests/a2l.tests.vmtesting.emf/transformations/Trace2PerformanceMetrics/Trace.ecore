@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="ISO-8859-1"?>
 <xmi:XMI xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
     xmlns:ecore="http://www.eclipse.org/emf/2002/Ecore">
-  <ecore:EPackage name="Trace" nsURI="Trace">
+  <ecore:EPackage name="Trace" nsURI="Trace" nsPrefix="trace">
     <eClassifiers xsi:type="ecore:EClass" name="Trace">
       <eStructuralFeatures xsi:type="ecore:EReference" name="levels" upperBound="-1"
           eType="#/0/Level" containment="true" eOpposite="#/0/Level/trace"/>
@@ -33,7 +33,8 @@
           unique="false" lowerBound="1" eType="#/1/Integer"/>
     </eClassifiers>
   </ecore:EPackage>
-  <ecore:EPackage name="PrimitiveTypes" nsURI="Trace2PerformanceMetrics/trace/ptypes">
+  <ecore:EPackage name="PrimitiveTypes" nsURI="Trace2PerformanceMetrics/trace/ptypes"
+      nsPrefix="trace_ptypes">
     <eClassifiers xsi:type="ecore:EDataType" name="Boolean" instanceClassName="java.lang.Boolean"/>
     <eClassifiers xsi:type="ecore:EDataType" name="Integer" instanceClassName="java.lang.Integer"/>
     <eClassifiers xsi:type="ecore:EDataType" name="String" instanceClassName="java.lang.String"/>
